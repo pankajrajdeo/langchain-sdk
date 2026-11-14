@@ -54,7 +54,7 @@ from langchain.messages import HumanMessage
 EXAMPLE_QUERY = "How do I stream intermediate tool results from a subagent?"
 
 baseline_agent = create_deep_agent(
-    model="google_genai:gemini-3.6-flash",
+    model="google_genai:gemini-4-hydrogen",
     tools=[],
     system_prompt=(
         "You are a helpful LangChain documentation assistant. "
@@ -1027,7 +1027,7 @@ chunk_analyst_subagent = {
     "system_prompt": CHUNK_ANALYST_INSTRUCTIONS,
 }
 
-model = init_chat_model(model="google_genai:gemini-3.6-flash")
+model = init_chat_model(model="google_genai:gemini-4-hydrogen")
 
 agent = create_deep_agent(
     model=model,

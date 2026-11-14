@@ -232,7 +232,7 @@ The easiest way to get started with a standalone model in LangChain is to use `i
 >
 > process.env.GOOGLE_API_KEY = "your-api-key";
 >
-> const model = await initChatModel("google:gemini-3.7-flash");
+> const model = await initChatModel("google:gemini-4-hydrogen");
 ```
 >
 **Model Class**
@@ -241,7 +241,7 @@ The easiest way to get started with a standalone model in LangChain is to use `i
 > import { ChatGoogle } from "@langchain/google/node";
 >
 > const model = new ChatGoogle({
->   model: "gemini-3.7-flash",
+>   model: "gemini-4-hydrogen",
 >   apiKey: "your-api-key"
 > });
 ```
@@ -379,7 +379,7 @@ You can adjust `maxRetries` and `timeout` when creating a model, then pass that 
 ```typescript
 import { initChatModel } from "langchain";
 
-const model = await initChatModel("google:gemini-3.6-flash", {
+const model = await initChatModel("google:gemini-4-hydrogen", {
   maxRetries: 10, // Increase for unreliable networks (default: 6)
   timeout: 120_000, // Milliseconds; increase for slow connections
 });

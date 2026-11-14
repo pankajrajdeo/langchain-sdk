@@ -264,7 +264,7 @@ We will need to select a chat model from LangChain's suite of integrations:
 >
 > process.env.GOOGLE_API_KEY = "your-api-key";
 >
-> const model = await initChatModel("google:gemini-3.7-flash");
+> const model = await initChatModel("google:gemini-4-hydrogen");
 ```
 >
 **Model Class**
@@ -273,7 +273,7 @@ We will need to select a chat model from LangChain's suite of integrations:
 > import { ChatGoogle } from "@langchain/google/node";
 >
 > const model = new ChatGoogle({
->   model: "gemini-3.7-flash",
+>   model: "gemini-4-hydrogen",
 >   apiKey: "your-api-key"
 > });
 ```

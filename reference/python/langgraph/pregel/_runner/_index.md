@@ -7,11 +7,11 @@ tags: [index, reference, python, langgraph, pregel, runner]
 
 # reference/python/langgraph/pregel/_runner
 
-5 pages here, 23 pages including subdirectories.
+5 pages here, 24 pages including subdirectories.
 
 ## Directories
 
-- [FuturesDict/](FuturesDict/_index.md) - 7 pages
+- [FuturesDict/](FuturesDict/_index.md) - 8 pages
 - [PregelRunner/](PregelRunner/_index.md) - 11 pages
 
 ## Files

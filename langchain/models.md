@@ -194,7 +194,7 @@ The easiest way to get started with a standalone model in LangChain is to use [`
 >
 > os.environ["GOOGLE_API_KEY"] = "..."
 >
-> model = init_chat_model("google_genai:gemini-3.7-flash")
+> model = init_chat_model("google_genai:gemini-4-hydrogen")
 ```
 >
 **Model Class**
@@ -205,7 +205,7 @@ The easiest way to get started with a standalone model in LangChain is to use [`
 >
 > os.environ["GOOGLE_API_KEY"] = "..."
 >
-> model = ChatGoogleGenerativeAI(model="gemini-3.7-flash")
+> model = ChatGoogleGenerativeAI(model="gemini-4-hydrogen")
 ```
 
 > [tab] AWS Bedrock
@@ -418,7 +418,7 @@ You can adjust `max_retries` and `timeout` when creating a model, then pass that
 from langchain.chat_models import init_chat_model
 
 model = init_chat_model(
-    "google_genai:gemini-3.6-flash",
+    "google_genai:gemini-4-hydrogen",
     max_retries=10,  # Increase for unreliable networks (default: 6)
     timeout=120,  # Seconds; increase for slow connections
 )

@@ -112,7 +112,7 @@ Override [model profile](../../langchain/models.md#model-profiles) fields (for e
 
 ```bash
 dcode --profile-override '{"max_input_tokens": 4096}'
-dcode --model google_genai:gemini-3.6-flash --profile-override '{"max_input_tokens": 4096}'
+dcode --model google_genai:gemini-4-hydrogen --profile-override '{"max_input_tokens": 4096}'
 ```
 
 For retry counts on transient errors, use `--max-retries` or the `[retries]` section in `config.toml`. See [Model parameters](providers.md#model-parameters) and [Profile overrides](config-file.md#profile-overrides-advanced).

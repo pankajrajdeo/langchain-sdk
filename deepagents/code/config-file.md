@@ -29,7 +29,7 @@ tags: [docs, deepagents, code, config-file]
 ```toml
 [models]
 default = "ollama:qwen3:4b"             # your intentional long-term preference
-recent = "google_genai:gemini-3.6-flash"   # last /model switch (written automatically)
+recent = "google_genai:gemini-4-hydrogen"   # last /model switch (written automatically)
 auto_classifier = "openai:gpt-5.6-luna"  # optional: cheaper model for Auto approval review
 ```
 
@@ -512,7 +512,7 @@ Profile overrides are merged into the model's profile after creation. Any featur
 > dcode --profile-override '{"max_input_tokens": 4096}'
 >
 > # Combine with --model
-> dcode --model google_genai:gemini-3.6-flash --profile-override '{"max_input_tokens": 4096}'
+> dcode --model google_genai:gemini-4-hydrogen --profile-override '{"max_input_tokens": 4096}'
 >
 > # In non-interactive mode
 > dcode -n "Summarize this repo" --profile-override '{"max_input_tokens": 4096}'

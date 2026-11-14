@@ -126,7 +126,7 @@ Use [`create_agent`](https://reference.langchain.com/python/langchain/agents/fac
 ```python
 from langchain.agents import create_agent
 
-agent = create_agent(model="google_genai:gemini-3.6-flash", tools=[])
+agent = create_agent(model="google_genai:gemini-4-hydrogen", tools=[])
 ```
 
 **OpenAI**
@@ -206,7 +206,7 @@ sandbox = client.create_sandbox(name="langchain-docs", snapshot_name="docs-test-
 backend = LangSmithSandbox(sandbox=sandbox)
 
 agent = create_agent(
-    model="google_genai:gemini-3.6-flash",
+    model="google_genai:gemini-4-hydrogen",
     tools=[],
     middleware=[FilesystemMiddleware(backend=backend)],
 )
@@ -390,7 +390,7 @@ Update your agent from step 2 by adding [`SummarizationMiddleware`](https://refe
 ```python
 from deepagents.middleware import FilesystemMiddleware, SummarizationMiddleware
 
-model = "google_genai:gemini-3.6-flash"
+model = "google_genai:gemini-4-hydrogen"
 
 agent = create_agent(
     model=model,
@@ -561,7 +561,7 @@ Then create your agent with your skills by adding [`SkillsMiddleware`](https://r
 ```python
 from deepagents.middleware import FilesystemMiddleware, SkillsMiddleware, SummarizationMiddleware
 
-model = "google_genai:gemini-3.6-flash"
+model = "google_genai:gemini-4-hydrogen"
 
 agent = create_agent(
     model=model,
@@ -704,7 +704,7 @@ from deepagents.middleware import (
 )
 from langchain.agents.middleware import TodoListMiddleware
 
-model = "google_genai:gemini-3.6-flash"
+model = "google_genai:gemini-4-hydrogen"
 
 visualizer: SubAgent = {
     "name": "visualizer",

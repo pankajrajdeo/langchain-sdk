@@ -900,6 +900,7 @@ For async usage, implement the corresponding async variants (`aget_tuple`, `alis
 - [`should_stop`](https://reference.langchain.com/python/langgraph/pregel/_runner/FuturesDict/should_stop)
 - [`counter`](https://reference.langchain.com/python/langgraph/pregel/_runner/FuturesDict/counter)
 - [`done`](https://reference.langchain.com/python/langgraph/pregel/_runner/FuturesDict/done)
+- [`failed`](https://reference.langchain.com/python/langgraph/pregel/_runner/FuturesDict/failed)
 - [`lock`](https://reference.langchain.com/python/langgraph/pregel/_runner/FuturesDict/lock)
 - [`submit`](https://reference.langchain.com/python/langgraph/pregel/_runner/PregelRunner/submit)
 - [`put_writes`](https://reference.langchain.com/python/langgraph/pregel/_runner/PregelRunner/put_writes)

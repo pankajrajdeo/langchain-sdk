@@ -19,7 +19,7 @@ Reconnect: clients pass the last `seq` they received as `since` in the body. Buf
 ````yaml
 openapi: 3.1.0
 info:
-  title: LangSmith Deployment
+  title: LangSmith Agent Server
   version: 0.1.0
 servers: []
 security: []

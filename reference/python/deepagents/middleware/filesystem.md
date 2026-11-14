@@ -54,6 +54,7 @@ Middleware for providing filesystem tools to an agent.
 - [`format_grep_matches()`](https://reference.langchain.com/python/deepagents/middleware/filesystem/format_grep_matches)
 - [`regex_literal_hint()`](https://reference.langchain.com/python/deepagents/middleware/filesystem/regex_literal_hint)
 - [`sanitize_tool_call_id()`](https://reference.langchain.com/python/deepagents/middleware/filesystem/sanitize_tool_call_id)
+- [`to_posix_path()`](https://reference.langchain.com/python/deepagents/middleware/filesystem/to_posix_path)
 - [`truncate_if_too_long()`](https://reference.langchain.com/python/deepagents/middleware/filesystem/truncate_if_too_long)
 - [`validate_path()`](https://reference.langchain.com/python/deepagents/middleware/filesystem/validate_path)
 - [`append_to_system_message()`](https://reference.langchain.com/python/deepagents/middleware/filesystem/append_to_system_message)
@@ -63,4 +64,4 @@ Middleware for providing filesystem tools to an agent.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/0ec42441901968a75202a3ef365650eb280a473b/libs/deepagents/deepagents/middleware/filesystem.py)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/c858b3641b13fb3f40fe3a12515517b81fb8a744/libs/deepagents/deepagents/middleware/filesystem.py)

@@ -17,7 +17,7 @@ tags: [docs, langsmith, agent-server-api, store, search-or-list-items-within-a-n
 ````yaml
 openapi: 3.1.0
 info:
-  title: LangSmith Deployment
+  title: LangSmith Agent Server
   version: 0.1.0
 servers: []
 security: []

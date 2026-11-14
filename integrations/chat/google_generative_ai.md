@@ -105,7 +105,7 @@ You can also explicitly set `vertexai=True` or `vertexai=False` to override auto
 > from langchain_google_genai import ChatGoogleGenerativeAI
 >
 > llm = ChatGoogleGenerativeAI(
->     model="gemini-3.7-flash",
+>     model="gemini-4-hydrogen",
 >     api_key="your-api-key", # [!code highlight]
 >     project="your-project-id", # [!code highlight]
 >     vertexai=True, # [!code highlight]
@@ -142,7 +142,7 @@ You can also explicitly set `vertexai=True` or `vertexai=False` to override auto
 > )
 >
 > llm = ChatGoogleGenerativeAI(
->     model="gemini-3.7-flash",
+>     model="gemini-4-hydrogen",
 >     credentials=credentials, # [!code highlight]
 >     project="your-project-id", # [!code highlight]
 > )
@@ -175,8 +175,7 @@ Now we can instantiate our model object and generate responses:
 > from langchain_google_genai import ChatGoogleGenerativeAI
 >
 > model = ChatGoogleGenerativeAI(
->     model="gemini-3.7-flash",
->     temperature=1.0,  # Gemini 3.0+ defaults to 1.0
+>     model="gemini-4-hydrogen",
 >     max_tokens=None,
 >     timeout=None,
 >     max_retries=2,
@@ -190,10 +189,9 @@ Now we can instantiate our model object and generate responses:
 > from langchain_google_genai import ChatGoogleGenerativeAI
 >
 > model = ChatGoogleGenerativeAI(
->     model="gemini-3.7-flash",
+>     model="gemini-4-hydrogen",
 >     project="your-project-id", # [!code highlight]
 >     location="us-central1",  # Optional, defaults to us-central1 [!code highlight]
->     temperature=1.0,  # Gemini 3.0+ defaults to 1.0
 >     max_tokens=None,
 >     timeout=None,
 >     max_retries=2,
@@ -224,7 +222,7 @@ For SOCKS5 proxies or advanced proxy configuration, use the `client_args` parame
 
 ```python
 model = ChatGoogleGenerativeAI(
-    model="gemini-3.7-flash",
+    model="gemini-4-hydrogen",
     client_args={"proxy": "socks5://user:pass@host:port"},
 )
 ```
@@ -235,7 +233,7 @@ Use `base_url` and `additional_headers` for model-level HTTP options, such as ro
 
 ```python
 model = ChatGoogleGenerativeAI(
-    model="gemini-3.7-flash",
+    model="gemini-4-hydrogen",
     base_url="https://your-gemini-gateway.example.com",
     additional_headers={"X-Custom-Header": "value"},
 )
@@ -296,7 +294,7 @@ ai_msg
 **Gemini 3**
 
 ```plaintext
-AIMessage(content=[{'type': 'text', 'text': "J'adore la programmation.", 'extras': {'signature': 'EpoWCpc...'}}], additional_kwargs={}, response_metadata={'prompt_feedback': {'block_reason': 0, 'safety_ratings': []}, 'finish_reason': 'STOP', 'model_name': 'gemini-3.7-flash', 'safety_ratings': [], 'model_provider': 'google_genai'}, id='lc_run--fb732b64-1ab4-4a28-b93b-dcfb2a164a3d-0', usage_metadata={'input_tokens': 21, 'output_tokens': 779, 'total_tokens': 800, 'input_token_details': {'cache_read': 0}, 'output_token_details': {'reasoning': 772}})
+AIMessage(content=[{'type': 'text', 'text': "J'adore la programmation.", 'extras': {'signature': 'EpoWCpc...'}}], additional_kwargs={}, response_metadata={'prompt_feedback': {'block_reason': 0, 'safety_ratings': []}, 'finish_reason': 'STOP', 'model_name': 'gemini-4-hydrogen', 'safety_ratings': [], 'model_provider': 'google_genai'}, id='lc_run--fb732b64-1ab4-4a28-b93b-dcfb2a164a3d-0', usage_metadata={'input_tokens': 21, 'output_tokens': 779, 'total_tokens': 800, 'input_token_details': {'cache_read': 0}, 'output_token_details': {'reasoning': 772}})
 ```
 
 **Gemini 2.5**
@@ -344,7 +342,7 @@ from langchain.messages import HumanMessage
 from langchain_google_genai import ChatGoogleGenerativeAI
 
 client = genai.Client()
-model = ChatGoogleGenerativeAI(model="gemini-3.7-flash")
+model = ChatGoogleGenerativeAI(model="gemini-4-hydrogen")
 
 # Upload file to Google's servers
 myfile = client.files.upload(file="/path/to/your/file.pdf")
@@ -378,7 +376,7 @@ Provide image inputs along with text using a [`HumanMessage`](https://reference.
 from langchain.messages import HumanMessage
 from langchain_google_genai import ChatGoogleGenerativeAI
 
-model = ChatGoogleGenerativeAI(model="gemini-3.7-flash")
+model = ChatGoogleGenerativeAI(model="gemini-4-hydrogen")
 
 message = HumanMessage(
     content=[
@@ -398,7 +396,7 @@ response = model.invoke([message])
 from langchain.messages import HumanMessage
 from langchain_google_genai import ChatGoogleGenerativeAI
 
-model = ChatGoogleGenerativeAI(model="gemini-3.7-flash")
+model = ChatGoogleGenerativeAI(model="gemini-4-hydrogen")
 
 message = HumanMessage(
     content=[
@@ -416,7 +414,7 @@ import base64
 from langchain.messages import HumanMessage
 from langchain_google_genai import ChatGoogleGenerativeAI
 
-model = ChatGoogleGenerativeAI(model="gemini-3.7-flash")
+model = ChatGoogleGenerativeAI(model="gemini-4-hydrogen")
 
 image_bytes = open("path/to/your/image.jpg", "rb").read()
 image_base64 = base64.b64encode(image_bytes).decode("utf-8")
@@ -444,7 +442,7 @@ from langchain.messages import HumanMessage
 from langchain_google_genai import ChatGoogleGenerativeAI
 
 client = genai.Client()
-model = ChatGoogleGenerativeAI(model="gemini-3.7-flash")
+model = ChatGoogleGenerativeAI(model="gemini-4-hydrogen")
 
 # Upload and wait for processing
 myfile = client.files.upload(file="/path/to/image.jpg")
@@ -479,7 +477,7 @@ Provide PDF file inputs along with text.
 from langchain.messages import HumanMessage
 from langchain_google_genai import ChatGoogleGenerativeAI
 
-model = ChatGoogleGenerativeAI(model="gemini-3.7-flash")
+model = ChatGoogleGenerativeAI(model="gemini-4-hydrogen")
 
 message = HumanMessage(
     content=[
@@ -500,7 +498,7 @@ import base64
 from langchain.messages import HumanMessage
 from langchain_google_genai import ChatGoogleGenerativeAI
 
-model = ChatGoogleGenerativeAI(model="gemini-3.7-flash")
+model = ChatGoogleGenerativeAI(model="gemini-4-hydrogen")
 
 pdf_bytes = open("path/to/your/document.pdf", "rb").read()
 pdf_base64 = base64.b64encode(pdf_bytes).decode("utf-8")
@@ -528,7 +526,7 @@ from langchain.messages import HumanMessage
 from langchain_google_genai import ChatGoogleGenerativeAI
 
 client = genai.Client()
-model = ChatGoogleGenerativeAI(model="gemini-3.7-flash")
+model = ChatGoogleGenerativeAI(model="gemini-4-hydrogen")
 
 # Upload and wait for processing
 myfile = client.files.upload(file="/path/to/document.pdf")
@@ -559,7 +557,7 @@ Provide audio file inputs along with text.
 from langchain.messages import HumanMessage
 from langchain_google_genai import ChatGoogleGenerativeAI
 
-model = ChatGoogleGenerativeAI(model="gemini-3.7-flash")
+model = ChatGoogleGenerativeAI(model="gemini-4-hydrogen")
 
 message = HumanMessage(
     content=[
@@ -580,7 +578,7 @@ import base64
 from langchain.messages import HumanMessage
 from langchain_google_genai import ChatGoogleGenerativeAI
 
-model = ChatGoogleGenerativeAI(model="gemini-3.7-flash")
+model = ChatGoogleGenerativeAI(model="gemini-4-hydrogen")
 
 audio_bytes = open("path/to/your/audio.mp3", "rb").read()
 audio_base64 = base64.b64encode(audio_bytes).decode("utf-8")
@@ -608,7 +606,7 @@ from langchain.messages import HumanMessage
 from langchain_google_genai import ChatGoogleGenerativeAI
 
 client = genai.Client()
-model = ChatGoogleGenerativeAI(model="gemini-3.7-flash")
+model = ChatGoogleGenerativeAI(model="gemini-4-hydrogen")
 
 # Upload and wait for processing
 myfile = client.files.upload(file="/path/to/audio.mp3")
@@ -640,7 +638,7 @@ import base64
 from langchain.messages import HumanMessage
 from langchain_google_genai import ChatGoogleGenerativeAI
 
-model = ChatGoogleGenerativeAI(model="gemini-3.7-flash")
+model = ChatGoogleGenerativeAI(model="gemini-4-hydrogen")
 
 video_bytes = open("path/to/your/video.mp4", "rb").read()
 video_base64 = base64.b64encode(video_bytes).decode("utf-8")
@@ -668,7 +666,7 @@ from langchain.messages import HumanMessage
 from langchain_google_genai import ChatGoogleGenerativeAI
 
 client = genai.Client()
-model = ChatGoogleGenerativeAI(model="gemini-3.7-flash")
+model = ChatGoogleGenerativeAI(model="gemini-4-hydrogen")
 
 # Upload and wait for processing
 myfile = client.files.upload(file="/path/to/video.mp4")
@@ -695,7 +693,7 @@ response = model.invoke([message])
 from langchain.messages import HumanMessage
 from langchain_google_genai import ChatGoogleGenerativeAI
 
-model = ChatGoogleGenerativeAI(model="gemini-3.7-flash")
+model = ChatGoogleGenerativeAI(model="gemini-4-hydrogen")
 
 message = HumanMessage(
     content=[
@@ -728,7 +726,7 @@ response = model.invoke([message])
 ```python
 from langchain.chat_models import init_chat_model
 
-model = init_chat_model("google_genai:gemini-3.7-flash")
+model = init_chat_model("google_genai:gemini-4-hydrogen")
 
 message = {
     "role": "user",
@@ -864,7 +862,7 @@ def get_weather(location: str) -> str:
     return "It's sunny."
 
 # Initialize and bind (potentially multiple) tools to the model
-model_with_tools = ChatGoogleGenerativeAI(model="gemini-3.7-flash").bind_tools([get_weather])
+model_with_tools = ChatGoogleGenerativeAI(model="gemini-4-hydrogen").bind_tools([get_weather])
 
 # Step 1: Model generates tool calls
 messages = [HumanMessage("What's the weather in Boston?")]
@@ -902,7 +900,7 @@ class Feedback(BaseModel):
     sentiment: Literal["positive", "neutral", "negative"]
     summary: str
 
-model = ChatGoogleGenerativeAI(model="gemini-3.7-flash")
+model = ChatGoogleGenerativeAI(model="gemini-4-hydrogen")
 structured_model = model.with_structured_output(
     schema=Feedback.model_json_schema(), method="json_schema"
 )
@@ -945,7 +943,7 @@ class MatchResult(BaseModel):
     final_match_score: str
     scorers: list[str]
 
-llm = ChatGoogleGenerativeAI(model="gemini-3.7-flash")
+llm = ChatGoogleGenerativeAI(model="gemini-4-hydrogen")
 
 llm_with_search = llm.bind(
     tools=[{"google_search": {}}],
@@ -967,7 +965,7 @@ Access token usage information from the response metadata.
 ```python
 from langchain_google_genai import ChatGoogleGenerativeAI
 
-model = ChatGoogleGenerativeAI(model="gemini-3.7-flash")
+model = ChatGoogleGenerativeAI(model="gemini-4-hydrogen")
 
 result = model.invoke("Explain the concept of prompt engineering in one sentence.")
 
@@ -997,7 +995,7 @@ Set the tier on the model, or pass it per request:
 from langchain_google_genai import ChatGoogleGenerativeAI
 
 model = ChatGoogleGenerativeAI(
-    model="gemini-3.7-flash",
+    model="gemini-4-hydrogen",
     service_tier="flex",  # [!code highlight]
 )
 
@@ -1021,7 +1019,7 @@ Certain Gemini models support configurable thinking depth. The parameter depends
 
 | Model family | Parameter | Values |
 | - | - | - |
-| Gemini 3+ | `thinking_level` | `"minimal"`, `"low"`, `"medium"`, `"high"` (default for Pro) |
+| Gemini 3+ | `thinking_level` | `"minimal"`, `"low"`, `"medium"`, `"high"` (default for Pro), `"xhigh"` (`gemini-4-hydrogen`) |
 | Gemini 2.5 | `thinking_budget` | `0` (off), `-1` (dynamic), or a positive integer (token limit) |
 
 ```python
@@ -1029,7 +1027,7 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 
 # Gemini 3+: use thinking_level
 llm = ChatGoogleGenerativeAI(
-    model="gemini-3.7-flash",
+    model="gemini-4-hydrogen",
     thinking_level="low",  # [!code highlight]
 )
 
@@ -1039,7 +1037,7 @@ response = llm.invoke("How many O's are in Google?")
 `thinking_level` is Gemini's native name for the standard [`reasoning_effort`](../../langchain/models.md#reasoning) parameter, and the two are interchangeable aliases at both construction and call time. If both are set, `thinking_level` wins. Check a model's [profile](../../langchain/models.md#model-profiles) for the levels it supports and its default:
 
 ```python
-llm.profile["reasoning_effort_levels"]  # e.g. ['minimal', 'low', 'medium', 'high']
+llm.profile["reasoning_effort_levels"]  # e.g. ['minimal', 'low', 'medium', 'high', 'xhigh']
 llm.profile["reasoning_effort_default"]  # e.g. 'medium'
 ```
 
@@ -1059,7 +1057,7 @@ For Gemini 2.5 models, use `thinking_budget` (an integer token count) instead:
 from langchain_google_genai import ChatGoogleGenerativeAI
 
 llm = ChatGoogleGenerativeAI(
-    model="gemini-3.7-flash",
+    model="gemini-4-hydrogen",
     thinking_budget=1024,  # [!code highlight]
 )
 ```
@@ -1076,7 +1074,7 @@ To see a thinking model's reasoning, set `include_thoughts=True`:
 from langchain_google_genai import ChatGoogleGenerativeAI
 
 llm = ChatGoogleGenerativeAI(
-    model="gemini-3.7-flash",
+    model="gemini-4-hydrogen",
     include_thoughts=True,  # [!code highlight]
 )
 
@@ -1126,7 +1124,7 @@ See [Gemini docs](https://ai.google.dev/gemini-api/docs/grounding/search-suggest
 ```python
 from langchain_google_genai import ChatGoogleGenerativeAI
 
-model = ChatGoogleGenerativeAI(model="gemini-3.7-flash")
+model = ChatGoogleGenerativeAI(model="gemini-4-hydrogen")
 
 model_with_search = model.bind_tools([{"google_search": {}}]) # [!code highlight]
 response = model_with_search.invoke("When is the next total solar eclipse in US?")
@@ -1139,7 +1137,7 @@ response.content_blocks
 ```python
 from langchain_google_genai import ChatGoogleGenerativeAI
 
-model = ChatGoogleGenerativeAI(model="gemini-3.7-flash")
+model = ChatGoogleGenerativeAI(model="gemini-4-hydrogen")
 
 response = model.invoke(
     "When is the next total solar eclipse in US?",
@@ -1254,7 +1252,7 @@ The URL context tool enables the model to access and analyze content from URLs y
 ```python
 from langchain_google_genai import ChatGoogleGenerativeAI
 
-model = ChatGoogleGenerativeAI(model="gemini-3.7-flash")
+model = ChatGoogleGenerativeAI(model="gemini-4-hydrogen")
 
 model_with_url_context = model.bind_tools([{"url_context": {}}]) # [!code highlight]
 response = model_with_url_context.invoke(
@@ -1267,7 +1265,7 @@ response = model_with_url_context.invoke(
 ```python
 from langchain_google_genai import ChatGoogleGenerativeAI
 
-model = ChatGoogleGenerativeAI(model="gemini-3.7-flash")
+model = ChatGoogleGenerativeAI(model="gemini-4-hydrogen")
 
 response = model.invoke(
     "Summarize the content at https://docs.langchain.com",
@@ -1284,7 +1282,7 @@ See [Gemini docs](https://ai.google.dev/gemini-api/docs/code-execution?lang=pyth
 ```python
 from langchain_google_genai import ChatGoogleGenerativeAI
 
-model = ChatGoogleGenerativeAI(model="gemini-3.7-flash")
+model = ChatGoogleGenerativeAI(model="gemini-4-hydrogen")
 
 model_with_code_interpreter = model.bind_tools([{"code_execution": {}}]) # [!code highlight]
 response = model_with_code_interpreter.invoke("Use Python to calculate 3^3.")
@@ -1297,7 +1295,7 @@ response.content_blocks
 ```python
 from langchain_google_genai import ChatGoogleGenerativeAI
 
-model = ChatGoogleGenerativeAI(model="gemini-3.7-flash")
+model = ChatGoogleGenerativeAI(model="gemini-4-hydrogen")
 
 response = model.invoke(
     "Use Python to calculate 3^3.",
@@ -1412,7 +1410,7 @@ from langchain_google_genai import (
 )
 
 llm = ChatGoogleGenerativeAI(
-        model="gemini-3.7-flash",
+        model="gemini-4-hydrogen",
         safety_settings={
         HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE,
     },
@@ -1445,7 +1443,7 @@ Context caching allows you to store and reuse content (e.g., PDFs, images) for f
 >     file = client.files.get(name=file.name)
 >
 > # Create cache
-> model = "gemini-3.7-flash"
+> model = "gemini-4-hydrogen"
 > cache = client.caches.create(
 >     model=model,
 >     config=types.CreateCachedContentConfig(
@@ -1502,7 +1500,7 @@ Context caching allows you to store and reuse content (e.g., PDFs, images) for f
 >         ],
 >     )
 > ]
-> model = "gemini-3.7-flash"
+> model = "gemini-4-hydrogen"
 > cache = client.caches.create(
 >     model=model,
 >     config=CreateCachedContentConfig(
@@ -1536,7 +1534,7 @@ Access response metadata from the model response.
 ```python
 from langchain_google_genai import ChatGoogleGenerativeAI
 
-llm = ChatGoogleGenerativeAI(model="gemini-3.7-flash")
+llm = ChatGoogleGenerativeAI(model="gemini-4-hydrogen")
 
 response = llm.invoke("Hello!")
 response.response_metadata
@@ -1545,7 +1543,7 @@ response.response_metadata
 ```text
 {'prompt_feedback': {'block_reason': 0, 'safety_ratings': []},
  'finish_reason': 'STOP',
- 'model_name': 'gemini-3.7-flash',
+ 'model_name': 'gemini-4-hydrogen',
  'safety_ratings': [],
  'model_provider': 'google_genai'}
 ```

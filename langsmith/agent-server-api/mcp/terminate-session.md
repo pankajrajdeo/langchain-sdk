@@ -18,7 +18,7 @@ Terminate an MCP session. The server implementation is stateless, so this is a n
 ````yaml
 openapi: 3.1.0
 info:
-  title: LangSmith Deployment
+  title: LangSmith Agent Server
   version: 0.1.0
 servers: []
 security: []

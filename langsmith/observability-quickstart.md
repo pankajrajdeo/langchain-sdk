@@ -484,7 +484,7 @@ Create a file called `app.py`, `index.ts`, `App.java`, or `App.kt` with the foll
 > def assistant(question: str) -> str:
 >     context = get_context(question)
 >     response = client.models.generate_content(
->         model="gemini-3.8-flash",
+>         model="gemini-4-hydrogen",
 >         contents=question,
 >         config={"system_instruction": f"Answer using the context below.\n\nContext: {context}"},
 >     )
@@ -514,7 +514,7 @@ Create a file called `app.py`, `index.ts`, `App.java`, or `App.kt` with the foll
 > const assistant = traceable(async function assistant(question: string) { // capture the full pipeline as a single trace
 >     const context = await getContext(question);
 >     const response = await client.models.generateContent({
->         model: "gemini-3.8-flash",
+>         model: "gemini-4-hydrogen",
 >         contents: question,
 >         config: { systemInstruction: `Answer using the context below.\n\nContext: ${context}` },
 >     });

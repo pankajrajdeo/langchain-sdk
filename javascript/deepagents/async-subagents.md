@@ -69,7 +69,7 @@ const asyncSubagents: AsyncSubAgent[] = [
 ];
 
 const agent = createDeepAgent({
-  model: "google:gemini-3.6-flash",
+  model: "google:gemini-4-hydrogen",
   subagents: [...asyncSubagents],
 });
 ```
@@ -417,7 +417,7 @@ function researcher(config: LangGraphRunnableConfig) {
   // Set when a supervisor launched this run with `start_async_task`
   const parentThreadId = config.metadata?.parent_thread_id;
   return createDeepAgent({
-    model: "google:gemini-3.6-flash",
+    model: "google:gemini-4-hydrogen",
     systemPrompt: "You research topics thoroughly.",
   });
 }
@@ -706,7 +706,7 @@ Subagents on the same deployment also receive the supervisor's trace headers. To
 import { createDeepAgent } from "deepagents";
 
 const agent = createDeepAgent({
-  model: "google:gemini-3.6-flash",
+  model: "google:gemini-4-hydrogen",
   systemPrompt: `...your instructions...
 
     After launching an async subagent, ALWAYS return control to the user.

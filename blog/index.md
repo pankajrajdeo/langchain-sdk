@@ -1,6 +1,6 @@
 ---
 title: "LangChain Blog"
-description: "Thank you! Your submission has been received!Oops! Something went wrong while submitting the form.Harrison's In the Loop"
+description: "Thank you! Your submission has been received!Oops! Something went wrong while submitting the form.Company Announcements"
 source: "https://www.langchain.com/blog"
 category: "blog"
 tags: [blog]
@@ -10,11 +10,11 @@ tags: [blog]
 
 ### Featured stories
 
-Thank you! Your submission has been received!Oops! Something went wrong while submitting the form.![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a6518d7f8fe95d8c0790586_dark-77%20characters%20max.png)Harrison's In the Loop
+Thank you! Your submission has been received!Oops! Something went wrong while submitting the form.![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6af52a0047907d0f9587a24f_Social%20Announcement.png)Company Announcements
 
-## What does it mean to "own your intelligence"?
+## LangChain Raises $300M to Enable Every Company to Own Its Intelligence
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a056ea05f3880a1361b47cf_Harrison.avif)Harrison ChaseJuly 25, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)9min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ae8c3176dbb11c11eaf324b_context-engineering-challenges-blog.png)Harrison's In the Loop
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a056ea05f3880a1361b47cf_Harrison.avif)Harrison ChaseNovember 13, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)3min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ae8c3176dbb11c11eaf324b_context-engineering-challenges-blog.png)Harrison's In the Loop
 
 ## New context engineering challenges in late 2026
 
@@ -30,7 +30,11 @@ Thank you! Your submission has been received!Oops! Something went wrong while su
 
 ### Recent stories
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6af3b3e9c07c79843a4bf1f8_GTM%20Agent.png)Deep Agents
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6af52a0047907d0f9587a24f_Social%20Announcement.png)Company Announcements
+
+## LangChain Raises $300M to Enable Every Company to Own Its Intelligence
+
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a056ea05f3880a1361b47cf_Harrison.avif)Harrison ChaseNovember 13, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)3min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6af3b3e9c07c79843a4bf1f8_GTM%20Agent.png)Deep Agents
 
 ## How our GTM Agent builds consistent, high-quality sales artifacts
 
@@ -90,11 +94,7 @@ Thank you! Your submission has been received!Oops! Something went wrong while su
 
 ## Context Engineering Starts with Retrieval
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6acfb8492227373b922e7719_Screenshot%202026-10-14%20at%2010.12.17%E2%80%AFAM.png)Jess WengOctober 23, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)12min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6acff77d1bd39af709e68bc7_numan-blog.png)Case Studies
-
-## How Numan built an eval-first AI health coach with LangGraph and LangSmith
-
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aceb543d21c5bdd01e91ec2_asif-laldin.jpeg)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aceb544d21c5bdd01e91ec7_marcus-wadge-dale.jpeg)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aceb544d21c5bdd01e91ecc_shubhangi-hora.jpeg)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aceb545d21c5bdd01e91ed1_konstantinos-georgakilas.jpeg)Asif LaldinMarcus Wadge-DaleShubhangi HoraKonstantinos GeorgakilasOctober 19, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)10min1...1 / 35
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6acfb8492227373b922e7719_Screenshot%202026-10-14%20at%2010.12.17%E2%80%AFAM.png)Jess WengOctober 23, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)12min1...1 / 35
 
 #### We couldn't find anything matching that.
 

@@ -20,4 +20,4 @@ expected_removal: tuple[int, int] = expected_removal if expected_removal is not 
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/a054ed08dcee7ecc4105706d38c0b4aa0b3c3c32/libs/langgraph/langgraph/warnings.py#L39)
+[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/08a2016953789a4f579b4d36bd1967941ec62012/libs/langgraph/langgraph/warnings.py#L39)

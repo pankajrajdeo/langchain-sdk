@@ -1516,7 +1516,7 @@ def get_weather(city: str) -> str:
     return f"The weather in {city} is sunny."
 
 agent = create_agent(
-    model="google_genai:gemini-3.6-flash",
+    model="google_genai:gemini-4-hydrogen",
     middleware=[
         SubAgentMiddleware(
             backend=StateBackend(),
@@ -1783,7 +1783,7 @@ weather_subagent = CompiledSubAgent(
 )
 
 agent = create_agent(
-    model="google_genai:gemini-3.6-flash",
+    model="google_genai:gemini-4-hydrogen",
     middleware=[
         SubAgentMiddleware(
             backend=StateBackend(),
@@ -2064,7 +2064,7 @@ from deepagents import RubricMiddleware, create_deep_agent
 from langgraph.checkpoint.memory import InMemorySaver
 
 agent = create_deep_agent(
-    model="google_genai:gemini-3.6-flash",
+    model="google_genai:gemini-4-hydrogen",
     middleware=[
         RubricMiddleware(
             model="anthropic:claude-haiku-4-5",
@@ -2401,7 +2401,7 @@ agent = create_agent(
 >
 > **model** `string | BaseChatModel`
 >
-> Model to use for generating emulated tool responses. Can be a model identifier string (e.g., `'google_genai:gemini-3.6-flash'`) or a `BaseChatModel` instance. Defaults to the agent's model if not specified. See [`init_chat_model`](https://reference.langchain.com/python/langchain/chat_models/base/init_chat_model) for more information.
+> Model to use for generating emulated tool responses. Can be a model identifier string (e.g., `'google_genai:gemini-4-hydrogen'`) or a `BaseChatModel` instance. Defaults to the agent's model if not specified. See [`init_chat_model`](https://reference.langchain.com/python/langchain/chat_models/base/init_chat_model) for more information.
 
 > [accordion] Full example
 >

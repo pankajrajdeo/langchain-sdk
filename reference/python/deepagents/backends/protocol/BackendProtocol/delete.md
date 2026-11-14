@@ -50,4 +50,4 @@ nothing exists at or under the path or removal fails.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/0ec42441901968a75202a3ef365650eb280a473b/libs/deepagents/deepagents/backends/protocol.py#L722)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/c858b3641b13fb3f40fe3a12515517b81fb8a744/libs/deepagents/deepagents/backends/protocol.py#L722)

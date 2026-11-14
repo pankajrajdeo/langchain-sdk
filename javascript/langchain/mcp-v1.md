@@ -504,7 +504,7 @@ async function accessMultimodalToolContent(): Promise<void> {
   const { MultiServerMCPClient } = await import("@langchain/mcp-adapters");
   const client = new MultiServerMCPClient({});
   const tools = await client.getTools();
-  const agent = createAgent({ model: "google:gemini-3.6-flash", tools });
+  const agent = createAgent({ model: "google:gemini-4-hydrogen", tools });
 
   const result = await agent.invoke({
     messages: [

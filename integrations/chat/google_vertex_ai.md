@@ -16,7 +16,7 @@ tags: [docs, integrations, chat, google_vertex_ai]
 >
 > This integration is deprecated and will be removed in a future release. Please use [`ChatGoogleGenerativeAI`](google_generative_ai.md) instead. See the full [release notes and migration guide](https://github.com/langchain-ai/langchain-google/discussions/1422).
 
-Gemini Enterprise Agent Platform exposes all foundational models available in Google Cloud, like `gemini-3.1-pro-preview`, `gemini-3.7-flash`, etc. For a full and updated list of available models visit [Gemini Enterprise Agent Platform documentation](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/google-models).
+Gemini Enterprise Agent Platform exposes all foundational models available in Google Cloud, like `gemini-3.1-pro-preview`, `gemini-4-hydrogen`, etc. For a full and updated list of available models visit [Gemini Enterprise Agent Platform documentation](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/google-models).
 
 > [!NOTE]
 >
@@ -82,8 +82,7 @@ Now we can instantiate our model object and generate chat completions:
 from langchain_google_vertexai import ChatVertexAI
 
 llm = ChatVertexAI(
-    model="gemini-3.7-flash",
-    temperature=0,
+    model="gemini-4-hydrogen",
     max_tokens=None,
     max_retries=6,
     stop=None,
@@ -132,7 +131,7 @@ Gemini can execute a Google search and use the results to [ground its responses]
 ```python
 from langchain_google_vertexai import ChatVertexAI
 
-llm = ChatVertexAI(model="gemini-3.7-flash").bind_tools([{"google_search": {}}])
+llm = ChatVertexAI(model="gemini-4-hydrogen").bind_tools([{"google_search": {}}])
 
 response = llm.invoke("What is today's news?")
 ```
@@ -148,7 +147,7 @@ Gemini can [generate and execute Python code](https://ai.google.dev/gemini-api/d
 ```python
 from langchain_google_vertexai import ChatVertexAI
 
-llm = ChatVertexAI(model="gemini-3.7-flash").bind_tools([{"code_execution": {}}])
+llm = ChatVertexAI(model="gemini-4-hydrogen").bind_tools([{"code_execution": {}}])
 
 response = llm.invoke("What is 3^3?")
 ```

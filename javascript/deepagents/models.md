@@ -14,7 +14,7 @@ Deep Agents work with any [LangChain chat model](../langchain/models.md) that su
 
 ## Supported models
 
-Specify models in `provider:model` format (for example, `google:gemini-3.6-flash`, `openai:gpt-5.4`, or `anthropic:claude-sonnet-4-6`). The provider prefix selects the LangChain integration, and everything after the colon is passed through to that provider as the model identifier. For valid provider strings, see [`initChatModel`](https://reference.langchain.com/javascript/langchain/chat_models/universal/initChatModel). For provider-specific configuration, see [chat model integrations](../integrations/chat.md).
+Specify models in `provider:model` format (for example, `google:gemini-4-hydrogen`, `openai:gpt-5.4`, or `anthropic:claude-sonnet-4-6`). The provider prefix selects the LangChain integration, and everything after the colon is passed through to that provider as the model identifier. For valid provider strings, see [`initChatModel`](https://reference.langchain.com/javascript/langchain/chat_models/universal/initChatModel). For provider-specific configuration, see [chat model integrations](../integrations/chat.md).
 
 The model identifier must match the format expected by the provider. Some providers use simple names like `gpt-6.1-sol`; others use namespaced IDs or deployment paths like `zai-org/GLM-5.2`, so the full Deep Agents string would be `baseten:zai-org/GLM-5.2`. Check the provider's model catalog or integration docs for the current identifiers.
 
@@ -24,7 +24,7 @@ These models perform well on the [Deep Agents eval suite](https://github.com/lan
 
 | Provider | Models |
 | - | - |
-| [Google](../integrations/providers/google.md) | `gemini-3.1-pro-preview`, `gemini-3.6-flash` |
+| [Google](../integrations/providers/google.md) | `gemini-3.1-pro-preview`, `gemini-4-hydrogen` |
 | [OpenAI](../integrations/providers/openai.md) | `gpt-5.5`, `gpt-5.4` |
 | [Anthropic](../integrations/providers/anthropic.md) | `claude-opus-4-8`, `claude-opus-4-7`, `claude-opus-4-6` |
 | Open-weight | `GLM-5.2`, `Kimi-K2.7 Code`, `MiniMax-M3` |
@@ -65,7 +65,7 @@ To configure model-specific parameters, use [`init_chat_model`](https://referenc
 import { initChatModel } from "langchain/chat_models/universal";
 import { createDeepAgent } from "deepagents";
 
-const model = await initChatModel("google:gemini-3.6-flash", {
+const model = await initChatModel("google:gemini-4-hydrogen", {
   reasoningEffort: "medium", // [!code highlight]
 });
 const agent = createDeepAgent({ model });
@@ -140,7 +140,7 @@ const configurableModel = createMiddleware({
 });
 
 const agent = await createDeepAgent({
-  model: "google:gemini-3.6-flash",
+  model: "google:gemini-4-hydrogen",
   middleware: [configurableModel],
   contextSchema,
 });

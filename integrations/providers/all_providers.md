@@ -480,6 +480,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 >
 > Product search across thousands of retailers, with each retailer's offer and live price.
 
+> [card] [ChatEXAONE](https://github.com/ykoh42/exaone-integrations/tree/main/packages/langchain-exaone-py)
+>
+> Community-maintained EXAONE chat model integration for LangChain with streaming, tool calling, structured output, and reasoning history.
+
 > [card] [Cheaper Inference](https://cheaperinference.com/docs)
 >
 > OpenAI-compatible LLM gateway that serves models from many labs below list price.
@@ -1332,6 +1336,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 >
 > Sub-second RAG retrieval regression testing and stability monitoring.
 
+> [card] [LoomStore](https://github.com/ClickHouse/loom/blob/main/docs/features/integrations/frameworks.md#langgraph)
+>
+> LangGraph BaseStore backed by a self-hosted ClickHouse Loom server: long-term memory shared across agents, with search by meaning.
+
 > [card] [LoopGrid](https://loopgrid.io/integrations/langchain/)
 >
 > Native LangChain AgentMiddleware for signed decision evidence, policy enforcement, human approval, and guarded tool execution through LoopGrid Core.
@@ -2000,6 +2008,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 >
 > Firecracker microVM sandboxes for Deep Agents from Runtime.
 
+> [card] [SaefMiddleware](https://github.com/guillermollopis/soma-ai-emission-factors#integrations)
+>
+> Agent middleware that estimates CO2e and water per model call from token usage, model and cloud region. Estimates, not measurements.
+
 > [card] [Sail](https://docs.lakesail.com/sail/latest/guide/integrations/langchain.html)
 >
 > Rust-based drop-in Spark replacement with Spark Connect and a Sail SQL toolkit for LangChain agents.
@@ -2044,9 +2056,9 @@ Browse the complete collection of integrations available for Python. LangChain P
 >
 > AI-powered web scraping framework.
 
-> [card] [Scrapeless](https://github.com/scrapeless-ai/langchain-scrapeless)
+> [card] [Scrapeless](https://docs.scrapeless.com/en/integrations/langchain/)
 >
-> Web scraping API and proxy service.
+> Google Search, Web Unlocker, Crawl, and AI Scraper tools for LangChain through the Scrapeless Python SDK.
 
 > [card] [ScrapelyActorsTool](https://scrape.ly/docs/langchain)
 >
@@ -2160,9 +2172,9 @@ Browse the complete collection of integrations available for Python. LangChain P
 >
 > x402-native clean web reader for AI agents.
 
-> [card] [SnapRender](https://snap-render.com)
+> [card] [SnapRender](https://github.com/User0856/snaprender-integrations/tree/main/langchain)
 >
-> Capture website screenshots as PNG, JPEG, WebP, or PDF.
+> Tools that capture web pages as PNG, JPEG, WebP or PDF screenshots in a real browser via the SnapRender API.
 
 > [card] [Snowflake](https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-rest-api)
 >
@@ -2416,7 +2428,7 @@ Browse the complete collection of integrations available for Python. LangChain P
 >
 > Extended toolkit for LangChain applications.
 
-> [card] [TopxAI](https://ai.topxea.com/docs/use-topxai-with-langchain)
+> [card] [TopxAI](https://api.topxai.xyz/docs/use-topxai-with-langchain)
 >
 > TopxAI is an API gateway that serves Claude, GPT, Grok, GLM, Kimi, and DeepSeek models through one OpenAI-compatible API.
 

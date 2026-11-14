@@ -15,7 +15,7 @@ tags: [docs, langsmith, agent-server-api, thread-runs, cancel-run]
 ````yaml
 openapi: 3.1.0
 info:
-  title: LangSmith Deployment
+  title: LangSmith Agent Server
   version: 0.1.0
 servers: []
 security: []
@@ -103,6 +103,19 @@ paths:
             title: Action
             default: interrupt
           name: action
+          in: query
+        - description: >-
+            Use `taken` to mark run input absorbed for steering. Records a
+            `cancel_reason` starting with `taken:`. Only supported with
+            `action=interrupt`; cancellation behavior is unchanged. A 404
+            response means the run was not cancelled.
+          required: false
+          schema:
+            type: string
+            enum:
+              - taken
+            title: Reason
+          name: reason
           in: query
       responses:
         '200':

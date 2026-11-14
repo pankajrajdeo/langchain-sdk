@@ -111,7 +111,7 @@ def yearly_balance_schedule(
     return schedule
 
 agent = create_deep_agent(
-    model="google_genai:gemini-3.6-flash",
+    model="google_genai:gemini-4-hydrogen",
     tools=[compute_compound_interest, yearly_balance_schedule],
     system_prompt=(
         "You are a careful assistant. "
@@ -286,7 +286,7 @@ def yearly_balance_schedule(
     return schedule
 
 agent = create_deep_agent(
-    model="google_genai:gemini-3.6-flash",
+    model="google_genai:gemini-4-hydrogen",
     tools=[compute_compound_interest, yearly_balance_schedule],
     system_prompt=(
         "You are a careful assistant. "

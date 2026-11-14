@@ -1,13 +1,13 @@
 ---
 title: "langsmith"
-description: "Index of 530 pages and 5 subdirectories under langsmith."
+description: "Index of 534 pages and 5 subdirectories under langsmith."
 category: "index"
 tags: [index, langsmith]
 ---
 
 # langsmith
 
-530 pages here, 1289 pages including subdirectories.
+534 pages here, 1293 pages including subdirectories.
 
 ## Directories
 
@@ -361,6 +361,7 @@ tags: [index, langsmith]
 - [Run (span) data format](run-data-format.md) - LangSmith stores each run as a structured record. Understanding this format is useful when exporting traces, querying the API, or building integrations.
 - [How to use the REST API](run-evals-api-only.md) - The Python and TypeScript SDKs are the recommended way to run evaluations in LangSmith. They include optimizations and features that enhance performance and reliability.
 - [Run an evaluation from the Playground](run-evaluation-from-playground.md) - LangSmith allows you to run evaluations directly in the UI. The Playground allows you to test your prompt or model configuration over a series of inputs to see how well it scores across different...
+- [Prioritize runs](run-priority.md) - Set a priority for each thread so that urgent runs start first.
 - [Runs](runs.md) - An overview of runs in Agent Server, including how to kick off background runs, stateless runs, and cancel runs.
 - [How to run multiple assistants on the same thread](same-thread.md) - In LangSmith Agent Server, a thread is not explicitly associated with a particular assistant. This means that you can run multiple assistants on the same thread, which allows a different assistant to...
 - [Set a sampling rate for traces](sample-traces.md) - When working with high-volume applications, you may not want to log every trace to LangSmith. Sampling rates allow you to control what percentage of traces are logged, helping you balance...
@@ -410,10 +411,13 @@ tags: [index, langsmith]
 - [Run self-hosted Sandboxes in a separate cluster](self-host-sandbox-separate-cluster.md) - Run the self-hosted LangSmith Sandbox runtime in a dedicated Kubernetes cluster with the langsmith-sandbox Helm chart, connected to the LangSmith control plane in another cluster.
 - [Configure LangSmith for scale](self-host-scale.md) - Scale a self-hosted LangSmith instance for trace ingestion, evaluation workloads, and concurrent users, with example configurations for different load patterns.
 - [Connect self-hosted and BYOC LangSmith to Slack](self-host-slack.md) - Configure your own Slack app for Engine and alert notifications on self-hosted LangSmith or a BYOC data plane.
+- [SmithDB architecture](self-host-smithdb-architecture.md) - How SmithDB and LangSmith components depend on each other on self-hosted LangSmith.
+- [Common SmithDB issues to monitor](self-host-smithdb-common-issues.md) - The first metrics to check on self-hosted LangSmith, and how to detect and fix the SmithDB issues that occur most often in production.
+- [How SmithDB handles data](self-host-smithdb-data-paths.md) - How SmithDB writes runs, answers queries, applies feedback and deletes, and compacts stored data on self-hosted LangSmith.
 - [SmithDB feature availability](self-host-smithdb-features.md) - LangSmith features that are unavailable on self-hosted installations that query ClickHouse, and what still works without SmithDB.
 - [Prepare SmithDB supporting infrastructure](self-host-smithdb-infrastructure.md) - Provide a dedicated PostgreSQL metastore, object storage, and cache storage before enabling SmithDB.
 - [Install LangSmith with SmithDB](self-host-smithdb-install.md) - Enable SmithDB on a self-hosted LangSmith Kubernetes installation through staged Helm updates.
-- [SmithDB metrics reference](self-host-smithdb-metrics.md) - Metrics to watch on each SmithDB component, what they measure, and how to read them.
+- [Essential SmithDB metrics](self-host-smithdb-metrics.md) - The SmithDB and LangSmith metrics to monitor on self-hosted LangSmith, what they measure, and how to use them.
 - [Migrate ClickHouse history to SmithDB](self-host-smithdb-migrate.md) - Run the historical ClickHouse-to-SmithDB migration for a self-hosted LangSmith installation.
 - [Configure SmithDB observability](self-host-smithdb-observability.md) - Scrape SmithDB application metrics and export logs and traces to your existing observability stack.
 - [Configure SmithDB for scale](self-host-smithdb-scale.md) - Choose tested SmithDB resource tiers and size Kubernetes workloads and the PostgreSQL metastore.

@@ -31,7 +31,7 @@ To add long-term memory to an agent, create a store and pass it to [`create_agen
 > const store = new InMemoryStore();
 >
 > const agent = createAgent({
->   model: "google:gemini-3.6-flash",
+>   model: "google:gemini-4-hydrogen",
 >   tools: [],
 >   store,
 > });
@@ -152,7 +152,7 @@ To add long-term memory to an agent, create a store and pass it to [`create_agen
 > await store.setup();
 >
 > const agent = createAgent({
->   model: "google:gemini-3.6-flash",
+>   model: "google:gemini-4-hydrogen",
 >   tools: [],
 >   store,
 > });
@@ -409,7 +409,7 @@ For more information about the memory store, see the [Persistence](../langgraph/
 > );
 >
 > const agent = createAgent({
->   model: "google:gemini-3.6-flash",
+>   model: "google:gemini-4-hydrogen",
 >   tools: [getUserInfo],
 >   contextSchema,
 >   // Pass store to agent - enables agent to access store when running tools
@@ -869,7 +869,7 @@ For more information about the memory store, see the [Persistence](../langgraph/
 > );
 >
 > const agent = createAgent({
->   model: "google:gemini-3.6-flash",
+>   model: "google:gemini-4-hydrogen",
 >   tools: [getUserInfo],
 >   contextSchema,
 >   store,
@@ -1212,7 +1212,7 @@ For more information about the memory store, see the [Persistence](../langgraph/
 > );
 >
 > const agent = createAgent({
->   model: "google:gemini-3.6-flash",
+>   model: "google:gemini-4-hydrogen",
 >   tools: [saveUserInfo],
 >   contextSchema,
 >   store,
@@ -1621,7 +1621,7 @@ For more information about the memory store, see the [Persistence](../langgraph/
 > );
 >
 > const agent = createAgent({
->   model: "google:gemini-3.6-flash",
+>   model: "google:gemini-4-hydrogen",
 >   tools: [saveUserInfo],
 >   contextSchema,
 >   store,

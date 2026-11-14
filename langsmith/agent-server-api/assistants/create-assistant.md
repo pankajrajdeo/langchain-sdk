@@ -19,7 +19,7 @@ An initial version of the assistant will be created and the assistant is set to 
 ````yaml
 openapi: 3.1.0
 info:
-  title: LangSmith Deployment
+  title: LangSmith Agent Server
   version: 0.1.0
 servers: []
 security: []

@@ -84,6 +84,10 @@ Connect LangGraph agents to front ends and observability platforms.
 >
 > Marketplace of real residential Chrome sessions for AI agents.
 
+> [card] [ChatExaone](https://github.com/ykoh42/exaone-integrations/tree/main/packages/langchain-exaone-ts)
+>
+> Community-maintained EXAONE chat model integration for LangChain with streaming, tool calling, structured output, and reasoning history.
+
 > [card] [ChatWebLLM](https://github.com/ykoh42/web-llm-adapters/blob/main/packages/langchain-web-llm/README.md)
 >
 > Run WebLLM models locally with WebGPU through LangChain, LangGraph, and Deep Agents.
@@ -565,6 +569,10 @@ Connect LangGraph agents to front ends and observability platforms.
 > [card] [Sato Hub](https://github.com/satohubai/sato-hub-integrations/tree/main/packages/satohub-langchain-tools#readme)
 >
 > Keyless tools over Sato Hub's index of onchain-agent building blocks: search listings, Preflight lookups, swap venues, and build plans.
+
+> [card] [SnapRender](https://github.com/User0856/snaprender-integrations/tree/main/langchain)
+>
+> Tools that capture web pages as PNG, JPEG, WebP or PDF screenshots in a real browser via the SnapRender API.
 
 > [card] [SproutsDataTools](https://github.com/sproutsdata-ai/sproutsdata-js/tree/main/packages/langchain#readme)
 >

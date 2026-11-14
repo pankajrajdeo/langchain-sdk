@@ -29,7 +29,7 @@ A harness is everything around that loop: the prompt, the tools, and any middlew
 ```ts
 import { createAgent } from "langchain";
 
-var agent = createAgent({ model: "google:gemini-3.6-flash", tools });
+var agent = createAgent({ model: "google:gemini-4-hydrogen", tools });
 ```
 
 **OpenAI**
@@ -99,7 +99,7 @@ Pass a model identifier string (`"provider:model"`) or an initialized model inst
 ```ts
 import { createAgent } from "langchain";
 
-var agent = createAgent({ model: "google:gemini-3.6-flash", tools });
+var agent = createAgent({ model: "google:gemini-4-hydrogen", tools });
 ```
 
 **OpenAI**
@@ -166,7 +166,7 @@ var search = tool(({ query }) => `Results for: ${query}`, {
   schema: z.object({ query: z.string() }),
 });
 
-var agent = createAgent({ model: "google:gemini-3.6-flash", tools: [search] });
+var agent = createAgent({ model: "google:gemini-4-hydrogen", tools: [search] });
 ```
 
 **OpenAI**
@@ -267,7 +267,7 @@ Shape how the agent approaches tasks. The system prompt parameter accepts a stri
 
 ```ts
 var agent = createAgent({
-  model: "google:gemini-3.6-flash",
+  model: "google:gemini-4-hydrogen",
   tools,
   systemPrompt: "You are a helpful assistant. Be concise and accurate.",
 });
@@ -343,7 +343,7 @@ Return a validated schema from the agent using `response_format=`. See [Structur
 const Answer = z.object({ summary: z.string(), confidence: z.number() });
 
 var agent = createAgent({
-  model: "google:gemini-3.6-flash",
+  model: "google:gemini-4-hydrogen",
   tools,
   responseFormat: Answer,
 });
@@ -481,7 +481,7 @@ const stateMiddleware = createMiddleware({
 });
 
 const agent = createAgent({
-  model: "google:gemini-3.6-flash",
+  model: "google:gemini-4-hydrogen",
   tools: [],
   middleware: [stateMiddleware],
 });
@@ -650,7 +650,7 @@ import { createAgent } from "langchain";
 import { MemorySaver } from "@langchain/langgraph";
 
 const agent = createAgent({
-  model: "google:gemini-3.6-flash",
+  model: "google:gemini-4-hydrogen",
   tools: [],
   checkpointer: new MemorySaver(),
 });
@@ -889,7 +889,7 @@ const contextSchema = z.object({
 });
 
 const agent = createAgent({
-  model: "google:gemini-3.6-flash",
+  model: "google:gemini-4-hydrogen",
   tools: [],
   contextSchema,
   checkpointer: new MemorySaver(),
@@ -1202,7 +1202,7 @@ import { createAgent } from "langchain";
 import { createFilesystemMiddleware, StateBackend } from "deepagents";
 
 var agent = createAgent({
-  model: "google:gemini-3.6-flash",
+  model: "google:gemini-4-hydrogen",
   tools: [search],
   middleware: [createFilesystemMiddleware({ backend: new StateBackend() })],
 });
@@ -1326,7 +1326,7 @@ import {
 } from "deepagents";
 
 var backend = new StateBackend();
-const model = "google:gemini-3.6-flash";
+const model = "google:gemini-4-hydrogen";
 
 var agent = createAgent({
   model,
@@ -1537,7 +1537,7 @@ var search = tool(({ query }) => `Search results for: ${query}`, {
 var backend = new StateBackend();
 
 var agent = createAgent({
-  model: "google:gemini-3.6-flash",
+  model: "google:gemini-4-hydrogen",
   tools: [search],
   middleware: [
     createFilesystemMiddleware({ backend }),
@@ -1552,7 +1552,7 @@ var agent = createAgent({
           systemPrompt:
             "Use the search tool to research the question and summarize key points.",
           tools: [search],
-          model: "google:gemini-3.6-flash",
+          model: "google:gemini-4-hydrogen",
           middleware: [],
         },
       ],
@@ -1857,7 +1857,7 @@ Optionally use an identifier for the agent. This is especially useful when embed
 
 ```ts
 var agent = createAgent({
-  model: "google:gemini-3.6-flash",
+  model: "google:gemini-4-hydrogen",
   tools,
   name: "research_assistant",
 });
@@ -1945,7 +1945,7 @@ var search = tool(({ query }) => `Search results for: ${query}`, {
 });
 
 var agent = createAgent({
-  model: "google:gemini-3.6-flash",
+  model: "google:gemini-4-hydrogen",
   tools: [search],
   middleware: [
     modelRetryMiddleware({ maxRetries: 3 }),
@@ -2135,7 +2135,7 @@ var search = tool(({ query }) => `Search results for: ${query}`, {
 });
 
 var agent = createAgent({
-  model: "google:gemini-3.6-flash",
+  model: "google:gemini-4-hydrogen",
   tools: [search],
   middleware: [piiMiddleware("email")],
 });
@@ -2274,7 +2274,7 @@ var search = tool(({ query }) => `Search results for: ${query}`, {
 });
 
 var agent = createAgent({
-  model: "google:gemini-3.6-flash",
+  model: "google:gemini-4-hydrogen",
   tools: [search],
   middleware: [humanInTheLoopMiddleware({ interruptOn: { writeFile: true } })],
 });

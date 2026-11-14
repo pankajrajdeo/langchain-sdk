@@ -19,7 +19,7 @@ Pass them to `create_deep_agent` via the `tools=` parameter alongside the [built
 from deepagents import create_deep_agent
 
 agent = create_deep_agent(
-    model="google_genai:gemini-3.6-flash",
+    model="google_genai:gemini-4-hydrogen",
     tools=[search, fetch_url, run_query],
 )
 ```
@@ -120,7 +120,7 @@ def internet_search(
     )
 
 agent = create_deep_agent(
-    model="google_genai:gemini-3.6-flash",
+    model="google_genai:gemini-4-hydrogen",
     tools=[internet_search],
 )
 ```
@@ -342,7 +342,7 @@ async def main():
     async with MCPAdapter(config) as adapter:
         tools = await adapter.list_tools()
         agent = create_deep_agent(
-            model="google_genai:gemini-3.6-flash",
+            model="google_genai:gemini-4-hydrogen",
             tools=tools,
         )
         await agent.ainvoke(

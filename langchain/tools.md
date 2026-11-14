@@ -766,7 +766,7 @@ def handle_tool_errors(
         )
 
 agent = create_agent(
-    model="google_genai:gemini-3.6-flash",
+    model="google_genai:gemini-4-hydrogen",
     tools=[],
     middleware=[handle_tool_errors],
 )

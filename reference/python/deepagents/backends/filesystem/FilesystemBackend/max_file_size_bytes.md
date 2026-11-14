@@ -20,4 +20,4 @@ max_file_size_bytes = max_file_size_mb * 1024 * 1024
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/0ec42441901968a75202a3ef365650eb280a473b/libs/deepagents/deepagents/backends/filesystem.py#L181)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/c858b3641b13fb3f40fe3a12515517b81fb8a744/libs/deepagents/deepagents/backends/filesystem.py#L181)

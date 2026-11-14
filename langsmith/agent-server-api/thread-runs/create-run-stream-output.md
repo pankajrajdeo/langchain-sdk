@@ -17,7 +17,7 @@ tags: [docs, langsmith, agent-server-api, thread-runs, create-run-stream-output]
 ````yaml
 openapi: 3.1.0
 info:
-  title: LangSmith Deployment
+  title: LangSmith Agent Server
   version: 0.1.0
 servers: []
 security: []
@@ -76,6 +76,28 @@ paths:
             description: The ID of the thread.
           name: thread_id
           in: path
+        - required: false
+          schema:
+            type: array
+            items:
+              type: string
+            maxItems: 32
+            title: Namespace
+            description: >-
+              A conversation to stream: a `|`-joined namespace, empty for the
+              main agent (the root graph) or a subagent's, such as
+              `tools:<task_id>`. The stream keeps that conversation's events
+              without those of the subagents it starts (subgraphs that the
+              `tools` node runs), but with the `lifecycle` events of every
+              subagent below it. Repeat it to stream several conversations.
+              Events about the whole run, such as `metadata` and `error`, always
+              pass. Events of the `events` and `messages` modes (not
+              `messages-tuple`) carry no namespace, so they stream with the main
+              agent's conversation. Subagent events exist only on runs created
+              with `stream_subgraphs`, except `lifecycle` events, which come
+              either way. If not provided, all of the run's events are returned.
+          name: namespace
+          in: query
       requestBody:
         content:
           application/json:
@@ -89,8 +111,16 @@ paths:
             text/event-stream:
               schema:
                 type: string
-                description: |-
-                  The server will send a stream of events in SSE format.
+                description: >-
+                  The server will send a stream of events in SSE format. The
+                  last event is `end`, with data `{"run_id": ..., "status":
+                  ...}` giving the run's final status: `success` (also when the
+                  run stops at an interrupt), `error`, `timeout`, `interrupted`
+                  (the run was cancelled) or, for a stateless run, `rollback`. A
+                  run that was deleted, or rolled back on a thread, has no
+                  status left, so its stream ends with its `error` event
+                  instead. If a stream closes with neither, get the run to see
+                  how it ended.
 
                   **Example event**:
 
@@ -251,6 +281,7 @@ components:
                   - debug
                   - custom
                   - tools
+                  - lifecycle
               type: array
             - type: string
               enum:
@@ -264,8 +295,17 @@ components:
                 - debug
                 - custom
                 - tools
+                - lifecycle
           title: Stream Mode
-          description: The stream mode(s) to use.
+          description: >-
+            The stream mode(s) to use. `lifecycle` sends `lifecycle|<namespace>`
+            events when a subagent (a subgraph) starts and ends: `{"event":
+            "started" | "completed" | "failed" | "interrupted", "namespace",
+            "tool_call_id"?, "error"?}`, with the id of the tool call that
+            started it, with or without `stream_subgraphs`. `tools` sends
+            `on_tool_start`, `on_tool_event`, `on_tool_end` and `on_tool_error`
+            events with `toolCallId` and `name` (from langgraph 1.2.19 and
+            @langchain/langgraph 1.6.0; a tool error's text is never sent).
           default:
             - values
         stream_subgraphs:
@@ -277,8 +317,21 @@ components:
           type: boolean
           title: Stream Resumable
           description: >-
-            Whether to persist the stream chunks in order to resume the stream
-            later.
+            Whether to keep the run's stream events so a client can rejoin the
+            run. Deployments keep every run's events for
+            `RESUMABLE_STREAM_TTL_SECONDS` (2 minutes by default) regardless of
+            this field. The in-memory runtime (`langgraph dev`) keeps them only
+            when it is true.
+          default: false
+        strict_resume:
+          type: boolean
+          title: Strict Resume
+          description: >-
+            Refuse a `command.resume` that names an interrupt that isn't
+            pending, before the graph runs: the run ends with
+            `UnknownInterruptError` and the thread keeps its state. Needs a
+            langgraph version with strict resume; `/info` reports
+            `strict_resume` when it is available.
           default: false
         feedback_keys:
           items:

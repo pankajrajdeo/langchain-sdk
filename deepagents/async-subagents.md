@@ -67,7 +67,7 @@ async_subagents = [
 ]
 
 agent = create_deep_agent(
-    model="google_genai:gemini-3.6-flash",
+    model="google_genai:gemini-4-hydrogen",
     subagents=async_subagents,
 )
 ```
@@ -412,7 +412,7 @@ Subagents on the same deployment also receive the supervisor's trace headers. To
 from deepagents import create_deep_agent
 
 agent = create_deep_agent(
-    model="google_genai:gemini-3.6-flash",
+    model="google_genai:gemini-4-hydrogen",
     system_prompt="""...your instructions...
 
     After launching an async subagent, ALWAYS return control to the user.

@@ -49,7 +49,7 @@ Each component has its own configuration under the bundle's `components/` direct
 
 Follow [Configure SmithDB observability](self-host-smithdb-observability.md) and use the appropriate collection example from `components/smithdb/`. Those examples also collect ingestion-path metrics from the ingest queue and platform-backend.
 
-The Datadog download defaults to the `smithdb.` prefix for SmithDB metrics; Grafana uses raw Prometheus names. For metric meanings, see the [SmithDB metrics reference](self-host-smithdb-metrics.md). Datadog's SmithDB error-log panels additionally require logs matching `service:smithdb*`.
+The Datadog download defaults to the `smithdb.` prefix for SmithDB metrics; Grafana uses raw Prometheus names. For metric meanings, see the [Essential SmithDB metrics](self-host-smithdb-metrics.md). Datadog's SmithDB error-log panels additionally require logs matching `service:smithdb*`.
 
 If your collector uses another namespace, regenerate the dashboard from a local copy of the Helm repository:
 

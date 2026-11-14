@@ -18,6 +18,6 @@ tags: [index, langsmith, agent-server-api, thread-runs]
 - [Create Run, Wait for Output](create-run-wait-for-output.md) - Create a run in existing thread. Wait for the final output and then return it.
 - [Delete Run](delete-run.md) - Delete a run by ID.
 - [Get Run](get-run.md) - Get a run by ID.
-- [Join Run Stream](join-run-stream.md) - Join a run stream. This endpoint streams output in real-time from a run similar to the /threads/__THREAD_ID__/runs/stream endpoint. If the run has been created with stream_resumable=true, the stream...
+- [Join Run Stream](join-run-stream.md) - Join a run stream. This endpoint streams output in real-time from a run similar to the /threads/__THREAD_ID__/runs/stream endpoint. The stream can be resumed from the last seen event ID, or from a...
 - [Join Run](join-run.md) - Wait for a run to finish.
 - [List Runs](list-runs.md) - List runs for a thread.

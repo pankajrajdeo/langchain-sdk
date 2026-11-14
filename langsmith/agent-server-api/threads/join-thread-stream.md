@@ -17,7 +17,7 @@ tags: [docs, langsmith, agent-server-api, threads, join-thread-stream]
 ````yaml
 openapi: 3.1.0
 info:
-  title: LangSmith Deployment
+  title: LangSmith Agent Server
   version: 0.1.0
 servers: []
 security: []
@@ -86,7 +86,16 @@ paths:
             title: Last Event ID
             description: >-
               The ID of the last event received. Used to resume streaming from a
-              specific point. Pass '-' to resume from the beginning.
+              specific point. Pass '-' to resume from the beginning. A `gap`
+              event is sent, first on a resume or mid-stream, when events the
+              client should receive may be missing. Its `reason` is `expired`
+              when they may have aged out of the stream's history; `unknown_id`
+              when the ID is later than any event the thread streamed, and the
+              stream starts over from the beginning; or `too_large` when an
+              event was over the size limit, with that event's stream mode in
+              `mode`. `expired` errs on the safe side: once the stream's history
+              has expired, a resume gets it unless its ID is the thread's last
+              streamed event, which is kept for an hour after that.
           name: Last-Event-ID
           in: header
         - required: false
@@ -109,9 +118,10 @@ paths:
             title: Stream Modes
             description: >-
               Stream modes to control which events are returned. 'lifecycle'
-              returns only run start/end events, 'run_modes' returns all run
-              events (default behavior), 'state_update' returns only state
-              update events.
+              returns only run start/end events and `interrupts` events (the
+              interrupts a run answers), 'run_modes' returns all run events
+              (default behavior), 'state_update' returns only state update
+              events.
           name: stream_modes
           in: query
         - required: false

@@ -145,7 +145,7 @@ research_subagent = {
 subagents = [research_subagent]
 
 agent = create_deep_agent(
-    model="google_genai:gemini-3.6-flash",
+    model="google_genai:gemini-4-hydrogen",
     subagents=subagents,
 )
 ```
@@ -188,7 +188,7 @@ custom_subagent = CompiledSubAgent(
 subagents = [custom_subagent]
 
 agent = create_deep_agent(
-    model="google_genai:gemini-3.6-flash",
+    model="google_genai:gemini-4-hydrogen",
     tools=[internet_search],
     system_prompt=research_instructions,
     subagents=subagents,
@@ -500,7 +500,7 @@ comment_writer = {
 }
 
 agent = create_deep_agent(
-    model="google_genai:gemini-3.7-flash",
+    model="google_genai:gemini-4-hydrogen",
     tools=[read_diff],
     subagents=[comment_writer],
 )
@@ -597,7 +597,7 @@ from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
 
 agent = create_deep_agent(
-    model="google_genai:gemini-3.6-flash",
+    model="google_genai:gemini-4-hydrogen",
     subagents=[{
         "name": "reviewer",
         "description": "Reviews code for security issues, citing lines and severity",
@@ -773,7 +773,7 @@ from deepagents import (
 )
 
 agent = create_deep_agent(
-    model="google_genai:gemini-3.6-flash",
+    model="google_genai:gemini-4-hydrogen",
     system_prompt=(
         "You are a project coordinator with no research knowledge. "
         "For every user request, you must call the task() tool with "
@@ -1261,7 +1261,7 @@ research_subagent = {
 }
 
 agent = create_deep_agent(
-    model="google_genai:gemini-3.6-flash",
+    model="google_genai:gemini-4-hydrogen",
     subagents=[research_subagent],
 )
 
@@ -1593,7 +1593,7 @@ def internet_search(query: str) -> str:
 
 # Main agent uses Gemini; general-purpose subagent uses GPT
 agent = create_deep_agent(
-    model="google_genai:gemini-3.6-flash",
+    model="google_genai:gemini-4-hydrogen",
     tools=[internet_search],
     subagents=[
         {
@@ -1792,7 +1792,7 @@ research_subagent = {
 }
 
 agent = create_deep_agent(
-    model="google_genai:gemini-3.6-flash",
+    model="google_genai:gemini-4-hydrogen",
     skills=["/skills/main/"],  # Main agent and GP subagent get these
     subagents=[research_subagent],  # Researcher gets only its own skills
 )
@@ -1864,7 +1864,7 @@ subagents = [
         "description": "Reviews legal documents and contracts",
         "system_prompt": "You are an expert legal reviewer...",
         "tools": [read_document, analyze_contract],
-        "model": "google_genai:gemini-3.6-flash",  # Large context for long documents
+        "model": "google_genai:gemini-4-hydrogen",  # Large context for long documents
     },
     {
         "name": "financial-analyst",
@@ -1929,7 +1929,7 @@ subagents = [
 ]
 
 agent = create_deep_agent(
-    model="google_genai:gemini-3.6-flash",
+    model="google_genai:gemini-4-hydrogen",
     system_prompt="You coordinate data analysis and reporting. Use subagents for specialized tasks.",
     subagents=subagents,
 )
@@ -2177,7 +2177,7 @@ research_subagent = {
 }
 
 agent = create_deep_agent(
-    model="google_genai:gemini-3.6-flash",
+    model="google_genai:gemini-4-hydrogen",
     subagents=[research_subagent],
     context_schema=Context,
 )
@@ -2457,7 +2457,7 @@ def verify_claim(claim: str, runtime: ToolRuntime[Context]) -> str:
     return basic_verification(claim)
 
 agent = create_deep_agent(
-    model="google_genai:gemini-3.6-flash",
+    model="google_genai:gemini-4-hydrogen",
     subagents=[
         {
             "name": "fact-checker",
@@ -2834,7 +2834,7 @@ def flexible_search(query: str, runtime: ToolRuntime[Context]) -> str:
    from deepagents import create_deep_agent
 
    agent = create_deep_agent(
-       model="google_genai:gemini-3.6-flash",
+       model="google_genai:gemini-4-hydrogen",
        system_prompt="""...your instructions...
 
        IMPORTANT: For complex tasks, delegate to your subagents using the task() tool.

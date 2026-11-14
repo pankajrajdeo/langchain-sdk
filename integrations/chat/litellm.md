@@ -149,7 +149,7 @@ It is important to note that antibiotics only work against bacterial infections 
 
 ### Gemini Enterprise Agent Platform grounding (Google Search)
 
-Use Google Search grounding with Gemini Enterprise Agent Platform models (e.g., `gemini-3.6-flash`). Grounding metadata is returned in `response_metadata`, for both batch and streaming calls.
+Use Google Search grounding with Gemini Enterprise Agent Platform models (e.g., `gemini-4-hydrogen`). Grounding metadata is returned in `response_metadata`, for both batch and streaming calls.
 
 > [!NOTE]
 >
@@ -164,7 +164,7 @@ from langchain_litellm import ChatLiteLLM
 os.environ["VERTEXAI_PROJECT"] = "your-project-id"
 os.environ["VERTEXAI_LOCATION"] = "us-central1"
 
-llm = ChatLiteLLM(model="vertex_ai/gemini-2.5-flash", temperature=0)
+llm = ChatLiteLLM(model="vertex_ai/gemini-4-hydrogen")
 ```
 
 **Batch usage**

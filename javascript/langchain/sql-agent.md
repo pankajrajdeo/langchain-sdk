@@ -258,7 +258,7 @@ Select a model that supports [tool-calling](../integrations/providers/overview.m
 >
 > process.env.GOOGLE_API_KEY = "your-api-key";
 >
-> const model = await initChatModel("google:gemini-3.7-flash");
+> const model = await initChatModel("google:gemini-4-hydrogen");
 ```
 >
 **Model Class**
@@ -267,7 +267,7 @@ Select a model that supports [tool-calling](../integrations/providers/overview.m
 > import { ChatGoogle } from "@langchain/google/node";
 >
 > const model = new ChatGoogle({
->   model: "gemini-3.7-flash",
+>   model: "gemini-4-hydrogen",
 >   apiKey: "your-api-key"
 > });
 ```
@@ -484,7 +484,7 @@ Now, create an agent with the model, tools, and prompt:
 import { createAgent } from "langchain";
 
 let agent = createAgent({
-  model: "google:gemini-3.6-flash",
+  model: "google:gemini-4-hydrogen",
   tools: [executeSql],
   systemPrompt: await getSystemPrompt(),
 });
@@ -744,7 +744,7 @@ The agent correctly wrote a query, checked the query, and ran it to inform its f
 > `);
 >
 > export const agent = createAgent({
->   model: "google:gemini-3.6-flash",
+>   model: "google:gemini-4-hydrogen",
 >   tools: [executeSql],
 >   systemPrompt: await getSystemPrompt(),
 > });
@@ -1475,7 +1475,7 @@ import { humanInTheLoopMiddleware } from "langchain"; // [!code highlight]
 import { MemorySaver } from "@langchain/langgraph"; // [!code highlight]
 
 agent = createAgent({
-  model: "google:gemini-3.6-flash",
+  model: "google:gemini-4-hydrogen",
   tools: [executeSql],
   systemPrompt: await getSystemPrompt(),
   middleware: [

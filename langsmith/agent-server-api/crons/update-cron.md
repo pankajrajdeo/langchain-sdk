@@ -17,7 +17,7 @@ tags: [docs, langsmith, agent-server-api, crons, update-cron]
 ````yaml
 openapi: 3.1.0
 info:
-  title: LangSmith Deployment
+  title: LangSmith Agent Server
   version: 0.1.0
 servers: []
 security: []
@@ -235,8 +235,11 @@ components:
           type: boolean
           title: Stream Resumable
           description: >-
-            Whether to persist the stream chunks in order to resume the stream
-            later.
+            Whether to keep the run's stream events so a client can rejoin the
+            run. Deployments keep every run's events for
+            `RESUMABLE_STREAM_TTL_SECONDS` (2 minutes by default) regardless of
+            this field. The in-memory runtime (`langgraph dev`) keeps them only
+            when it is true.
           default: false
         durability:
           type: string

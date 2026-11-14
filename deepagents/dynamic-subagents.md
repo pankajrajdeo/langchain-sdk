@@ -33,7 +33,7 @@ from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
 
 agent = create_deep_agent(
-    model="google_genai:gemini-3.6-flash",
+    model="google_genai:gemini-4-hydrogen",
     subagents=[{
         "name": "reviewer",
         "description": "Reviews code for security issues, citing lines and severity",
@@ -237,7 +237,7 @@ graph LR
 > from langchain_quickjs import CodeInterpreterMiddleware
 >
 > agent = create_deep_agent(
->     model="google_genai:gemini-3.6-flash",
+>     model="google_genai:gemini-4-hydrogen",
 >     subagents=[
 >         {
 >             "name": "bug-fixer",
@@ -482,7 +482,7 @@ Discovering files from interpreter code requires [programmatic tool calling (PTC
 > from langchain_quickjs import CodeInterpreterMiddleware
 >
 > agent = create_deep_agent(
->     model="google_genai:gemini-3.6-flash",
+>     model="google_genai:gemini-4-hydrogen",
 >     subagents=[{
 >         "name": "reviewer",
 >         "description": "Reviews code for security issues, citing lines and severity",
@@ -647,7 +647,7 @@ graph LR
 > from langchain_quickjs import CodeInterpreterMiddleware
 >
 > agent = create_deep_agent(
->     model="google_genai:gemini-3.6-flash",
+>     model="google_genai:gemini-4-hydrogen",
 >     subagents=[
 >         {
 >             "name": "reviewer",
@@ -861,7 +861,7 @@ graph LR
 > from langchain_quickjs import CodeInterpreterMiddleware
 >
 > agent = create_deep_agent(
->     model="google_genai:gemini-3.6-flash",
+>     model="google_genai:gemini-4-hydrogen",
 >     subagents=[{
 >         "name": "architect",
 >         "description": "Proposes a database schema design with tradeoff analysis",
@@ -1020,7 +1020,7 @@ graph LR
 > from langchain_quickjs import CodeInterpreterMiddleware
 >
 > agent = create_deep_agent(
->     model="google_genai:gemini-3.6-flash",
+>     model="google_genai:gemini-4-hydrogen",
 >     subagents=[
 >         {
 >             "name": "writer",
@@ -1231,7 +1231,7 @@ graph LR
 > from langchain_quickjs import CodeInterpreterMiddleware
 >
 > agent = create_deep_agent(
->     model="google_genai:gemini-3.6-flash",
+>     model="google_genai:gemini-4-hydrogen",
 >     subagents=[{
 >         "name": "analyzer",
 >         "description": "Analyzes code for unused exports, functions, and dead code paths",
@@ -1378,7 +1378,7 @@ from deepagents import create_deep_agent
 from langchain_quickjs import CodeInterpreterMiddleware
 
 agent = create_deep_agent(
-    model="google_genai:gemini-3.6-flash",
+    model="google_genai:gemini-4-hydrogen",
     subagents=[{"name": "reviewer", "description": "Reviews code", "system_prompt": "Review code."}],
     middleware=[CodeInterpreterMiddleware(subagents=False)],
 )

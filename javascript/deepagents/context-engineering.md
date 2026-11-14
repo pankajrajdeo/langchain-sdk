@@ -62,7 +62,7 @@ Your custom system prompt is prepended to the built-in system prompt, which incl
 import { createDeepAgent } from "deepagents";
 
 const agent = await createDeepAgent({
-  model: "google:gemini-3.6-flash",
+  model: "google:gemini-4-hydrogen",
   systemPrompt: `You are a research assistant specializing in scientific literature.
   Always cite sources. Use subagents for parallel research on different topics.`,
 });
@@ -162,7 +162,7 @@ Memory files ([`AGENTS.md`](https://agents.md/)) provide persistent context that
 import { createDeepAgent } from "deepagents";
 
 const agent = await createDeepAgent({
-  model: "google:gemini-3.6-flash",
+  model: "google:gemini-4-hydrogen",
   memory: ["/project/AGENTS.md", "~/.deepagents/preferences.md"],
 });
 ```
@@ -247,7 +247,7 @@ Skills provide **on-demand** capabilities. The agent reads frontmatter from each
 import { createDeepAgent } from "deepagents";
 
 const agent = await createDeepAgent({
-  model: "google:gemini-3.6-flash",
+  model: "google:gemini-4-hydrogen",
   skills: ["/skills/research/", "/skills/web-search/"],
 });
 ```
@@ -428,7 +428,7 @@ const fetchUserData = tool(
 );
 
 const agent = await createDeepAgent({
-  model: "google:gemini-3.6-flash",
+  model: "google:gemini-4-hydrogen",
   tools: [fetchUserData],
   contextSchema,
 });
@@ -800,7 +800,7 @@ import {
 import { InMemoryStore } from "@langchain/langgraph";
 
 const agent = await createDeepAgent({
-  model: "google:gemini-3.6-flash",
+  model: "google:gemini-4-hydrogen",
   store: new InMemoryStore(),
   backend: new CompositeBackend(new StateBackend(), {
     "/memories/": new StoreBackend({

@@ -522,7 +522,7 @@ configure()
 async def main():
     agent = LlmAgent(
         name="travel_assistant",
-        model="gemini-3.8-flash",
+        model="gemini-4-hydrogen",
         instruction="You are a helpful travel assistant.",
     )
 
@@ -674,7 +674,7 @@ async def main():
     agent = LlmAgent(
         name="travel_assistant",
         tools=[get_flight_info, get_hotel_recommendations],
-        model="gemini-3.8-flash",
+        model="gemini-4-hydrogen",
         instruction="You are a helpful travel assistant that can help with flights and hotels.",
     )
 

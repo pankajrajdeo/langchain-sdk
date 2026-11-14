@@ -19,7 +19,7 @@ This endpoint also functions as the endpoint to list all threads.
 ````yaml
 openapi: 3.1.0
 info:
-  title: LangSmith Deployment
+  title: LangSmith Agent Server
   version: 0.1.0
 servers: []
 security: []
@@ -122,6 +122,34 @@ components:
             Exclude threads whose metadata contains this object, or any object
             in this list. Uses the same matching as `metadata`; threads missing
             the keys are not excluded.
+        created_after:
+          type: string
+          format: date-time
+          title: Created After
+          description: >-
+            Only include threads created at or after this time (ISO 8601).
+            Timestamps without a timezone are treated as UTC.
+        created_before:
+          type: string
+          format: date-time
+          title: Created Before
+          description: >-
+            Only include threads created before this time (ISO 8601). Timestamps
+            without a timezone are treated as UTC.
+        state_updated_after:
+          type: string
+          format: date-time
+          title: State Updated After
+          description: >-
+            Only include threads whose state last changed at or after this time
+            (ISO 8601). Timestamps without a timezone are treated as UTC.
+        state_updated_before:
+          type: string
+          format: date-time
+          title: State Updated Before
+          description: >-
+            Only include threads whose state last changed before this time (ISO
+            8601). Timestamps without a timezone are treated as UTC.
         values:
           type: object
           title: Values

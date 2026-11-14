@@ -1,13 +1,13 @@
 ---
 title: "reference/python/deepagents/middleware/filesystem"
-description: "Index of 50 pages and 12 subdirectories under reference/python/deepagents/middleware/filesystem."
+description: "Index of 51 pages and 12 subdirectories under reference/python/deepagents/middleware/filesystem."
 category: "index"
 tags: [index, reference, python, deepagents, middleware, filesystem]
 ---
 
 # reference/python/deepagents/middleware/filesystem
 
-50 pages here, 84 pages including subdirectories.
+51 pages here, 85 pages including subdirectories.
 
 ## Directories
 
@@ -72,6 +72,7 @@ tags: [index, reference, python, deepagents, middleware, filesystem]
 - [regex_literal_hint](regex_literal_hint.md) - Return a hint when a pattern looks like an (unsupported) regex.
 - [sanitize_tool_call_id](sanitize_tool_call_id.md) - Return a bounded, path-safe component for a tool call ID.
 - [supports_execution](supports_execution.md) - Check if a backend supports command execution.
+- [to_posix_path](to_posix_path.md) - Normalize backslash separators to forward slashes for PurePosixPath use.
 - [truncate_if_too_long](truncate_if_too_long.md) - Truncate list or string result if it exceeds token limit (rough estimate: 4 chars/token).
 - [validate_path](validate_path.md) - Validate and normalize file path for security.
 - [video_dependencies_available](video_dependencies_available.md) - Return whether the optional video dependencies appear to be installed.

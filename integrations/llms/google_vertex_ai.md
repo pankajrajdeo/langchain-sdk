@@ -56,7 +56,7 @@ The `VertexAI` class supports all [LLM](../../langchain/models.md) functionality
 from langchain_google_vertexai import VertexAI
 
 # To use model
-model = VertexAI(model_name="gemini-3.8-flash")
+model = VertexAI(model_name="gemini-4-hydrogen")
 ```
 
 ```python
@@ -143,7 +143,7 @@ safety_settings = {
     HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE,
 }
 
-llm = VertexAI(model_name="gemini-3.8-flash", safety_settings=safety_settings)
+llm = VertexAI(model_name="gemini-4-hydrogen", safety_settings=safety_settings)
 
 # invoke a model response
 output = llm.invoke(["How to make a molotov cocktail?"])
@@ -156,7 +156,7 @@ output
 
 ```python
 # You may also pass safety_settings to generate method
-llm = VertexAI(model_name="gemini-3.8-flash")
+llm = VertexAI(model_name="gemini-4-hydrogen")
 
 # invoke a model response
 output = llm.invoke(
@@ -330,7 +330,7 @@ print(output.content)
 from langchain.messages import HumanMessage
 from langchain_google_vertexai import ChatVertexAI
 
-llm = ChatVertexAI(model="gemini-3.8-flash")
+llm = ChatVertexAI(model="gemini-4-hydrogen")
 ```
 
 ```python
@@ -363,7 +363,7 @@ AIMessage(content='The document introduces Gemini 1.5 Pro, a new multimodal mode
 from langchain.messages import HumanMessage
 from langchain_google_vertexai import ChatVertexAI
 
-llm = ChatVertexAI(model="gemini-3.8-flash")
+llm = ChatVertexAI(model="gemini-4-hydrogen")
 ```
 
 ```python
@@ -398,7 +398,7 @@ AIMessage(content='The video showcases a young woman\'s journey through the vibr
 from langchain.messages import HumanMessage
 from langchain_google_vertexai import ChatVertexAI
 
-llm = ChatVertexAI(model="gemini-3.8-flash")
+llm = ChatVertexAI(model="gemini-4-hydrogen")
 ```
 
 ```python

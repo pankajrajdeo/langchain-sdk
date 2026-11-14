@@ -23,7 +23,7 @@ The `googleSearch` tool grounds model responses with real-time Google Search res
 ```typescript
 import { ChatGoogle } from "@langchain/google";
 
-const llm = new ChatGoogle("gemini-2.5-flash")
+const llm = new ChatGoogle("gemini-4-hydrogen")
   .bindTools([
     {
       googleSearch: {},
@@ -37,7 +37,7 @@ console.log(res.text);
 You can optionally filter search results to a specific time range:
 
 ```typescript
-const llm = new ChatGoogle("gemini-2.5-flash")
+const llm = new ChatGoogle("gemini-4-hydrogen")
   .bindTools([
   {
     googleSearch: {
@@ -63,7 +63,7 @@ The `codeExecution` tool allows Gemini to generate and run Python code to solve 
 ```typescript
 import { ChatGoogle } from "@langchain/google";
 
-const llm = new ChatGoogle("gemini-2.5-flash")
+const llm = new ChatGoogle("gemini-4-hydrogen")
   .bindTools([
     {
       codeExecution: {},
@@ -95,7 +95,7 @@ The `urlContext` tool allows Gemini to fetch and use content from URLs to ground
 ```typescript
 import { ChatGoogle } from "@langchain/google";
 
-const llm = new ChatGoogle("gemini-2.5-flash")
+const llm = new ChatGoogle("gemini-4-hydrogen")
   .bindTools([
     {
       urlContext: {},
@@ -115,7 +115,7 @@ The `googleMaps` tool grounds responses with geospatial context from Google Maps
 ```typescript
 import { ChatGoogle } from "@langchain/google";
 
-const llm = new ChatGoogle("gemini-2.5-flash")
+const llm = new ChatGoogle("gemini-4-hydrogen")
   .bindTools([
     {
       googleMaps: {},
@@ -129,7 +129,7 @@ console.log(res.text);
 You can enable a widget context token for rendering a Google Maps widget:
 
 ```typescript
-const llm = new ChatGoogle("gemini-2.5-flash")
+const llm = new ChatGoogle("gemini-4-hydrogen")
   .bindTools([
     {
       googleMaps: {
@@ -154,7 +154,7 @@ The `fileSearch` tool performs semantic retrieval from file search stores. Files
 ```typescript
 import { ChatGoogle } from "@langchain/google";
 
-const llm = new ChatGoogle("gemini-2.5-flash")
+const llm = new ChatGoogle("gemini-4-hydrogen")
   .bindTools([
     {
       fileSearch: {
@@ -182,7 +182,7 @@ The `computerUse` tool enables Gemini to interact with a browser environment. Th
 ```typescript
 import { ChatGoogle } from "@langchain/google";
 
-const llm = new ChatGoogle("gemini-2.5-flash")
+const llm = new ChatGoogle("gemini-4-hydrogen")
   .bindTools([
     {
       computerUse: {
@@ -206,7 +206,7 @@ The `mcpServers` field allows Gemini to connect to remote MCP (Model Context Pro
 ```typescript
 import { ChatGoogle } from "@langchain/google";
 
-const llm = new ChatGoogle("gemini-2.5-flash")
+const llm = new ChatGoogle("gemini-4-hydrogen")
   .bindTools([
     {
       mcpServers: [

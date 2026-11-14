@@ -17,7 +17,7 @@ tags: [docs, langsmith, agent-server-api, stateless-runs, create-background-run]
 ````yaml
 openapi: 3.1.0
 info:
-  title: LangSmith Deployment
+  title: LangSmith Agent Server
   version: 0.1.0
 servers: []
 security: []
@@ -181,6 +181,7 @@ components:
                   - debug
                   - custom
                   - tools
+                  - lifecycle
               type: array
             - type: string
               enum:
@@ -194,8 +195,17 @@ components:
                 - debug
                 - custom
                 - tools
+                - lifecycle
           title: Stream Mode
-          description: The stream mode(s) to use.
+          description: >-
+            The stream mode(s) to use. `lifecycle` sends `lifecycle|<namespace>`
+            events when a subagent (a subgraph) starts and ends: `{"event":
+            "started" | "completed" | "failed" | "interrupted", "namespace",
+            "tool_call_id"?, "error"?}`, with the id of the tool call that
+            started it, with or without `stream_subgraphs`. `tools` sends
+            `on_tool_start`, `on_tool_event`, `on_tool_end` and `on_tool_error`
+            events with `toolCallId` and `name` (from langgraph 1.2.19 and
+            @langchain/langgraph 1.6.0; a tool error's text is never sent).
           default:
             - values
         feedback_keys:
@@ -219,8 +229,11 @@ components:
           type: boolean
           title: Stream Resumable
           description: >-
-            Whether to persist the stream chunks in order to resume the stream
-            later.
+            Whether to keep the run's stream events so a client can rejoin the
+            run. Deployments keep every run's events for
+            `RESUMABLE_STREAM_TTL_SECONDS` (2 minutes by default) regardless of
+            this field. The in-memory runtime (`langgraph dev`) keeps them only
+            when it is true.
           default: false
         on_completion:
           type: string

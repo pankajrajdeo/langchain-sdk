@@ -146,7 +146,7 @@ export async function agent(config: LangGraphRunnableConfig) {
       idleTtlSeconds: 3600, // TTL: clean up when idle
     }));
   return createDeepAgent({
-    model: "google:gemini-3.6-flash",
+    model: "google:gemini-4-hydrogen",
     backend: new LangSmithSandbox({ sandbox: lsSandbox }),
   });
 }
@@ -349,7 +349,7 @@ export async function agent(config: LangGraphRunnableConfig) {
       name: sandboxName,
     }));
   return createDeepAgent({
-    model: "google:gemini-3.6-flash",
+    model: "google:gemini-4-hydrogen",
     backend: new LangSmithSandbox({ sandbox: lsSandbox }),
   });
 }

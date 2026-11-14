@@ -202,7 +202,7 @@ def read_data(table: str) -> str:
     return f"3 rows from {table}"
 
 agent = create_agent(
-    model="google_genai:gemini-3.6-flash",
+    model="google_genai:gemini-4-hydrogen",
     tools=[write_file, execute_sql, read_data],
     middleware=[
         HumanInTheLoopMiddleware(

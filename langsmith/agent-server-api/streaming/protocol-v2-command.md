@@ -21,7 +21,7 @@ WebSocket clients use the same command envelope in-band on `/threads/{thread_id}
 ````yaml
 openapi: 3.1.0
 info:
-  title: LangSmith Deployment
+  title: LangSmith Agent Server
   version: 0.1.0
 servers: []
 security: []

@@ -1,13 +1,13 @@
 ---
 title: "blog"
-description: "Index of 557 pages and 0 subdirectories under blog."
+description: "Index of 558 pages and 0 subdirectories under blog."
 category: "index"
 tags: [index, blog]
 ---
 
 # blog
 
-557 pages here.
+558 pages here.
 
 ## Files
 
@@ -280,7 +280,7 @@ tags: [index, blog]
 - [Improving Document Retrieval with Contextual Compression](improving-document-retrieval-with-contextual-compression.md) - Extract relevant information from retrieved documents with LangChain&#39;s contextual compression. Improve LLM accuracy, reduce tokens, build smarter Q&amp;A.
 - [In software, the code documents the app. In AI, the traces do.](in-software-the-code-documents-the-app-in-ai-the-traces-do.md) - Discover how traces for documentation replace code as the source of truth for AI agents. Learn to debug, test, and optimize agent behavior effectively.
 - [Incorporating domain specific knowledge in SQL-LLM solutions](incorporating-domain-specific-knowledge-in-sql-llm-solutions.md) - Extend LangChain&#39;s SQL Toolkit with domain-specific knowledge using RAG. Improve query accuracy, reduce tokens, and build custom SQL-LLM solutions.
-- [LangChain Blog](index.md) - Thank you! Your submission has been received!Oops! Something went wrong while submitting the form.Harrison's In the Loop
+- [LangChain Blog](index.md) - Thank you! Your submission has been received!Oops! Something went wrong while submitting the form.Company Announcements
 - [Improve agent quality with Insights Agent and Multi-turn Evals, now in LangSmith](insights-agent-multiturn-evals-langsmith.md) - LangSmith&#39;s new Insights Agent and Multi-turn Evals help you understand what your agents are doing in production and whether they&#39;re accomplishing user goals.
 - [Tavrn x LangChain: Integrating Noah: ChatGPT with Google Drive and Notion data](integrating-chatgpt-with-google-drive-and-notion-data.md) - Learn how Tavrn built Noah, an AI assistant integrating ChatGPT with Google Drive and Notion using LangChain for context-aware responses.
 - [Integrating LangChain with Azure Container Apps dynamic sessions](integrating-langchain-with-azure-container-apps-dynamic-sessions.md) - Safely execute LLM-generated Python code with LangChain and Azure Container Apps dynamic sessions. Build secure AI agents with isolated sandboxes and fast startup.
@@ -494,6 +494,7 @@ tags: [index, blog]
 - [Semantic Search for LangGraph Memory](semantic-search-for-langgraph-memory.md) - Add semantic search to LangGraph&#39;s memory store for smarter AI agents. Retrieve by meaning, not exact matches—available now in open source and production.
 - [Multi-Vector Retriever for RAG on tables, text, and images](semi-structured-multi-modal-rag.md) - Learn how to implement multi-vector retriever for RAG across tables, text, and images. Explore cookbooks for semi-structured and multi-modal data retrieval.
 - [LangChain raises $125M to build the platform for agent engineering](series-b.md) - We raised $125M at a $1.25B valuation to build the platform for agent engineering.
+- [LangChain Raises $300M to Enable Every Company to Own Its Intelligence](series-c.md) - LangChain raises $300M Series C at a $3B valuation, led by CapitalG, to help every company own its intelligence with LangSmith, the agent engineering platform.
 - [Skills in LangSmith Fleet](skills-in-langsmith-fleet.md) - Fleet now supports shareable skills, so you equip agents across your team with knowledge for specialized tasks.
 - [Build great out-of-the-box user experiences with Managed Deep Agents](slack-sdk-managed-deep-agents.md) - Managed Deep Agents includes a new API for managing reactions for your distributed agents, and a system to dynamically assign emoji responses with your instrument of choice. Learn more.
 - [♠️ SPADE: Automatically Digging up Evals based on Prompt Refinements](spade-automatically-digging-up-evals-based-on-prompt-refinements.md) - Generate evaluation functions for your LLM prompts with SPADE. Analyze prompt refinements to discover useful evals and improve chain reliability.

@@ -32,7 +32,7 @@ This endpoint accepts a JSON-RPC envelope and dispatches based on `method`.
 ````yaml
 openapi: 3.1.0
 info:
-  title: LangSmith Deployment
+  title: LangSmith Agent Server
   version: 0.1.0
 servers: []
 security: []

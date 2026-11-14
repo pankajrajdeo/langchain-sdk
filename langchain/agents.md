@@ -29,7 +29,7 @@ A harness is everything around that loop: the prompt, the tools, and any middlew
 ```python
 from langchain.agents import create_agent
 
-agent = create_agent(model="google_genai:gemini-3.6-flash", tools=tools)
+agent = create_agent(model="google_genai:gemini-4-hydrogen", tools=tools)
 ```
 
 **OpenAI**
@@ -99,7 +99,7 @@ Pass a model identifier string (`"provider:model"`) or an initialized model inst
 ```python
 from langchain.agents import create_agent
 
-agent = create_agent(model="google_genai:gemini-3.6-flash", tools=tools)
+agent = create_agent(model="google_genai:gemini-4-hydrogen", tools=tools)
 ```
 
 **OpenAI**
@@ -165,7 +165,7 @@ def search(query: str) -> str:
     """Search for information."""
     return f"Results for: {query}"
 
-agent = create_agent(model="google_genai:gemini-3.6-flash", tools=[search])
+agent = create_agent(model="google_genai:gemini-4-hydrogen", tools=[search])
 ```
 
 **OpenAI**
@@ -260,7 +260,7 @@ Shape how the agent approaches tasks. The system prompt parameter accepts a stri
 
 ```python
 agent = create_agent(
-    model="google_genai:gemini-3.6-flash",
+    model="google_genai:gemini-4-hydrogen",
     tools=tools,
     system_prompt="You are a helpful assistant. Be concise and accurate.",
 )
@@ -340,7 +340,7 @@ class Answer(BaseModel):
     summary: str
     confidence: float
 
-agent = create_agent(model="google_genai:gemini-3.6-flash", tools=tools, response_format=Answer)
+agent = create_agent(model="google_genai:gemini-4-hydrogen", tools=tools, response_format=Answer)
 result = agent.invoke({"messages": [{"role": "user", "content": "Summarize AI trends"}]})
 result["structured_response"]  # Answer(summary=..., confidence=...)
 ```
@@ -459,7 +459,7 @@ class MyState(AgentState):
     call_count: int
 
 agent = create_agent(
-    model="google_genai:gemini-3.6-flash",
+    model="google_genai:gemini-4-hydrogen",
     tools=[],
     state_schema=MyState,  # [!code highlight]
 )
@@ -579,7 +579,7 @@ from langchain_core.utils.uuid import uuid7
 from langgraph.checkpoint.memory import InMemorySaver
 
 agent = create_agent(
-    model="google_genai:gemini-3.6-flash",
+    model="google_genai:gemini-4-hydrogen",
     tools=[],
     checkpointer=InMemorySaver(),
 )
@@ -784,7 +784,7 @@ class Context:
     user_id: str
 
 agent = create_agent(
-    model="google_genai:gemini-3.6-flash",
+    model="google_genai:gemini-4-hydrogen",
     tools=[],
     context_schema=Context,
     checkpointer=InMemorySaver(),
@@ -1048,7 +1048,7 @@ from deepagents.backends import StateBackend
 from deepagents.middleware import FilesystemMiddleware
 
 agent = create_agent(
-    model="google_genai:gemini-3.6-flash",
+    model="google_genai:gemini-4-hydrogen",
     tools=[search],
     middleware=[FilesystemMiddleware(backend=StateBackend())],
 )
@@ -1167,7 +1167,7 @@ from deepagents.backends import StateBackend
 from deepagents.middleware import FilesystemMiddleware, MemoryMiddleware, SkillsMiddleware, SummarizationMiddleware
 
 backend = StateBackend()
-model = "google_genai:gemini-3.6-flash"
+model = "google_genai:gemini-4-hydrogen"
 
 agent = create_agent(
     model=model,
@@ -1347,7 +1347,7 @@ def search(query: str) -> str:
 backend = StateBackend()
 
 agent = create_agent(
-    model="google_genai:gemini-3.6-flash",
+    model="google_genai:gemini-4-hydrogen",
     tools=[search],
     middleware=[
         FilesystemMiddleware(backend=backend),
@@ -1634,7 +1634,7 @@ Optionally use an identifier for the agent. This is especially useful when embed
 **Google**
 
 ```python
-agent = create_agent(model="google_genai:gemini-3.6-flash", tools=tools, name="research_assistant")
+agent = create_agent(model="google_genai:gemini-4-hydrogen", tools=tools, name="research_assistant")
 ```
 
 **OpenAI**
@@ -1690,7 +1690,7 @@ def search(query: str) -> str:
     return f"Search results for: {query}"
 
 agent = create_agent(
-    model="google_genai:gemini-3.6-flash",
+    model="google_genai:gemini-4-hydrogen",
     tools=[search],
     middleware=[
         ModelRetryMiddleware(max_retries=3),
@@ -1850,7 +1850,7 @@ def search(query: str) -> str:
     return f"Search results for: {query}"
 
 agent = create_agent(
-    model="google_genai:gemini-3.6-flash",
+    model="google_genai:gemini-4-hydrogen",
     tools=[search],
     middleware=[PIIMiddleware("email")],
 )
@@ -1989,7 +1989,7 @@ def search(query: str) -> str:
     return f"Search results for: {query}"
 
 agent = create_agent(
-    model="google_genai:gemini-3.6-flash",
+    model="google_genai:gemini-4-hydrogen",
     tools=[search],
     middleware=[HumanInTheLoopMiddleware(interrupt_on={"write_file": True})],
 )

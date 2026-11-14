@@ -57,7 +57,7 @@ from deepagents import RubricMiddleware, create_deep_agent
 from langgraph.checkpoint.memory import InMemorySaver
 
 agent = create_deep_agent(
-    model="google_genai:gemini-3.6-flash",
+    model="google_genai:gemini-4-hydrogen",
     middleware=[
         RubricMiddleware(
             model="anthropic:claude-haiku-4-5",
@@ -274,10 +274,10 @@ def log_evaluation(ev: RubricEvaluation) -> None:
     print(f"iteration {ev['iteration']}: {ev['result']} — {ev['explanation']}")
 
 agent = create_deep_agent(
-    model="google_genai:gemini-3.6-flash",
+    model="google_genai:gemini-4-hydrogen",
     middleware=[
         RubricMiddleware(
-            model="google_genai:gemini-3.6-flash",
+            model="google_genai:gemini-4-hydrogen",
             on_evaluation=log_evaluation,
         ),
     ],
@@ -580,7 +580,7 @@ def run_test_suite(code: str) -> dict:
     return {"ok": not failures, "failures": failures}
 
 rubric_middleware = RubricMiddleware(
-    model="google_genai:gemini-3.6-flash",
+    model="google_genai:gemini-4-hydrogen",
     system_prompt="You are a code reviewer grading generated code against a rubric.",
     tools=[run_test_suite],
     max_iterations=5,
@@ -862,7 +862,7 @@ from deepagents import create_deep_agent
 from langgraph.checkpoint.memory import InMemorySaver
 
 agent = create_deep_agent(
-    model="google_genai:gemini-3.6-flash",
+    model="google_genai:gemini-4-hydrogen",
     system_prompt=(
         "You are a careful Python engineer. Write correct, readable code. "
         "Follow the user's instructions exactly."

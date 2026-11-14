@@ -74,7 +74,7 @@ Each SmithDB component exposes application metrics at the fixed `/metrics` path 
 
 These are Prometheus-style annotations. Providers with their own discovery format, such as Datadog, need that format applied to the same ports and path. Monitor the PostgreSQL metastore, Kubernetes nodes, and cloud services with your existing infrastructure monitoring.
 
-For which metrics to watch and how to read them, see [SmithDB metrics reference](self-host-smithdb-metrics.md).
+For which metrics to watch and how to read them, see [Essential SmithDB metrics](self-host-smithdb-metrics.md).
 
 ## Logs and traces
 

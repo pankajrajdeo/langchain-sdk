@@ -1286,7 +1286,7 @@ Start with [Managed Deep Agents](../langsmith/python/managed-deep-agents-overvie
 > def create_content_writer():
 >     """Create a content writer agent configured by filesystem files."""
 >     return create_deep_agent(
->         model="google_genai:gemini-3.6-flash",
+>         model="google_genai:gemini-4-hydrogen",
 >         memory=["./AGENTS.md"],
 >         skills=["./skills/"],
 >         tools=[generate_cover, generate_social_image],

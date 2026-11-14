@@ -261,7 +261,7 @@ We can use our tools directly with an agent executor by binding the tool to the 
 >
 > os.environ["GOOGLE_API_KEY"] = "..."
 >
-> model = init_chat_model("google_genai:gemini-3.7-flash")
+> model = init_chat_model("google_genai:gemini-4-hydrogen")
 ```
 >
 **Model Class**
@@ -272,7 +272,7 @@ We can use our tools directly with an agent executor by binding the tool to the 
 >
 > os.environ["GOOGLE_API_KEY"] = "..."
 >
-> model = ChatGoogleGenerativeAI(model="gemini-3.7-flash")
+> model = ChatGoogleGenerativeAI(model="gemini-4-hydrogen")
 ```
 
 > [tab] AWS Bedrock

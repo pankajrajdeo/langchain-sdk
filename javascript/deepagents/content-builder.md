@@ -1301,7 +1301,7 @@ Start with [Managed Deep Agents](../../langsmith/javascript/managed-deep-agents-
 >   };
 >
 >   return createDeepAgent({
->     model: "google:gemini-3.6-flash",
+>     model: "google:gemini-4-hydrogen",
 >     memory: ["./AGENTS.md"],
 >     skills: ["./skills/"],
 >     tools: [generateCover, generateSocialImage],

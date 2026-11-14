@@ -24,7 +24,7 @@ Sends a JSON-RPC 2.0 message to the server.
 ````yaml
 openapi: 3.1.0
 info:
-  title: LangSmith Deployment
+  title: LangSmith Agent Server
   version: 0.1.0
 servers: []
 security: []

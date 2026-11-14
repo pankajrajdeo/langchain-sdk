@@ -202,7 +202,7 @@ from langchain_google_genai import GoogleGenAIClassifier
 router = ModelRouterMiddleware(
     choices={
         "fast": ModelChoice(
-            model="google_genai:gemini-3.8-flash",
+            model="google_genai:gemini-4-hydrogen",
             criteria="Simple, well-scoped tasks.",
         ),
         "powerful": ModelChoice(
@@ -214,7 +214,7 @@ router = ModelRouterMiddleware(
     classifier=GoogleGenAIClassifier(model="gemini-decision-1"),
 )
 
-agent = create_agent("google_genai:gemini-3.8-flash", middleware=[router])
+agent = create_agent("google_genai:gemini-4-hydrogen", middleware=[router])
 
 result = agent.invoke({"messages": [{"role": "user", "content": "What is 2 + 2?"}]})
 print(result["model_route"].choice)
@@ -236,7 +236,7 @@ def delete_file(path: str) -> str:
     return f"Deleted {path}."
 
 agent = create_agent(
-    "google_genai:gemini-3.8-flash",
+    "google_genai:gemini-4-hydrogen",
     tools=[delete_file],
     middleware=[
         AutoModeMiddleware(
