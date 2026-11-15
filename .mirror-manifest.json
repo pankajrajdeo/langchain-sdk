@@ -684,8 +684,8 @@
       "resolved_markdown": "https://www.langchain.com/blog/agent-frameworks-runtimes-and-harnesses-oh-my",
       "sha256": "c2f507383fe86c7e16fab81fbe96af485f717e77fe2feef91e42d40254adcb20",
       "source": "https://www.langchain.com/blog/agent-frameworks-runtimes-and-harnesses-oh-my",
-      "upstream_bytes": 168193,
-      "upstream_sha256": "2ebf16b9583e501d70bbd93c1e9f09a6862fc5e481ee27028b9b15ca78866405"
+      "upstream_bytes": 169086,
+      "upstream_sha256": "f2cf433b7aa04482121486540c325f00daa02d84c2ba28bee019b7c5972de730"
     },
     "blog/agent-harness-life-sciences.md": {
       "bytes": 1215,
@@ -711,8 +711,8 @@
       "resolved_markdown": "https://www.langchain.com/blog/agent-observability-needs-feedback-to-power-learning",
       "sha256": "b0e8a61a9291ccb30a09b2770927b3d3c6ce676af3e64a8c091b686b42ab99cc",
       "source": "https://www.langchain.com/blog/agent-observability-needs-feedback-to-power-learning",
-      "upstream_bytes": 173538,
-      "upstream_sha256": "884bb1da189c5314660c1223e81635c2466f87b3c1b5f0c5164c74225af90571"
+      "upstream_bytes": 174490,
+      "upstream_sha256": "0453daf5e0991591349107eea1dbadb6f62ea3c36e7d92cc7b4fe6611ed3a8ae"
     },
     "blog/agent-observability-powers-agent-evaluation.md": {
       "bytes": 856,
@@ -837,8 +837,8 @@
       "resolved_markdown": "https://www.langchain.com/blog/aligning-llm-as-a-judge-with-human-preferences",
       "sha256": "c443641f871a93eeda18d67a722b3b8718565e76e0f3870816ee8bb2730f8d7a",
       "source": "https://www.langchain.com/blog/aligning-llm-as-a-judge-with-human-preferences",
-      "upstream_bytes": 172510,
-      "upstream_sha256": "771326332da9802d7df2d68707be782d1421ecf76788090b106e20ebfca50c18"
+      "upstream_bytes": 173819,
+      "upstream_sha256": "1bdcb692cfd2ce087361a59c7b72646fdf3ef06096a3fb5b65b6e718ab400146"
     },
     "blog/ally-financial-collaborates-with-langchain-to-deliver-critical-coding-module-to-mask-personal-identifying-information-in-a-compliant-and-safe-manner.md": {
       "bytes": 9596,
@@ -936,8 +936,8 @@
       "resolved_markdown": "https://www.langchain.com/blog/assistant-ui",
       "sha256": "5e7b3a74e418bd68cf5cc7026430258df01e47e0da55c4e5fad4cbff5f2d108a",
       "source": "https://www.langchain.com/blog/assistant-ui",
-      "upstream_bytes": 174004,
-      "upstream_sha256": "d1139c1f9d6a2c556de72bd81ea78c592e2b20fda428ad9b48cab31cbe2f178b"
+      "upstream_bytes": 174177,
+      "upstream_sha256": "74ebd5c1d347a9de57204726bd6c1006fa37aeb8236bd4a7a15a4b920379b314"
     },
     "blog/asssistant-editor.md": {
       "bytes": 5256,
@@ -1386,8 +1386,8 @@
       "resolved_markdown": "https://www.langchain.com/blog/communication-is-all-you-need",
       "sha256": "cf4eda6a7b63569ce46ee249ac27644d7e874e32c7d905c169d2374e7d832949",
       "source": "https://www.langchain.com/blog/communication-is-all-you-need",
-      "upstream_bytes": 173251,
-      "upstream_sha256": "8888146e29a6ba298437dcbae9f056c83bb3575ae60963b8be8c0a4391159e78"
+      "upstream_bytes": 174144,
+      "upstream_sha256": "826c406dfac24890c3bf8783f9ffa0b73321e7e3b156f0d0b0e811d1267c91d8"
     },
     "blog/components-building-company-harness.md": {
       "bytes": 7610,
@@ -1431,8 +1431,8 @@
       "resolved_markdown": "https://www.langchain.com/blog/context-engineering-challenges-late-2026",
       "sha256": "f5256afe20058532a02a67f1dcede148a57763e7714881c671506761b7b7d327",
       "source": "https://www.langchain.com/blog/context-engineering-challenges-late-2026",
-      "upstream_bytes": 172321,
-      "upstream_sha256": "8da109ba7eabf17c62bd020e35e8e17c751e6b80b23556c5f888b8bc82edaed3"
+      "upstream_bytes": 173212,
+      "upstream_sha256": "888dedfa952cb73c479a45881beb943bb83030ba47fe7606e5fb91e08308ec0f"
     },
     "blog/context-engineering-deep-agents-remember.md": {
       "bytes": 961,
@@ -1476,8 +1476,8 @@
       "resolved_markdown": "https://www.langchain.com/blog/continual-learning-for-ai-agents",
       "sha256": "0a6f9b86f2d4ce9ce3aad147a257a3f89920ba52285c2939358cc04d1664ce36",
       "source": "https://www.langchain.com/blog/continual-learning-for-ai-agents",
-      "upstream_bytes": 173282,
-      "upstream_sha256": "f938fbe14524786f427399e34e5ca3ac7d10dbbf531a9e60791b1ff95f76aa7a"
+      "upstream_bytes": 174234,
+      "upstream_sha256": "c080205ad016f5ebabd6f161dc3dd7fd6cc7d3ee74555382342cce983fc37669"
     },
     "blog/conversational-retrieval-agents.md": {
       "bytes": 7271,
@@ -2007,8 +2007,8 @@
       "resolved_markdown": "https://www.langchain.com/blog/deep-agents",
       "sha256": "02201ff1b875eb39b4d6526b1484cb1864c2c42252e208a83bf9e8a670955a95",
       "source": "https://www.langchain.com/blog/deep-agents",
-      "upstream_bytes": 170873,
-      "upstream_sha256": "f06dedaa622f9006157e9978bebd895e7543e90863976c62c9980039ffa4c8e2"
+      "upstream_bytes": 172175,
+      "upstream_sha256": "a444d69a4900e696941a83b9620ad4ec1b7c9aaf6b4c086e6f052de4e7bdb79d"
     },
     "blog/delta-channels-evolving-agent-runtime.md": {
       "bytes": 1176,
@@ -2322,8 +2322,8 @@
       "resolved_markdown": "https://www.langchain.com/blog/from-traces-to-insights-understanding-agent-behavior-at-scale",
       "sha256": "05b0eb89820192183d8015e42d08ce483576c5917798fbee2c06ad2b7b4000ff",
       "source": "https://www.langchain.com/blog/from-traces-to-insights-understanding-agent-behavior-at-scale",
-      "upstream_bytes": 171566,
-      "upstream_sha256": "79b320ecb5aebe7b526ed5f1ba911f7741ae0c1949fd0e5fbec28722e4393e32"
+      "upstream_bytes": 172875,
+      "upstream_sha256": "6cf303e5d064a0762b7c83e17f215803ce19d916c7b6d788867b0d56ef9cea53"
     },
     "blog/full-text-search-in-smithdb-constructing-and-querying-our-inverted-index-pt-2.md": {
       "bytes": 15814,
@@ -2369,6 +2369,15 @@
       "source": "https://www.langchain.com/blog/give-your-ai-agent-its-own-computer",
       "upstream_bytes": 174084,
       "upstream_sha256": "6c2cda0436620c697a5d9def30e44ec9d580162ef89d3fa07119b7eecccc0f65"
+    },
+    "blog/goal-engineering.md": {
+      "bytes": 7124,
+      "content_source": "page-markdown",
+      "resolved_markdown": "https://www.langchain.com/blog/goal-engineering",
+      "sha256": "89a5765d18aad2188ea61ff74d4a986ceb8a66ab2171aef30856bbba79cb9f67",
+      "source": "https://www.langchain.com/blog/goal-engineering",
+      "upstream_bytes": 168195,
+      "upstream_sha256": "d68c790621a8c1693433d3139c563313d29195e573a6e76d0cf7a568edee254c"
     },
     "blog/going-beyond-chatbots-how-to-make-gpt-4-output-structured-data-using-langchain.md": {
       "bytes": 8071,
@@ -2484,8 +2493,8 @@
       "resolved_markdown": "https://www.langchain.com/blog/how-and-when-to-build-multi-agent-systems",
       "sha256": "1b5ef3dc9bb76e5324d49e683d8c0f08291add826d3b6a94c5057d9985591a38",
       "source": "https://www.langchain.com/blog/how-and-when-to-build-multi-agent-systems",
-      "upstream_bytes": 173406,
-      "upstream_sha256": "2c77f94a09d7ced70615bff5974415524dc4e9ab030c6ea06e1fdb5c30a68521"
+      "upstream_bytes": 174708,
+      "upstream_sha256": "37c5e9a53893a3f4969083a8d4cfd3b5e82f3de70a0f8d9be23df2e2a206f7c9"
     },
     "blog/how-apollo-rebuilt-its-ai-assistant-on-deep-agents-to-power-the-full-gtm-loop.md": {
       "bytes": 8356,
@@ -2547,8 +2556,8 @@
       "resolved_markdown": "https://www.langchain.com/blog/how-coding-agents-are-reshaping-engineering-product-and-design",
       "sha256": "958c0c294f695e4bdef39484b366d7b9b41683a709472ffba8c81079ddc9e350",
       "source": "https://www.langchain.com/blog/how-coding-agents-are-reshaping-engineering-product-and-design",
-      "upstream_bytes": 176595,
-      "upstream_sha256": "857a3f25e38e8594301b4b40cf43d8013ecc723b6a1b231489fdf4b55adc3a5c"
+      "upstream_bytes": 177897,
+      "upstream_sha256": "469e06075cbff656c1b5f33efcc1384e3a9c2befbd539f3d56d1d8d022a8995a"
     },
     "blog/how-correct-are-llm-evaluators.md": {
       "bytes": 12629,
@@ -2574,8 +2583,8 @@
       "resolved_markdown": "https://www.langchain.com/blog/how-do-i-speed-up-my-agent",
       "sha256": "7e79f0396dfeead402337eec00547b841c5dba495fa0a8d4fda81ef968c55a51",
       "source": "https://www.langchain.com/blog/how-do-i-speed-up-my-agent",
-      "upstream_bytes": 168011,
-      "upstream_sha256": "76aae75b29b7ce50f9753c8f9e7b433ee53cd792d29dbccf7e8caef4ea4f36e5"
+      "upstream_bytes": 168963,
+      "upstream_sha256": "427e220a2c3a7bccddc17f66496ed509c636571ebef024924b7133f4949efb0a"
     },
     "blog/how-harmonic-rebuilt-scout-on-deep-agents-and-4xd-retention-with-langsmith.md": {
       "bytes": 10760,
@@ -2799,8 +2808,8 @@
       "resolved_markdown": "https://www.langchain.com/blog/how-to-think-about-agent-frameworks",
       "sha256": "942701fe29a7fb804ae9f28d8bc280ed6dfc156b3f09f0efcf1d4127af91a2ac",
       "source": "https://www.langchain.com/blog/how-to-think-about-agent-frameworks",
-      "upstream_bytes": 206795,
-      "upstream_sha256": "8d26567e2167cd8e953db578c7c97f7023b19c7c9c9407a49375c2d53277547a"
+      "upstream_bytes": 207688,
+      "upstream_sha256": "6855e86f5f2bff57949fe094f751c2ff082e16f914edce6c7d4b0b3349cd0d65"
     },
     "blog/how-to-turn-claude-code-into-a-domain-specific-coding-agent.md": {
       "bytes": 18154,
@@ -3015,8 +3024,8 @@
       "resolved_markdown": "https://www.langchain.com/blog/in-software-the-code-documents-the-app-in-ai-the-traces-do",
       "sha256": "30d64653383db325cff53afad072836b20686d79e7b5012d16dd18ae09c9c600",
       "source": "https://www.langchain.com/blog/in-software-the-code-documents-the-app-in-ai-the-traces-do",
-      "upstream_bytes": 169086,
-      "upstream_sha256": "6ead6065da71af1b9cc5124f808a2c12ee164d56a56ffd89fc86d65e9ef9dcde"
+      "upstream_bytes": 170395,
+      "upstream_sha256": "a6c7538eda9daa3979119aa2344f934ce181918e34472aee228ffb6bb7f9d220"
     },
     "blog/incorporating-domain-specific-knowledge-in-sql-llm-solutions.md": {
       "bytes": 9520,
@@ -3028,13 +3037,13 @@
       "upstream_sha256": "8b99e620abd3ab9f191c3cdd9aa51a66f4541874d906363a75c5646df53cba55"
     },
     "blog/index.md": {
-      "bytes": 11441,
+      "bytes": 11616,
       "content_source": "page-markdown",
       "resolved_markdown": "https://www.langchain.com/blog",
-      "sha256": "7789e9224badc2a64d315f18b4ffe758a19cbd5335cb232f3d51ecdda7eb0a89",
+      "sha256": "15b252b19c72fe9587b1056b2c601cb3ec33a656bd17034e0ce99a6bdb656a79",
       "source": "https://www.langchain.com/blog",
-      "upstream_bytes": 224317,
-      "upstream_sha256": "e34c1c8c6e15e60e1eb9a4992a9bbd995b0797f9d621f023061e34acb5ba5a46"
+      "upstream_bytes": 224574,
+      "upstream_sha256": "63cc4bdccf74741bc1ea79866e8e7c1f9976961db17fc7b5e28c54727d168c70"
     },
     "blog/insights-agent-multiturn-evals-langsmith.md": {
       "bytes": 6843,
@@ -3132,8 +3141,8 @@
       "resolved_markdown": "https://www.langchain.com/blog/introducing-ambient-agents",
       "sha256": "8829336cbabdfd45c6c84ad8af219a7471b4d1d396ebc7b990a143a0f9507015",
       "source": "https://www.langchain.com/blog/introducing-ambient-agents",
-      "upstream_bytes": 176046,
-      "upstream_sha256": "2abc82ec8521de03e6f99b30909689c612c27e1fd9a6877afaaa8bfb137c6cc1"
+      "upstream_bytes": 177096,
+      "upstream_sha256": "b6b260df579de0981bbddb17b6ddcd6baf255068449488c818832ddfa19b9101"
     },
     "blog/introducing-context-hub.md": {
       "bytes": 1034,
@@ -3186,8 +3195,8 @@
       "resolved_markdown": "https://www.langchain.com/blog/introducing-interrupt-langchain-conference",
       "sha256": "17b7f5bbfa698808d5897f07e032b664d2dea652dd170bfdc12c4b325b7ca497",
       "source": "https://www.langchain.com/blog/introducing-interrupt-langchain-conference",
-      "upstream_bytes": 165344,
-      "upstream_sha256": "a667d4020a710f0d0a23fc280e4f46f5152702e1cc8ff511a37f35d97ff0ce86"
+      "upstream_bytes": 165705,
+      "upstream_sha256": "b2dbd83423253e2e1a2adc8596005ec99478c890b2c4629578790bd3698455ad"
     },
     "blog/introducing-langchain-labs.md": {
       "bytes": 1073,
@@ -3654,8 +3663,8 @@
       "resolved_markdown": "https://www.langchain.com/blog/langchain-second-birthday",
       "sha256": "14b20b3bc0105a119916a72350c4c90fd3518700682ac5734ff3fbaa3929718f",
       "source": "https://www.langchain.com/blog/langchain-second-birthday",
-      "upstream_bytes": 175281,
-      "upstream_sha256": "872d982b95545e08b78e97721b310c51738c8c65ad16478e458bfbffcb82e960"
+      "upstream_bytes": 175642,
+      "upstream_sha256": "239c73940dcff13788427612263f042b4cb4e772bf8a285faf9448493ce84f7d"
     },
     "blog/langchain-skills.md": {
       "bytes": 3726,
@@ -4230,8 +4239,8 @@
       "resolved_markdown": "https://www.langchain.com/blog/mcp-fad-or-fixture",
       "sha256": "b62533cb98e37da3567f21740f68c5eaaacb23c116a31d6e0f547b6bd01cbb68",
       "source": "https://www.langchain.com/blog/mcp-fad-or-fixture",
-      "upstream_bytes": 169933,
-      "upstream_sha256": "37169ed1fee13e731a7fdaed8f65a3d8dac6eeb90b92772f21bea465ba7a87cd"
+      "upstream_bytes": 170826,
+      "upstream_sha256": "6447a76e2b633f2af9fc16d89199b6e4db23be67acb8af50b6edcb458c7fcdad"
     },
     "blog/mcp-in-langchain-stateless-protocol-elicitation-and-more.md": {
       "bytes": 10340,
@@ -4257,8 +4266,8 @@
       "resolved_markdown": "https://www.langchain.com/blog/memory-for-agents",
       "sha256": "ffdde1d8278d0e84db6eeca63291907bd4df64f368800e714a026a456aeecde5",
       "source": "https://www.langchain.com/blog/memory-for-agents",
-      "upstream_bytes": 172233,
-      "upstream_sha256": "6082901acdb8ebf8d5dbbc83b2dfa9482afee908476b7785c29e8ab05889321d"
+      "upstream_bytes": 173185,
+      "upstream_sha256": "be9a72c33c8af9a245aeaa526ea93e99744e99132a59a7c01eecc920eb264bfd"
     },
     "blog/mental-health-therapy-as-an-llm-state-machine.md": {
       "bytes": 11399,
@@ -4383,8 +4392,8 @@
       "resolved_markdown": "https://www.langchain.com/blog/not-another-workflow-builder",
       "sha256": "f8af3278589761fa506d9f77779d572c4bc33c2693ae08b6eec2764ac063528b",
       "source": "https://www.langchain.com/blog/not-another-workflow-builder",
-      "upstream_bytes": 166586,
-      "upstream_sha256": "ada7b8c3e0c509997d6b0ce828be3c150096a7205fa948584dd4a75126954b2d"
+      "upstream_bytes": 167479,
+      "upstream_sha256": "f7e9deecd126c7c9720897d4b380a174165f555226caffd0ca0f843ef950b376"
     },
     "blog/nvidia-enterprise.md": {
       "bytes": 10941,
@@ -4419,8 +4428,8 @@
       "resolved_markdown": "https://www.langchain.com/blog/on-agent-frameworks-and-agent-observability",
       "sha256": "bf0d7909d68dfe89ab410dde36c52ce159ace070cddc5eb886064612cf94cac0",
       "source": "https://www.langchain.com/blog/on-agent-frameworks-and-agent-observability",
-      "upstream_bytes": 168987,
-      "upstream_sha256": "67b65c948af8098b164e540adbdfb9ea31bf9087244e7a3620eef72d5c7b8c0c"
+      "upstream_bytes": 169880,
+      "upstream_sha256": "0ec4b19b1f174860eb70c24e19022c2e5b5dc872ba990c12cd3cbf6f3baf43d7"
     },
     "blog/opaqueprompts-x-langchain-enhance-the-privacy-of-your-langchain-application-with-just-one-code-change.md": {
       "bytes": 8576,
@@ -4473,8 +4482,8 @@
       "resolved_markdown": "https://www.langchain.com/blog/openais-bet-on-a-cognitive-architecture",
       "sha256": "af36c827033a537366fe0624a41900ef38405df876c08ed531f6ea680d903d9c",
       "source": "https://www.langchain.com/blog/openais-bet-on-a-cognitive-architecture",
-      "upstream_bytes": 184180,
-      "upstream_sha256": "3a0aaa18b35389173de0ded66da4e04a2f81f25249f49e2fb93c208254a2e374"
+      "upstream_bytes": 185132,
+      "upstream_sha256": "0328c6eaeae07ac1e2baedd6fead46310bcb09c97c6ed6c28965e45029a48a51"
     },
     "blog/opengpts.md": {
       "bytes": 10832,
@@ -4536,8 +4545,8 @@
       "resolved_markdown": "https://www.langchain.com/blog/own-your-intelligence",
       "sha256": "2a6fc7c0a96ce42034a228aec106c51aa63b2bfba07c76390fb5e892aa1899c5",
       "source": "https://www.langchain.com/blog/own-your-intelligence",
-      "upstream_bytes": 174149,
-      "upstream_sha256": "a3d4e4b0ff09a575a18be50d7896a292f40e1e17eaa18a3efb611a66fbe3cf0c"
+      "upstream_bytes": 175040,
+      "upstream_sha256": "c80715179d9423e0e2aa2a339057076230989808b3c129aa1011a54064cfbe40"
     },
     "blog/paid-media-agent.md": {
       "bytes": 1587,
@@ -4608,8 +4617,8 @@
       "resolved_markdown": "https://www.langchain.com/blog/planning-for-agents",
       "sha256": "435230e63e13438d39f3202015f512d3ae7c501bb41ce20d7e46eb035f9a5b05",
       "source": "https://www.langchain.com/blog/planning-for-agents",
-      "upstream_bytes": 173146,
-      "upstream_sha256": "39da492e6dad394df4aa0c1dd5a0efcb864eb968a400628b3c037881de4552aa"
+      "upstream_bytes": 174039,
+      "upstream_sha256": "fe31eeb20d3b72058ad858948097d7825c9625a5e214148ef3d490128e75fff3"
     },
     "blog/polly-langsmith-ga.md": {
       "bytes": 5310,
@@ -5139,8 +5148,8 @@
       "resolved_markdown": "https://www.langchain.com/blog/the-hidden-metric-that-determines-ai-product-success",
       "sha256": "b01a38a2d9240d1fe0162575742c3560141e2f317c9df63903dd9cb239e58429",
       "source": "https://www.langchain.com/blog/the-hidden-metric-that-determines-ai-product-success",
-      "upstream_bytes": 177957,
-      "upstream_sha256": "725e5bda5cf3e18cf1604e51f14f6329c1541d82001d9628ce31983d0249c035"
+      "upstream_bytes": 179007,
+      "upstream_sha256": "6ddd522d1252b0aff8be2e4cd2de56cb79e8ae41b3173f554deb393b899e5bb0"
     },
     "blog/the-new-langchain-architecture-langchain-core-v0-1-langchain-community-and-a-path-to-langchain-v0-1.md": {
       "bytes": 26221,
@@ -5166,8 +5175,8 @@
       "resolved_markdown": "https://www.langchain.com/blog/the-rise-of-context-engineering",
       "sha256": "9e0c7efa9dd0be6ad4d0cb8322253c7298e132d4f52d2e2a28cc7c54959cea38",
       "source": "https://www.langchain.com/blog/the-rise-of-context-engineering",
-      "upstream_bytes": 171040,
-      "upstream_sha256": "b0628538167554ecfe005321173d202976c69dc621185ebcd789c9a10c00221f"
+      "upstream_bytes": 171992,
+      "upstream_sha256": "e7bdf489dac7570f6d76bcf2d3e43a5f5eebff36cb7f6ed594e13db1b6f6cc90"
     },
     "blog/the-two-patterns-by-which-agents-connect-sandboxes.md": {
       "bytes": 10383,
@@ -5175,8 +5184,8 @@
       "resolved_markdown": "https://www.langchain.com/blog/the-two-patterns-by-which-agents-connect-sandboxes",
       "sha256": "d644d79b98b659793759da68480ebee010a4daad94c45e4755d11bb6a1faa4cd",
       "source": "https://www.langchain.com/blog/the-two-patterns-by-which-agents-connect-sandboxes",
-      "upstream_bytes": 172485,
-      "upstream_sha256": "48773c33d145f1b13848279f0431b072e1c262923e34e1c733964fcb325211c4"
+      "upstream_bytes": 173378,
+      "upstream_sha256": "78b75a7c406a862985247cedb6f20b2097750fe012d5823de22ced00fa7e3530"
     },
     "blog/three-years-langchain.md": {
       "bytes": 10487,
@@ -5184,8 +5193,8 @@
       "resolved_markdown": "https://www.langchain.com/blog/three-years-langchain",
       "sha256": "ac0c1953b67e680407fb85b26687bc5d978d305f21cea3f1b82be30ecb23d77c",
       "source": "https://www.langchain.com/blog/three-years-langchain",
-      "upstream_bytes": 171668,
-      "upstream_sha256": "322b1b3290efd6ead2708f4153c7d75df35b20c2ce16484c6096a5695006255b"
+      "upstream_bytes": 172620,
+      "upstream_sha256": "63c446c51a13e9edf83e7db2d629c3b9f30db3ede804daef087b429b3d9fd77c"
     },
     "blog/timescale-vector-x-langchain-making-postgresql-a-better-vector-database-for-ai-applications.md": {
       "bytes": 31292,
@@ -5310,8 +5319,8 @@
       "resolved_markdown": "https://www.langchain.com/blog/two-different-types-of-agent-authorization",
       "sha256": "a3d6ee2982a70885f424ba105a672b77a5a19805718f30c817c712b18e58d18d",
       "source": "https://www.langchain.com/blog/two-different-types-of-agent-authorization",
-      "upstream_bytes": 166811,
-      "upstream_sha256": "fd14856b6d6d8ac282a1c3575e17f9dc1dc1dd7cdc0d3ddcd3e75c760c6f82eb"
+      "upstream_bytes": 167704,
+      "upstream_sha256": "adfa27d8cc257ba647883ddb8cbb07df0e569795dfb3e8007ca299cd1e0e4eee"
     },
     "blog/typescript-support.md": {
       "bytes": 5485,
@@ -5409,8 +5418,8 @@
       "resolved_markdown": "https://www.langchain.com/blog/ux-for-agents-part-1-chat-2",
       "sha256": "caf2a283709acc63b7d1094f615f7cc556144a2a3b680441608578044c7c791d",
       "source": "https://www.langchain.com/blog/ux-for-agents-part-1-chat-2",
-      "upstream_bytes": 167412,
-      "upstream_sha256": "85a14596bf699a8ffcc1dabb6080366677c101b7d0569451e7ffda820203a833"
+      "upstream_bytes": 168364,
+      "upstream_sha256": "93364cb56c6e0a82a2dbdfabb21e4ba5864018a332d6da814e29f7b6ebe74f5a"
     },
     "blog/ux-for-agents-part-2-ambient.md": {
       "bytes": 6796,
@@ -5418,8 +5427,8 @@
       "resolved_markdown": "https://www.langchain.com/blog/ux-for-agents-part-2-ambient",
       "sha256": "4c91206c6400f104f506a285c35fa447a8e3e5cb5a2f93cfe69f331910313820",
       "source": "https://www.langchain.com/blog/ux-for-agents-part-2-ambient",
-      "upstream_bytes": 168269,
-      "upstream_sha256": "16cd33542564d9385e878e32a06373816ad1488969ab98703967b6d7cb2777ac"
+      "upstream_bytes": 169221,
+      "upstream_sha256": "857bd43c711393b40b35ae411adcb9d0d8859ea993cd37ca8a9c2ae169811554"
     },
     "blog/ux-for-agents-part-3.md": {
       "bytes": 7127,
@@ -5427,8 +5436,8 @@
       "resolved_markdown": "https://www.langchain.com/blog/ux-for-agents-part-3",
       "sha256": "2a3b8c3e7e606fc0641c5b8a28c893274b29f4ac703f84f188d72c8a5a718b85",
       "source": "https://www.langchain.com/blog/ux-for-agents-part-3",
-      "upstream_bytes": 170302,
-      "upstream_sha256": "3ae71823145b3e86c57fe145d8369c6c7f10b1970413393f28d94f1a12d8222c"
+      "upstream_bytes": 171254,
+      "upstream_sha256": "565c265657acd184ed3bbb707507bd00b000e91c197f40a491b1d14b17356efb"
     },
     "blog/villagers-x-langsmith-simulating-multi-agent-social-networks.md": {
       "bytes": 3171,
@@ -5472,8 +5481,8 @@
       "resolved_markdown": "https://www.langchain.com/blog/what-is-a-cognitive-architecture",
       "sha256": "5127d4ef7d496e86eb9110161be6e908e1c67dcff8f2588ea5572c25eca7e769",
       "source": "https://www.langchain.com/blog/what-is-a-cognitive-architecture",
-      "upstream_bytes": 167416,
-      "upstream_sha256": "c6d413c11083e51faca85962c14b64876f5f74ce45c69dcf7be882840a3e6187"
+      "upstream_bytes": 168368,
+      "upstream_sha256": "3472bdd978f9cd8c70529ac0ec7f271ac8464969f21769a23ef52a5df51ed912"
     },
     "blog/what-is-an-agent.md": {
       "bytes": 12296,
@@ -5526,8 +5535,8 @@
       "resolved_markdown": "https://www.langchain.com/blog/why-managed-agents-are-the-next-big-thing-in-agent-building",
       "sha256": "56c5f996ee3041c2a8caf5a901e0e2369d6b029f46e7ab656fe5dbc9efb2402c",
       "source": "https://www.langchain.com/blog/why-managed-agents-are-the-next-big-thing-in-agent-building",
-      "upstream_bytes": 176591,
-      "upstream_sha256": "111c2741d9b30e15b6c5c4b97405b5078367c82a3434e5d0b48c67756aeec7e3"
+      "upstream_bytes": 177482,
+      "upstream_sha256": "56785cb49f30ef702782e7fb472fe24703b613c045a7db6a809dfa7c071fb4f6"
     },
     "blog/why-the-best-agents-are-simpler-than-you-think-sierra-max-agency-podcast.md": {
       "bytes": 8171,
@@ -5544,8 +5553,8 @@
       "resolved_markdown": "https://www.langchain.com/blog/why-you-should-outsource-your-agentic-infrastructure-but-own-your-cognitive-architecture",
       "sha256": "5d7271f6f7f02c5698afda79fae4b94fe221ff098a034fe8e777d1ed1d9a812c",
       "source": "https://www.langchain.com/blog/why-you-should-outsource-your-agentic-infrastructure-but-own-your-cognitive-architecture",
-      "upstream_bytes": 167114,
-      "upstream_sha256": "dade1793e76cb595f7042b634522a4899634002704154eb167a4597ab70ece52"
+      "upstream_bytes": 168007,
+      "upstream_sha256": "c615b4bf64665d72b527d7b2d32238dc15df50c5bb1697e8644b742f3d082d57"
     },
     "blog/wiki-memory.md": {
       "bytes": 4631,
@@ -5553,8 +5562,8 @@
       "resolved_markdown": "https://www.langchain.com/blog/wiki-memory",
       "sha256": "b106686e170b6e2ec0b2107b31d63a7d79733d974ea03d5cfcf04952ce474073",
       "source": "https://www.langchain.com/blog/wiki-memory",
-      "upstream_bytes": 165773,
-      "upstream_sha256": "ecf60093aff9a6ca6c96e424471fea528bfeeb7859fbd53061c59b1db8ddfb5e"
+      "upstream_bytes": 166725,
+      "upstream_sha256": "c5766faa4cd6e5f818ded851b1686fa9ca65ae4b9482c7f9f4c96e753e544c20"
     },
     "blog/winning-in-ai-means-mastering-the-new-stack.md": {
       "bytes": 14025,
@@ -5562,8 +5571,8 @@
       "resolved_markdown": "https://www.langchain.com/blog/winning-in-ai-means-mastering-the-new-stack",
       "sha256": "ed10da9afc73653792fe9206a385e1f0a3212dc66841653e2d7f91c2370878c9",
       "source": "https://www.langchain.com/blog/winning-in-ai-means-mastering-the-new-stack",
-      "upstream_bytes": 174174,
-      "upstream_sha256": "7545f3dcdfc8e96b5cfbb89aac42fac0380a5e1c3a674f562907d12639503ad2"
+      "upstream_bytes": 175483,
+      "upstream_sha256": "39e3ec23810efbc5c5f70deacc5e50885fe07718566cb0b6c7672c37cd0db92d"
     },
     "blog/workspaces-in-langsmith.md": {
       "bytes": 6556,
@@ -5607,8 +5616,8 @@
       "resolved_markdown": "https://www.langchain.com/blog/your-harness-your-memory",
       "sha256": "fff5783e7093c7d9917562423135499b5f202dbce182b0e87fbc39e2248e81c1",
       "source": "https://www.langchain.com/blog/your-harness-your-memory",
-      "upstream_bytes": 178679,
-      "upstream_sha256": "be13fe26d6c628af12b148d1d7df3d2ad277da763c7c7e597b008c4f5b269709"
+      "upstream_bytes": 179631,
+      "upstream_sha256": "0542161748dd54daeca593a71a101ae0658c550d66e95738943280b3f44e04ed"
     },
     "blog/zep-x-langchain-slow-chatbots.md": {
       "bytes": 12167,
@@ -82617,7 +82626,7 @@
     "_index.md": {
       "bytes": 3028,
       "content_source": "generated-index",
-      "sha256": "fc0f3e221c95a5b1aece7fe9bf1c99d0b6583078eace448cddc075db7e1ea491"
+      "sha256": "dd05321b26632b0da6e2129829ab3e45cdc2cecc611ef5654bbefa6468d57327"
     },
     "api-reference/_index.md": {
       "bytes": 900,
@@ -82655,9 +82664,9 @@
       "sha256": "5a1889fce12276793f3abbfd18d2b4862b8c4db67c5d41dd29bf921131b84b9d"
     },
     "blog/_index.md": {
-      "bytes": 144510,
+      "bytes": 144690,
       "content_source": "generated-index",
-      "sha256": "3f6a9b75669f093c13e1b05d2f04f8f74d4f5961754d0938682e5c04f48c8fed"
+      "sha256": "39f0e933a5c74c446518ed9f46d8a9f08b245ed497ac6ee448819fadc45e38a8"
     },
     "breakoutagents/_index.md": {
       "bytes": 1324,
@@ -88972,7 +88981,7 @@
   },
   "llms_full_page_count": 1731,
   "normalization_warnings": {},
-  "page_count": 9176,
+  "page_count": 9177,
   "pages_without_content": {
     "https://www.langchain.com/resources/breakout-agentic-apps": "page has no article content",
     "https://www.langchain.com/resources/built-with-langgraph": "page has no article content",

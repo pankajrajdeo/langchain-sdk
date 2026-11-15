@@ -1,13 +1,13 @@
 ---
 title: "blog"
-description: "Index of 558 pages and 0 subdirectories under blog."
+description: "Index of 559 pages and 0 subdirectories under blog."
 category: "index"
 tags: [index, blog]
 ---
 
 # blog
 
-558 pages here.
+559 pages here.
 
 ## Files
 
@@ -207,6 +207,7 @@ tags: [index, blog]
 - [Generating Usable Text with AI](generating-usable-text-with-ai.md) - Practical strategies for generating reliable text with LLMs. Discover prompt engineering techniques, evaluation methods, and solutions to common challenges.
 - [Give Your Agents an Interpreter](give-your-agents-an-interpreter.md) - Deep Agents now supports interpreters: small embedded runtimes where agents write code to coordinate tools, hold working state, and decide what enters model context.
 - [Give your agent its own computer](give-your-ai-agent-its-own-computer.md) - Running code execution in an AI agent is harder than it looks. Your agent needs a real computer (filesystem, shell, package manager, persistent state) but handing it access to your infrastructure is...
+- [Goal Engineering: How to Design Goals](goal-engineering.md) - The future of agents is them taking on open ended goals and driving towards completion of those goals. Learn more.
 - [Going Beyond Chatbots: How to Make GPT-4 Output Structured Data Using LangChain](going-beyond-chatbots-how-to-make-gpt-4-output-structured-data-using-langchain.md) - Learn how to make GPT-4 output structured data using LangChain&#39;s output parsers. Transform LLM responses into typed objects for APIs and databases.
 - [Goodbye CVEs, Hello langchain_experimental](goodbye-cves-hello-langchain-experimental.md) - Introducing langchain_experimental, a separate package for experimental AI features with security considerations, enhancing stability and innovation.
 - [GPT Researcher x LangChain](gpt-researcher-x-langchain.md) - GPT Researcher now integrates with LangChain, enabling easy LLM model switching and seamless debugging with LangSmith for autonomous AI research agents.

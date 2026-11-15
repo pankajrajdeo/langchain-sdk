@@ -30,7 +30,11 @@ Thank you! Your submission has been received!Oops! Something went wrong while su
 
 ### Recent stories
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6af52a0047907d0f9587a24f_Social%20Announcement.png)Company Announcements
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6af667f57ac0e019ab9e0159_Goal%20Engineering.png)Harrison's In the Loop
+
+## Goal Engineering: How to Design Goals
+
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a056ea05f3880a1361b47cf_Harrison.avif)![](https://cdn.prod.website-files.com/plugins/Basic/assets/placeholder.60f9b1840c.svg)![](https://cdn.prod.website-files.com/plugins/Basic/assets/placeholder.60f9b1840c.svg)Harrison ChaseMihir Garimella (Actively AI)Anshul Gupta (Actively AI)November 14, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6af52a0047907d0f9587a24f_Social%20Announcement.png)Company Announcements
 
 ## LangChain Raises $300M to Enable Every Company to Own Its Intelligence
 
@@ -90,11 +94,7 @@ Thank you! Your submission has been received!Oops! Something went wrong while su
 
 ## The five components of building a "company harness"
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a056ea05f3880a1361b47cf_Harrison.avif)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a56f3a3a4a725f72a70441f_caspar-b.jpeg)Harrison ChaseCaspar BroekhuizenOctober 24, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)6min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6adb940c2b1a77d3a87ae860_dark-52%20characters%20max.png)Deep AgentsConceptual Guide
-
-## Context Engineering Starts with Retrieval
-
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6acfb8492227373b922e7719_Screenshot%202026-10-14%20at%2010.12.17%E2%80%AFAM.png)Jess WengOctober 23, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)12min1...1 / 35
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a056ea05f3880a1361b47cf_Harrison.avif)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a56f3a3a4a725f72a70441f_caspar-b.jpeg)Harrison ChaseCaspar BroekhuizenOctober 24, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)6min1...1 / 35
 
 #### We couldn't find anything matching that.
 
