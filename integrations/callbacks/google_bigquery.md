@@ -12,8 +12,6 @@ tags: [docs, integrations, callbacks, google_bigquery]
 
 # BigQuery Callback Handler
 
-CommunityPythonPreview
-
 > [Google BigQuery](https://cloud.google.com/bigquery) is a serverless and cost-effective enterprise data warehouse that works across clouds and scales with your data.
 
 The `BigQueryCallbackHandler` allows you to log events from LangChain and LangGraph to Google BigQuery. This is useful for monitoring, auditing, and analyzing the performance of your LLM applications.
@@ -30,14 +28,6 @@ The `BigQueryCallbackHandler` allows you to log events from LangChain and LangGr
 * **Graph context manager**: explicit `INVOCATION_*` boundaries with accurate timing
 * **`flush()` between requests**: drain the queue without tearing the handler down
 * **Real-time dashboard**: FastAPI monitoring webapp with live event streaming
-
-> [!NOTE]
->
-> **Preview release**
->
-> The BigQuery Callback Handler is in **Preview**. APIs and functionality are subject to change.
-> For more information, see the
-> [launch stage descriptions](https://cloud.google.com/products#product-launch-stages).
 
 > [!WARNING]
 >

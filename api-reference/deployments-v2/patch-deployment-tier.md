@@ -418,6 +418,18 @@ components:
       description: Agent identity and environment for a deployment.
     SourceConfig:
       properties:
+        k8s_namespace:
+          anyOf:
+            - type: string
+              maxLength: 63
+              pattern: ^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$
+            - type: 'null'
+          title: K8S Namespace
+          description: >-
+            Kubernetes namespace for a BYOC deployment, provisioned and allowed
+            by the data-plane administrator for this workspace. Omit to use the
+            installation namespace. Cannot be changed after creation. Not
+            supported for SaaS or listener-backed deployments.
         integration_id:
           anyOf:
             - type: string

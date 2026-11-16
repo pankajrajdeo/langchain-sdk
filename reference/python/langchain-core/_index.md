@@ -7,7 +7,7 @@ tags: [index, reference, python, langchain-core]
 
 # reference/python/langchain-core
 
-42 pages here, 2993 pages including subdirectories.
+42 pages here, 2996 pages including subdirectories.
 
 ## Directories
 
@@ -47,7 +47,7 @@ tags: [index, reference, python, langchain-core]
 - [sys_info/](sys_info/_index.md) - 1 page
 - [tools/](tools/_index.md) - 90 pages
 - [tracers/](tracers/_index.md) - 197 pages
-- [utils/](utils/_index.md) - 134 pages
+- [utils/](utils/_index.md) - 137 pages
 - [vectorstores/](vectorstores/_index.md) - 73 pages
 - [version/](version/_index.md) - 1 page
 

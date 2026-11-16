@@ -520,6 +520,7 @@ tags: [reference, langchain-core]
 - [`dumpd()`](https://reference.langchain.com/python/langchain-core/load/dump/dumpd)
 - [`try_neq_default()`](https://reference.langchain.com/python/langchain-core/load/serializable/try_neq_default)
 - [`to_json_not_implemented()`](https://reference.langchain.com/python/langchain-core/load/serializable/to_json_not_implemented)
+- [`langsmith_gateway()`](https://reference.langchain.com/python/langchain-core/utils/_gateway/langsmith_gateway)
 - [`convert_to_openai_function()`](https://reference.langchain.com/python/langchain-core/utils/function_calling/convert_to_openai_function)
 - [`convert_to_openai_tool()`](https://reference.langchain.com/python/langchain-core/utils/function_calling/convert_to_openai_tool)
 - [`convert_to_json_schema()`](https://reference.langchain.com/python/langchain-core/utils/function_calling/convert_to_json_schema)
