@@ -718,7 +718,7 @@ For the full list of changes, see [`MIGRATION-0.16-to-0.17.md`](https://github.c
 * Reference the [GCP variables](self-host-terraform-gcp-variables.md) and the [quick reference](self-host-terraform-gcp-quick-reference.md).
 * Review the [GCP architecture](self-host-terraform-gcp-architecture.md) for module structure, traffic flow, and Workload Identity.
 * When something breaks, check the [GCP troubleshooting guide](self-host-terraform-gcp-troubleshooting.md).
-* Enable agent deployment in the UI with [Agent Server hosting](enable-self-hosted-deployment.md).
+* Enable agent deployment in the UI with [Agent Server hosting](enable-self-hosted-agent-server.md).
 
 ***
 

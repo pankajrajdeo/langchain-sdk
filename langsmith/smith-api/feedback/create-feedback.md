@@ -176,8 +176,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/feedback:
     post:
@@ -237,14 +240,23 @@ components:
           type: string
           format: date-time
           title: Created At
+          description: >-
+            When the feedback was created, as an ISO 8601 timestamp. Defaults to
+            now.
         modified_at:
           type: string
           format: date-time
           title: Modified At
+          description: >-
+            When the feedback was last modified, as an ISO 8601 timestamp.
+            Defaults to now.
         key:
           type: string
           maxLength: 180
           title: Key
+          description: >-
+            The feedback key: the metric, tag, or aspect being scored, for
+            example correctness.
         score:
           anyOf:
             - type: number
@@ -252,6 +264,9 @@ components:
             - type: boolean
             - type: 'null'
           title: Score
+          description: >-
+            The numeric or boolean score. Numbers must be between -99999.9999
+            and 99999.9999 with at most 4 decimal places.
         value:
           anyOf:
             - type: number
@@ -262,11 +277,17 @@ components:
               type: object
             - type: 'null'
           title: Value
+          description: >-
+            A non-numeric value, such as a category label or a JSON object.
+            Dropped if it exceeds the feedback size limit.
         comment:
           anyOf:
             - type: string
             - type: 'null'
           title: Comment
+          description: >-
+            A free-text comment explaining the feedback. Truncated at the
+            feedback size limit.
         correction:
           anyOf:
             - additionalProperties: true
@@ -274,24 +295,36 @@ components:
             - type: string
             - type: 'null'
           title: Correction
+          description: >-
+            The corrected output for the run, as a string or a JSON object.
+            Dropped if it exceeds the feedback size limit.
         feedback_group_id:
           anyOf:
             - type: string
               format: uuid
             - type: 'null'
           title: Feedback Group Id
+          description: >-
+            Groups feedback written together, such as one comparison in a
+            pairwise experiment.
         comparative_experiment_id:
           anyOf:
             - type: string
               format: uuid
             - type: 'null'
           title: Comparative Experiment Id
+          description: >-
+            The ID of the comparative (pairwise) experiment this feedback was
+            written for.
         run_id:
           anyOf:
             - type: string
               format: uuid
             - type: 'null'
           title: Run Id
+          description: >-
+            The ID of the run the feedback is about. Omit it for feedback on a
+            whole tracing project or a thread.
         session_id:
           anyOf:
             - type: string
@@ -321,25 +354,40 @@ components:
               format: uuid
             - type: 'null'
           title: Trace Id
+          description: >-
+            The ID of the trace that contains run_id. With session_id and
+            start_time, it lets the server write run feedback without looking
+            the run up.
         start_time:
           anyOf:
             - type: string
               format: date-time
             - type: 'null'
           title: Start Time
+          description: >-
+            The start time of run_id, as an ISO 8601 timestamp. With session_id
+            and trace_id, it lets the server write run feedback without looking
+            the run up.
         feedback_thread_id:
           anyOf:
             - type: string
             - type: 'null'
           title: Feedback Thread Id
+          description: >-
+            The ID of the thread the feedback is about. Requires session_id (or
+            address) and cannot be combined with run_id.
         extend_trace_retention:
           type: boolean
           title: Extend Trace Retention
+          description: >-
+            Whether writing this feedback may upgrade the trace to extended
+            retention. Defaults to true.
           default: true
         id:
           type: string
           format: uuid
           title: Id
+          description: The ID to give the feedback. Defaults to a new random UUID.
         feedback_source:
           anyOf:
             - oneOf:
@@ -356,6 +404,9 @@ components:
                   model: '#/components/schemas/ModelFeedbackSource'
             - type: 'null'
           title: Feedback Source
+          description: >-
+            Where the feedback came from, as an object whose type is api, app,
+            model, or auto_eval.
         feedback_config:
           anyOf:
             - $ref: '#/components/schemas/FeedbackConfig'
@@ -383,8 +434,8 @@ components:
             - type: 'null'
           title: Error
           description: >-
-            Deprecated. Use `extra.error` instead. If both values are provided,
-            `error` takes precedence.
+            Deprecated. Use extra.error instead. If both values are provided,
+            error takes precedence.
           deprecated: true
         extra:
           anyOf:
@@ -392,6 +443,7 @@ components:
               type: object
             - type: 'null'
           title: Extra
+          description: Additional metadata to store with the feedback, as a JSON object.
       type: object
       required:
         - key
@@ -403,13 +455,22 @@ components:
           type: string
           format: date-time
           title: Created At
+          description: >-
+            When the feedback was created, as an ISO 8601 timestamp. Defaults to
+            now.
         modified_at:
           type: string
           format: date-time
           title: Modified At
+          description: >-
+            When the feedback was last modified, as an ISO 8601 timestamp.
+            Defaults to now.
         key:
           type: string
           title: Key
+          description: >-
+            The feedback key: the metric, tag, or aspect being scored, for
+            example correctness.
         score:
           anyOf:
             - type: number
@@ -417,6 +478,9 @@ components:
             - type: boolean
             - type: 'null'
           title: Score
+          description: >-
+            The numeric or boolean score. Numbers must be between -99999.9999
+            and 99999.9999 with at most 4 decimal places.
         value:
           anyOf:
             - type: number
@@ -427,11 +491,17 @@ components:
               type: object
             - type: 'null'
           title: Value
+          description: >-
+            A non-numeric value, such as a category label or a JSON object.
+            Dropped if it exceeds the feedback size limit.
         comment:
           anyOf:
             - type: string
             - type: 'null'
           title: Comment
+          description: >-
+            A free-text comment explaining the feedback. Truncated at the
+            feedback size limit.
         correction:
           anyOf:
             - additionalProperties: true
@@ -439,30 +509,43 @@ components:
             - type: string
             - type: 'null'
           title: Correction
+          description: >-
+            The corrected output for the run, as a string or a JSON object.
+            Dropped if it exceeds the feedback size limit.
         feedback_group_id:
           anyOf:
             - type: string
               format: uuid
             - type: 'null'
           title: Feedback Group Id
+          description: >-
+            Groups feedback written together, such as one comparison in a
+            pairwise experiment.
         comparative_experiment_id:
           anyOf:
             - type: string
               format: uuid
             - type: 'null'
           title: Comparative Experiment Id
+          description: >-
+            The ID of the comparative (pairwise) experiment this feedback was
+            written for.
         run_id:
           anyOf:
             - type: string
               format: uuid
             - type: 'null'
           title: Run Id
+          description: >-
+            The ID of the run the feedback is about. Omit it for feedback on a
+            whole tracing project or a thread.
         session_id:
           anyOf:
             - type: string
               format: uuid
             - type: 'null'
           title: Session Id
+          description: The ID of the tracing project (session) the feedback belongs to.
         id:
           type: string
           format: uuid

@@ -175,8 +175,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v2/datasets/{dataset_id}/experiment-runs:
     post:

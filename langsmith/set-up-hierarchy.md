@@ -86,7 +86,7 @@ Once you have created your workspace, you can manage its members and other confi
 
 For users that are already members of an organization, a workspace admin may add them to a workspace in the **Workspace members** tab on the [**Workspaces settings** page](https://smith.langchain.com/settings/workspaces). Users may also be invited directly to one or more workspaces when they are invited to an organization.
 
-A user can also receive a workspace role through a [team](teams.md) that has access to the workspace.
+A user can also receive a workspace role through a [user group](user-groups.md) that has access to the workspace.
 
 ### Configure workspace settings
 

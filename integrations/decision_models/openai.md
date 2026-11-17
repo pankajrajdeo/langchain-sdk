@@ -14,6 +14,8 @@ The [OpenAI Decisions API](https://developers.openai.com/api/docs/guides/decisio
 
 `OpenAIDecisions` exposes these decisions as a LangChain `Runnable`, so you can invoke, batch, or compose them with other runnables. It accepts strings, structured JSON, and [LangChain message objects](../../langchain/messages.md), and records traces and token usage in LangSmith. Use it for focused decisions such as routing a request, choosing a model, or checking whether a tool call is safe to run.
 
+To use OpenAI decisions through LangChain's standard decision model interface, which other providers also implement, use [`OpenAIClassifier`](openai_classifier.md).
+
 Use OpenAI decisions in LangChain middleware to control `create_agent` behavior at specific lifecycle points, including with custom middleware that classifies agent state. See [Agent middleware](#agent-middleware) for examples.
 
 > [!NOTE]
@@ -280,6 +282,7 @@ OpenAI decisions are traced in [LangSmith](../../langsmith/home.md), so you can 
 ## See also
 
 * [OpenAI Decisions guide](https://developers.openai.com/api/docs/guides/decisions)
+* [OpenAIClassifier integration](openai_classifier.md)
 * [OpenAI middleware](../middleware/openai.md)
 * [OpenAI provider overview](../providers/openai.md)
 * [LangChain OpenAI API reference](https://reference.langchain.com/python/langchain-openai)

@@ -7,13 +7,13 @@ tags: [index, api-reference]
 
 # api-reference
 
-4 pages here, 65 pages including subdirectories.
+4 pages here, 66 pages including subdirectories.
 
 ## Directories
 
 - [agent-connections-v2/](agent-connections-v2/_index.md) - 4 pages
 - [auth-service-v2/](auth-service-v2/_index.md) - 23 pages
-- [deployments-v2/](deployments-v2/_index.md) - 17 pages
+- [deployments-v2/](deployments-v2/_index.md) - 18 pages
 - [integrations-v1/](integrations-v1/_index.md) - 4 pages
 - [integrations-v2/](integrations-v2/_index.md) - 8 pages
 - [listeners-v2/](listeners-v2/_index.md) - 5 pages

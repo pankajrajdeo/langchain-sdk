@@ -22,6 +22,6 @@ tags: [index, langsmith, smith-api, feedback]
 - [List feedback formula ep](list-feedback-formula-ep.md) - List feedback formulas for a given dataset or tracing project
 - [List feedback ingest tokens](list-feedback-ingest-tokens.md) - List all feedback ingest tokens for a run.
 - [Read feedback](read-feedback.md) - Get a specific feedback.
-- [Read feedbacks](read-feedbacks.md) - List all Feedback by query params.
+- [Read feedbacks](read-feedbacks.md) - List feedback, newest first.
 - [Update feedback formula ep](update-feedback-formula-ep.md) - Update a feedback formula
 - [Update feedback](update-feedback.md) - Replace an existing feedback entry with a new, modified entry.

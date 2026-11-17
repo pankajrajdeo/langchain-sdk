@@ -1,13 +1,13 @@
 ---
 title: "langsmith/smith-api"
-description: "Index of 0 pages and 62 subdirectories under langsmith/smith-api."
+description: "Index of 0 pages and 64 subdirectories under langsmith/smith-api."
 category: "index"
 tags: [index, langsmith, smith-api]
 ---
 
 # langsmith/smith-api
 
-0 pages here, 595 pages including subdirectories.
+0 pages here, 630 pages including subdirectories.
 
 ## Directories
 
@@ -26,10 +26,10 @@ tags: [index, langsmith, smith-api]
 - [comments/](comments/_index.md) - 6 pages
 - [commits/](commits/_index.md) - 3 pages
 - [data_planes/](data_planes/_index.md) - 5 pages
-- [datasets/](datasets/_index.md) - 30 pages
+- [datasets/](datasets/_index.md) - 31 pages
 - [directories/](directories/_index.md) - 3 pages
 - [evaluators/](evaluators/_index.md) - 7 pages
-- [examples/](examples/_index.md) - 16 pages
+- [examples/](examples/_index.md) - 17 pages
 - [experiment-view-overrides/](experiment-view-overrides/_index.md) - 5 pages
 - [experiments/](experiments/_index.md) - 1 page
 - [features/](features/_index.md) - 5 pages
@@ -45,23 +45,24 @@ tags: [index, langsmith, smith-api]
 - [mcp/](mcp/_index.md) - 4 pages
 - [mcp_vendors/](mcp_vendors/_index.md) - 9 pages
 - [me/](me/_index.md) - 5 pages
-- [model-price-map/](model-price-map/_index.md) - 4 pages
+- [model-price-map/](model-price-map/_index.md) - 10 pages
 - [oauth/](oauth/_index.md) - 19 pages
 - [optimization-jobs/](optimization-jobs/_index.md) - 9 pages
 - [organizations/](organizations/_index.md) - 1 page
-- [orgs/](orgs/_index.md) - 59 pages
+- [orgs/](orgs/_index.md) - 60 pages
 - [ownerships/](ownerships/_index.md) - 3 pages
 - [playground-settings/](playground-settings/_index.md) - 5 pages
 - [prompt-webhooks/](prompt-webhooks/_index.md) - 6 pages
 - [prompts/](prompts/_index.md) - 1 page
 - [public/](public/_index.md) - 17 pages
 - [repos/](repos/_index.md) - 9 pages
+- [rules/](rules/_index.md) - 1 page
 - [run/](run/_index.md) - 24 pages
-- [runs/](runs/_index.md) - 13 pages
+- [runs/](runs/_index.md) - 14 pages
 - [sandboxes/](sandboxes/_index.md) - 52 pages
 - [scim-tokens/](scim-tokens/_index.md) - 5 pages
 - [service-accounts/](service-accounts/_index.md) - 3 pages
-- [sessions/](sessions/_index.md) - 2 pages
+- [sessions/](sessions/_index.md) - 6 pages
 - [settings/](settings/_index.md) - 2 pages
 - [tag-transitions/](tag-transitions/_index.md) - 1 page
 - [tags/](tags/_index.md) - 5 pages
@@ -71,5 +72,6 @@ tags: [index, langsmith, smith-api]
 - [tools/](tools/_index.md) - 8 pages
 - [tracer-sessions/](tracer-sessions/_index.md) - 26 pages
 - [ttl-settings/](ttl-settings/_index.md) - 4 pages
-- [usage-limits/](usage-limits/_index.md) - 4 pages
+- [usage-limits/](usage-limits/_index.md) - 7 pages
+- [user-groups/](user-groups/_index.md) - 17 pages
 - [workspaces/](workspaces/_index.md) - 42 pages

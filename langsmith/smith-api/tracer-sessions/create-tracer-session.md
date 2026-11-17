@@ -10,6 +10,9 @@ tags: [docs, langsmith, smith-api, tracer-sessions, create-tracer-session]
 
 > Create a new project.
 
+Deprecated: use POST /api/v2/sessions. The v1 endpoint is
+scheduled for removal on Jul 1, 2027.
+
 ## OpenAPI
 
 **/langsmith/langsmith-platform-openapi.json post /api/v1/sessions**
@@ -172,15 +175,22 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/sessions:
     post:
       tags:
         - tracer-sessions
       summary: Create tracer session
-      description: Create a new project.
+      description: |-
+        Create a new project.
+
+        Deprecated: use POST /api/v2/sessions. The v1 endpoint is
+        scheduled for removal on Jul 1, 2027.
       operationId: create_tracer_session_api_v1_sessions_post
       parameters:
         - name: upsert
@@ -209,6 +219,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
+      deprecated: true
       security:
         - API Key: []
         - Tenant ID: []
@@ -266,6 +277,17 @@ components:
           anyOf:
             - $ref: '#/components/schemas/TraceTier'
             - type: 'null'
+        longlived_ttl_days:
+          anyOf:
+            - type: integer
+            - type: 'null'
+          title: Longlived Ttl Days
+          description: >-
+            Retention in days for traces while trace_tier is longlived. One of
+            the deployment's allowed values (allowed_longlived_ttl_days in
+            /info), up to the maximum of the deployment. The value is kept while
+            trace_tier is shortlived. Null means the project uses the workspace
+            retention.
         id:
           anyOf:
             - type: string
@@ -339,6 +361,17 @@ components:
           anyOf:
             - $ref: '#/components/schemas/TraceTier'
             - type: 'null'
+        longlived_ttl_days:
+          anyOf:
+            - type: integer
+            - type: 'null'
+          title: Longlived Ttl Days
+          description: >-
+            Retention in days for traces while trace_tier is longlived. One of
+            the deployment's allowed values (allowed_longlived_ttl_days in
+            /info), up to the maximum of the deployment. The value is kept while
+            trace_tier is shortlived. Null means the project uses the workspace
+            retention.
         id:
           type: string
           format: uuid
@@ -385,20 +418,17 @@ components:
           title: Completion Tokens
         total_cost:
           anyOf:
-            - type: string
-              pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+            - type: number
             - type: 'null'
           title: Total Cost
         prompt_cost:
           anyOf:
-            - type: string
-              pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+            - type: number
             - type: 'null'
           title: Prompt Cost
         completion_cost:
           anyOf:
-            - type: string
-              pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+            - type: number
             - type: 'null'
           title: Completion Cost
         tenant_id:

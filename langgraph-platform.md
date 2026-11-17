@@ -1,30 +1,28 @@
 ---
-title: "LangSmith Agent Server"
-description: "Deploy and manage agents with durable execution, real-time streaming, and horizontal scaling."
+title: "Deploy agents"
+description: "Deploy agents to production on LangSmith Agent Server, on LangSmith Cloud, BYOC, your own infrastructure, or a standalone server."
 source: "https://docs.langchain.com/langgraph-platform"
 category: "docs"
 tags: [docs, langgraph-platform]
 ---
 
-# LangSmith Agent Server
+# Deploy agents
 
-> Deploy and manage agents with durable execution, real-time streaming, and horizontal scaling.
+> Deploy agents to production on LangSmith Agent Server, on LangSmith Cloud, BYOC, your own infrastructure, or a standalone server.
 
-**LangSmith Agent Server** is a workflow orchestration runtime purpose-built for agent workloads. Agent Server hosting provides infrastructure and deployment management for running agents in production at scale. Deploy to Cloud, BYOC, or your own infrastructure, or run a standalone Agent Server without a control plane.
+Deploy your agents to production on [LangSmith Agent Server](langsmith/agent-server.md), the runtime for agent workloads, with durable execution, real-time streaming, and horizontal scaling. Agent Server hosting provides the infrastructure and deployment management around it. Deploy to Cloud, BYOC, or your own infrastructure, or run a standalone Agent Server without a control plane.
 
 > [!NOTE]
 >
 > LangSmith Deployment is now **LangSmith Agent Server**.
 
-> [!NOTE]
+> [!TIP]
 >
-> This page covers how your **agents** run in production with **LangSmith Agent Server**.
->
-> Where you run LangSmith for observability, evaluation, and prompt engineering is separate; refer to [Platform setup](langsmith/platform-setup.md) for details.
+> This page covers where your agents run. Where you run LangSmith itself (for observability, evaluation, and prompt engineering) is a separate choice. For more information, see [Platform setup](langsmith/platform-setup.md).
 
-## Deployable products
+## Choose your agent framework
 
-LangSmith Agent Server is framework-agnostic, which means you can deploy agents built with:
+Agent Server is framework-agnostic. You can deploy agents built with:
 
 > [card] [LangGraph (and LangChain)](langsmith/deployment-quickstart.md)
 >
@@ -42,7 +40,7 @@ LangSmith Agent Server is framework-agnostic, which means you can deploy agents 
 >
 > Use Managed Deep Agents: the managed runtime for deploying code-first Deep Agents.
 
-## Agent Server hosting environments
+## Choose a hosting environment
 
 Pick an environment based on where you want the [control plane](langsmith/control-plane.md) and [data plane](langsmith/data-plane.md) (Agent Servers and their databases) to run. All infrastructure types use the same [Agent Server](langsmith/agent-server.md) runtime.
 
@@ -69,23 +67,21 @@ Pick an environment based on where you want the [control plane](langsmith/contro
 * **Full data residency or air-gapped.** [Self-hosted Agent Server hosting](langsmith/deploy-with-control-plane.md). You host the control plane and Agent Servers in your own infrastructure alongside self-hosted LangSmith.
 * **Agent runtime only, no control plane.** [Standalone Agent Server](langsmith/deploy-standalone-server.md). Run Agent Server containers with Docker or Kubernetes without a control plane, optionally sending traces to LangSmith Cloud or self-hosted.
 
-For where the LangSmith platform runs, see [Platform setup](langsmith/platform-setup.md).
+## Understand pricing
 
-## Understand deployment pricing
-
-Deployments on LangSmith Cloud are billed on the compute and database resources that each deployment requests.
+Agent Servers on LangSmith Cloud are billed on the compute and database resources that each Agent Server requests.
 
 > [!NOTE]
 >
-> Deployments on LangSmith Cloud require a Plus or Enterprise plan. For more information, see the [pricing page](https://www.langchain.com/pricing).
+> Agent Server hosting on LangSmith Cloud requires a Plus or Enterprise plan. For more information, see the [pricing page](https://www.langchain.com/pricing).
 
 > [card] [LangSmith Agent Server billing](langsmith/billing.md#langsmith-deployment-billing)
 >
 > See the rates, the hourly cost of each deployment size, and ways to reduce deployment costs.
 
-## After deployment
+## After you deploy
 
-Once deployed, agents work with [Agent Server](langsmith/assistants.md)'s execution model: **assistants** for configuration, **threads** for state, and **runs** for workloads. For capabilities, tutorials, server customization, and operations, see [Agent Server](langsmith/develop-agents-overview.md).
+Deployed agents use the Agent Server execution model: **assistants** for configuration, **threads** for state, and **runs** for workloads. For capabilities, auth, server customization, and tutorials, see [Agent Server](langsmith/agent-server.md).
 
 > [card] [Update prompts and contexts without redeploying](langsmith/prompt-context-hub.md)
 >
@@ -123,4 +119,4 @@ Ship a LangChain.js agent and chat UI together as a single web app. The Vite exa
 
 [Connect these docs](use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deployment.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

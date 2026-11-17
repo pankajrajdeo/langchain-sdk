@@ -172,8 +172,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/platform/orgs/current/access-policies/{access_policy_id}:
     patch:
@@ -441,12 +444,15 @@ components:
         - organization:manage-model-configs
         - organization:manage-model-secrets
         - organization:members:manage
+        - organization:model-price-map:manage
+        - organization:model-price-map:read
         - organization:pats:create
         - organization:pats:manage
         - organization:pats:read
         - organization:read
         - organization:read-metadata
         - organization:retention:manage
+        - organization:scim-tokens:manage
         - organization:security-policy:manage
         - organization:service-key:manage
         - organization:settings:manage
@@ -600,12 +606,15 @@ components:
         - OrganizationManageModelConfigs
         - OrganizationManageModelSecrets
         - OrganizationMembersManage
+        - OrganizationModelPriceMapManage
+        - OrganizationModelPriceMapRead
         - OrganizationPATsCreate
         - OrganizationPATsManage
         - OrganizationPATsRead
         - OrganizationRead
         - OrganizationReadMetadata
         - OrganizationRetentionManage
+        - OrganizationScimTokensManage
         - OrganizationSecurityPolicyManage
         - OrganizationServiceKeyManage
         - OrganizationSettingsManage

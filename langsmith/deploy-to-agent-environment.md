@@ -10,7 +10,7 @@ tags: [docs, langsmith, deploy-to-agent-environment]
 
 > How the LangGraph and Managed Deep Agents CLIs bind a deployment to an agent and an environment, which values each flag takes, and which CLI versions accept them.
 
-Deploying to an agent environment binds a [deployment](deployment.md) to one [agent](agent-registry.md#agent) and one of that agent's [environments](agent-environments.md). Two flags carry the binding, and the LangGraph CLI and the `mda` CLI both accept them.
+Deploying to an agent environment binds a [deployment](deploy-overview.md) to one [agent](agent-registry.md#agent) and one of that agent's [environments](agent-environments.md). Two flags carry the binding, and the LangGraph CLI and the `mda` CLI both accept them.
 
 Use it to keep a staging build and a production build of the same agent apart, so each one reports into its own environment.
 
@@ -119,7 +119,6 @@ If the Agent Server is missing from the intended environment, check the agent ID
 * [Agent Registry](agent-registry.md)
 * [Agent environments](agent-environments.md)
 * [Log traces to an agent](log-traces-to-agent.md)
-* [Deployment](deployment.md)
 
 ***
 

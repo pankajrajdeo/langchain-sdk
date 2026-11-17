@@ -10,6 +10,8 @@ tags: [docs, langsmith, smith-api, run, list-rules]
 
 > List all run rules.
 
+Deprecated: use GET /api/v2/runs/rules, which returns cursor-paginated results.
+
 ## OpenAPI
 
 **/langsmith/langsmith-platform-openapi.json get /api/v1/runs/rules**
@@ -172,15 +174,22 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/runs/rules:
     get:
       tags:
         - run
       summary: List rules
-      description: List all run rules.
+      description: >-
+        List all run rules.
+
+        Deprecated: use GET /api/v2/runs/rules, which returns cursor-paginated
+        results.
       operationId: list_rules_api_v1_runs_rules_get
       parameters:
         - name: dataset_id
@@ -274,6 +283,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
+      deprecated: true
       security:
         - API Key: []
         - Tenant ID: []
@@ -337,6 +347,11 @@ components:
             - type: string
             - type: 'null'
           title: Tree Filter
+        thread_filter:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Thread Filter
         add_to_annotation_queue_id:
           anyOf:
             - type: string

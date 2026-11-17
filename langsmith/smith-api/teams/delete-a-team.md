@@ -1,6 +1,6 @@
 ---
 title: "Delete a team"
-description: "Deletes an organization-wide team with its members, workspace grants and access policies, and the workspace scoped teams under it. A workspace scoped team returns 400: removing its parent's grant in..."
+description: "Deprecated: use the corresponding /user-groups endpoint. Deletes an organization-wide team with its members, workspace grants and access policies, and the workspace scoped teams under it. A workspace..."
 source: "https://docs.langchain.com/langsmith/smith-api/teams/delete-a-team"
 category: "docs"
 tags: [docs, langsmith, smith-api, teams, delete-a-team]
@@ -8,7 +8,8 @@ tags: [docs, langsmith, smith-api, teams, delete-a-team]
 
 # Delete a team
 
-> Deletes an organization-wide team with its members, workspace grants and access
+> Deprecated: use the corresponding /user-groups endpoint.
+Deletes an organization-wide team with its members, workspace grants and access
 policies, and the workspace scoped teams under it. A workspace scoped team returns
 400: removing its parent's grant in the workspace deletes it. Returns 204 also when
 the team does not exist. Needs organization:teams:manage.
@@ -175,8 +176,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/platform/orgs/current/teams/{team_id}:
     delete:
@@ -184,6 +188,8 @@ paths:
         - teams
       summary: Delete a team
       description: >-
+        Deprecated: use the corresponding /user-groups endpoint.
+
         Deletes an organization-wide team with its members, workspace grants and
         access
 
@@ -229,6 +235,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/shared.ProblemDetails'
+      deprecated: true
       security:
         - API Key: []
           Organization ID: []

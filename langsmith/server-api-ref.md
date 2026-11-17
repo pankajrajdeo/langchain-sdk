@@ -12,7 +12,7 @@ tags: [docs, langsmith, server-api-ref]
 
 > Browse the Agent Server API reference, available within each Agent Server at the /docs endpoint.
 
-The Agent Server API reference is available within each [deployment](deployment.md) at the `/docs` endpoint (e.g. `http://localhost:8124/docs`).
+The Agent Server API reference is available within each [deployment](deploy-overview.md) at the `/docs` endpoint (e.g. `http://localhost:8124/docs`).
 
 Browse the full API reference in the **Agent Server API** section in the sidebar, or see the endpoint groups below:
 

@@ -170,8 +170,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/orgs/current/plan:
     post:
@@ -238,6 +241,7 @@ components:
         - plus_01_2026
         - plus_07_2026
         - plus_10_2026
+        - plus_11_2026
         - startup
         - startup_v0
         - startup_07_2026

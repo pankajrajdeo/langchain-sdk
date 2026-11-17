@@ -1,6 +1,6 @@
 ---
 title: "List workspace scoped team members"
-description: "Lists the workspace identities of a workspace scoped team's members. A page carries next_cursor, which is the value to send back as cursor for the next page, and null once the last page has been..."
+description: "Deprecated: use the corresponding /user-groups endpoint. Lists the workspace identities of a workspace scoped team's members. A page carries next_cursor, which is the value to send back as cursor for..."
 source: "https://docs.langchain.com/langsmith/smith-api/teams/list-workspace-scoped-team-members"
 category: "docs"
 tags: [docs, langsmith, smith-api, teams, list-workspace-scoped-team-members]
@@ -8,7 +8,8 @@ tags: [docs, langsmith, smith-api, teams, list-workspace-scoped-team-members]
 
 # List workspace scoped team members
 
-> Lists the workspace identities of a workspace scoped team's members. A page carries
+> Deprecated: use the corresponding /user-groups endpoint.
+Lists the workspace identities of a workspace scoped team's members. A page carries
 next_cursor, which is the value to send back as cursor for the next page, and null
 once the last page has been read. A cursor this endpoint did not issue for this
 team starts again at the first page. Needs workspaces:teams:read in
@@ -176,8 +177,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/platform/orgs/current/teams/{team_id}/workspace-members:
     get:
@@ -185,6 +189,8 @@ paths:
         - teams
       summary: List workspace scoped team members
       description: >-
+        Deprecated: use the corresponding /user-groups endpoint.
+
         Lists the workspace identities of a workspace scoped team's members. A
         page carries
 
@@ -226,7 +232,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/teams.ListTeamWorkspaceMembersResponse'
+                $ref: >-
+                  #/components/schemas/user_groups.ListUserGroupWorkspaceMembersResponse
         '400':
           description: invalid team_id or page_size, or the team is organization-wide
           content:
@@ -253,6 +260,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/shared.ProblemDetails'
+      deprecated: true
       security:
         - API Key: []
           Organization ID: []
@@ -260,7 +268,7 @@ paths:
           Organization ID: []
 components:
   schemas:
-    teams.ListTeamWorkspaceMembersResponse:
+    user_groups.ListUserGroupWorkspaceMembersResponse:
       type: object
       required:
         - items
@@ -269,7 +277,7 @@ components:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/teams.TeamWorkspaceMember'
+            $ref: '#/components/schemas/user_groups.UserGroupWorkspaceMember'
         next_cursor:
           anyOf:
             - type: string
@@ -305,7 +313,7 @@ components:
           type: string
         type:
           type: string
-    teams.TeamWorkspaceMember:
+    user_groups.UserGroupWorkspaceMember:
       type: object
       required:
         - created_at

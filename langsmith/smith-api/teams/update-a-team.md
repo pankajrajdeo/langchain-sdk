@@ -1,6 +1,6 @@
 ---
 title: "Update a team"
-description: "Renames an organization-wide team or changes its description or IdP group mapping. Omitted fields are left unchanged, and a null description or idp_group_name clears it. idp_sync_enabled needs an IdP..."
+description: "Deprecated: use the corresponding /user-groups endpoint. Renames an organization-wide team or changes its description or IdP group mapping. Omitted fields are left unchanged, and a null description..."
 source: "https://docs.langchain.com/langsmith/smith-api/teams/update-a-team"
 category: "docs"
 tags: [docs, langsmith, smith-api, teams, update-a-team]
@@ -8,7 +8,8 @@ tags: [docs, langsmith, smith-api, teams, update-a-team]
 
 # Update a team
 
-> Renames an organization-wide team or changes its description or IdP group mapping.
+> Deprecated: use the corresponding /user-groups endpoint.
+Renames an organization-wide team or changes its description or IdP group mapping.
 Omitted fields are left unchanged, and a null description or idp_group_name clears
 it. idp_sync_enabled needs an IdP group. A workspace scoped team returns 400: its
 workspace grant creates and deletes it. Needs organization:teams:manage.
@@ -175,8 +176,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/platform/orgs/current/teams/{team_id}:
     patch:
@@ -184,6 +188,8 @@ paths:
         - teams
       summary: Update a team
       description: >-
+        Deprecated: use the corresponding /user-groups endpoint.
+
         Renames an organization-wide team or changes its description or IdP
         group mapping.
 
@@ -207,14 +213,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/teams.UpdateTeamPayload'
+              $ref: '#/components/schemas/user_groups.UpdateUserGroupPayload'
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/teams.Team'
+                $ref: '#/components/schemas/user_groups.Team'
         '400':
           description: invalid team_id or request, or the team is workspace scoped
           content:
@@ -245,6 +251,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/shared.ProblemDetails'
+      deprecated: true
       security:
         - API Key: []
           Organization ID: []
@@ -252,7 +259,7 @@ paths:
           Organization ID: []
 components:
   schemas:
-    teams.UpdateTeamPayload:
+    user_groups.UpdateUserGroupPayload:
       type: object
       properties:
         description:
@@ -262,21 +269,23 @@ components:
             - type: 'null'
         idp_group_name:
           description: >-
-            IdpGroupName is cleared by null. Workspace scoped teams cannot have
-            one.
+            IdpGroupName is cleared by null. Workspace scoped user groups cannot
+            have one.
           anyOf:
             - type: string
               maxLength: 255
               minLength: 1
             - type: 'null'
         idp_sync_enabled:
-          description: IdpSyncEnabled can be true only while the team has an IdpGroupName.
+          description: >-
+            IdpSyncEnabled can be true only while the user group has an
+            IdpGroupName.
           type: boolean
         name:
           type: string
           maxLength: 255
           minLength: 1
-    teams.Team:
+    user_groups.Team:
       type: object
       required:
         - created_at
@@ -305,18 +314,20 @@ components:
           format: uuid
         parent_team_id:
           description: >-
-            ParentTeamID is the organization-wide team a workspace team belongs
-            to.
+            ParentUserGroupID is the organization-wide user group a workspace
+            user group belongs to.
 
-            It is omitted for organization-wide teams.
+            It is omitted for organization-wide user groups.
           type: string
           format: uuid
         updated_at:
           type: string
         workspace_id:
-          description: |-
-            WorkspaceID is the workspace the team belongs to. It is omitted for
-            organization-wide teams.
+          description: >-
+            WorkspaceID is the workspace the user group belongs to. It is
+            omitted for
+
+            organization-wide user groups.
           type: string
           format: uuid
     shared.ProblemDetails:

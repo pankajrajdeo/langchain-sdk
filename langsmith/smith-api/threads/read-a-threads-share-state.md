@@ -174,8 +174,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v2/threads/{thread_id}/share:
     get:
@@ -198,8 +201,8 @@ paths:
           in: query
           required: true
           schema:
-            format: uuid
             type: string
+            format: uuid
             title: Project Id
       responses:
         '200':

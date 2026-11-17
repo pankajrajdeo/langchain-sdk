@@ -10,7 +10,8 @@ tags: [docs, langsmith, smith-api, runs, query-runs]
 
 > Returns a paginated list of runs for the given projects within min/max start_time. Supports filters, cursor pagination, and `selects` to select fields to return.
 
-When `ai_search` is set, `Accept: text/event-stream` is required; requests without it return 406. AI search is unavailable on deployments that route queries to the v1 backend and returns 501 there.
+`ai_search` cannot be combined with `sem_filter`. With full AI search enabled, `ai_search` translates natural language into query filters and time bounds and cannot be combined with explicit filter expressions. Otherwise, `ai_search` retains legacy semantic-only behavior. Use `sem_filter` for semantic-only matching combined with structured filters. AI search requires organization consent.
+When semantic matching is needed, `Accept: text/event-stream` is required; requests without it return 406. AI search is unavailable on deployments that route queries to the v1 backend and returns 501 there.
 
 Self-hosted deployments require LangSmith `v0.16` or later.
 
@@ -176,8 +177,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v2/runs/query:
     post:
@@ -189,15 +193,22 @@ paths:
         start_time. Supports filters, cursor pagination, and `selects` to select
         fields to return.
 
-        When `ai_search` is set, `Accept: text/event-stream` is required;
-        requests without it return 406. AI search is unavailable on deployments
-        that route queries to the v1 backend and returns 501 there.
+        `ai_search` cannot be combined with `sem_filter`. With full AI search
+        enabled, `ai_search` translates natural language into query filters and
+        time bounds and cannot be combined with explicit filter expressions.
+        Otherwise, `ai_search` retains legacy semantic-only behavior. Use
+        `sem_filter` for semantic-only matching combined with structured
+        filters. AI search requires organization consent.
+
+        When semantic matching is needed, `Accept: text/event-stream` is
+        required; requests without it return 406. AI search is unavailable on
+        deployments that route queries to the v1 backend and returns 501 there.
 
         Self-hosted deployments require LangSmith `v0.16` or later.
       parameters:
         - description: >-
-            application/json, or text/event-stream (required when ai_search is
-            set)
+            application/json, or text/event-stream (required for semantic
+            matching)
           name: Accept
           in: header
           schema:
@@ -248,7 +259,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/shared.ProblemDetails'
         '406':
-          description: 'not acceptable (ai_search requires Accept: text/event-stream)'
+          description: >-
+            not acceptable (semantic matching requires Accept:
+            text/event-stream)
           content:
             application/problem+json:
               schema:
@@ -297,11 +310,12 @@ components:
       properties:
         ai_search:
           description: >-
-            `ai_search` is a plain-language criterion evaluated against the
-            messages from the agent trajectory scoped to the run.
+            `ai_search` translates natural language into structured filters,
+            semantic criteria and time bounds.
 
-            AND-ed with the ordinary filters. Requires semantic filtering
-            enabled for the deployment.
+            Cannot be combined with sem_filter. With full AI search enabled,
+            also cannot be combined with explicit filter expressions; otherwise
+            retains legacy semantic-only behavior.
 
             Must contain nonempty text of at most 2000 UTF-8 bytes. Not
             supported on public dataset queries.
@@ -468,6 +482,13 @@ components:
             - START_TIME
             - RUN_TYPE
             - STATUS
+        sem_filter:
+          description: >-
+            SemFilter evaluates a plain-language criterion against trajectory
+            messages, AND-ed with structured filters.
+          type: string
+          maxLength: 2000
+          minLength: 1
         trace_filter:
           description: >-
             `trace_filter` narrows results to runs whose root trace matches this

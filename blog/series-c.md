@@ -18,11 +18,11 @@ We believe agents will transform the economy. That future will be shaped by doma
 
 To capture that opportunity, every company will need to own its intelligence. Companies should be free to choose the best models for their needs, control their data and infrastructure, and continuously improve their agents, while maintaining the governance needed to operate securely at scale.
 
-That’s why we’ve built LangSmith, the framework-agnostic platform to run, improve, and govern agents. More than 7,000 organizations already rely on LangSmith, from fast-growing startups like Harvey, Rippling, and Listen Labs to Fortune 500 enterprises like NVIDIA, Toyota, and Salesforce. Clay uses LangSmith to monitor hundreds of millions of agent runs per month and improve their agents. Workday uses LangSmith to run and govern agents across the organization, reducing the time to deploy a new agent from five months to under a day.
+That’s why we’ve built LangSmith, [the framework-agnostic platform to run, improve, and govern agents](https://www.langchain.com/blog/we-rebuilt-langsmith-around-the-agent). More than 7,000 organizations already rely on LangSmith, from fast-growing startups like Harvey, Rippling, and Listen Labs to Fortune 500 enterprises like NVIDIA, Toyota, and Salesforce. Clay uses LangSmith to monitor hundreds of millions of agent runs per month and improve their agents. Workday uses LangSmith to run and govern agents across the organization, reducing the time to deploy a new agent from five months to under a day.
 
 LangSmith provides the foundation for companies to control their agent systems across three pillars – Agent Runtime, Agent Improvement, and Agent Governance:
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6af52a53dfc23de1ad3a2804_langchain-product-stackvF.png)
+![__wf_reserved_inherit](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6af52a53dfc23de1ad3a2804_langchain-product-stackvF.png)
 
 **Agent Runtime **gives teams the architecture and infrastructure to run agents reliably. Deep Agents, LangGraph, and LangChain give developers flexibility across models and control over how context is managed. LangSmith Agent Server and Sandboxes allow teams to deploy and run agents securely at scale, whether in the cloud or in their environment. LangSmith Managed Agents and Fleet provide fully managed services to build, deploy, and run mission-critical agents in production.
 

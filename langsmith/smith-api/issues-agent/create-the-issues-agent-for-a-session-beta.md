@@ -175,8 +175,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/platform/sessions/{session_id}/issues-agent:
     post:
@@ -298,6 +301,13 @@ components:
           type: array
         run_filter:
           description: Runs-filter-DSL trace scope; omit/null/empty for no scope.
+          type: string
+        user_instructions:
+          description: >-
+            Freeform preferences Engine reads as context, including on the
+            board's
+
+            first scan. Omit or send "" for none.
           type: string
     agent.IssuesAgent:
       type: object

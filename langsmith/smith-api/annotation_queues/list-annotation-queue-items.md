@@ -172,8 +172,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/platform/annotation-queues/{queue_id}/items:
     get:
@@ -203,11 +206,11 @@ paths:
           in: query
           required: true
           schema:
-            type: string
             enum:
               - needs_my_review
               - needs_others_review
               - archived
+            type: string
             title: Status
         - description: Page size (max 100)
           name: page_size
@@ -226,10 +229,10 @@ paths:
           name: item_type
           in: query
           schema:
-            type: string
             enum:
               - RUN
               - THREAD
+            type: string
             title: Item Type
         - description: >-
             Only items whose trace start time is at or after this timestamp.
@@ -253,10 +256,10 @@ paths:
           name: direction
           in: query
           schema:
-            type: string
             enum:
               - forward
               - backward
+            type: string
             default: forward
             title: Direction
       responses:

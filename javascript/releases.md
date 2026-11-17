@@ -66,7 +66,7 @@ Use per-call mode for new agents. LangChain plans to make it the default in the 
 
 Alpha release of `deepagents` v1.9.0.
 
-* **[Async subagents](deepagents/async-subagents.md)**: Deep Agents can launch non-blocking background tasks, so users can continue interacting with the agent while subagents work concurrently. Requires [LangSmith Deployment](../langsmith/deployment.md) for sub-agents.
+* **[Async subagents](deepagents/async-subagents.md)**: Deep Agents can launch non-blocking background tasks, so users can continue interacting with the agent while subagents work concurrently. Requires [LangSmith Deployment](../langsmith/deploy-overview.md) for sub-agents.
 
 * **[Backend](deepagents/backends.md) protocol v2**: We've introduced a new v2 backend protocol (`BackendProtocolV2`) with backward-compatible changes to the Deep Agents backend interface. Key changes:
   * **Structured result types**: All methods now return structured `Result` objects (e.g., `ReadResult`, `LsResult`, `GrepResult`, `GlobResult`) with consistent error handling via an `error` field, instead of returning raw values or throwing exceptions.

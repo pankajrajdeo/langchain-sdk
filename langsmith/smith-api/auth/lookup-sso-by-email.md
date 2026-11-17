@@ -172,8 +172,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/sso/email-lookup:
     post:
@@ -232,11 +235,15 @@ components:
           $ref: '#/components/schemas/SSOProviderType'
           default: saml
           x-extensible-enum: true
+        sso_login_slug:
+          type: string
+          title: Sso Login Slug
       type: object
       required:
         - provider_id
         - organization_id
         - organization_display_name
+        - sso_login_slug
       title: SSOProviderSlim
     HTTPValidationError:
       properties:

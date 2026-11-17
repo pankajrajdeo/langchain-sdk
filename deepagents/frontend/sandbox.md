@@ -460,7 +460,7 @@ chat panel. It uses [`useStream`](https://reference.langchain.com/javascript/lan
 endpoints for file browsing.
 
 For production deployment, point `apiUrl` at your
-[Agent Server URL](../../langsmith/deployment.md), and pass a stable
+[Agent Server URL](../../langsmith/agent-server.md), and pass a stable
 `thread_id` on each run. See
 [Frontend](../going-to-production.md#frontend) in
 [Going to production](../going-to-production.md) for those settings

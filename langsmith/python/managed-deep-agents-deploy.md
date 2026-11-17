@@ -10,7 +10,7 @@ tags: [docs, langsmith, managed-deep-agents-deploy]
 
 > Test and deploy a Managed Deep Agent with the mda CLI.
 
-Deploying a Managed Deep Agent compiles a code-first project into a managed LangGraph app, syncs deploy-owned context to [Context Hub](managed-deep-agents-context-hub.md), uploads the compiled source, and triggers a LangSmith hosted deployment build. The result is an [Agent Server](../agent-server-overview.md) deployment, including the Agent Server API and [MCP endpoint](managed-deep-agents-mcp-endpoint.md).
+Deploying a Managed Deep Agent compiles a code-first project into a managed LangGraph app, syncs deploy-owned context to [Context Hub](managed-deep-agents-context-hub.md), uploads the compiled source, and triggers a LangSmith hosted deployment build. The result is an [Agent Server](../agent-server.md) deployment, including the Agent Server API and [MCP endpoint](managed-deep-agents-mcp-endpoint.md).
 
 > [!NOTE]
 >
@@ -133,7 +133,7 @@ requires-python = ">=3.11"
 python-version = "3.14"
 ```
 
-When set, `python-version` takes a quoted `major.minor` string, with no patch version. MDA writes the resolved version to `python_version` in the generated `langgraph.json` and selects the matching [Agent Server](../agent-server-overview.md) image. `requires-python` remains the project's own compatibility requirement.
+When set, `python-version` takes a quoted `major.minor` string, with no patch version. MDA writes the resolved version to `python_version` in the generated `langgraph.json` and selects the matching [Agent Server](../agent-server.md) image. `requires-python` remains the project's own compatibility requirement.
 
 Pin it to stay on the same minor version when MDA adds support for a newer Python. To override it for a single build, set `MDA_PYTHON_VERSION`:
 
@@ -177,7 +177,7 @@ If a deployment reaches `BUILD_FAILED` or `DEPLOY_FAILED`, open the printed depl
 
 ## Next steps
 
-> [card] [Agent Server](../agent-server-overview.md)
+> [card] [Agent Server](../agent-server.md)
 >
 > Explore the runtime that hosts the deployment.
 

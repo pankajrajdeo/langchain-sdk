@@ -10,7 +10,7 @@ tags: [docs, langsmith, hybrid]
 
 > A LangSmith Agent Server setup where you self-host Agent Servers in your infrastructure and send traces to LangSmith Cloud or a self-hosted LangSmith instance.
 
-Hybrid is a hosting setup for [LangSmith Agent Server](deployment.md), which **deploys and runs agents in production**.
+Hybrid is a hosting setup for [LangSmith Agent Server](agent-server.md), which **deploys and runs agents in production**.
 
 In a hybrid platform setup, you self-host [Agent Servers](agent-server.md) in your own infrastructure and send their traces to LangSmith, where LangSmith can be either a [self-hosted](self-hosted.md) instance or [LangSmith Cloud](cloud.md).
 

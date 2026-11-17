@@ -1,6 +1,6 @@
 ---
 title: "Grant a team a role in a workspace"
-description: "Gives an organization-wide team a role in a workspace. Team members who are members of the workspace get the role's permissions there, and their workspace identities are recorded as the team's..."
+description: "Deprecated: use the corresponding /user-groups endpoint. Gives an organization-wide team a role in a workspace. Team members who are members of the workspace get the role's permissions there, and..."
 source: "https://docs.langchain.com/langsmith/smith-api/teams/grant-a-team-a-role-in-a-workspace"
 category: "docs"
 tags: [docs, langsmith, smith-api, teams, grant-a-team-a-role-in-a-workspace]
@@ -8,7 +8,8 @@ tags: [docs, langsmith, smith-api, teams, grant-a-team-a-role-in-a-workspace]
 
 # Grant a team a role in a workspace
 
-> Gives an organization-wide team a role in a workspace. Team members who are
+> Deprecated: use the corresponding /user-groups endpoint.
+Gives an organization-wide team a role in a workspace. Team members who are
 members of the workspace get the role's permissions there, and their workspace
 identities are recorded as the team's members in the workspace. The grant also
 creates the team's workspace scoped team in the workspace, named after the team and
@@ -178,8 +179,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/platform/orgs/current/teams/{team_id}/workspaces:
     post:
@@ -187,6 +191,8 @@ paths:
         - teams
       summary: Grant a team a role in a workspace
       description: >-
+        Deprecated: use the corresponding /user-groups endpoint.
+
         Gives an organization-wide team a role in a workspace. Team members who
         are
 
@@ -219,7 +225,8 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/teams.CreateTeamWorkspaceGrantPayload'
+              $ref: >-
+                #/components/schemas/user_groups.CreateUserGroupWorkspaceGrantPayload
       responses:
         '201':
           description: Created
@@ -231,7 +238,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/teams.TeamWorkspaceGrant'
+                $ref: '#/components/schemas/user_groups.UserGroupWorkspaceGrant'
         '400':
           description: >-
             invalid team_id, workspace_id or role_id, the workspace or role is
@@ -270,6 +277,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/shared.ProblemDetails'
+      deprecated: true
       security:
         - API Key: []
           Organization ID: []
@@ -277,7 +285,7 @@ paths:
           Organization ID: []
 components:
   schemas:
-    teams.CreateTeamWorkspaceGrantPayload:
+    user_groups.CreateUserGroupWorkspaceGrantPayload:
       type: object
       required:
         - role_id
@@ -292,7 +300,7 @@ components:
         workspace_id:
           type: string
           format: uuid
-    teams.TeamWorkspaceGrant:
+    user_groups.UserGroupWorkspaceGrant:
       type: object
       required:
         - created_at

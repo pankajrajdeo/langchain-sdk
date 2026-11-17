@@ -26,7 +26,7 @@ tags: [index, langsmith, smith-api, tracer-sessions]
 - [Get insights jobs (Beta)](get-insights-jobs-beta.md) - List Insights jobs for a project.
 - [Get run cluster from insights job (Beta)](get-run-cluster-from-insights-job-beta.md) - Get a cluster from the report produced by an Insights job.
 - [Get runs from insights job (Beta)](get-runs-from-insights-job-beta.md) - List runs analyzed by an Insights job, optionally filtered by report cluster.
-- [Get tracing project prebuilt dashboard](get-tracing-project-prebuilt-dashboard.md) - Get a prebuilt dashboard for a tracing project.
+- [Get tracing project prebuilt dashboard](get-tracing-project-prebuilt-dashboard.md) - GET with body payload — no resources created. Returns the prebuilt dashboard for the tracing project matching the query passed as the request payload.
 - [Read filter view](read-filter-view.md) - Get a specific filter view.
 - [Read filter views](read-filter-views.md) - Get all filter views for a session.
 - [Read tracer session](read-tracer-session.md) - Get a specific project.

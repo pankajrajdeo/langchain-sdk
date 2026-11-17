@@ -10,7 +10,7 @@ tags: [docs, javascript, deepagents, going-to-production]
 
 > Take your deep agent to production with persistent memory, sandboxes, resilience middleware, and deployment options
 
-This guide covers considerations for taking a deep agent from a local prototype to a production deployment with the SDK. To run production agents without having to manage infrastructure, start with [Managed Deep Agents](../../langsmith/javascript/managed-deep-agents-overview.md) or [migrate to Managed Deep Agents](../../langsmith/javascript/managed-deep-agents-migrate.md) instead. The rest of this page walks through scoping memory, configuring execution environments, adding guardrails, and connecting a frontend when you host agents yourself or run a custom [Agent Server](../../langsmith/deployment.md).
+This guide covers considerations for taking a deep agent from a local prototype to a production deployment with the SDK. To run production agents without having to manage infrastructure, start with [Managed Deep Agents](../../langsmith/javascript/managed-deep-agents-overview.md) or [migrate to Managed Deep Agents](../../langsmith/javascript/managed-deep-agents-migrate.md) instead. The rest of this page walks through scoping memory, configuring execution environments, adding guardrails, and connecting a frontend when you host agents yourself or run a custom [Agent Server](../../langsmith/agent-server.md).
 
 ## Overview
 
@@ -38,7 +38,7 @@ This page covers:
 
 The recommended path for taking a Deep Agent to production is [Managed Deep Agents](../../langsmith/javascript/managed-deep-agents-overview.md), a CLI-first hosted runtime for creating, running, and operating deep agents in LangSmith. Managed Deep Agents is in public [beta](../../langsmith/release-stages.md) on [LangSmith Cloud](../../langsmith/cloud.md) and [Bring Your Own Cloud (BYOC)](../../langsmith/byoc.md). Use Managed Deep Agents CLI and SDK v0.10 or later for BYOC. It runs the same Deep Agents harness, but you author the agent as a project of files and declare it for the managed runtime rather than compiling it yourself. See [Relationship to Deep Agents](../../langsmith/javascript/managed-deep-agents-overview.md#relationship-to-deep-agents).
 
-For teams that need custom application code, custom routes, advanced authentication, you can configure [LangSmith Agent Server](../../langsmith/deployment.md) directly. Either path provisions the infrastructure your agent needs: [threads](../../langsmith/use-threads.md), [runs](../../langsmith/runs.md), a store, and a checkpointer, so you don't have to set these up yourself. A custom Agent Server also gives you [authentication](../../langsmith/auth.md), [webhooks](../../langsmith/use-webhooks.md), [cron jobs](../../langsmith/cron-jobs.md), and [observability](../../langsmith/observability.md) out of the box, and can expose your agent via [MCP](../../langsmith/server-mcp.md) or [A2A](../../langsmith/server-a2a.md).
+For teams that need custom application code, custom routes, advanced authentication, you can configure [LangSmith Agent Server](../../langsmith/agent-server.md) directly. Either path provisions the infrastructure your agent needs: [threads](../../langsmith/use-threads.md), [runs](../../langsmith/runs.md), a store, and a checkpointer, so you don't have to set these up yourself. A custom Agent Server also gives you [authentication](../../langsmith/auth.md), [webhooks](../../langsmith/use-webhooks.md), [cron jobs](../../langsmith/cron-jobs.md), and [observability](../../langsmith/observability.md) out of the box, and can expose your agent via [MCP](../../langsmith/server-mcp.md) or [A2A](../../langsmith/server-a2a.md).
 
 You can also deploy on JavaScript frameworks and hosting platforms without LangSmith Cloud.
 
@@ -356,7 +356,7 @@ When your agent serves multiple users, you need to handle three concerns: verify
 
 #### User identity and access control
 
-[LangSmith Agent Server](../../langsmith/deployment.md) supports [custom authentication](../../langsmith/custom-auth.md) to establish user identity and [authorization handlers](../../langsmith/auth.md) to control access to resources like threads, assistants, and store namespaces. Authorization handlers run after authentication succeeds and can:
+[LangSmith Agent Server](../../langsmith/agent-server.md) supports [custom authentication](../../langsmith/custom-auth.md) to establish user identity and [authorization handlers](../../langsmith/auth.md) to control access to resources like threads, assistants, and store namespaces. Authorization handlers run after authentication succeeds and can:
 
 * Tag resources with ownership metadata (e.g., `owner: user_id`)
 * Return filters so users only see their own resources
@@ -431,7 +431,7 @@ Checkpointing also enables:
 
 > [!TIP]
 >
-> [LangSmith Agent Server](../../langsmith/deployment.md) configures a persistent checkpointer automatically. If you are self-hosting, see [persistence](../langgraph/persistence.md) for setup instructions.
+> [LangSmith Agent Server](../../langsmith/agent-server.md#persistence) configures a persistent checkpointer automatically. If you are self-hosting, see [persistence](../langgraph/persistence.md) for setup instructions.
 
 ## Memory
 
@@ -918,7 +918,7 @@ For the default Deep Agents middleware stack, see [Customization](customization.
 
 Deep Agents use [`useStream`](../langchain/frontend/overview.md) to connect your UI to the agent backend. [`useStream`](https://reference.langchain.com/javascript/langchain-react/index/useStream) is a frontend hook (available for React, Vue, Svelte, and Angular) that streams messages, subagent progress, and custom state from your agent in real time.
 
-Locally, `useStream` points at `http://localhost:2024`. In production, point it at your [Agent Server](../../langsmith/deployment.md) and configure reconnection so users don't lose progress if their connection drops.
+Locally, `useStream` points at `http://localhost:2024`. In production, point it at your [Agent Server](../../langsmith/agent-server.md) and configure reconnection so users don't lose progress if their connection drops.
 
 ```tsx
 import { useStream } from "@langchain/react";

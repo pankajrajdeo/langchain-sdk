@@ -170,8 +170,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/annotation-queues/{queue_id}:
     get:
@@ -386,14 +389,10 @@ components:
           title: Is Assertion
         regex_validator:
           anyOf:
-            - anyOf:
-                - type: string
-                - $ref: '#/components/schemas/Missing'
-              maxLength: 500
+            - maxLength: 500
+              type: string
             - type: 'null'
           title: Regex Validator
-          default:
-            __missing__: __missing__
         feedback_config_id:
           anyOf:
             - type: string
@@ -428,16 +427,6 @@ components:
         - join
         - rules
       title: RubricItemConditions
-    Missing:
-      properties:
-        __missing__:
-          type: string
-          const: __missing__
-          title: Missing
-      type: object
-      required:
-        - __missing__
-      title: Missing
     FeedbackConfigSchema:
       properties:
         id:

@@ -1,13 +1,13 @@
 ---
 title: "langsmith/smith-api/examples"
-description: "Index of 16 pages and 0 subdirectories under langsmith/smith-api/examples."
+description: "Index of 17 pages and 0 subdirectories under langsmith/smith-api/examples."
 category: "index"
 tags: [index, langsmith, smith-api, examples]
 ---
 
 # langsmith/smith-api/examples
 
-16 pages here.
+17 pages here.
 
 ## Files
 
@@ -23,6 +23,7 @@ tags: [index, langsmith, smith-api, examples]
 - [Read examples](read-examples.md) - Get all examples by query params
 - [Update example](update-example.md) - Update a specific example.
 - [Update examples](update-examples.md) - This endpoint allows clients to update existing examples in a specified dataset by sending a multipart/form-data PATCH request. Each form part contains either JSON-encoded data or binary attachment...
+- [Update metadata on many examples](update-metadata-on-many-examples.md) - Applies the same metadata changes, in order, to every listed example in a dataset. Examples that are not in the dataset or were deleted are skipped; the rest are updated together, so if the update...
 - [Upload examples from csv](upload-examples-from-csv.md) - Upload examples from a CSV file.
 - [Upload examples](upload-examples.md) - This endpoint allows clients to upload examples to a specified dataset by sending a multipart/form-data POST request. Each form part contains either JSON-encoded data or binary attachment files...
 - [Validate example](validate-example.md) - Validate an example.

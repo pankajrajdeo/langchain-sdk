@@ -1,6 +1,6 @@
 ---
 title: "Change a team's role in a workspace"
-description: "Changes an organization-wide team's role in a workspace it has access to. Team members get the new role's permissions there in place of the old role's. Access policies attached to the team for the..."
+description: "Deprecated: use the corresponding /user-groups endpoint. Changes an organization-wide team's role in a workspace it has access to. Team members get the new role's permissions there in place of the..."
 source: "https://docs.langchain.com/langsmith/smith-api/teams/change-a-teams-role-in-a-workspace"
 category: "docs"
 tags: [docs, langsmith, smith-api, teams, change-a-teams-role-in-a-workspace]
@@ -8,7 +8,8 @@ tags: [docs, langsmith, smith-api, teams, change-a-teams-role-in-a-workspace]
 
 # Change a team's role in a workspace
 
-> Changes an organization-wide team's role in a workspace it has access to. Team
+> Deprecated: use the corresponding /user-groups endpoint.
+Changes an organization-wide team's role in a workspace it has access to. Team
 members get the new role's permissions there in place of the old role's. Access
 policies attached to the team for the workspace stay attached. Needs
 organization:teams:manage-grants.
@@ -175,8 +176,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/platform/orgs/current/teams/{team_id}/workspaces/{workspace_id}:
     patch:
@@ -184,6 +188,8 @@ paths:
         - teams
       summary: Change a team's role in a workspace
       description: >-
+        Deprecated: use the corresponding /user-groups endpoint.
+
         Changes an organization-wide team's role in a workspace it has access
         to. Team
 
@@ -213,14 +219,15 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/teams.UpdateTeamWorkspaceGrantPayload'
+              $ref: >-
+                #/components/schemas/user_groups.UpdateUserGroupWorkspaceGrantPayload
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/teams.TeamWorkspaceGrant'
+                $ref: '#/components/schemas/user_groups.UserGroupWorkspaceGrant'
         '400':
           description: >-
             invalid team_id, workspace_id or role_id, the role is not in this
@@ -253,6 +260,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/shared.ProblemDetails'
+      deprecated: true
       security:
         - API Key: []
           Organization ID: []
@@ -260,7 +268,7 @@ paths:
           Organization ID: []
 components:
   schemas:
-    teams.UpdateTeamWorkspaceGrantPayload:
+    user_groups.UpdateUserGroupWorkspaceGrantPayload:
       type: object
       required:
         - role_id
@@ -271,7 +279,7 @@ components:
             organization.
           type: string
           format: uuid
-    teams.TeamWorkspaceGrant:
+    user_groups.UserGroupWorkspaceGrant:
       type: object
       required:
         - created_at

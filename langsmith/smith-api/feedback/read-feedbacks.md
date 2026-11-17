@@ -1,6 +1,6 @@
 ---
 title: "Read feedbacks"
-description: "List all Feedback by query params."
+description: "List feedback, newest first."
 source: "https://docs.langchain.com/langsmith/smith-api/feedback/read-feedbacks"
 category: "docs"
 tags: [docs, langsmith, smith-api, feedback, read-feedbacks]
@@ -8,7 +8,9 @@ tags: [docs, langsmith, smith-api, feedback, read-feedbacks]
 
 # Read feedbacks
 
-> List all Feedback by query params.
+> List feedback, newest first.
+
+At least one of run, key, or session is required.
 
 ## OpenAPI
 
@@ -172,15 +174,21 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/feedback:
     get:
       tags:
         - feedback
       summary: Read feedbacks
-      description: List all Feedback by query params.
+      description: |-
+        List feedback, newest first.
+
+        At least one of run, key, or session is required.
       operationId: read_feedbacks_api_v1_feedback_get
       parameters:
         - name: run
@@ -195,7 +203,9 @@ paths:
               - type: string
                 format: uuid
               - type: 'null'
+            description: Only feedback on these run IDs.
             title: Run
+          description: Only feedback on these run IDs.
         - name: key
           in: query
           required: false
@@ -205,7 +215,9 @@ paths:
                   type: string
                 type: array
               - type: 'null'
+            description: Only feedback with these keys.
             title: Key
+          description: Only feedback with these keys.
         - name: session
           in: query
           required: false
@@ -218,7 +230,9 @@ paths:
               - type: string
                 format: uuid
               - type: 'null'
+            description: Only feedback in these tracing project (session) IDs.
             title: Session
+          description: Only feedback in these tracing project (session) IDs.
         - name: source
           in: query
           required: false
@@ -228,7 +242,13 @@ paths:
                 items:
                   $ref: '#/components/schemas/SourceType'
               - type: 'null'
+            description: >-
+              Only feedback from these source types: api, model, app, or
+              auto_eval.
             title: Source
+          description: >-
+            Only feedback from these source types: api, model, app, or
+            auto_eval.
         - name: limit
           in: query
           required: false
@@ -236,16 +256,20 @@ paths:
             type: integer
             maximum: 100
             minimum: 1
-            title: Limit
+            description: The maximum number of feedback to return, 1 to 100.
             default: 100
+            title: Limit
+          description: The maximum number of feedback to return, 1 to 100.
         - name: offset
           in: query
           required: false
           schema:
             type: integer
             minimum: 0
-            title: Offset
+            description: The number of feedback to skip, for paging.
             default: 0
+            title: Offset
+          description: The number of feedback to skip, for paging.
         - name: user
           in: query
           required: false
@@ -256,7 +280,9 @@ paths:
                   format: uuid
                 type: array
               - type: 'null'
+            description: Only feedback written by these user IDs.
             title: User
+          description: Only feedback written by these user IDs.
         - name: has_comment
           in: query
           required: false
@@ -264,7 +290,13 @@ paths:
             anyOf:
               - type: boolean
               - type: 'null'
+            description: >-
+              true returns only feedback with a non-empty comment; false only
+              feedback without one.
             title: Has Comment
+          description: >-
+            true returns only feedback with a non-empty comment; false only
+            feedback without one.
         - name: has_score
           in: query
           required: false
@@ -272,7 +304,13 @@ paths:
             anyOf:
               - type: boolean
               - type: 'null'
+            description: >-
+              true returns only feedback with a score; false only feedback
+              without one.
             title: Has Score
+          description: >-
+            true returns only feedback with a score; false only feedback without
+            one.
         - name: level
           in: query
           required: false
@@ -280,7 +318,13 @@ paths:
             anyOf:
               - $ref: '#/components/schemas/FeedbackLevel'
               - type: 'null'
+            description: >-
+              run returns only feedback on a run; session returns only feedback
+              on a whole tracing project, and requires session.
             title: Level
+          description: >-
+            run returns only feedback on a run; session returns only feedback on
+            a whole tracing project, and requires session.
         - name: max_created_at
           in: query
           required: false
@@ -289,7 +333,9 @@ paths:
               - type: string
                 format: date-time
               - type: 'null'
+            description: Only feedback created at or before this ISO 8601 time.
             title: Max Created At
+          description: Only feedback created at or before this ISO 8601 time.
         - name: min_created_at
           in: query
           required: false
@@ -298,7 +344,9 @@ paths:
               - type: string
                 format: date-time
               - type: 'null'
+            description: Only feedback created at or after this ISO 8601 time.
             title: Min Created At
+          description: Only feedback created at or after this ISO 8601 time.
         - name: feedback_thread_id
           in: query
           required: false
@@ -306,7 +354,13 @@ paths:
             anyOf:
               - type: string
               - type: 'null'
+            description: >-
+              Only feedback on this thread. Requires exactly one session and
+              cannot be combined with run.
             title: Feedback Thread Id
+          description: >-
+            Only feedback on this thread. Requires exactly one session and
+            cannot be combined with run.
         - name: include_user_names
           in: query
           required: false
@@ -314,7 +368,9 @@ paths:
             anyOf:
               - type: boolean
               - type: 'null'
+            description: Whether to add the author's name to each feedback's source.
             title: Include User Names
+          description: Whether to add the author's name to each feedback's source.
         - name: comparative_experiment_id
           in: query
           required: false
@@ -323,7 +379,9 @@ paths:
               - type: string
                 format: uuid
               - type: 'null'
+            description: Only feedback written for this comparative (pairwise) experiment.
             title: Comparative Experiment Id
+          description: Only feedback written for this comparative (pairwise) experiment.
       responses:
         '200':
           description: Successful Response
@@ -361,20 +419,31 @@ components:
         - run
         - session
       title: FeedbackLevel
-      description: Enum for feedback levels.
+      description: >-
+        Feedback level: run for feedback on a run, session for feedback on a
+        whole tracing project (session level requires a session filter).
     FeedbackSchema:
       properties:
         created_at:
           type: string
           format: date-time
           title: Created At
+          description: >-
+            When the feedback was created, as an ISO 8601 timestamp. Defaults to
+            now.
         modified_at:
           type: string
           format: date-time
           title: Modified At
+          description: >-
+            When the feedback was last modified, as an ISO 8601 timestamp.
+            Defaults to now.
         key:
           type: string
           title: Key
+          description: >-
+            The feedback key: the metric, tag, or aspect being scored, for
+            example correctness.
         score:
           anyOf:
             - type: number
@@ -382,6 +451,9 @@ components:
             - type: boolean
             - type: 'null'
           title: Score
+          description: >-
+            The numeric or boolean score. Numbers must be between -99999.9999
+            and 99999.9999 with at most 4 decimal places.
         value:
           anyOf:
             - type: number
@@ -392,11 +464,17 @@ components:
               type: object
             - type: 'null'
           title: Value
+          description: >-
+            A non-numeric value, such as a category label or a JSON object.
+            Dropped if it exceeds the feedback size limit.
         comment:
           anyOf:
             - type: string
             - type: 'null'
           title: Comment
+          description: >-
+            A free-text comment explaining the feedback. Truncated at the
+            feedback size limit.
         correction:
           anyOf:
             - additionalProperties: true
@@ -404,30 +482,43 @@ components:
             - type: string
             - type: 'null'
           title: Correction
+          description: >-
+            The corrected output for the run, as a string or a JSON object.
+            Dropped if it exceeds the feedback size limit.
         feedback_group_id:
           anyOf:
             - type: string
               format: uuid
             - type: 'null'
           title: Feedback Group Id
+          description: >-
+            Groups feedback written together, such as one comparison in a
+            pairwise experiment.
         comparative_experiment_id:
           anyOf:
             - type: string
               format: uuid
             - type: 'null'
           title: Comparative Experiment Id
+          description: >-
+            The ID of the comparative (pairwise) experiment this feedback was
+            written for.
         run_id:
           anyOf:
             - type: string
               format: uuid
             - type: 'null'
           title: Run Id
+          description: >-
+            The ID of the run the feedback is about. Omit it for feedback on a
+            whole tracing project or a thread.
         session_id:
           anyOf:
             - type: string
               format: uuid
             - type: 'null'
           title: Session Id
+          description: The ID of the tracing project (session) the feedback belongs to.
         id:
           type: string
           format: uuid

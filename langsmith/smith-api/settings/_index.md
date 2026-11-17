@@ -11,5 +11,5 @@ tags: [index, langsmith, smith-api, settings]
 
 ## Files
 
-- [Get settings](get-settings.md) - Get settings.
+- [Get settings](get-settings.md) - Get the current workspace.
 - [Set tenant handle](set-tenant-handle.md) - Set tenant handle.

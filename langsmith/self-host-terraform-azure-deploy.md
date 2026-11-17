@@ -466,7 +466,7 @@ Each add-on is gated by a flag in `infra/terraform.tfvars`. Set the flag, re-run
 
 ### Agent Server hosting
 
-Enables [Agent Server hosting](enable-self-hosted-deployment.md), which lets you deploy and manage agents as API servers directly from the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-self-host-terraform-azure-deploy). This adds three new pods.
+Enables [Agent Server hosting](enable-self-hosted-agent-server.md), which lets you deploy and manage agents as API servers directly from the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-self-host-terraform-azure-deploy). This adds three new pods.
 
 | Pod | Role | Workload Identity |
 | - | - | - |
@@ -792,7 +792,7 @@ kubectl -n langsmith create secret generic <secret-name> --from-file=ca.crt=ca-b
 * Reference the [Azure variables](self-host-terraform-azure-variables.md) and the [quick reference](self-host-terraform-azure-quick-reference.md).
 * Review the [Azure architecture](self-host-terraform-azure-architecture.md) for module structure, traffic flow, and Workload Identity.
 * When something breaks, check the [Azure troubleshooting guide](self-host-terraform-azure-troubleshooting.md).
-* Enable agent deployment in the UI with [Agent Server hosting](enable-self-hosted-deployment.md).
+* Enable agent deployment in the UI with [Agent Server hosting](enable-self-hosted-agent-server.md).
 
 ***
 

@@ -1,6 +1,6 @@
 ---
 title: "Get tracing project prebuilt dashboard"
-description: "Get a prebuilt dashboard for a tracing project."
+description: "GET with body payload — no resources created. Returns the prebuilt dashboard for the tracing project matching the query passed as the request payload."
 source: "https://docs.langchain.com/langsmith/smith-api/tracer-sessions/get-tracing-project-prebuilt-dashboard"
 category: "docs"
 tags: [docs, langsmith, smith-api, tracer-sessions, get-tracing-project-prebuilt-dashboard]
@@ -8,7 +8,7 @@ tags: [docs, langsmith, smith-api, tracer-sessions, get-tracing-project-prebuilt
 
 # Get tracing project prebuilt dashboard
 
-> Get a prebuilt dashboard for a tracing project.
+> GET with body payload — no resources created. Returns the prebuilt dashboard for the tracing project matching the query passed as the request payload.
 
 ## OpenAPI
 
@@ -172,15 +172,21 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/sessions/{session_id}/dashboard:
     post:
       tags:
         - tracer-sessions
       summary: Get tracing project prebuilt dashboard
-      description: Get a prebuilt dashboard for a tracing project.
+      description: >-
+        GET with body payload — no resources created. Returns the prebuilt
+        dashboard for the tracing project matching the query passed as the
+        request payload.
       operationId: >-
         get_tracing_project_prebuilt_dashboard_api_v1_sessions__session_id__dashboard_post
       parameters:
@@ -382,8 +388,8 @@ components:
           const: text
           title: Chart Type
         markdown:
-          type: string
           title: Markdown
+          type: string
         index:
           type: integer
           title: Index

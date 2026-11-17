@@ -170,8 +170,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/workspaces/current/secrets:
     post:
@@ -184,10 +187,7 @@ paths:
         content:
           application/json:
             schema:
-              type: array
-              items:
-                $ref: '#/components/schemas/SecretUpsert'
-              title: Secrets
+              $ref: '#/components/schemas/WorkspaceSecretsBulkUpsert'
       responses:
         '200':
           description: Successful Response
@@ -195,17 +195,59 @@ paths:
             application/json:
               schema: {}
         '422':
-          description: Validation Error
+          description: The request has an invalid path, query, header, or body parameter.
           content:
-            application/json:
+            application/problem+json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                allOf:
+                  - $ref: '#/components/schemas/ProblemDetails'
+                  - type: object
+                    required:
+                      - errors
+                    properties:
+                      errors:
+                        type: array
+                        items:
+                          type: string
+                        description: >-
+                          One message per invalid parameter, prefixed with its
+                          location.
       security:
         - API Key: []
         - Tenant ID: []
         - Bearer Auth: []
 components:
   schemas:
+    WorkspaceSecretsBulkUpsert:
+      items:
+        $ref: '#/components/schemas/SecretUpsert'
+      type: array
+      title: WorkspaceSecretsBulkUpsert
+      description: >-
+        Secrets written together. A null value deletes the secret and its
+        configs.
+    ProblemDetails:
+      properties:
+        type:
+          type: string
+          title: Type
+        title:
+          type: string
+          title: Title
+        status:
+          type: integer
+          title: Status
+        detail:
+          type: string
+          title: Detail
+      type: object
+      required:
+        - type
+        - title
+        - status
+        - detail
+      title: ProblemDetails
+      description: Problem details describing an error response, as defined by RFC 7807.
     SecretUpsert:
       properties:
         key:
@@ -221,15 +263,6 @@ components:
         - key
         - value
       title: SecretUpsert
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            type: string
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
   securitySchemes:
     API Key:
       type: apiKey

@@ -177,8 +177,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/commits/{owner}/{repo}:
     get:
@@ -383,10 +386,9 @@ components:
           description: The manifest of the commit
           type: object
         manifest_sha:
-          description: The SHA of the manifest
-          type: array
-          items:
-            type: integer
+          description: The base64-encoded SHA-256 of the manifest
+          type: string
+          format: byte
         num_downloads:
           description: Number of API downloads
           type: integer

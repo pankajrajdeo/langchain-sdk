@@ -172,8 +172,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/runs/rules:
     post:
@@ -246,6 +249,11 @@ components:
             - type: string
             - type: 'null'
           title: Tree Filter
+        thread_filter:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Thread Filter
         backfill_from:
           anyOf:
             - type: string
@@ -435,6 +443,11 @@ components:
             - type: string
             - type: 'null'
           title: Tree Filter
+        thread_filter:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Thread Filter
         add_to_annotation_queue_id:
           anyOf:
             - type: string

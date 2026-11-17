@@ -181,8 +181,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/model-price-map:
     post:
@@ -212,7 +215,25 @@ paths:
           description: Successful Response
           content:
             application/json:
-              schema: {}
+              schema:
+                $ref: '#/components/schemas/ModelPriceMapSchema'
+        '201':
+          description: The entry was created.
+          headers:
+            Location:
+              description: URL of the created entry, `/api/v1/model-price-map/{id}`.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelPriceMapSchema'
+        '409':
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+          description: Another entry already has these match conditions.
         '422':
           description: Validation Error
           content:
@@ -337,6 +358,158 @@ components:
           prompt_cost_details:
             cache_read: '0.000001'
           provider: openai
+    ModelPriceMapSchema:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: ID of the entry.
+        name:
+          type: string
+          title: Name
+          description: Display name for the entry, usually the model name.
+        start_time:
+          anyOf:
+            - type: string
+              format: date-time
+            - type: 'null'
+          title: Start Time
+          description: >-
+            Only price runs that started at or after this time. Null applies to
+            runs from any time.
+        tenant_id:
+          anyOf:
+            - type: string
+              format: uuid
+            - type: 'null'
+          title: Tenant Id
+          description: >-
+            Workspace that owns the entry. Null for organization entries and for
+            LangSmith default entries.
+        organization_id:
+          anyOf:
+            - type: string
+              format: uuid
+            - type: 'null'
+          title: Organization Id
+          description: >-
+            Organization that owns the entry, which every workspace in it prices
+            against unless the workspace overrides it. Null otherwise.
+        scope:
+          type: string
+          enum:
+            - BUILTIN
+            - ORGANIZATION
+            - WORKSPACE
+          title: Scope
+          description: >-
+            Which scope owns the entry. Server-assigned from the route that
+            created it.
+          default: BUILTIN
+        match_path:
+          items:
+            type: string
+          type: array
+          title: Match Path
+          description: >-
+            Invocation parameter keys checked, in order, for the model name when
+            the run does not report `ls_model_name` metadata.
+          default:
+            - model
+            - model_name
+            - model_id
+            - model_path
+            - endpoint_name
+        match_pattern:
+          type: string
+          title: Match Pattern
+          description: >-
+            Regular expression matched against the run's model name, for example
+            `^gpt-4o-mini$`.
+        prompt_cost:
+          type: string
+          pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+          title: Prompt Cost
+          description: Cost in US dollars per input (prompt) token.
+        completion_cost:
+          type: string
+          pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+          title: Completion Cost
+          description: Cost in US dollars per output (completion) token.
+        prompt_cost_details:
+          anyOf:
+            - additionalProperties:
+                type: string
+                pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+              type: object
+            - type: 'null'
+          title: Prompt Cost Details
+          description: >-
+            Cost in US dollars per input token for specific token types, keyed
+            by the token detail name the run reports, for example `cache_read`.
+            Input tokens not covered here are priced at `prompt_cost`.
+        completion_cost_details:
+          anyOf:
+            - additionalProperties:
+                type: string
+                pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+              type: object
+            - type: 'null'
+          title: Completion Cost Details
+          description: >-
+            Cost in US dollars per output token for specific token types, keyed
+            by the token detail name the run reports, for example `audio`.
+            Output tokens not covered here are priced at `completion_cost`.
+        provider:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Provider
+          description: >-
+            Only price runs from this provider (the `ls_provider` metadata,
+            case-insensitive), for example `openai` or `anthropic`. Null matches
+            any provider.
+        prompt_tokens_above:
+          anyOf:
+            - type: integer
+              maximum: 9007199254740991
+              minimum: 0
+            - type: 'null'
+          title: Prompt Tokens Above
+          description: >-
+            Only price requests with more input tokens than this, for
+            long-context pricing tiers. Null applies to every request.
+      type: object
+      required:
+        - name
+        - match_pattern
+        - prompt_cost
+        - completion_cost
+      title: ModelPriceMapSchema
+      description: A model price entry used to compute the cost of LLM runs.
+    ProblemDetails:
+      properties:
+        type:
+          type: string
+          title: Type
+        title:
+          type: string
+          title: Title
+        status:
+          type: integer
+          title: Status
+        detail:
+          type: string
+          title: Detail
+      type: object
+      required:
+        - type
+        - title
+        - status
+        - detail
+      title: ProblemDetails
+      description: Problem details describing an error response, as defined by RFC 7807.
     HTTPValidationError:
       properties:
         detail:

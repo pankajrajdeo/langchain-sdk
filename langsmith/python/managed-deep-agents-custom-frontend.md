@@ -12,7 +12,7 @@ tags: [docs, langsmith, managed-deep-agents-custom-frontend]
 
 A custom frontend is any application you write that calls a deployment directly instead of reaching the agent through a [channel](managed-deep-agents-channels.md) or [LangSmith Studio](managed-deep-agents-local-development.md#start-local-studio). Use one when the agent belongs inside a product surface you control, such as a support console, an internal dashboard, or a customer-facing chat page.
 
-Managed Deep Agents deployments run on [LangSmith Agent Server](../agent-server-overview.md), so a frontend talks to the same threads, runs, and streaming endpoints that every Agent Server client uses. Nothing on the agent side changes to support one.
+Managed Deep Agents deployments run on [LangSmith Agent Server](../agent-server.md), so a frontend talks to the same threads, runs, and streaming endpoints that every Agent Server client uses. Nothing on the agent side changes to support one.
 
 > [!NOTE]
 >

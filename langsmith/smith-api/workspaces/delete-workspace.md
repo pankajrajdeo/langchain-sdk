@@ -175,8 +175,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/workspaces/{workspace_id}:
     delete:
@@ -213,11 +216,23 @@ paths:
                 $ref: '#/components/schemas/ProblemDetails'
           description: The workspace is not the one the request is scoped to.
         '422':
-          description: Validation Error
+          description: The request has an invalid path, query, header, or body parameter.
           content:
-            application/json:
+            application/problem+json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                allOf:
+                  - $ref: '#/components/schemas/ProblemDetails'
+                  - type: object
+                    required:
+                      - errors
+                    properties:
+                      errors:
+                        type: array
+                        items:
+                          type: string
+                        description: >-
+                          One message per invalid parameter, prefixed with its
+                          location.
       security:
         - API Key: []
         - Tenant ID: []
@@ -246,15 +261,6 @@ components:
         - detail
       title: ProblemDetails
       description: Problem details describing an error response, as defined by RFC 7807.
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            type: string
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
   securitySchemes:
     API Key:
       type: apiKey

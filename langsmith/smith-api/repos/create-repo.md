@@ -172,8 +172,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/repos:
     post:
@@ -191,6 +194,17 @@ paths:
       responses:
         '200':
           description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateRepoResponse'
+        '201':
+          description: Repo created
+          headers:
+            Location:
+              description: URL of the created repo
+              schema:
+                type: string
           content:
             application/json:
               schema:

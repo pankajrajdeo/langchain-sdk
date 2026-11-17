@@ -172,8 +172,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/repos/{owner}/{repo}:
     delete:
@@ -201,6 +204,8 @@ paths:
           content:
             application/json:
               schema: {}
+        '204':
+          description: The repo was deleted or did not exist.
         '422':
           description: The request has an invalid path, query, header, or body parameter.
           content:

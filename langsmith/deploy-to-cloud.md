@@ -41,7 +41,7 @@ For a shorter walkthrough, see the [deployment quickstart](deployment-quickstart
 >
 > 7. Enter the full path to the [LangGraph API configuration file](cli.md#configuration-file), including the file name. For example, enter `langgraph.json` if the file is in the repository root.
 >
-> 8. For a branch, choose whether to enable **Automatically update Agent Server on push to branch**. This option is unavailable for tags. You can change it later in [Agent Server Settings](manage-deployment.md#configure-deployment-settings).
+> 8. For a branch, choose whether to enable **Automatically update Agent Server on push to branch**. This option is unavailable for tags. You can change it later in [Agent Server Settings](manage-agent-server.md#configure-deployment-settings).
 >
 > 9. For [Agent Server type](cloud-platform-features.md#deployment-types), select **Serverless** or **Dedicated**, depending on whether the workload can tolerate cold starts or needs always-on capacity.
 >
@@ -101,13 +101,13 @@ After you authorize the `hosted-langserve` GitHub app, configure which repositor
 
 The repository list in the **Create Agent Server** pane reflects the updated access.
 
-If you rename or transfer a repository that an Agent Server uses, [change the Agent Server's repository](manage-deployment.md#change-the-repository).
+If you rename or transfer a repository that an Agent Server uses, [change the Agent Server's repository](manage-agent-server.md#change-the-repository).
 
 ## See also
 
-* [Revisions](deployment-revisions.md)
+* [Revisions](agent-server-revisions.md)
 * [Preview builds](preview-builds.md)
-* [Manage an Agent Server](manage-deployment.md)
+* [Manage an Agent Server](manage-agent-server.md)
 
 ***
 

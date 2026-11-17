@@ -1,6 +1,6 @@
 ---
 title: "List organizations"
-description: "Get all orgs visible to this auth"
+description: "List memberships, or all organizations for instance admins opting in or using a PAT."
 source: "https://docs.langchain.com/langsmith/smith-api/orgs/list-organizations"
 category: "docs"
 tags: [docs, langsmith, smith-api, orgs, list-organizations]
@@ -8,7 +8,7 @@ tags: [docs, langsmith, smith-api, orgs, list-organizations]
 
 # List organizations
 
-> Get all orgs visible to this auth
+> List memberships, or all organizations for instance admins opting in or using a PAT.
 
 ## OpenAPI
 
@@ -172,15 +172,20 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/orgs:
     get:
       tags:
         - orgs
       summary: List organizations
-      description: Get all orgs visible to this auth
+      description: >-
+        List memberships, or all organizations for instance admins opting in or
+        using a PAT.
       operationId: list_organizations_api_v1_orgs_get
       parameters:
         - name: skip_create
@@ -197,6 +202,19 @@ paths:
             type: boolean
             default: false
             title: Include Tier
+        - name: include_all
+          in: query
+          required: false
+          schema:
+            type: boolean
+            description: >-
+              List all organizations on the instance. Requires an instance
+              administrator.
+            default: false
+            title: Include All
+          description: >-
+            List all organizations on the instance. Requires an instance
+            administrator.
       responses:
         '200':
           description: Successful Response
@@ -214,6 +232,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
       security:
+        - API Key: []
         - Bearer Auth: []
 components:
   schemas:
@@ -316,6 +335,12 @@ components:
             - type: string
             - type: 'null'
           title: Security Contact
+        security_contacts:
+          items:
+            type: string
+          type: array
+          title: Security Contacts
+          default: []
         max_pat_expiry_days:
           anyOf:
             - type: integer
@@ -425,6 +450,7 @@ components:
         - plus_01_2026
         - plus_07_2026
         - plus_10_2026
+        - plus_11_2026
         - enterprise
         - developer_legacy
         - plus_legacy
@@ -440,6 +466,10 @@ components:
         - premier
       title: PaymentPlanTier
   securitySchemes:
+    API Key:
+      type: apiKey
+      in: header
+      name: X-API-Key
     Bearer Auth:
       type: http
       description: >-

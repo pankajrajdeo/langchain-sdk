@@ -14,23 +14,31 @@ Thank you! Your submission has been received!Oops! Something went wrong while su
 
 ## LangChain Raises $300M to Enable Every Company to Own Its Intelligence
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a056ea05f3880a1361b47cf_Harrison.avif)Harrison ChaseNovember 13, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)3min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ae8c3176dbb11c11eaf324b_context-engineering-challenges-blog.png)Harrison's In the Loop
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a056ea05f3880a1361b47cf_Harrison.avif)Harrison ChaseNovember 13, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)3min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6afb4de42e8c607285a6a62d_From%20tasks%20to%20agent%20goals.png)Harrison's In the Loop
+
+## From tasks to goals
+
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a056ea05f3880a1361b47cf_Harrison.avif)Harrison ChaseNovember 16, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)5min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6afb4ca64506aba208c3894f_we-rebuilt-langsmith-cover-centered-bird-left.png)LangSmith
+
+## We rebuilt LangSmith around the agent
+
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69ebb0ba47307bda72996a96_sam-crowder.png)Sam CrowderNovember 16, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)8min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ae8c3176dbb11c11eaf324b_context-engineering-challenges-blog.png)Harrison's In the Loop
 
 ## New context engineering challenges in late 2026
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a056ea05f3880a1361b47cf_Harrison.avif)Harrison ChaseNovember 2, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)5min![How We Built Our Design Agent: one Slack prompt fanning into a launch film, slide deck, X post and blog chart](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6adda72d5667dffba0fa8595_6adda7178937e3ba40233f86_design-agent-cover-4k.png)Agent ArchitectureDeep Agents
-
-## How We Built Our Design Agent
-
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aa748ac8b001558f0c48c12_amal.jpeg)![Shreya Talegaonkar](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6adeccb1dacfad6b3efd098f_6adecc9dddb5d734dd77080d_shreya-talegaonkar.png)Amal IrgashevShreya TalegaonkarOctober 27, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)22min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6add442530f2704b9d5e03af_HVZbWoXb0AAOzqm.png)Deep Agents
-
-## The five components of building a "company harness"
-
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a056ea05f3880a1361b47cf_Harrison.avif)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a56f3a3a4a725f72a70441f_caspar-b.jpeg)Harrison ChaseCaspar BroekhuizenOctober 24, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)6min
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a056ea05f3880a1361b47cf_Harrison.avif)Harrison ChaseNovember 2, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)5min
 
 ### Recent stories
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6af667f57ac0e019ab9e0159_Goal%20Engineering.png)Harrison's In the Loop
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6afb4de42e8c607285a6a62d_From%20tasks%20to%20agent%20goals.png)Harrison's In the Loop
+
+## From tasks to goals
+
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a056ea05f3880a1361b47cf_Harrison.avif)Harrison ChaseNovember 16, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)5min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6afb4ca64506aba208c3894f_we-rebuilt-langsmith-cover-centered-bird-left.png)LangSmith
+
+## We rebuilt LangSmith around the agent
+
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69ebb0ba47307bda72996a96_sam-crowder.png)Sam CrowderNovember 16, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)8min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6af667f57ac0e019ab9e0159_Goal%20Engineering.png)Harrison's In the Loop
 
 ## Goal Engineering: How to Design Goals
 
@@ -86,15 +94,7 @@ Thank you! Your submission has been received!Oops! Something went wrong while su
 
 ## Why aren’t you building proactive agents yet?
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab416d4dafca27a7246c1d0_Nathan%20Drezner.jpg)Nathan DreznerOctober 28, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)6min![How We Built Our Design Agent: one Slack prompt fanning into a launch film, slide deck, X post and blog chart](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6adda72d5667dffba0fa8595_6adda7178937e3ba40233f86_design-agent-cover-4k.png)Agent ArchitectureDeep Agents
-
-## How We Built Our Design Agent
-
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aa748ac8b001558f0c48c12_amal.jpeg)![Shreya Talegaonkar](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6adeccb1dacfad6b3efd098f_6adecc9dddb5d734dd77080d_shreya-talegaonkar.png)Amal IrgashevShreya TalegaonkarOctober 27, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)22min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6add442530f2704b9d5e03af_HVZbWoXb0AAOzqm.png)Deep Agents
-
-## The five components of building a "company harness"
-
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a056ea05f3880a1361b47cf_Harrison.avif)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a56f3a3a4a725f72a70441f_caspar-b.jpeg)Harrison ChaseCaspar BroekhuizenOctober 24, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)6min1...1 / 35
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab416d4dafca27a7246c1d0_Nathan%20Drezner.jpg)Nathan DreznerOctober 28, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)6min1...1 / 35
 
 #### We couldn't find anything matching that.
 

@@ -170,8 +170,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/annotation-queues/{queue_id}:
     patch:
@@ -237,31 +240,21 @@ components:
         num_reviewers_per_item:
           anyOf:
             - type: integer
-            - $ref: '#/components/schemas/Missing'
             - type: 'null'
           title: Num Reviewers Per Item
           description: How many reviewers must review each run.
-          default:
-            __missing__: __missing__
         enable_reservations:
-          anyOf:
-            - type: boolean
-            - $ref: '#/components/schemas/Missing'
           title: Enable Reservations
           description: >-
             Whether a reviewer reserves a run while reviewing it, so others skip
             it.
-          default:
-            __missing__: __missing__
+          type: boolean
         reservation_minutes:
           anyOf:
             - type: integer
-            - $ref: '#/components/schemas/Missing'
             - type: 'null'
           title: Reservation Minutes
           description: How long a reservation lasts, in minutes.
-          default:
-            __missing__: __missing__
         rubric_items:
           anyOf:
             - items:
@@ -280,12 +273,9 @@ components:
           anyOf:
             - additionalProperties: true
               type: object
-            - $ref: '#/components/schemas/Missing'
             - type: 'null'
           title: Metadata
           description: Metadata to store on the queue. Replaces the existing metadata.
-          default:
-            __missing__: __missing__
         reviewer_access_mode:
           anyOf:
             - type: string
@@ -309,16 +299,6 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    Missing:
-      properties:
-        __missing__:
-          type: string
-          const: __missing__
-          title: Missing
-      type: object
-      required:
-        - __missing__
-      title: Missing
     AnnotationQueueRubricItemSchema:
       properties:
         feedback_key:
@@ -363,14 +343,10 @@ components:
           title: Is Assertion
         regex_validator:
           anyOf:
-            - anyOf:
-                - type: string
-                - $ref: '#/components/schemas/Missing'
-              maxLength: 500
+            - maxLength: 500
+              type: string
             - type: 'null'
           title: Regex Validator
-          default:
-            __missing__: __missing__
         feedback_config_id:
           anyOf:
             - type: string

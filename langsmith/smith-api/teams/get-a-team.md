@@ -1,6 +1,6 @@
 ---
 title: "Get a team"
-description: "Gets one team in the organization. An organization scoped team needs organization:teams:read. A workspace scoped team needs workspaces:teams:read in its workspace."
+description: "Deprecated: use the corresponding /user-groups endpoint. Gets one team in the organization. An organization scoped team needs organization:teams:read. A workspace scoped team needs..."
 source: "https://docs.langchain.com/langsmith/smith-api/teams/get-a-team"
 category: "docs"
 tags: [docs, langsmith, smith-api, teams, get-a-team]
@@ -8,7 +8,8 @@ tags: [docs, langsmith, smith-api, teams, get-a-team]
 
 # Get a team
 
-> Gets one team in the organization.
+> Deprecated: use the corresponding /user-groups endpoint.
+Gets one team in the organization.
 An organization scoped team needs organization:teams:read.
 A workspace scoped team needs workspaces:teams:read in its workspace.
 
@@ -174,8 +175,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/platform/orgs/current/teams/{team_id}:
     get:
@@ -183,6 +187,7 @@ paths:
         - teams
       summary: Get a team
       description: |-
+        Deprecated: use the corresponding /user-groups endpoint.
         Gets one team in the organization.
         An organization scoped team needs organization:teams:read.
         A workspace scoped team needs workspaces:teams:read in its workspace.
@@ -200,7 +205,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/teams.Team'
+                $ref: '#/components/schemas/user_groups.Team'
         '400':
           description: invalid team_id
           content:
@@ -227,6 +232,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/shared.ProblemDetails'
+      deprecated: true
       security:
         - API Key: []
           Organization ID: []
@@ -234,7 +240,7 @@ paths:
           Organization ID: []
 components:
   schemas:
-    teams.Team:
+    user_groups.Team:
       type: object
       required:
         - created_at
@@ -263,18 +269,20 @@ components:
           format: uuid
         parent_team_id:
           description: >-
-            ParentTeamID is the organization-wide team a workspace team belongs
-            to.
+            ParentUserGroupID is the organization-wide user group a workspace
+            user group belongs to.
 
-            It is omitted for organization-wide teams.
+            It is omitted for organization-wide user groups.
           type: string
           format: uuid
         updated_at:
           type: string
         workspace_id:
-          description: |-
-            WorkspaceID is the workspace the team belongs to. It is omitted for
-            organization-wide teams.
+          description: >-
+            WorkspaceID is the workspace the user group belongs to. It is
+            omitted for
+
+            organization-wide user groups.
           type: string
           format: uuid
     shared.ProblemDetails:

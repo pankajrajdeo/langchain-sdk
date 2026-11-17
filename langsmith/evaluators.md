@@ -249,7 +249,7 @@ To turn on tracing for an existing rule, get it with [list rules](smith-api/run/
 
 When an online evaluator scores a trace, it attaches feedback to the trace. This can auto-upgrade the trace to [extended retention](usage-and-billing.md#data-retention-auto-upgrades), depending on the evaluator's retention setting. When you set up an online evaluator on a [tracing project](observability-concepts.md#tracing-projects), or on an agent environment, you can opt out of this upgrade so that scored traces stay at the base retention.
 
-This control is available only when the project's [default retention](billing.md#change-project-level-default-retention) is the [base tier](usage-and-billing.md#how-it-works). If the project defaults to extended retention ([set at the project or workspace level](data-purging-compliance.md#data-retention)), traces scored by the evaluator follow that default and the option is locked.
+This control is available only when the project's [default retention](billing.md#change-project-level-default-retention) is the [base tier](usage-and-billing.md#retention-periods). If the project defaults to extended retention ([set at the project or workspace level](data-purging-compliance.md#data-retention)), traces scored by the evaluator follow that default and the option is locked.
 
 To opt out of extending retention for scored traces:
 

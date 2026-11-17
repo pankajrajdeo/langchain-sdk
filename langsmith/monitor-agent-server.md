@@ -1,9 +1,9 @@
 ---
 title: "Monitor an Agent Server"
 description: "View build logs, server logs, and metrics for an Agent Server on LangSmith Cloud."
-source: "https://docs.langchain.com/langsmith/monitor-deployment"
+source: "https://docs.langchain.com/langsmith/monitor-agent-server"
 category: "docs"
-tags: [docs, langsmith, monitor-deployment]
+tags: [docs, langsmith, monitor-agent-server]
 ---
 
 # Monitor an Agent Server
@@ -74,18 +74,18 @@ To correlate logs with traces, also set `DD_LOGS_INJECTION=true`. For all suppor
 
 To view Agent Server metrics:
 
-1. From the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-monitor-deployment), select **Agent Servers**.
+1. From the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-monitor-agent-server), select **Agent Servers**.
 2. Select an Agent Server.
 3. Select the **Monitoring** tab. For metric definitions, see [Control plane monitoring](control-plane.md#monitoring).
 4. Adjust the date and time range as needed. The default range is **Last 15 minutes**.
 
 ## See also
 
-* [Revisions](deployment-revisions.md)
-* [Manage an Agent Server](manage-deployment.md)
+* [Revisions](agent-server-revisions.md)
+* [Manage an Agent Server](manage-agent-server.md)
 
 ***
 
 [Connect these docs](../use-these-docs.md) to your agent of choice via MCP for real-time answers.
 
-[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/monitor-deployment.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/monitor-agent-server.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

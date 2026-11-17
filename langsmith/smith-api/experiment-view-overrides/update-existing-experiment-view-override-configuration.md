@@ -199,8 +199,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /datasets/{dataset_id}/experiment-view-overrides/{id}:
     patch:

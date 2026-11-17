@@ -1,6 +1,6 @@
 ---
 title: "Cloud (SaaS)"
-description: "Learn how LangChain hosts and operates LangSmith Cloud, including its regions, data storage locations, architecture, IP allowlists, private connectivity, and API rate limits."
+description: "Learn how LangChain hosts and operates LangSmith Cloud, including its regions, data storage locations, and regional architecture."
 source: "https://docs.langchain.com/langsmith/cloud"
 category: "docs"
 tags: [docs, langsmith, cloud]
@@ -8,14 +8,14 @@ tags: [docs, langsmith, cloud]
 
 # Cloud (SaaS)
 
-> Learn how LangChain hosts and operates LangSmith Cloud, including its regions, data storage locations, architecture, IP allowlists, private connectivity, and API rate limits.
+> Learn how LangChain hosts and operates LangSmith Cloud, including its regions, data storage locations, and regional architecture.
 
 The **Cloud** hosting option is a fully managed model where LangChain hosts and operates all LangSmith infrastructure and services:
 
 * **Fully managed infrastructure**: LangChain handles all infrastructure, updates, scaling, and maintenance.
-* [**LangSmith UI**](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-cloud): Full access to [observability](observability.md), [evaluation](evaluation.md), [agent deployment management](deployment.md), and [Studio](studio.md).
-* **Deploy Agent Servers from GitHub**: Connect your repositories and deploy [Agent Servers](deployment.md) to the Cloud with a few clicks.
-* **Automated CI/CD for Agent Servers**: The build and deployment process for your [Agent Servers](deployment.md) is handled automatically by the platform.
+* [**LangSmith UI**](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-cloud): Full access to [observability](observability.md), [evaluation](evaluation.md), [agent deployment management](deploy-overview.md), and [Studio](studio.md).
+* **Deploy Agent Servers from GitHub**: Connect your repositories and deploy [Agent Servers](agent-server.md) to the Cloud with a few clicks.
+* **Automated CI/CD for Agent Servers**: The build and deployment process for your Agent Servers is handled automatically by the platform.
 
 LangChain manages the LangSmith platform (UI, APIs, and datastores), your Agent Servers, and CI/CD for your apps. All of them run in LangChain's cloud on AWS, Azure, or GCP, depending on your [region](#regions).
 
@@ -48,7 +48,7 @@ Cloud-managed LangSmith stores trace and application data in the cloud location 
 * **Authentication data**: [Supabase](https://supabase.com) hosts authentication and authorization data on AWS, in the location listed in the Supabase column. This location can differ from the region's cloud location. For example, the Azure US region runs in Azure `centralus` (Iowa), while its authentication data is in AWS `us-east-1` (N. Virginia).
 * **Billing data**: Payment and billing information is stored in the US, as described in [Region-independent storage](#region-independent-storage).
 
-| Region | Cloud location | Supabase | Trace datastore | [LangSmith Agent Server](deployment.md) domain |
+| Region | Cloud location | Supabase | Trace datastore | [LangSmith Agent Server](agent-server.md) domain |
 | - | - | - | - | - |
 | GCP US | GCP us-central1 (Iowa) | AWS us-east-1 (N. Virginia) | [ClickHouse Cloud](https://clickhouse.com/cloud), us-central1 (Iowa) | `*.us.langgraph.app` |
 | GCP EU | GCP europe-west4 (Netherlands) | AWS eu-central-1 (Germany) | ClickHouse Cloud, europe-west4 (Netherlands) | `*.eu.langgraph.app` |
@@ -99,7 +99,7 @@ Some additional GCP services we use include:
 
 * Google Cloud Load Balancer for routing traffic to the LangSmith services.
 * Google Cloud CDN for caching static assets.
-* Google Cloud Armor for security and rate limits. For more information on rate limits we enforce, please refer to [Rate limits](usage-and-billing.md#rate-limits).
+* Google Cloud Armor for security and rate limits. For more information on rate limits we enforce, please refer to [Rate limits](cloud-rate-limits.md).
 
 ### AWS services
 
@@ -124,7 +124,7 @@ LangSmith uses the following AWS storage and data services:
 
 Some additional AWS services we use include:
 
-* Elastic Load Balancing (Network Load Balancers) and Istio ingress for routing traffic to the LangSmith services. Documented API rate limits are enforced at the Istio ingress gateway. For details, see [Rate limits](usage-and-billing.md#rate-limits).
+* Elastic Load Balancing (Network Load Balancers) and Istio ingress for routing traffic to the LangSmith services. Documented API rate limits are enforced at the Istio ingress gateway. For details, see [Rate limits](cloud-rate-limits.md).
 * Amazon CloudFront for caching static assets (including the web UI hostname `aws.smith.langchain.com`).
 * AWS WAF on CloudFront for managed rule groups at the edge (for example, AWS Managed Rules common protections and Bot Control).
 
@@ -159,7 +159,7 @@ Internet-bound traffic leaving LangSmith services is routed through a NAT gatewa
 
 > [!NOTE]
 >
-> Agents on [LangSmith Agent Server](deployment.md) egress from a [separate IP list](cloud-platform-features.md#allowlist-ip-addresses).
+> Agents on [LangSmith Agent Server](agent-server.md) egress from a [separate IP list](cloud-platform-features.md#allowlist-ip-addresses).
 
 | GCP US | GCP EU | GCP APAC | AWS US | AZURE US |
 | - | - | - | - | - |
@@ -171,6 +171,9 @@ Internet-bound traffic leaving LangSmith services is routed through a NAT gatewa
 | 34.58.194.127 | 34.91.238.184 | 35.201.9.237 | | |
 | 34.59.97.173 | 35.204.101.241 | 35.189.57.29 | | |
 | 104.198.162.55 | 35.204.48.32 | 34.40.198.11 | | |
+| 34.71.41.140 | | | | |
+| 34.71.43.131 | | | | |
+| 34.72.23.45 | | | | |
 
 It may be helpful to allowlist these IP addresses if connecting to your own AzureOpenAI service or other endpoints that may be required by the Playground or Online Evaluation.
 

@@ -29,7 +29,7 @@ LangSmith
 
 > [card] [Test](evaluation.md)
 
-> [card] [Deploy](deployment.md)
+> [card] [Deploy](deploy-overview.md)
 
 > [card] [Monitor](observability.md)
 

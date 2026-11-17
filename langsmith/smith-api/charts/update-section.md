@@ -172,8 +172,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/charts/section/{section_id}:
     patch:
@@ -218,35 +221,21 @@ components:
     CustomChartsSectionUpdate:
       properties:
         title:
-          anyOf:
-            - type: string
-            - $ref: '#/components/schemas/Missing'
+          type: string
           title: Title
-          default:
-            __missing__: __missing__
         description:
           anyOf:
             - type: string
-            - $ref: '#/components/schemas/Missing'
             - type: 'null'
           title: Description
-          default:
-            __missing__: __missing__
         index:
-          anyOf:
-            - type: integer
-            - $ref: '#/components/schemas/Missing'
+          type: integer
           title: Index
-          default:
-            __missing__: __missing__
         layout:
           anyOf:
             - $ref: '#/components/schemas/DashboardLayout-Input'
-            - $ref: '#/components/schemas/Missing'
             - type: 'null'
           title: Layout
-          default:
-            __missing__: __missing__
       type: object
       title: CustomChartsSectionUpdate
     CustomChartsSectionResponse:
@@ -299,16 +288,6 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    Missing:
-      properties:
-        __missing__:
-          type: string
-          const: __missing__
-          title: Missing
-      type: object
-      required:
-        - __missing__
-      title: Missing
     DashboardLayout-Input:
       properties:
         version:

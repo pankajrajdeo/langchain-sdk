@@ -96,7 +96,7 @@ These bindings ship no components of their own. Hooks like `useStream` return pl
 
 ## See also
 
-* [LangSmith Agent Server overview](deployment.md)
+* [Deploy agents](deploy-overview.md)
 * [Agent Server](agent-server.md)
 * [Configure checkpointer](configure-checkpointer.md)
 * [Frontend overview](../langchain/frontend/overview.md)

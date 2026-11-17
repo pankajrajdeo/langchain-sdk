@@ -20,7 +20,7 @@ LangChain provides open source, model-agnostic harnesses for building agents. La
 >
 > Evaluate agents with datasets, evaluations, and prompt engineering.
 
-> [card] [Deploy](langsmith/deployment.md)
+> [card] [Deploy](langsmith/deploy-overview.md)
 >
 > Deploy and serve agents at scale.
 

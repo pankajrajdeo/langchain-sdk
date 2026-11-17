@@ -1,6 +1,6 @@
 ---
 title: "List a team's access policies"
-description: "Lists the access policies attached to a team. A page carries next_cursor, which is the value to send back as cursor for the next page, and null once the last page has been read. A cursor this..."
+description: "Deprecated: use the corresponding /user-groups endpoint. Lists the access policies attached to a team. A page carries next_cursor, which is the value to send back as cursor for the next page, and..."
 source: "https://docs.langchain.com/langsmith/smith-api/teams/list-a-teams-access-policies"
 category: "docs"
 tags: [docs, langsmith, smith-api, teams, list-a-teams-access-policies]
@@ -8,7 +8,8 @@ tags: [docs, langsmith, smith-api, teams, list-a-teams-access-policies]
 
 # List a team's access policies
 
-> Lists the access policies attached to a team. A page carries next_cursor, which is
+> Deprecated: use the corresponding /user-groups endpoint.
+Lists the access policies attached to a team. A page carries next_cursor, which is
 the value to send back as cursor for the next page, and null once the last page
 has been read. A cursor this endpoint did not issue for this team starts again at
 the first page.
@@ -177,8 +178,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/platform/orgs/current/teams/{team_id}/access-policies:
     get:
@@ -186,6 +190,8 @@ paths:
         - teams
       summary: List a team's access policies
       description: >-
+        Deprecated: use the corresponding /user-groups endpoint.
+
         Lists the access policies attached to a team. A page carries
         next_cursor, which is
 
@@ -229,7 +235,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/teams.ListTeamAccessPoliciesResponse'
+                $ref: >-
+                  #/components/schemas/user_groups.ListUserGroupAccessPoliciesResponse
         '400':
           description: invalid team_id or page_size
           content:
@@ -256,6 +263,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/shared.ProblemDetails'
+      deprecated: true
       security:
         - API Key: []
           Organization ID: []
@@ -263,7 +271,7 @@ paths:
           Organization ID: []
 components:
   schemas:
-    teams.ListTeamAccessPoliciesResponse:
+    user_groups.ListUserGroupAccessPoliciesResponse:
       type: object
       required:
         - items
@@ -272,7 +280,7 @@ components:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/teams.TeamAccessPolicy'
+            $ref: '#/components/schemas/user_groups.UserGroupAccessPolicy'
         next_cursor:
           anyOf:
             - type: string
@@ -308,7 +316,7 @@ components:
           type: string
         type:
           type: string
-    teams.TeamAccessPolicy:
+    user_groups.UserGroupAccessPolicy:
       type: object
       required:
         - attached_at
@@ -336,7 +344,7 @@ components:
             WorkspaceID is the workspace the policy applies in. It is omitted
             when the policy applies
 
-            in every workspace an organization-wide team has access to.
+            in every workspace an organization-wide user group has access to.
           type: string
           format: uuid
     shared.ParseErrorDetails:

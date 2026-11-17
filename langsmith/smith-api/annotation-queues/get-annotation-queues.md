@@ -170,8 +170,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/annotation-queues:
     get:
@@ -277,6 +280,13 @@ paths:
             type: boolean
             default: true
             title: Sort By Desc
+        - name: include_rubric_keys
+          in: query
+          required: false
+          schema:
+            type: boolean
+            default: false
+            title: Include Rubric Keys
       responses:
         '200':
           description: Successful Response
@@ -386,6 +396,11 @@ components:
         total_runs:
           type: integer
           title: Total Runs
+        rubric_keys:
+          items:
+            type: string
+          type: array
+          title: Rubric Keys
       type: object
       required:
         - name

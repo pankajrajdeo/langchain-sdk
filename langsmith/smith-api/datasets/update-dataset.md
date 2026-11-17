@@ -181,8 +181,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/datasets/{dataset_id}:
     patch:
@@ -254,31 +257,24 @@ components:
         name:
           anyOf:
             - type: string
-            - $ref: '#/components/schemas/Missing'
             - type: 'null'
           title: Name
           description: >-
             New dataset name. Must be unique in the workspace; a name already
             used by another dataset returns 409. Null returns 400. Omit to keep
             the current name.
-          default:
-            __missing__: __missing__
         description:
           anyOf:
             - type: string
-            - $ref: '#/components/schemas/Missing'
             - type: 'null'
           title: Description
           description: >-
             New dataset description. Null clears it. Omit to keep the current
             description.
-          default:
-            __missing__: __missing__
         inputs_schema_definition:
           anyOf:
             - additionalProperties: true
               type: object
-            - $ref: '#/components/schemas/Missing'
             - type: 'null'
           title: Inputs Schema Definition
           description: >-
@@ -288,13 +284,10 @@ components:
             support schemas. Every existing example must match the new schema,
             otherwise the request returns 400 with the IDs of the examples that
             do not, and nothing is changed. Omit to keep the current schema.
-          default:
-            __missing__: __missing__
         outputs_schema_definition:
           anyOf:
             - additionalProperties: true
               type: object
-            - $ref: '#/components/schemas/Missing'
             - type: 'null'
           title: Outputs Schema Definition
           description: >-
@@ -304,8 +297,6 @@ components:
             support schemas. Every existing example must match the new schema,
             otherwise the request returns 400 with the IDs of the examples that
             do not, and nothing is changed. Omit to keep the current schema.
-          default:
-            __missing__: __missing__
         patch_examples:
           anyOf:
             - additionalProperties:
@@ -329,7 +320,6 @@ components:
             - items:
                 $ref: '#/components/schemas/DatasetTransformation'
               type: array
-            - $ref: '#/components/schemas/Missing'
             - type: 'null'
           title: Transformations
           description: >-
@@ -338,26 +328,20 @@ components:
             null or an empty list removes all of them. Existing examples are not
             transformed. Requires a schema on the inputs or outputs the path
             points into, otherwise returns 400. Omit to keep the current list.
-          default:
-            __missing__: __missing__
         metadata:
           anyOf:
             - additionalProperties: true
               type: object
-            - $ref: '#/components/schemas/Missing'
             - type: 'null'
           title: Metadata
           description: >-
             Dataset metadata as a JSON object. Replaces the current metadata as
             a whole; keys are not merged. Send an empty object to clear it. Omit
             to keep the current metadata.
-          default:
-            __missing__: __missing__
         baseline_experiment_id:
           anyOf:
             - type: string
               format: uuid
-            - $ref: '#/components/schemas/Missing'
             - type: 'null'
           title: Baseline Experiment Id
           description: >-
@@ -365,8 +349,6 @@ components:
             on this dataset. Must be an experiment run on this dataset,
             otherwise returns 400. Null clears it. Omit to keep the current
             baseline.
-          default:
-            __missing__: __missing__
       type: object
       title: DatasetUpdate
       description: Update class for Dataset.
@@ -437,16 +419,6 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    Missing:
-      properties:
-        __missing__:
-          type: string
-          const: __missing__
-          title: Missing
-      type: object
-      required:
-        - __missing__
-      title: Missing
     ExampleUpdate:
       properties:
         dataset_id:

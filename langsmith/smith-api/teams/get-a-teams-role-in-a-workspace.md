@@ -1,6 +1,6 @@
 ---
 title: "Get a team's role in a workspace"
-description: "Gets an organization-wide team's grant in one workspace. A workspace scoped team returns 400, since its access to its own workspace is set when it is created. Needs organization:teams:read, or..."
+description: "Deprecated: use the corresponding /user-groups endpoint. Gets an organization-wide team's grant in one workspace. A workspace scoped team returns 400, since its access to its own workspace is set..."
 source: "https://docs.langchain.com/langsmith/smith-api/teams/get-a-teams-role-in-a-workspace"
 category: "docs"
 tags: [docs, langsmith, smith-api, teams, get-a-teams-role-in-a-workspace]
@@ -8,7 +8,8 @@ tags: [docs, langsmith, smith-api, teams, get-a-teams-role-in-a-workspace]
 
 # Get a team's role in a workspace
 
-> Gets an organization-wide team's grant in one workspace. A workspace scoped team
+> Deprecated: use the corresponding /user-groups endpoint.
+Gets an organization-wide team's grant in one workspace. A workspace scoped team
 returns 400, since its access to its own workspace is set when it is created.
 Needs organization:teams:read, or workspaces:teams:read in the workspace.
 
@@ -174,8 +175,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/platform/orgs/current/teams/{team_id}/workspaces/{workspace_id}:
     get:
@@ -183,6 +187,8 @@ paths:
         - teams
       summary: Get a team's role in a workspace
       description: >-
+        Deprecated: use the corresponding /user-groups endpoint.
+
         Gets an organization-wide team's grant in one workspace. A workspace
         scoped team
 
@@ -212,7 +218,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/teams.TeamWorkspaceGrant'
+                $ref: '#/components/schemas/user_groups.UserGroupWorkspaceGrant'
         '400':
           description: invalid team_id or workspace_id, or the team is workspace scoped
           content:
@@ -239,6 +245,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/shared.ProblemDetails'
+      deprecated: true
       security:
         - API Key: []
           Organization ID: []
@@ -246,7 +253,7 @@ paths:
           Organization ID: []
 components:
   schemas:
-    teams.TeamWorkspaceGrant:
+    user_groups.UserGroupWorkspaceGrant:
       type: object
       required:
         - created_at

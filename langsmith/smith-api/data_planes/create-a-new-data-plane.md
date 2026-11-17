@@ -173,8 +173,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /orgs/current/data-planes:
     post:
@@ -270,6 +273,8 @@ components:
           $ref: '#/components/schemas/data_planes.DataPlaneFleetOIDCSettings'
         id:
           type: string
+        ingress:
+          $ref: '#/components/schemas/data_planes.DataPlaneIngressSettings'
         maintenance_window:
           type: string
         name:
@@ -336,11 +341,26 @@ components:
           $ref: '#/components/schemas/data_planes.CreateDataPlaneBYOIAMSettings'
         byovpc:
           $ref: '#/components/schemas/data_planes.DataPlaneBYOVPCSettings'
+        customer_managed_keys:
+          description: >-
+            CustomerManagedKeys encrypts data plane storage with
+            customer-managed KMS keys.
+          allOf:
+            - $ref: '#/components/schemas/data_planes.CreateDataPlaneCMKSettings'
         eks_api_privatelink_disabled:
           description: >-
             Use a public EKS API endpoint restricted to LangSmith control-plane
             egress IPs instead of creating a managed PrivateLink endpoint
             service. Defaults to false.
+          type: boolean
+        ingress:
+          description: Ingress restricts inbound access to the data plane load balancer.
+          allOf:
+            - $ref: '#/components/schemas/data_planes.DataPlaneIngressSettings'
+        is_sandboxes_enabled:
+          description: >-
+            SandboxesEnabled turns on sandboxes when the data plane is created.
+            Defaults to false.
           type: boolean
         name:
           type: string
@@ -367,9 +387,32 @@ components:
         - resource_group_id
         - vpc_cidr
       properties:
+        additional_tags:
+          description: >-
+            AdditionalTags are added to every Azure resource that LangSmith
+            creates.
+
+            Azure allows only 15 tags on DNS resources, so the limit is 14 plus
+            the
+
+            managed_by system tag.
+          type: array
+          maxItems: 14
+          items:
+            $ref: '#/components/schemas/azure.ResourceTag'
         azure_entra_tenant_id:
           description: EntraTenantID is the Microsoft Entra tenant of the resource group.
           type: string
+        byoiam:
+          description: >-
+            Use customer-managed identities created by the LangSmith BYOC
+            Terraform
+
+            module with byo_iam = true. LangSmith then needs no User Access
+
+            Administrator assignment on the resource group.
+          allOf:
+            - $ref: '#/components/schemas/data_planes.DataPlaneBYOIAMSettings'
         name:
           type: string
         public_load_balancer:
@@ -485,10 +528,27 @@ components:
           type: object
           additionalProperties:
             type: string
+    data_planes.DataPlaneIngressSettings:
+      type: object
+      properties:
+        allowed_source_cidrs:
+          description: >-
+            IPv4 CIDR blocks allowed to reach the data plane load balancer on
+            port 443. Empty allows all sources. A private load balancer also
+            always allows the data plane VPC CIDR.
+          type: array
+          maxItems: 50
+          items:
+            type: string
     data_planes.DataPlaneProvisioningSettings:
       type: object
       properties:
         additional_tags:
+          description: >-
+            AdditionalTags are the customer tags on the cloud resources. GCP
+            data
+
+            planes have none.
           type: object
           additionalProperties:
             type: string
@@ -514,6 +574,9 @@ components:
             object.
           type: boolean
         is_public_load_balancer:
+          type: boolean
+        is_sandboxes_enabled:
+          description: IsSandboxesEnabled is whether sandboxes are turned on.
           type: boolean
         provisioner_service_account:
           description: |-
@@ -634,6 +697,33 @@ components:
           type: array
         vpc_id:
           type: string
+    data_planes.CreateDataPlaneCMKSettings:
+      type: object
+      properties:
+        key_arn:
+          description: >-
+            KMS key ARN that encrypts S3, EBS, EKS secrets, RDS, and
+            ElastiCache. Must be in the data plane region.
+          type: string
+        service_key_arns:
+          description: >-
+            KMS key ARNs keyed by service: s3, ebs, eks, rds, or elasticache.
+            Each overrides key_arn for its service. Without key_arn, services
+            not listed keep AWS-managed encryption.
+          type: object
+          additionalProperties:
+            type: string
+      anyOf:
+        - required:
+            - key_arn
+          properties:
+            key_arn:
+              minLength: 1
+        - required:
+            - service_key_arns
+          properties:
+            service_key_arns:
+              minProperties: 1
     data_planes.DataPlaneTraceStorage:
       type: string
       enum:
@@ -642,6 +732,18 @@ components:
       x-enum-varnames:
         - DataPlaneTraceStorageClickHouse
         - DataPlaneTraceStorageSmithDB
+    azure.ResourceTag:
+      type: object
+      required:
+        - key
+      properties:
+        key:
+          type: string
+          maxLength: 128
+          minLength: 1
+        value:
+          type: string
+          maxLength: 256
     data_planes.DataPlaneBYOIAMSettings:
       type: object
       properties:

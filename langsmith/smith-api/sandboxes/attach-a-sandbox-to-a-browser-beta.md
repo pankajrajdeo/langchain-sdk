@@ -172,8 +172,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v2/sandboxes/browsers/{name}/attachments:
     post:
@@ -229,7 +232,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/sandboxes.ErrorResponse'
         '501':
-          description: The browser beta is not enabled
+          description: Browsers are only available on SaaS deployments
           content:
             application/json:
               schema:

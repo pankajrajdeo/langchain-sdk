@@ -91,7 +91,7 @@ graph LR
 
 ## Isolate by agent or application
 
-In this model, multiple business units share a single workspace within an organization. They use agents or applications, together with [ABAC](organization-workspace-operations.md#access-policies), to separate resources and govern access. As a result, shared resources such as [prompts](prompt-context-hub.md#prompts) and [deployments](deployment.md) can be reused across business units. Access to sensitive resources like [traces](observability-concepts.md#traces) and [datasets](evaluation-concepts.md#datasets) is limited to the owning business unit.
+In this model, multiple business units share a single workspace within an organization. They use agents or applications, together with [ABAC](organization-workspace-operations.md#access-policies), to separate resources and govern access. As a result, shared resources such as [prompts](prompt-context-hub.md#prompts) and [deployments](deploy-overview.md) can be reused across business units. Access to sensitive resources like [traces](observability-concepts.md#traces) and [datasets](evaluation-concepts.md#datasets) is limited to the owning business unit.
 
 ```mermaid
 graph LR

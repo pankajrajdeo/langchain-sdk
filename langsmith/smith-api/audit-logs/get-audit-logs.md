@@ -179,8 +179,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/audit-logs:
     get:
@@ -363,6 +366,8 @@ components:
         - create_oidc_sso_settings
         - update_oidc_sso_settings
         - delete_oidc_sso_settings
+        - delete_oidc_sso_login_method
+        - update_sso_login_protocol
         - update_organization_info
         - update_business_info
         - update_payment_plan
@@ -414,6 +419,7 @@ components:
         - update_tracer_session
         - delete_tracer_session
         - delete_tracer_sessions
+        - list_rules
         - delete_runs
         - share_run
         - unshare_run
@@ -494,6 +500,17 @@ components:
         - create_team_workspace_grant
         - update_team_workspace_grant
         - delete_team_workspace_grant
+        - read_user_group_access_policies
+        - create_user_group
+        - update_user_group
+        - delete_user_group
+        - add_user_group_members
+        - attach_user_group_access_policy
+        - detach_user_group_access_policy
+        - remove_user_group_member
+        - create_user_group_workspace_grant
+        - update_user_group_workspace_grant
+        - delete_user_group_workspace_grant
         - create_scim_token
         - update_scim_token
         - delete_scim_token
@@ -571,6 +588,7 @@ components:
         - delete_agent_auth_oidc_integration
         - resolve_agent_auth_agent
         - create_agent_auth_app
+        - mint_agent_access_token
         - create_tool
         - update_tool
         - delete_tool
@@ -606,6 +624,8 @@ components:
         - create_gateway_policy
         - update_gateway_policy
         - delete_gateway_policy
+        - connect_gateway_vendor_admin_key
+        - disconnect_gateway_vendor_admin_key
         - invoke_gateway
         - purchase_prepaid_gateway_provider_credits
         - create_sandbox_proxy_profile
@@ -619,6 +639,7 @@ components:
         - archive_computer_environment
         - update_fleet_feedback
         - delete_fleet_feedback
+        - trigger_fleet_managed_tools_migration
         - list_sandbox_claims
         - get_sandbox_claim
         - get_sandbox_claim_status
@@ -634,6 +655,7 @@ components:
         - list_sandbox_snapshots
         - get_sandbox_snapshot
         - create_sandbox_snapshot
+        - tag_sandbox_snapshot
         - delete_sandbox_snapshot
         - list_sandbox_volumes
         - get_sandbox_volume
@@ -653,6 +675,7 @@ components:
         - deploy_sandbox_function
         - delete_sandbox_function
         - generate_sandbox_function_token
+        - get_sandbox_function_logs
         - create_data_plane
         - delete_data_plane
         - update_data_plane
@@ -674,6 +697,7 @@ components:
         - execute_custom_code
         - generate_dataset
         - evaluate_experiment
+        - create_feedback
         - create_feedback_formula
         - update_feedback_formula
         - delete_feedback_formula
@@ -697,6 +721,9 @@ components:
         - update_filter_view
         - rename_filter_view
         - delete_filter_view
+        - create_redaction_rule
+        - update_redaction_rule
+        - delete_redaction_rule
         - create_insights_job
         - create_insights_job_config
         - update_insights_job_config
@@ -792,6 +819,7 @@ components:
         - list_tags_for_resource
         - list_taggings
         - get_shared_examples_count
+        - list_datasets
         - list_examples
         - get_example
         - get_experiment_view_overrides
@@ -801,6 +829,7 @@ components:
         - stream_feedback_delta
         - read_comparative_experiments
         - stream_grouped_experiments
+        - read_tracer_session
         - get_run_url
         - query_run
         - query_runs
@@ -835,12 +864,16 @@ components:
         - get_self_hosted_customer
         - get_provisioned_saas_org
         - update_provisioned_saas_org
+        - get_entitlements
+        - update_entitlements
+        - delete_entitlements
         - create_oauth_client
         - update_oauth_client
         - delete_oauth_client
         - rotate_oauth_client_secret
         - revoke_oauth_grant
         - create_custom_app
+        - list_custom_apps
         - update_custom_app
         - delete_custom_app
         - bulk_delete_custom_apps
@@ -1355,6 +1388,13 @@ components:
             - $ref: '#/components/schemas/AuditLogServer'
             - type: 'null'
           description: Managed Tools MCP server the request reached.
+        agent_access_token:
+          anyOf:
+            - $ref: '#/components/schemas/AuditLogAgentAccessToken'
+            - type: 'null'
+          description: >-
+            Agent access token the request minted. The entry is written to the
+            org of the agent the token names.
       type: object
       title: AuditLogEnrichments
       description: Non-indexed request metadata stored in the enrichments JSONB column.
@@ -1407,6 +1447,69 @@ components:
         - name
       title: AuditLogServer
       description: Managed Tools MCP server a request reached.
+    AuditLogAgentAccessToken:
+      properties:
+        sub:
+          type: string
+          title: Sub
+        ls_agent_id:
+          type: string
+          title: Ls Agent Id
+        ls_agent_uuid:
+          type: string
+          title: Ls Agent Uuid
+        ls_env:
+          type: string
+          title: Ls Env
+        ls_deployment_id:
+          type: string
+          title: Ls Deployment Id
+        ls_proof:
+          type: string
+          title: Ls Proof
+        ls_user_id:
+          type: string
+          title: Ls User Id
+          description: User the agent acts for, not the actor of the mint.
+        ls_trigger:
+          $ref: '#/components/schemas/AuditLogAgentAccessTokenTrigger'
+        aud:
+          type: string
+          title: Aud
+        jti:
+          type: string
+          title: Jti
+        exp:
+          type: string
+          format: date-time
+          title: Exp
+      type: object
+      required:
+        - sub
+        - ls_agent_id
+        - ls_agent_uuid
+        - ls_env
+        - ls_deployment_id
+        - ls_proof
+        - aud
+        - jti
+        - exp
+      title: AuditLogAgentAccessToken
+      description: Claims of a minted agent access token. Never the token itself.
+    AuditLogAgentAccessTokenTrigger:
+      properties:
+        kind:
+          type: string
+          title: Kind
+        id:
+          type: string
+          title: Id
+      type: object
+      required:
+        - kind
+        - id
+      title: AuditLogAgentAccessTokenTrigger
+      description: Cron that started the agent's run.
   securitySchemes:
     API Key:
       type: apiKey

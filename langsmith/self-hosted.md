@@ -14,7 +14,7 @@ tags: [docs, langsmith, self-hosted]
 >
 > Self-hosted LangSmith is an add-on to the Enterprise plan designed for LangChain's largest, most security-conscious customers. For more details, refer to [Pricing](https://www.langchain.com/pricing). [Contact our sales team](https://www.langchain.com/contact-sales) if you want a license key to trial LangSmith in your environment.
 
-Self-hosted LangSmith runs the LangSmith platform in your own infrastructure so that trace and operational data stay in your environment. The base installation includes [observability](observability.md), [evaluation](evaluation.md), [prompt engineering](prompt-context-hub.md#prompts), [Insights](insights.md), and [Chat](chat.md). You can add [Sandboxes](sandboxes.md), [Engine](engine.md), [Fleet](fleet/index.md), [LLM Gateway](llm-gateway.md), and [Agent Server hosting](deployment.md) when your use case requires them.
+Self-hosted LangSmith runs the LangSmith platform in your own infrastructure so that trace and operational data stay in your environment. The base installation includes [observability](observability.md), [evaluation](evaluation.md), [prompt engineering](prompt-context-hub.md#prompts), [Insights](insights.md), and [Chat](chat.md). You can add [Sandboxes](sandboxes.md), [Engine](engine.md), [Fleet](fleet/index.md), [LLM Gateway](llm-gateway.md), and [Agent Server hosting](deploy-to-self-hosted-overview.md) when your use case requires them.
 
 ## Features
 
@@ -26,7 +26,7 @@ Self-hosted LangSmith runs the LangSmith platform in your own infrastructure so 
 | [Engine](engine-self-hosted.md) | Optional | Sandboxes, a license with the Engine entitlement, and Helm chart version 0.16.0 or later. Air-gapped installations require Helm chart version 0.17.0 or later. |
 | [Fleet](enable-self-hosted-fleet.md) | Optional | Fleet services in your cluster. Does not require Agent Server hosting. |
 | [LLM Gateway](llm-gateway-self-hosted.md) | Optional (beta) | Helm chart version 0.17.1 or later. The `agent-gateway` service needs access to PostgreSQL, Redis, and other LangSmith pods. |
-| [Agent Server hosting](enable-self-hosted-deployment.md) | Optional | KEDA, an ingress, and a control plane and data plane. To run Agent Servers without a control plane, see [standalone servers](deploy-standalone-server.md). |
+| [Agent Server hosting](enable-self-hosted-agent-server.md) | Optional | KEDA, an ingress, and a control plane and data plane. To run Agent Servers without a control plane, see [standalone servers](deploy-standalone-server.md). |
 
 ## Architecture
 

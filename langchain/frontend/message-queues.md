@@ -14,7 +14,7 @@ Message queuing lets users send multiple messages in rapid succession without wa
 
 > [!NOTE]
 >
-> This feature requires the [LangGraph Agent Server](../../langgraph/local-server.md). Run your agent locally with `langgraph dev` or [deploy it to LangSmith](../../langsmith/deployment.md) to use this pattern.
+> This feature requires the [LangGraph Agent Server](../../langgraph/local-server.md). Run your agent locally with `langgraph dev` or [deploy it to LangSmith](../../langsmith/deploy-overview.md) to use this pattern.
 
 ## Why message queues?
 

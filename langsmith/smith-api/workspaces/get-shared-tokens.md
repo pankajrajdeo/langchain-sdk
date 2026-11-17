@@ -172,8 +172,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/workspaces/current/shared:
     get:
@@ -208,11 +211,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/TenantShareTokensResponse'
         '422':
-          description: Validation Error
+          description: The request has an invalid path, query, header, or body parameter.
           content:
-            application/json:
+            application/problem+json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                allOf:
+                  - $ref: '#/components/schemas/ProblemDetails'
+                  - type: object
+                    required:
+                      - errors
+                    properties:
+                      errors:
+                        type: array
+                        items:
+                          type: string
+                        description: >-
+                          One message per invalid parameter, prefixed with its
+                          location.
       security:
         - API Key: []
         - Tenant ID: []
@@ -239,15 +254,28 @@ components:
       required:
         - entities
       title: TenantShareTokensResponse
-    HTTPValidationError:
+    ProblemDetails:
       properties:
+        type:
+          type: string
+          title: Type
+        title:
+          type: string
+          title: Title
+        status:
+          type: integer
+          title: Status
         detail:
-          items:
-            type: string
-          type: array
+          type: string
           title: Detail
       type: object
-      title: HTTPValidationError
+      required:
+        - type
+        - title
+        - status
+        - detail
+      title: ProblemDetails
+      description: Problem details describing an error response, as defined by RFC 7807.
     TenantShareRunToken:
       properties:
         type:

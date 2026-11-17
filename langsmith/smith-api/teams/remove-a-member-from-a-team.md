@@ -1,6 +1,6 @@
 ---
 title: "Remove a member from a team"
-description: "Removes an organization member from a team, along with the workspace identities the team recorded for them. Returns 204 also when the identity was not a member. Needs the same permissions as adding..."
+description: "Deprecated: use the corresponding /user-groups endpoint. Removes an organization member from a team, along with the workspace identities the team recorded for them. Returns 204 also when the identity..."
 source: "https://docs.langchain.com/langsmith/smith-api/teams/remove-a-member-from-a-team"
 category: "docs"
 tags: [docs, langsmith, smith-api, teams, remove-a-member-from-a-team]
@@ -8,7 +8,8 @@ tags: [docs, langsmith, smith-api, teams, remove-a-member-from-a-team]
 
 # Remove a member from a team
 
-> Removes an organization member from a team, along with the workspace identities
+> Deprecated: use the corresponding /user-groups endpoint.
+Removes an organization member from a team, along with the workspace identities
 the team recorded for them. Returns 204 also when the identity was not a member.
 Needs the same permissions as adding members.
 
@@ -174,8 +175,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/platform/orgs/current/teams/{team_id}/members/{identity_id}:
     delete:
@@ -183,6 +187,8 @@ paths:
         - teams
       summary: Remove a member from a team
       description: >-
+        Deprecated: use the corresponding /user-groups endpoint.
+
         Removes an organization member from a team, along with the workspace
         identities
 
@@ -241,6 +247,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/shared.ProblemDetails'
+      deprecated: true
       security:
         - API Key: []
           Organization ID: []

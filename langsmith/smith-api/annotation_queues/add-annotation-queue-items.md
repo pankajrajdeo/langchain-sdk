@@ -172,8 +172,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/platform/annotation-queues/{queue_id}/items:
     post:
@@ -191,7 +194,9 @@ paths:
           required: true
           schema:
             type: string
-        - description: Extend trace retention for added run items
+        - description: >-
+            Defaults to false. When true, upgrade the traces of added runs from
+            base to extended retention. Thread items are not upgraded.
           name: extend_trace_retention
           in: query
           schema:

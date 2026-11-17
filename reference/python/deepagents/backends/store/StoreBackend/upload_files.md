@@ -14,8 +14,9 @@ tags: [reference, deepagents, backends, store, storebackend, upload_files]
 
 Upload multiple files to the store.
 
-Binary files (images, PDFs, etc.) are stored as base64-encoded strings.
-Text files are stored as utf-8 strings.
+Content that is valid UTF-8 and contains no NUL bytes is stored as a
+UTF-8 string. Everything else (images, PDFs, etc.) is stored as a
+base64-encoded string.
 
 ## Signature
 
@@ -42,4 +43,4 @@ Response order matches input order.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/c858b3641b13fb3f40fe3a12515517b81fb8a744/libs/deepagents/deepagents/backends/store.py#L663)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/53e090968118f72f6dd3847d097607461a0fb5a8/libs/deepagents/deepagents/backends/store.py#L684)

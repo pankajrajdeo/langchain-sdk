@@ -14,6 +14,8 @@ Multi-turn online evaluators allow you to evaluate entire conversations between 
 >
 > To use a LangChain-managed, thread-level judge without configuring a model, API key, or prompt, see [LangChain Tuned Evaluators](tuned-evaluators.md).
 
+To score threads with your own Python or JavaScript code instead of an LLM, use an advanced code evaluator. For more information, see [Evaluate threads](advanced-code-evaluators.md#evaluate-threads).
+
 You can use multi-turn evaluations to measure:
 
 1. Semantic Intent: What the user was trying to do.
@@ -103,7 +105,9 @@ This lifecycle means that multi-turn evaluators run once per completed thread, n
 
 > [!NOTE]
 >
-> On [LangSmith Cloud](cloud.md), the `trajectory` variable is available in the GCP US, GCP EU, GCP APAC, and AWS US regions. It is not available on [BYOC](byoc.md) deployments.
+> On [LangSmith Cloud](cloud.md), the `trajectory` variable is available in the GCP US, GCP EU, GCP APAC, and AWS US regions.
+>
+> On [BYOC](byoc.md), the `trajectory` variable is available on data planes that store and query traces in SmithDB.
 >
 > [Self-hosted](self-hosted.md) installations support the `trajectory` variable on LangSmith v0.17 or later, after you [switch queries to SmithDB](self-host-smithdb-install.md#step-6-switch-queries-to-smithdb). See [SmithDB feature availability](self-host-smithdb-features.md).
 

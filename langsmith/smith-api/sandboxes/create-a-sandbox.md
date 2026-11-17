@@ -172,8 +172,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v2/sandboxes/boxes:
     post:
@@ -474,13 +477,15 @@ components:
       type: object
       required:
         - mode
+        - permissions
       properties:
         mode:
           $ref: '#/components/schemas/auth.SandboxDelegationMode'
         permissions:
+          type: array
+          minItems: 1
           items:
             type: string
-          type: array
     sandboxes.Labels:
       type: object
       additionalProperties:
@@ -562,10 +567,8 @@ components:
     auth.SandboxDelegationMode:
       type: string
       enum:
-        - INHERIT
         - EXPLICIT
       x-enum-varnames:
-        - SandboxDelegationModeInherit
         - SandboxDelegationModeExplicit
     sandboxes.SandboxMountAuthConfig:
       type: object
@@ -641,10 +644,18 @@ components:
     sandboxes.Callback:
       type: object
       required:
-        - match_hosts
         - ttl_seconds
         - url
       properties:
+        attribution_headers:
+          description: >-
+            AttributionHeaders selects required all-egress response headers
+            instead of destination credentials; omit match_hosts and
+            full_request, and return expires_at with the headers.
+          type: array
+          maxItems: 16
+          items:
+            type: string
         full_request:
           type: boolean
         match_hosts:
@@ -748,12 +759,23 @@ components:
             suffix, written as `*`, a slash, and then the ending, which matches
             any path that ends with that text (the ending `runs` also matches
             `/v1/xruns`); or `*` alone for every path. A wildcard in the middle
-            of a path is not supported. An empty list matches every path. Rules
-            are evaluated in order and the first match wins. Rejected on aws,
-            gcp, azure, and relay rules.
+            of a path is not supported. An empty list matches every path. A
+            request whose path is not canonical (a `.` or `..` segment, an empty
+            segment such as `//`, a backslash, or a percent-encoded slash,
+            backslash, or dot) matches no pattern. Rules are evaluated in order
+            and the first match wins. Rejected on aws, gcp, azure, and relay
+            rules.
           type: array
           items:
             type: string
+        match_port:
+          type: integer
+          maximum: 65535
+          minimum: 1
+        match_scheme:
+          type: string
+          enum:
+            - https
         name:
           type: string
         relay_id:
@@ -769,6 +791,12 @@ components:
         rewrite:
           $ref: '#/components/schemas/sandboxapi.ProxyRewriteConfig'
         type:
+          description: >-
+            Type selects the rule action; attribution adds up to 16 literal
+            plaintext X- metadata headers to every proxy-handled HTTP(S)
+            destination, independently of credential rules. At most one
+            attribution rule is allowed, without matching, provider, relay,
+            rewrite or environment fields.
           type: string
     sandboxes.SandboxAWSMountAuthConfig:
       type: object

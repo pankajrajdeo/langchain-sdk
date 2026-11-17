@@ -178,8 +178,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/platform/gateway-policies/{id}:
     get:
@@ -326,6 +329,12 @@ components:
     gateway_policies.SpendUsage:
       type: object
       properties:
+        providers:
+          items:
+            type: string
+          type: array
+        scope:
+          type: string
         spend_usd:
           description: SpendUSD is the spend recorded in this window.
           type: number

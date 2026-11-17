@@ -1,6 +1,6 @@
 ---
 title: "Add members to a team"
-description: "Adds organization members to a team and returns a status for each identity: CREATED when it was added, UNCHANGED when it was already a member, and FAILED when it is not an organization identity in..."
+description: "Deprecated: use the corresponding /user-groups endpoint. Adds organization members to a team and returns a status for each identity: CREATED when it was added, UNCHANGED when it was already a member..."
 source: "https://docs.langchain.com/langsmith/smith-api/teams/add-members-to-a-team"
 category: "docs"
 tags: [docs, langsmith, smith-api, teams, add-members-to-a-team]
@@ -8,7 +8,8 @@ tags: [docs, langsmith, smith-api, teams, add-members-to-a-team]
 
 # Add members to a team
 
-> Adds organization members to a team and returns a status for each identity:
+> Deprecated: use the corresponding /user-groups endpoint.
+Adds organization members to a team and returns a status for each identity:
 CREATED when it was added, UNCHANGED when it was already a member, and FAILED
 when it is not an organization identity in this organization. A workspace
 scoped team only takes people who are members of its workspace, and also records
@@ -179,8 +180,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/platform/orgs/current/teams/{team_id}/members:
     post:
@@ -188,6 +192,8 @@ paths:
         - teams
       summary: Add members to a team
       description: >-
+        Deprecated: use the corresponding /user-groups endpoint.
+
         Adds organization members to a team and returns a status for each
         identity:
 
@@ -224,14 +230,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/teams.AddTeamMembersPayload'
+              $ref: '#/components/schemas/user_groups.AddUserGroupMembersPayload'
       responses:
         '207':
           description: Multi-Status
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/teams.AddTeamMembersResponse'
+                $ref: '#/components/schemas/user_groups.AddUserGroupMembersResponse'
         '400':
           description: invalid team_id or identity_ids
           content:
@@ -265,6 +271,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/shared.ProblemDetails'
+      deprecated: true
       security:
         - API Key: []
           Organization ID: []
@@ -272,7 +279,7 @@ paths:
           Organization ID: []
 components:
   schemas:
-    teams.AddTeamMembersPayload:
+    user_groups.AddUserGroupMembersPayload:
       type: object
       required:
         - identity_ids
@@ -285,7 +292,7 @@ components:
           items:
             type: string
             format: uuid
-    teams.AddTeamMembersResponse:
+    user_groups.AddUserGroupMembersResponse:
       type: object
       required:
         - statuses
@@ -293,7 +300,7 @@ components:
         statuses:
           type: array
           items:
-            $ref: '#/components/schemas/teams.TeamMemberStatus'
+            $ref: '#/components/schemas/user_groups.UserGroupMemberStatus'
     shared.ProblemDetails:
       description: RFC 7807 problem details returned on V2 API errors.
       type: object
@@ -325,7 +332,7 @@ components:
           type: string
         type:
           type: string
-    teams.TeamMemberStatus:
+    user_groups.UserGroupMemberStatus:
       type: object
       required:
         - id

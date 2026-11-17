@@ -170,8 +170,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/orgs/current/info:
     patch:
@@ -255,6 +258,14 @@ components:
               format: email
             - type: 'null'
           title: Security Contact
+        security_contacts:
+          anyOf:
+            - items:
+                type: string
+                format: email
+              type: array
+            - type: 'null'
+          title: Security Contacts
         max_pat_expiry_days:
           anyOf:
             - type: integer
@@ -463,6 +474,12 @@ components:
             - type: string
             - type: 'null'
           title: Security Contact
+        security_contacts:
+          items:
+            type: string
+          type: array
+          title: Security Contacts
+          default: []
         max_pat_expiry_days:
           anyOf:
             - type: integer
@@ -485,6 +502,10 @@ components:
         can_export_usage_backfill:
           type: boolean
           title: Can Export Usage Backfill
+          default: false
+        can_access_instance_admin:
+          type: boolean
+          title: Can Access Instance Admin
           default: false
         llm_auth_proxy_enabled:
           type: boolean
@@ -650,6 +671,11 @@ components:
           type: integer
           title: Max Free Langgraph Cloud Deployments
           default: 0
+        free_deployment_ttl_days:
+          anyOf:
+            - type: integer
+            - type: 'null'
+          title: Free Deployment Ttl Days
         sandbox_enabled:
           type: boolean
           title: Sandbox Enabled
@@ -947,6 +973,7 @@ components:
         - plus_01_2026
         - plus_07_2026
         - plus_10_2026
+        - plus_11_2026
         - enterprise
         - developer_legacy
         - plus_legacy

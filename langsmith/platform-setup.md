@@ -14,7 +14,7 @@ Set up **LangSmith** for [observability](observability.md), [evaluation](evaluat
 
 > [!NOTE]
 >
-> If you also want to deploy agents in production, you can use [**LangSmith Agent Server**](deployment.md) with Cloud, BYOC, or Self-hosted.
+> If you also want to deploy agents in production, you can use [**LangSmith Agent Server**](agent-server.md) with Cloud, BYOC, or Self-hosted.
 
 > [card] [Cloud](cloud.md)
 >
@@ -41,11 +41,11 @@ Self-hosted and BYOC are available on the [Enterprise plan](https://docs.langcha
 
 [Managed Deep Agents](python/managed-deep-agents-overview.md) is available in public beta on Cloud and BYOC. For BYOC, use Managed Deep Agents CLI and SDK v0.10 or later.
 
-Cloud, BYOC, and Self-hosted support [LangSmith Agent Server](deployment.md) for agent workloads. Refer to the [LangSmith Agent Server overview](deployment.md) to pick a topology (Cloud managed, BYOC, Hybrid, self-hosted with control plane, or standalone).
+Cloud, BYOC, and Self-hosted support [LangSmith Agent Server](agent-server.md) for agent workloads. Refer to [Deploy agents](deploy-overview.md) to pick a topology (Cloud managed, BYOC, Hybrid, self-hosted with control plane, or standalone).
 
 ## Common setups
 
-* **Fastest to start, managed everything.** [LangSmith Cloud](cloud.md) paired with [LangSmith Agent Server](deployment.md) on Cloud. LangChain hosts the platform, and, when you use LangSmith Agent Server, also hosts your [Agent Servers](agent-server.md).
+* **Fastest to start, managed everything.** [LangSmith Cloud](cloud.md) paired with [LangSmith Agent Server](agent-server.md) on Cloud. LangChain hosts the platform, and, when you use LangSmith Agent Server, also hosts your Agent Servers.
 * **Bring Your Own Cloud.** Data stays in your VPC, and LangChain manages the infrastructure. Refer to the [BYOC overview](byoc.md).
 * **Observability data must stay in your infrastructure.** Self-hosted LangSmith, paired with any Agent Server hosting topology, including [self-hosted Agent Server hosting](deploy-with-control-plane.md) for agent workloads.
 * **Managed observability, agents in your VPC.** LangSmith Cloud paired with [Hybrid](hybrid.md) LangSmith Agent Server. Traces and evaluations stay on SaaS while agent workloads stay in your infrastructure.

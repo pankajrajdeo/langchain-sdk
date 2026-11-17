@@ -1,13 +1,13 @@
 ---
 title: "blog"
-description: "Index of 559 pages and 0 subdirectories under blog."
+description: "Index of 561 pages and 0 subdirectories under blog."
 category: "index"
 tags: [index, blog]
 ---
 
 # blog
 
-559 pages here.
+561 pages here.
 
 ## Files
 
@@ -201,6 +201,7 @@ tags: [index, blog]
 - [Fine-tuning ChatGPT: Surpassing GPT-4 Summarization Performance–A 63% Cost Reduction and 11x Speed Enhancement using Synthetic Data and LangSmith](fine-tuning-chatgpt-surpassing-gpt-4-summarization.md) - Learn how fine-tuning ChatGPT with synthetic data surpasses GPT-4 summarization while cutting costs by 63% and boosting speed 11x using LangSmith.
 - [Your coding agent bill doubled. Here’s how to fix it.](fix-your-coding-agent-bill.md) - Learn why coding agent bills spiral out of control — and how to trace, compare, and govern spend across Claude Code, Cursor, Copilot, and more in one place.
 - [Label Studio x LangChain: From Foundation Models to Fine-Tuned Applications Using Label Studio](from-foundation-models-to-fine-tuned-applications-using-label-studio.md) - Build and improve LLM QA systems with Label Studio and LangChain. Capture user interactions, annotate responses, and fine-tune with human feedback.
+- [From tasks to goals](from-tasks-to-goals.md) - LangChain CEO and Co-founder Harrison Chase shares how we&#39;re moving from task-specific agents to goal-focused agents. Learn more.
 - [From Traces to Insights: Understanding Agent Behavior at Scale](from-traces-to-insights-understanding-agent-behavior-at-scale.md) - Understanding agent behavior at scale: How LangSmith Insights Agent analyzes thousands of traces to surface failure patterns beyond traditional metrics.
 - [Full Text Search in SmithDB: Constructing and Querying our Inverted Index (Pt. 2)](full-text-search-in-smithdb-constructing-and-querying-our-inverted-index-pt-2.md) - A technical deep dive into how LangChain built full-text search in SmithDB, from constructing and compacting inverted indexes to routing queries across local SSD and object storage.
 - [Full Text Search in SmithDB: Designing an Inverted Index for Object Storage](full-text-search-in-smithdb-designing-an-inverted-index-for-object-storage.md) - SmithDB supports full-text search and JSON filtering over agent traces with a median (P50) latency of 400 ms, even though the underlying data consists of large, deeply nested JSON documents stored in...
@@ -550,6 +551,7 @@ tags: [index, blog]
 - [UX for Agents, Part 3: Spreadsheet, Generative, and Collaborative UI/UX](ux-for-agents-part-3.md) - Learn about spreadsheet UX for batch agent workloads, Generative UI, and collaborative UX with agents.
 - [Villagers x LangSmith: Simulating multi-agent social networks with LangSmith](villagers-x-langsmith-simulating-multi-agent-social-networks.md) - Build realistic multi-agent social network simulations with LangSmith. Debug complex prompts, trace parallel agents, and predict user behavior at scale.
 - [Embeddings Drive the Quality of RAG: Voyage AI in Chat LangChain](voyage-embeddings-in-langchain-and-chat-langchain.md) - Improve RAG chatbot quality with better embeddings. See how Voyage AI boosts retrieval accuracy and response quality in Chat LangChain by 44%.
+- [We rebuilt LangSmith around the agent](we-rebuilt-langsmith-around-the-agent.md) - We reorganized LangSmith around a single agent record. Build, run, improve, and govern every agent from one place, on any framework or runtime.
 - [Building (and Breaking) WebLangChain](weblangchain.md) - Build an open-source web research assistant with RAG and LangChain. Key engineering decisions, tradeoffs, and implementation with full code.
 - [[Week of 7/8] LangChain Release Notes](week-of-7-8-langchain-release-notes.md) - See new use cases for building &amp; deploying with LangGraph Cloud, revamped LangGraph docs, and more on self-improving evaluators in LangSmith. Plus, hear the latest agents trends — and learn more...
 - [What is a &quot;cognitive architecture&quot;?](what-is-a-cognitive-architecture.md) - The second installment in our &quot;In the Loop&quot; series, focusing on what cognitive architecture means.

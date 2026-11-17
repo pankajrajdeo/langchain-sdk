@@ -172,8 +172,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/platform/orgs/current/members:
     get:
@@ -365,6 +368,8 @@ components:
     orgs.LinkedLoginMethod:
       type: object
       properties:
+        id:
+          type: string
         provider:
           type: string
         provisioning:

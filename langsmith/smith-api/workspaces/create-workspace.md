@@ -172,8 +172,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/workspaces:
     post:
@@ -194,13 +197,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/app__schemas__Tenant'
-        '422':
-          description: Validation Error
+                $ref: '#/components/schemas/TenantForUser'
+        '409':
           content:
-            application/json:
+            application/problem+json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: '#/components/schemas/ProblemDetails'
+          description: Another workspace already has this name or ID.
+        '422':
+          description: The request has an invalid path, query, header, or body parameter.
+          content:
+            application/problem+json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ProblemDetails'
+                  - type: object
+                    required:
+                      - errors
+                    properties:
+                      errors:
+                        type: array
+                        items:
+                          type: string
+                        description: >-
+                          One message per invalid parameter, prefixed with its
+                          location.
       security:
         - API Key: []
         - Organization ID: []
@@ -228,7 +249,7 @@ components:
         - display_name
       title: WorkspaceCreate
       description: Creation model for the workspace.
-    app__schemas__Tenant:
+    TenantForUser:
       properties:
         id:
           type: string
@@ -273,6 +294,29 @@ components:
             - type: string
             - type: 'null'
           title: Data Plane Region
+        read_only:
+          type: boolean
+          title: Read Only
+          default: false
+          deprecated: true
+        role_id:
+          anyOf:
+            - type: string
+              format: uuid
+            - type: 'null'
+          title: Role Id
+        role_name:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Role Name
+        permissions:
+          anyOf:
+            - items:
+                type: string
+              type: array
+            - type: 'null'
+          title: Permissions
       type: object
       required:
         - id
@@ -280,17 +324,29 @@ components:
         - display_name
         - is_personal
         - is_deleted
-      title: Tenant
-      description: Tenant schema.
-    HTTPValidationError:
+      title: TenantForUser
+    ProblemDetails:
       properties:
+        type:
+          type: string
+          title: Type
+        title:
+          type: string
+          title: Title
+        status:
+          type: integer
+          title: Status
         detail:
-          items:
-            type: string
-          type: array
+          type: string
           title: Detail
       type: object
-      title: HTTPValidationError
+      required:
+        - type
+        - title
+        - status
+        - detail
+      title: ProblemDetails
+      description: Problem details describing an error response, as defined by RFC 7807.
   securitySchemes:
     API Key:
       type: apiKey

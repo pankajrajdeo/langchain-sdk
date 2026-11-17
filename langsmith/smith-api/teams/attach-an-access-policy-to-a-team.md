@@ -1,6 +1,6 @@
 ---
 title: "Attach an access policy to a team"
-description: "Attaches an existing access policy in the organization to a team. A workspace scoped team's policy applies in its workspace. An organization-wide team's policy applies in the workspace_id given, or..."
+description: "Deprecated: use the corresponding /user-groups endpoint. Attaches an existing access policy in the organization to a team. A workspace scoped team's policy applies in its workspace. An..."
 source: "https://docs.langchain.com/langsmith/smith-api/teams/attach-an-access-policy-to-a-team"
 category: "docs"
 tags: [docs, langsmith, smith-api, teams, attach-an-access-policy-to-a-team]
@@ -8,7 +8,8 @@ tags: [docs, langsmith, smith-api, teams, attach-an-access-policy-to-a-team]
 
 # Attach an access policy to a team
 
-> Attaches an existing access policy in the organization to a team. A workspace
+> Deprecated: use the corresponding /user-groups endpoint.
+Attaches an existing access policy in the organization to a team. A workspace
 scoped team's policy applies in its workspace. An organization-wide team's policy applies
 in the workspace_id given, or in every workspace the team has access to when it is
 omitted. Returns 201 when the policy is attached, or 200 when it was already
@@ -178,8 +179,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/platform/orgs/current/teams/{team_id}/access-policies:
     post:
@@ -187,6 +191,8 @@ paths:
         - teams
       summary: Attach an access policy to a team
       description: >-
+        Deprecated: use the corresponding /user-groups endpoint.
+
         Attaches an existing access policy in the organization to a team. A
         workspace
 
@@ -220,14 +226,15 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/teams.AttachTeamAccessPolicyPayload'
+              $ref: >-
+                #/components/schemas/user_groups.AttachUserGroupAccessPolicyPayload
       responses:
         '200':
           description: The policy was already attached
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/teams.TeamAccessPolicy'
+                $ref: '#/components/schemas/user_groups.UserGroupAccessPolicy'
         '201':
           description: The policy was attached
           headers:
@@ -238,7 +245,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/teams.TeamAccessPolicy'
+                $ref: '#/components/schemas/user_groups.UserGroupAccessPolicy'
         '400':
           description: >-
             invalid team_id, access_policy_id or workspace_id, or the workspace
@@ -274,6 +281,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/shared.ProblemDetails'
+      deprecated: true
       security:
         - API Key: []
           Organization ID: []
@@ -281,7 +289,7 @@ paths:
           Organization ID: []
 components:
   schemas:
-    teams.AttachTeamAccessPolicyPayload:
+    user_groups.AttachUserGroupAccessPolicyPayload:
       type: object
       required:
         - access_policy_id
@@ -291,17 +299,17 @@ components:
           format: uuid
         workspace_id:
           description: >-
-            WorkspaceID limits an organization-wide team's policy to one
+            WorkspaceID limits an organization-wide user group's policy to one
             workspace. Omit it to apply
 
-            the policy in every workspace the team has access to. A workspace
-            team's policy always
+            the policy in every workspace the user group has access to. A
+            workspace user group's policy always
 
-            applies in the team's workspace, so this must be omitted or match
-            it.
+            applies in the user group's workspace, so this must be omitted or
+            match it.
           type: string
           format: uuid
-    teams.TeamAccessPolicy:
+    user_groups.UserGroupAccessPolicy:
       type: object
       required:
         - attached_at
@@ -329,7 +337,7 @@ components:
             WorkspaceID is the workspace the policy applies in. It is omitted
             when the policy applies
 
-            in every workspace an organization-wide team has access to.
+            in every workspace an organization-wide user group has access to.
           type: string
           format: uuid
     shared.ProblemDetails:

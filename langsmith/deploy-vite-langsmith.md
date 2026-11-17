@@ -10,7 +10,7 @@ tags: [docs, langsmith, deploy-vite-langsmith]
 
 > Deploy a LangChain deep agent to LangSmith Agent Server and stream from a Vite React chat UI on Vercel, Netlify, or Cloudflare Pages.
 
-This example gets you from a local checkout to a deployed LangChain deep agent with a working chat UI. The backend runs on [LangSmith Agent Server](deployment.md), and the frontend is a Vite + React app that streams from it.
+This example gets you from a local checkout to a deployed LangChain deep agent with a working chat UI. The backend runs on [LangSmith Agent Server](agent-server.md), and the frontend is a Vite + React app that streams from it.
 
 Use this guide when you want to run the agent locally, deploy it to LangSmith, and point the UI at the deployed Agent Server.
 
@@ -298,7 +298,7 @@ The agent and the UI deploy separately. After `pnpm run deploy` succeeds, host t
 ## See also
 
 * [Frameworks and platforms overview](deploy-frameworks-and-platforms.md)
-* [LangSmith Agent Server overview](deployment.md)
+* [Deploy agents](deploy-overview.md)
 * [LangGraph CLI](cli.md)
 * [Deep Agents going to production](../deepagents/going-to-production.md)
 

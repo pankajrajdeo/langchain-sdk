@@ -2597,7 +2597,7 @@ If you are using [skills](#skills) or [memory](#memory), you must add the expect
 >
 > > [!NOTE]
 > >
-> > When deploying to [LangSmith Agent Server](../../langsmith/deployment.md), omit the `store` parameter. The platform automatically provisions a store for your agent.
+> > When deploying to [LangSmith Agent Server](../../langsmith/agent-server.md#persistence), omit the `store` parameter. The platform automatically provisions a store for your agent.
 >
 > > [!TIP]
 > >

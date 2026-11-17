@@ -1,13 +1,13 @@
 ---
 title: "langsmith/smith-api/datasets"
-description: "Index of 30 pages and 0 subdirectories under langsmith/smith-api/datasets."
+description: "Index of 31 pages and 0 subdirectories under langsmith/smith-api/datasets."
 category: "index"
 tags: [index, langsmith, smith-api, datasets]
 ---
 
 # langsmith/smith-api/datasets
 
-30 pages here.
+31 pages here.
 
 ## Files
 
@@ -28,6 +28,7 @@ tags: [index, langsmith, smith-api, datasets]
 - [Get dataset splits](get-dataset-splits.md) - List the split names a dataset's examples belong to.
 - [Get dataset version](get-dataset-version.md) - Get dataset version by as_of or exact tag.
 - [Get dataset versions](get-dataset-versions.md) - Get dataset versions.
+- [List datasets](list-datasets.md) - Returns one page of the datasets in the workspace, filtered and sorted by the query parameters. Pass the next_cursor of a response as cursor, with the same filters and sort, to get the next page...
 - [Read dataset share state](read-dataset-share-state.md) - Get a dataset's share token.
 - [Read dataset](read-dataset.md) - Get a specific dataset.
 - [Read datasets stream](read-datasets-stream.md) - Stream all datasets by query params and owner as JSON patches.

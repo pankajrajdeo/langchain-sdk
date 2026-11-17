@@ -21,7 +21,7 @@ tags: [index, langsmith, smith-api, workspaces]
 - [Create workspace](create-workspace.md) - Create a new workspace.
 - [Delete current workspace member](delete-current-workspace-member.md) - /langsmith/langsmith-platform-openapi.json delete /api/v1/workspaces/current/members/{identity_id}
 - [Delete current workspace pending member](delete-current-workspace-pending-member.md) - /langsmith/langsmith-platform-openapi.json delete /api/v1/workspaces/current/members/{identity_id}/pending
-- [Delete current workspace secret](delete-current-workspace-secret.md) - Delete a workspace secret and its allowed hosts. Missing keys succeed.
+- [Delete current workspace secret](delete-current-workspace-secret.md) - Delete a workspace secret and its allowed hosts.
 - [Delete pending workspace invite](delete-pending-workspace-invite.md) - /langsmith/langsmith-platform-openapi.json delete /api/v1/workspaces/pending/{id}
 - [Delete tag key](delete-tag-key.md) - /langsmith/langsmith-platform-openapi.json delete /api/v1/workspaces/current/tag-keys/{tag_key_id}
 - [Delete tag value](delete-tag-value.md) - /langsmith/langsmith-platform-openapi.json delete /api/v1/workspaces/current/tag-keys/{tag_key_id}/tag-values/{tag_value_id}
@@ -37,7 +37,7 @@ tags: [index, langsmith, smith-api, workspaces]
 - [Get tag key](get-tag-key.md) - /langsmith/langsmith-platform-openapi.json get /api/v1/workspaces/current/tag-keys/{tag_key_id}
 - [Get tag value](get-tag-value.md) - /langsmith/langsmith-platform-openapi.json get /api/v1/workspaces/current/tag-keys/{tag_key_id}/tag-values/{tag_value_id}
 - [Get workspace](get-workspace.md) - Get a single workspace by ID, scoped to the current org and identity.
-- [List current workspace secrets](list-current-workspace-secrets.md) - /langsmith/langsmith-platform-openapi.json get /api/v1/workspaces/current/secrets
+- [List current workspace secrets](list-current-workspace-secrets.md) - List the current workspace's secret keys. Values are never returned.
 - [List pending workspace invites](list-pending-workspace-invites.md) - Get all workspaces visible to this auth
 - [List tag keys](list-tag-keys.md) - /langsmith/langsmith-platform-openapi.json get /api/v1/workspaces/current/tag-keys
 - [List tag values](list-tag-values.md) - /langsmith/langsmith-platform-openapi.json get /api/v1/workspaces/current/tag-keys/{tag_key_id}/tag-values

@@ -172,8 +172,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/workspaces/pending:
     get:
@@ -189,7 +192,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/app__schemas__Tenant'
+                  $ref: '#/components/schemas/Tenant'
                 type: array
                 title: >-
                   Response List Pending Workspace Invites Api V1 Workspaces
@@ -198,7 +201,7 @@ paths:
         - Bearer Auth: []
 components:
   schemas:
-    app__schemas__Tenant:
+    Tenant:
       properties:
         id:
           type: string

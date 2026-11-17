@@ -414,7 +414,7 @@ make deploy
 
 `enable_agent_builder` was removed in chart v16. Setting it to `true` fails validation at `terraform plan`, so delete it from existing `tfvars` files and use `enable_fleet`. `enable_standalone_polly` and `enable_standalone_insights` remain as legacy shorthand that enables the add-on with external storage (`enable_polly = true` with `polly_storage = "external"`, and the same for Insights).
 
-For details on agent deployment, see [Agent Server hosting](enable-self-hosted-deployment.md).
+For details on agent deployment, see [Agent Server hosting](enable-self-hosted-agent-server.md).
 
 ### Fleet
 
@@ -543,7 +543,7 @@ The manifest targets the `langsmith-agents` namespace; edit it for a different n
 * Reference the [AWS variables](self-host-terraform-aws-variables.md) and the [quick reference](self-host-terraform-aws-quick-reference.md).
 * Review the [AWS architecture](self-host-terraform-aws-architecture.md) for platform layers, IRSA, and module dependencies.
 * When something breaks, check the [AWS troubleshooting guide](self-host-terraform-aws-troubleshooting.md).
-* Enable agent deployment in the UI with [Agent Server hosting](enable-self-hosted-deployment.md).
+* Enable agent deployment in the UI with [Agent Server hosting](enable-self-hosted-agent-server.md).
 
 ***
 

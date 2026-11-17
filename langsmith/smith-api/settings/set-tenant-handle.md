@@ -172,8 +172,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/settings/handle:
     post:
@@ -194,7 +197,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/app__hub__crud__tenants__Tenant'
+                $ref: '#/components/schemas/TenantForUser'
         '422':
           description: Validation Error
           content:
@@ -216,30 +219,82 @@ components:
       required:
         - tenant_handle
       title: SetTenantHandleRequest
-    app__hub__crud__tenants__Tenant:
+    TenantForUser:
       properties:
         id:
           type: string
           format: uuid
           title: Id
-        display_name:
-          type: string
-          title: Display Name
+        organization_id:
+          anyOf:
+            - type: string
+              format: uuid
+            - type: 'null'
+          title: Organization Id
         created_at:
           type: string
           format: date-time
           title: Created At
+        display_name:
+          type: string
+          title: Display Name
+        is_personal:
+          type: boolean
+          title: Is Personal
+        is_deleted:
+          type: boolean
+          title: Is Deleted
         tenant_handle:
           anyOf:
             - type: string
             - type: 'null'
           title: Tenant Handle
+        data_plane_url:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Data Plane Url
+        data_plane_name:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Data Plane Name
+        data_plane_region:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Data Plane Region
+        read_only:
+          type: boolean
+          title: Read Only
+          default: false
+          deprecated: true
+        role_id:
+          anyOf:
+            - type: string
+              format: uuid
+            - type: 'null'
+          title: Role Id
+        role_name:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Role Name
+        permissions:
+          anyOf:
+            - items:
+                type: string
+              type: array
+            - type: 'null'
+          title: Permissions
       type: object
       required:
         - id
-        - display_name
         - created_at
-      title: Tenant
+        - display_name
+        - is_personal
+        - is_deleted
+      title: TenantForUser
     HTTPValidationError:
       properties:
         detail:

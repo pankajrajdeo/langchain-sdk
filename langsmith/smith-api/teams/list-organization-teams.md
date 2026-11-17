@@ -1,6 +1,6 @@
 ---
 title: "List organization teams"
-description: "Lists the organization's teams in name order. A page carries next_cursor, which is the value to send back as cursor for the next page, and null once the last page has been read. A cursor this..."
+description: "Deprecated: use the corresponding /user-groups endpoint. Lists the organization's teams in name order. A page carries next_cursor, which is the value to send back as cursor for the next page, and..."
 source: "https://docs.langchain.com/langsmith/smith-api/teams/list-organization-teams"
 category: "docs"
 tags: [docs, langsmith, smith-api, teams, list-organization-teams]
@@ -8,7 +8,8 @@ tags: [docs, langsmith, smith-api, teams, list-organization-teams]
 
 # List organization teams
 
-> Lists the organization's teams in name order. A page carries next_cursor, which is
+> Deprecated: use the corresponding /user-groups endpoint.
+Lists the organization's teams in name order. A page carries next_cursor, which is
 the value to send back as cursor for the next page, and null once the last page
 has been read. A cursor this endpoint did not issue, or one issued for different
 filters, starts again at the first page. Organization scoped teams are listed when
@@ -180,8 +181,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/platform/orgs/current/teams:
     get:
@@ -189,6 +193,8 @@ paths:
         - teams
       summary: List organization teams
       description: >-
+        Deprecated: use the corresponding /user-groups endpoint.
+
         Lists the organization's teams in name order. A page carries
         next_cursor, which is
 
@@ -257,7 +263,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/teams.ListTeamsResponse'
+                $ref: '#/components/schemas/user_groups.ListTeamsResponse'
         '400':
           description: invalid page_size, workspace_id, parent_team_id or identity_id
           content:
@@ -276,6 +282,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/shared.ProblemDetails'
+      deprecated: true
       security:
         - API Key: []
           Organization ID: []
@@ -283,7 +290,7 @@ paths:
           Organization ID: []
 components:
   schemas:
-    teams.ListTeamsResponse:
+    user_groups.ListTeamsResponse:
       type: object
       required:
         - items
@@ -292,7 +299,7 @@ components:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/teams.TeamListItem'
+            $ref: '#/components/schemas/user_groups.TeamListItem'
         next_cursor:
           anyOf:
             - type: string
@@ -328,7 +335,7 @@ components:
           type: string
         type:
           type: string
-    teams.TeamListItem:
+    user_groups.TeamListItem:
       type: object
       required:
         - created_at
@@ -357,29 +364,25 @@ components:
           format: uuid
         parent_team_id:
           description: >-
-            ParentTeamID is the organization-wide team a workspace team belongs
-            to.
+            ParentUserGroupID is the organization-wide user group a workspace
+            user group belongs to.
 
-            It is omitted for organization-wide teams.
+            It is omitted for organization-wide user groups.
           type: string
           format: uuid
         role_id:
-          description: >-
-            RoleID is the role an organization scoped team is granted in the
-            workspace given by the
-
-            workspace_id filter. It is omitted otherwise.
           type: string
           format: uuid
         role_name:
-          description: RoleName is the display name of RoleID.
           type: string
         updated_at:
           type: string
         workspace_id:
-          description: |-
-            WorkspaceID is the workspace the team belongs to. It is omitted for
-            organization-wide teams.
+          description: >-
+            WorkspaceID is the workspace the user group belongs to. It is
+            omitted for
+
+            organization-wide user groups.
           type: string
           format: uuid
     shared.ParseErrorDetails:

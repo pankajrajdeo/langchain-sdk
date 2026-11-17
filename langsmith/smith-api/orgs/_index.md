@@ -1,13 +1,13 @@
 ---
 title: "langsmith/smith-api/orgs"
-description: "Index of 59 pages and 0 subdirectories under langsmith/smith-api/orgs."
+description: "Index of 60 pages and 0 subdirectories under langsmith/smith-api/orgs."
 category: "index"
 tags: [index, langsmith, smith-api, orgs]
 ---
 
 # langsmith/smith-api/orgs
 
-59 pages here.
+60 pages here.
 
 ## Files
 
@@ -41,6 +41,7 @@ tags: [index, langsmith, smith-api, orgs]
 - [Get current user login methods](get-current-user-login-methods.md) - Get login methods for the current user.
 - [Get dashboard](get-dashboard.md) - /langsmith/langsmith-platform-openapi.json get /api/v1/orgs/current/dashboard
 - [Get granular usage](get-granular-usage.md) - Get granular usage data with flexible grouping.
+- [Get org tracing key](get-org-tracing-key.md) - Get tracing-key metadata with current management authority. Never returns the secret.
 - [Get org usage](get-org-usage.md) - /langsmith/langsmith-platform-openapi.json get /api/v1/orgs/current/billing/usage
 - [Get organization billing info](get-organization-billing-info.md) - /langsmith/langsmith-platform-openapi.json get /api/v1/orgs/current/billing
 - [Get organization info](get-organization-info.md) - /langsmith/langsmith-platform-openapi.json get /api/v1/orgs/current
@@ -50,7 +51,7 @@ tags: [index, langsmith, smith-api, orgs]
 - [List org service keys](list-org-service-keys.md) - /langsmith/langsmith-platform-openapi.json get /api/v1/orgs/current/service-keys
 - [List org tracing keys](list-org-tracing-keys.md) - List your tracing keys and keys visible through organization/workspace access.
 - [List organization roles](list-organization-roles.md) - /langsmith/langsmith-platform-openapi.json get /api/v1/orgs/current/roles
-- [List organizations](list-organizations.md) - Get all orgs visible to this auth
+- [List organizations](list-organizations.md) - List memberships, or all organizations for instance admins opting in or using a PAT.
 - [List pending organization invites](list-pending-organization-invites.md) - Get all pending orgs visible to this auth
 - [List permissions](list-permissions.md) - /langsmith/langsmith-platform-openapi.json get /api/v1/orgs/permissions
 - [List TTL settings](list-ttl-settings.md) - List out the configured TTL settings for a given org (org-level and tenant-level).

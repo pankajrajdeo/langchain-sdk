@@ -1,6 +1,6 @@
 ---
 title: "List a team's workspace grants"
-description: "Lists the workspaces an organization-wide team has access to and its role in each. A workspace scoped team returns 400, since its access to its own workspace is set when it is created. A page carries..."
+description: "Deprecated: use the corresponding /user-groups endpoint. Lists the workspaces an organization-wide team has access to and its role in each. A workspace scoped team returns 400, since its access to..."
 source: "https://docs.langchain.com/langsmith/smith-api/teams/list-a-teams-workspace-grants"
 category: "docs"
 tags: [docs, langsmith, smith-api, teams, list-a-teams-workspace-grants]
@@ -8,7 +8,8 @@ tags: [docs, langsmith, smith-api, teams, list-a-teams-workspace-grants]
 
 # List a team's workspace grants
 
-> Lists the workspaces an organization-wide team has access to and its role in each.
+> Deprecated: use the corresponding /user-groups endpoint.
+Lists the workspaces an organization-wide team has access to and its role in each.
 A workspace scoped team returns 400, since its access to its own workspace is set
 when it is created. A page carries next_cursor, which is the value to send back as
 cursor for the next page, and null once the last page has been read. A cursor this
@@ -177,8 +178,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/platform/orgs/current/teams/{team_id}/workspaces:
     get:
@@ -186,6 +190,8 @@ paths:
         - teams
       summary: List a team's workspace grants
       description: >-
+        Deprecated: use the corresponding /user-groups endpoint.
+
         Lists the workspaces an organization-wide team has access to and its
         role in each.
 
@@ -231,7 +237,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/teams.ListTeamWorkspaceGrantsResponse'
+                $ref: >-
+                  #/components/schemas/user_groups.ListUserGroupWorkspaceGrantsResponse
         '400':
           description: invalid team_id or page_size, or the team is workspace scoped
           content:
@@ -256,6 +263,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/shared.ProblemDetails'
+      deprecated: true
       security:
         - API Key: []
           Organization ID: []
@@ -263,7 +271,7 @@ paths:
           Organization ID: []
 components:
   schemas:
-    teams.ListTeamWorkspaceGrantsResponse:
+    user_groups.ListUserGroupWorkspaceGrantsResponse:
       type: object
       required:
         - items
@@ -272,7 +280,7 @@ components:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/teams.TeamWorkspaceGrant'
+            $ref: '#/components/schemas/user_groups.UserGroupWorkspaceGrant'
         next_cursor:
           anyOf:
             - type: string
@@ -308,7 +316,7 @@ components:
           type: string
         type:
           type: string
-    teams.TeamWorkspaceGrant:
+    user_groups.UserGroupWorkspaceGrant:
       type: object
       required:
         - created_at

@@ -1,13 +1,13 @@
 ---
 title: "api-reference/deployments-v2"
-description: "Index of 17 pages and 0 subdirectories under api-reference/deployments-v2."
+description: "Index of 18 pages and 0 subdirectories under api-reference/deployments-v2."
 category: "index"
 tags: [index, api-reference, deployments-v2]
 ---
 
 # api-reference/deployments-v2
 
-17 pages here.
+18 pages here.
 
 ## Files
 
@@ -21,6 +21,7 @@ tags: [index, api-reference, deployments-v2]
 - [Interrupt Deployment Revision](interrupt-deployment-revision.md) - Interrupt an in-progress revision build/deploy.
 - [List Deployment Log Entries](list-deployment-log-entries.md) - List build or deploy log entries for a deployment.
 - [List Deployment Logs](list-deployment-logs.md) - List deploy logs for a deployment (across all revisions).
+- [List Deployment Namespaces](list-deployment-namespaces.md) - Return all allowed Kubernetes namespaces for the deployment namespace selector.
 - [List Deployments](list-deployments.md) - List all deployments.
 - [List Revision Logs](list-revision-logs.md) - List build or deploy logs for a specific revision of a deployment.
 - [List Revisions](list-revisions.md) - List all revisions for a deployment.

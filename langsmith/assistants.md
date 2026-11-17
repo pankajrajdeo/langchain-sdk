@@ -18,7 +18,7 @@ The Agent Server API provides several endpoints for creating and managing assist
 
 > [!NOTE]
 >
-> Assistants are a [LangSmith Agent Server](deployment.md) concept. They are not available in the open source LangGraph library.
+> Assistants are a [LangSmith Agent Server](agent-server.md) concept. They are not available in the open source LangGraph library.
 
 ## How assistants work with deployments
 
@@ -57,7 +57,7 @@ Assistants have several key features:
 
 Assistants build on the LangGraph open source concept of [configuration](../langgraph/graph-api.md#runtime-context).
 
-While configuration is available in the open source LangGraph library, assistants are only present in [LangSmith Agent Server](deployment.md) because they are tightly coupled to your deployed graph. Upon deployment, [Agent Server](agent-server.md) will automatically create a default assistant for each graph using the graph's default configuration settings.
+While configuration is available in the open source LangGraph library, assistants are only present in LangSmith Agent Server because they are tightly coupled to your deployed graph. Upon deployment, Agent Server will automatically create a default assistant for each graph using the graph's default configuration settings.
 
 In practice, an assistant is just an *instance* of a graph with a specific configuration. Therefore, multiple assistants can reference the same graph but can contain different configurations (e.g. prompts, models, tools). The LangSmith Agent Server API provides several endpoints for creating and managing assistants. See the [API reference](server-api-ref.md) and [this how-to](configuration-cloud.md) for more details on how to create assistants.
 

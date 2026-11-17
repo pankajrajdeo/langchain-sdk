@@ -1,12 +1,14 @@
 ---
 title: "List current workspace secrets"
-description: "/langsmith/langsmith-platform-openapi.json get /api/v1/workspaces/current/secrets"
+description: "List the current workspace's secret keys. Values are never returned."
 source: "https://docs.langchain.com/langsmith/smith-api/workspaces/list-current-workspace-secrets"
 category: "docs"
 tags: [docs, langsmith, smith-api, workspaces, list-current-workspace-secrets]
 ---
 
 # List current workspace secrets
+
+> List the current workspace's secret keys. Values are never returned.
 
 ## OpenAPI
 
@@ -170,14 +172,18 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/workspaces/current/secrets:
     get:
       tags:
         - workspaces
       summary: List current workspace secrets
+      description: List the current workspace's secret keys. Values are never returned.
       operationId: list_current_workspace_secrets_api_v1_workspaces_current_secrets_get
       parameters:
         - name: include_configs
@@ -202,11 +208,23 @@ paths:
                   Response List Current Workspace Secrets Api V1 Workspaces
                   Current Secrets Get
         '422':
-          description: Validation Error
+          description: The request has an invalid path, query, header, or body parameter.
           content:
-            application/json:
+            application/problem+json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                allOf:
+                  - $ref: '#/components/schemas/ProblemDetails'
+                  - type: object
+                    required:
+                      - errors
+                    properties:
+                      errors:
+                        type: array
+                        items:
+                          type: string
+                        description: >-
+                          One message per invalid parameter, prefixed with its
+                          location.
       security:
         - API Key: []
         - Tenant ID: []
@@ -218,6 +236,7 @@ components:
         key:
           type: string
           title: Key
+          description: Secret name, e.g. OPENAI_API_KEY.
         configs:
           items:
             $ref: '#/components/schemas/SecretConfig'
@@ -233,15 +252,28 @@ components:
       description: >-
         A workspace secret's key and the hosts it may be sent to. Never the
         value.
-    HTTPValidationError:
+    ProblemDetails:
       properties:
+        type:
+          type: string
+          title: Type
+        title:
+          type: string
+          title: Title
+        status:
+          type: integer
+          title: Status
         detail:
-          items:
-            type: string
-          type: array
+          type: string
           title: Detail
       type: object
-      title: HTTPValidationError
+      required:
+        - type
+        - title
+        - status
+        - detail
+      title: ProblemDetails
+      description: Problem details describing an error response, as defined by RFC 7807.
     SecretConfig:
       properties:
         host_pattern:
@@ -271,6 +303,7 @@ components:
           description: Omitted for a built-in default.
         source:
           $ref: '#/components/schemas/SecretConfigSource'
+          description: DEFAULT for a built-in provider host, CUSTOM for one an admin set.
         created_at:
           anyOf:
             - type: string

@@ -198,7 +198,7 @@ Timeouts and error handlers are Python-only; retry policies continue to work in 
 
 ## `deepagents` v0.5.0
 
-* **[Async subagents](deepagents/async-subagents.md)**: Deep Agents can launch non-blocking background tasks, so users can continue interacting with the agent while subagents work concurrently. Requires [LangSmith Deployment](langsmith/deployment.md) for sub-agents.
+* **[Async subagents](deepagents/async-subagents.md)**: Deep Agents can launch non-blocking background tasks, so users can continue interacting with the agent while subagents work concurrently. Requires [LangSmith Deployment](langsmith/deploy-overview.md) for sub-agents.
 
 * **Multi-modal support**: The `read_file` tool now supports PDFs, audio, and video files in addition to images.
 

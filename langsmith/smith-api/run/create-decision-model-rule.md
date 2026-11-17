@@ -174,8 +174,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/runs/rules/decision-models:
     post:
@@ -334,6 +337,16 @@ components:
             - type: 'null'
           title: Filter
           description: Only evaluate runs that match this filter.
+        group_by:
+          anyOf:
+            - type: string
+              const: thread_id
+            - type: 'null'
+          title: Group By
+          description: >-
+            Set to thread_id to evaluate each thread once it goes idle, instead
+            of each run. Requires session_id. Decision models don't support
+            trajectory_id.
       additionalProperties: false
       type: object
       required:
@@ -399,6 +412,11 @@ components:
             - type: string
             - type: 'null'
           title: Tree Filter
+        thread_filter:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Thread Filter
         add_to_annotation_queue_id:
           anyOf:
             - type: string

@@ -172,8 +172,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/usage-limits:
     put:
@@ -213,6 +216,7 @@ components:
           $ref: '#/components/schemas/UsageLimitType'
         limit_value:
           type: integer
+          maximum: 9007199254740991
           title: Limit Value
         id:
           type: string
@@ -245,6 +249,7 @@ components:
           $ref: '#/components/schemas/UsageLimitType'
         limit_value:
           type: integer
+          maximum: 9007199254740991
           title: Limit Value
         id:
           type: string
@@ -277,6 +282,10 @@ components:
           type: string
           format: date-time
           title: Updated At
+        is_inherited_from_org_default:
+          type: boolean
+          title: Is Inherited From Org Default
+          default: false
       type: object
       required:
         - limit_type

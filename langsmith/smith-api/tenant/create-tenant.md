@@ -172,8 +172,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/tenants:
     post:
@@ -194,7 +197,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/app__schemas__Tenant'
+                $ref: '#/components/schemas/Tenant'
         '422':
           description: Validation Error
           content:
@@ -236,7 +239,7 @@ components:
         - display_name
       title: TenantCreate
       description: Creation model for the tenant.
-    app__schemas__Tenant:
+    Tenant:
       properties:
         id:
           type: string

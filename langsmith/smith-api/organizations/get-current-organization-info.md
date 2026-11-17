@@ -172,8 +172,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/platform/orgs/current/info:
     get:
@@ -231,6 +234,8 @@ components:
             - type: string
             - type: 'null'
         byoc_create_saas_workspace_enabled:
+          type: boolean
+        can_access_instance_admin:
           type: boolean
         can_export_usage_backfill:
           type: boolean
@@ -349,6 +354,10 @@ components:
           type: string
         security_contact:
           type: string
+        security_contacts:
+          items:
+            type: string
+          type: array
         sso_login_slug:
           type: string
         sso_only:
@@ -382,10 +391,10 @@ components:
           description: Indicates whether this org can provision BYOC data planes.
           type: boolean
         byoc_external_id:
-          readOnly: true
           description: >-
             ByocExternalID is the organization's assigned AWS external ID,
             stored only in org config.
+          readOnly: true
           anyOf:
             - type: string
             - type: 'null'
@@ -583,6 +592,16 @@ components:
             Metronome custom fields. nil or negative means unlimited; 0 blocks
             all runs.
           type: number
+        free_deployment_ttl_days:
+          description: >-
+            FreeDeploymentTTLDays is the lifetime in days of the free
+            deployments this org
+
+            creates; they are deleted when it ends and limited to the
+            SERVERLESS_S tier.
+
+            nil or a value <= 0 means free deployments never expire.
+          type: integer
         gateway_pii_redaction_enabled:
           description: |-
             GatewayPIIRedactionEnabled indicates whether this org can use PII

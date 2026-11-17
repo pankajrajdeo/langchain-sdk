@@ -174,8 +174,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/platform/issues/{id}:
     get:
@@ -338,6 +341,17 @@ components:
           type: string
         traces:
           type: object
+        type:
+          description: >-
+            "actionable" (there is something to do; it may carry PRs or
+            LangSmith
+
+            assets) or "finding" (an observation only). Defaults to
+            "actionable".
+          type: string
+          enum:
+            - actionable
+            - finding
         updated_at:
           type: string
         validation_result:

@@ -20,7 +20,7 @@ Each feature has its own setup guide. Follow only the guides for the features yo
 * **[Engine](engine-self-hosted.md)**: Diagnose recurring issues and propose fixes. Engine requires Sandboxes, a license with the Engine entitlement, a model configuration, and Helm chart version 0.16.0 or later. [Air-gapped installations](engine-self-hosted.md#air-gapped-installations) and your own model providers require Helm chart version 0.17.0 or later.
 * **[Fleet](enable-self-hosted-fleet.md)**: Create and manage no-code agents. Its guide covers Fleet services and optional tools and triggers.
 * **[LLM Gateway](llm-gateway-self-hosted.md)**: Route model calls and apply policies. It requires Helm chart version 0.17.1 or later. Its guide covers service connectivity, provider configuration, and your first gateway call.
-* **[Agent Server hosting](enable-self-hosted-deployment.md)**: Deploy and manage Agent Servers through the LangSmith UI. Its guide covers KEDA, ingress, the control plane, and the data plane.
+* **[Agent Server hosting](enable-self-hosted-agent-server.md)**: Deploy and manage Agent Servers through the LangSmith UI. Its guide covers KEDA, ingress, the control plane, and the data plane.
 
 ***
 

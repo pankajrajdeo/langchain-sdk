@@ -10,7 +10,7 @@ tags: [docs, langsmith, javascript, managed-deep-agents-mcp-endpoint]
 
 > Expose a deployed Managed Deep Agent as a tool to MCP clients such as Claude Code.
 
-Managed Deep Agents deployments run on [LangSmith Agent Server](../agent-server-overview.md), so every deployment serves the Agent Server [Model Context Protocol](https://modelcontextprotocol.io/introduction) (MCP) endpoint at `/mcp`. Any MCP client that supports the Streamable HTTP transport can call the deployed agent as a tool, so another assistant or agent can delegate work to it without calling the deployment API directly.
+Managed Deep Agents deployments run on [LangSmith Agent Server](../agent-server.md), so every deployment serves the Agent Server [Model Context Protocol](https://modelcontextprotocol.io/introduction) (MCP) endpoint at `/mcp`. Any MCP client that supports the Streamable HTTP transport can call the deployed agent as a tool, so another assistant or agent can delegate work to it without calling the deployment API directly.
 
 This page covers how to find the Managed Deep Agents URL and authenticate. For protocol behavior and generic Agent Server client setup, see [MCP endpoint in Agent Server](../server-mcp.md).
 
@@ -146,7 +146,7 @@ To retain knowledge across calls, [opt in to durable memory](managed-deep-agents
 
 ## Next steps
 
-> [card] [Agent Server](../agent-server-overview.md)
+> [card] [Agent Server](../agent-server.md)
 >
 > Explore the runtime that hosts every Managed Deep Agents deployment.
 

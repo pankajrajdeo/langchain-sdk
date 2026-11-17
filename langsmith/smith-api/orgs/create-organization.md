@@ -170,8 +170,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/orgs:
     post:
@@ -199,6 +202,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
       security:
+        - API Key: []
         - Bearer Auth: []
 components:
   schemas:
@@ -323,6 +327,12 @@ components:
             - type: string
             - type: 'null'
           title: Security Contact
+        security_contacts:
+          items:
+            type: string
+          type: array
+          title: Security Contacts
+          default: []
         max_pat_expiry_days:
           anyOf:
             - type: integer
@@ -432,6 +442,7 @@ components:
         - plus_01_2026
         - plus_07_2026
         - plus_10_2026
+        - plus_11_2026
         - enterprise
         - developer_legacy
         - plus_legacy
@@ -447,6 +458,10 @@ components:
         - premier
       title: PaymentPlanTier
   securitySchemes:
+    API Key:
+      type: apiKey
+      in: header
+      name: X-API-Key
     Bearer Auth:
       type: http
       description: >-

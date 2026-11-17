@@ -31,7 +31,7 @@ my-app/
 
 > [!TIP]
 >
-> LangSmith Agent Server supports deploying a [LangGraph](../langgraph/overview.md) *graph*. However, the implementation of a *node* of a graph can contain arbitrary code. This means any framework can be implemented within a node and deployed on LangSmith Agent Server. This lets you implement your core application logic without using additional LangGraph OSS APIs while still using LangSmith for [deployment](deployment.md), scaling, and [observability](observability.md). For more details, refer to [Use any framework with LangSmith Agent Server](application-structure.md#use-any-framework-with-langsmith-deployment).
+> LangSmith Agent Server supports deploying a [LangGraph](../langgraph/overview.md) *graph*. However, the implementation of a *node* of a graph can contain arbitrary code. This means any framework can be implemented within a node and deployed on LangSmith Agent Server. This lets you implement your core application logic without using additional LangGraph OSS APIs while still using LangSmith for [deployment](deploy-overview.md), scaling, and [observability](observability.md). For more details, refer to [Use any framework with LangSmith Agent Server](application-structure.md#use-any-framework-with-langsmith-deployment).
 
 You can also set up with:
 
@@ -64,7 +64,7 @@ structlog>=24.1.0
 cloudpickle>=3.0.0
 truststore>=0.1
 protobuf>=6.32.1,<7.0.0
-grpcio>=1.81.0,<1.82.0
+grpcio>=1.85.0,<1.86.0
 grpcio-tools>=1.81.0,<1.82.0
 grpcio-health-checking>=1.81.0,<1.82.0
 opentelemetry-api>=0.0.1

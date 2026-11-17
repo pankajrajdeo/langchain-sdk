@@ -942,7 +942,7 @@ Reset the stored metadata to load every source again at the start of the next ru
 
 > [!NOTE]
 >
-> Local runs often have no checkpointer, so skill edits take effect immediately and skills appear to reload on their own. [LangSmith Agent Server](../langsmith/deployment.md) configures a persistent checkpointer automatically, so the same agent holds its skills for the life of a thread once deployed. See [Going to production](going-to-production.md).
+> Local runs often have no checkpointer, so skill edits take effect immediately and skills appear to reload on their own. [LangSmith Agent Server](../langsmith/agent-server.md#persistence) configures a persistent checkpointer automatically, so the same agent holds its skills for the life of a thread once deployed. See [Going to production](going-to-production.md).
 
 > [!NOTE]
 >

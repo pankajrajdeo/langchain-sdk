@@ -172,8 +172,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/me/onboarding_state:
     post:
@@ -257,6 +260,18 @@ components:
               format: date-time
             - type: 'null'
           title: Agent Monitoring Viewed At
+        agent_edited_at:
+          anyOf:
+            - type: string
+              format: date-time
+            - type: 'null'
+          title: Agent Edited At
+        monitoring_course_opened_at:
+          anyOf:
+            - type: string
+              format: date-time
+            - type: 'null'
+          title: Monitoring Course Opened At
         get_started_path:
           anyOf:
             - $ref: '#/components/schemas/GetStartedPath'

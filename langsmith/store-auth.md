@@ -10,7 +10,7 @@ tags: [docs, langsmith, store-auth]
 
 > Scope long-term store data to each authenticated user in LangSmith Agent Server using auth handlers.
 
-Every [Agent Server](deployment.md) includes a Postgres-backed [store](../langgraph/stores.md) for long-term memory and cross-thread data. By default, store namespaces are shared across all callers. To give each user their own isolated store, configure [custom authentication](custom-auth.md) and add a store [authorization handler](auth.md#authorization) that rewrites namespaces to include the authenticated user's identity.
+Every [Agent Server](agent-server.md#persistence) includes a Postgres-backed [store](../langgraph/stores.md) for long-term memory and cross-thread data. By default, store namespaces are shared across all callers. To give each user their own isolated store, configure [custom authentication](custom-auth.md) and add a store [authorization handler](auth.md#authorization) that rewrites namespaces to include the authenticated user's identity.
 
 This guide shows how to configure that isolation in LangSmith Agent Server. The same pattern works for [self-hosted](self-hosted.md) deployments with custom auth enabled.
 

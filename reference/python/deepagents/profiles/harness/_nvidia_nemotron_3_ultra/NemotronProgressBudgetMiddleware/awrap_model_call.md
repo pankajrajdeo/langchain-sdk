@@ -26,4 +26,4 @@ awrap_model_call(
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/c858b3641b13fb3f40fe3a12515517b81fb8a744/libs/deepagents/deepagents/profiles/harness/_nvidia_nemotron_3_ultra.py#L1078)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/53e090968118f72f6dd3847d097607461a0fb5a8/libs/deepagents/deepagents/profiles/harness/_nvidia_nemotron_3_ultra.py#L1078)

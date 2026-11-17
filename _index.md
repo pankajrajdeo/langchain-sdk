@@ -7,21 +7,21 @@ tags: [index]
 
 # LangChain mirror
 
-13 pages here, 9180 pages including subdirectories.
+13 pages here, 9226 pages including subdirectories.
 
 ## Directories
 
-- [api-reference/](api-reference/_index.md) - 65 pages
-- [blog/](blog/_index.md) - 559 pages
+- [api-reference/](api-reference/_index.md) - 66 pages
+- [blog/](blog/_index.md) - 561 pages
 - [breakoutagents/](breakoutagents/_index.md) - 5 pages
 - [concepts/](concepts/_index.md) - 5 pages
 - [contributing/](contributing/_index.md) - 8 pages
 - [deepagents/](deepagents/_index.md) - 64 pages
-- [integrations/](integrations/_index.md) - 365 pages
+- [integrations/](integrations/_index.md) - 366 pages
 - [javascript/](javascript/_index.md) - 377 pages
 - [langchain/](langchain/_index.md) - 82 pages
 - [langgraph/](langgraph/_index.md) - 48 pages
-- [langsmith/](langsmith/_index.md) - 1293 pages
+- [langsmith/](langsmith/_index.md) - 1335 pages
 - [migrate/](migrate/_index.md) - 4 pages
 - [openwiki/](openwiki/_index.md) - 12 pages
 - [oss/](oss/_index.md) - 3 pages
@@ -37,7 +37,7 @@ tags: [index]
 - [The open agent engineering ecosystem](docs.md) - LangChain provides open source, model-agnostic harnesses for building agents. LangSmith is the framework-agnostic platform for testing, deploying, monitoring, and improving your agents across the...
 - [The open agent engineering ecosystem](home.md) - LangChain provides open source, model-agnostic harnesses for building agents. LangSmith is the framework-agnostic platform for testing, deploying, monitoring, and improving your agents across the...
 - [Deep Agents overview](index.md) - Agent harness for planning, subagents, and file-system context, available as Managed Deep Agents or the Deep Agents SDK
-- [LangSmith Agent Server](langgraph-platform.md) - Deploy and manage agents with durable execution, real-time streaming, and horizontal scaling.
+- [Deploy agents](langgraph-platform.md) - Deploy agents to production on LangSmith Agent Server, on LangSmith Cloud, BYOC, your own infrastructure, or a standalone server.
 - [Learn](learn.md) - Tutorials, conceptual guides, and resources to help you get started.
 - [Release policy](release-policy.md) - This page explains the LangChain and LangGraph release policies. Click on the tabs below to view the release policies for each:
 - [Changelog](releases.md) - Log of updates and improvements to our Python packages

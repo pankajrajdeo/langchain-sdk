@@ -172,8 +172,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /orgs/current/data-planes/{id}:
     patch:
@@ -235,6 +238,12 @@ components:
           $ref: '#/components/schemas/data_planes.UpdateDataPlaneFirewallSettings'
         fleet_oidc:
           $ref: '#/components/schemas/data_planes.UpdateDataPlaneFleetOIDCSettings'
+        ingress:
+          description: |-
+            Ingress is supported only for AWS data planes.
+            Ingress replaces the current allowed source CIDR list.
+          allOf:
+            - $ref: '#/components/schemas/data_planes.DataPlaneIngressSettings'
         maintenance_window:
           description: >-
             MaintenanceWindow is a weekly UTC window: two hours on AWS and GCP,
@@ -255,6 +264,8 @@ components:
           $ref: '#/components/schemas/data_planes.DataPlaneFleetOIDCSettings'
         id:
           type: string
+        ingress:
+          $ref: '#/components/schemas/data_planes.DataPlaneIngressSettings'
         maintenance_window:
           type: string
         name:
@@ -342,6 +353,18 @@ components:
           type: object
           additionalProperties:
             type: string
+    data_planes.DataPlaneIngressSettings:
+      type: object
+      properties:
+        allowed_source_cidrs:
+          description: >-
+            IPv4 CIDR blocks allowed to reach the data plane load balancer on
+            port 443. Empty allows all sources. A private load balancer also
+            always allows the data plane VPC CIDR.
+          type: array
+          maxItems: 50
+          items:
+            type: string
     data_planes.UpdateDataPlaneTTLSettings:
       type: object
       properties:
@@ -407,6 +430,11 @@ components:
       type: object
       properties:
         additional_tags:
+          description: >-
+            AdditionalTags are the customer tags on the cloud resources. GCP
+            data
+
+            planes have none.
           type: object
           additionalProperties:
             type: string
@@ -432,6 +460,9 @@ components:
             object.
           type: boolean
         is_public_load_balancer:
+          type: boolean
+        is_sandboxes_enabled:
+          description: IsSandboxesEnabled is whether sandboxes are turned on.
           type: boolean
         provisioner_service_account:
           description: |-

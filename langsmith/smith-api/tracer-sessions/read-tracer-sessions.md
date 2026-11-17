@@ -10,6 +10,9 @@ tags: [docs, langsmith, smith-api, tracer-sessions, read-tracer-sessions]
 
 > List all projects.
 
+Deprecated: use GET /api/v2/sessions, which pages with a cursor. The v1
+endpoint is scheduled for removal on Jul 1, 2027.
+
 ## OpenAPI
 
 **/langsmith/langsmith-platform-openapi.json get /api/v1/sessions**
@@ -172,15 +175,22 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/sessions:
     get:
       tags:
         - tracer-sessions
       summary: Read tracer sessions
-      description: List all projects.
+      description: |-
+        List all projects.
+
+        Deprecated: use GET /api/v2/sessions, which pages with a cursor. The v1
+        endpoint is scheduled for removal on Jul 1, 2027.
       operationId: read_tracer_sessions_api_v1_sessions_get
       parameters:
         - name: reference_free
@@ -382,6 +392,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
+      deprecated: true
       security:
         - API Key: []
         - Tenant ID: []
@@ -447,6 +458,17 @@ components:
           anyOf:
             - $ref: '#/components/schemas/TraceTier'
             - type: 'null'
+        longlived_ttl_days:
+          anyOf:
+            - type: integer
+            - type: 'null'
+          title: Longlived Ttl Days
+          description: >-
+            Retention in days for traces while trace_tier is longlived. One of
+            the deployment's allowed values (allowed_longlived_ttl_days in
+            /info), up to the maximum of the deployment. The value is kept while
+            trace_tier is shortlived. Null means the project uses the workspace
+            retention.
         id:
           type: string
           format: uuid
@@ -493,20 +515,17 @@ components:
           title: Completion Tokens
         total_cost:
           anyOf:
-            - type: string
-              pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+            - type: number
             - type: 'null'
           title: Total Cost
         prompt_cost:
           anyOf:
-            - type: string
-              pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+            - type: number
             - type: 'null'
           title: Prompt Cost
         completion_cost:
           anyOf:
-            - type: string
-              pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+            - type: number
             - type: 'null'
           title: Completion Cost
         tenant_id:

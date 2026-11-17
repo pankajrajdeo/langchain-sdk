@@ -175,8 +175,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/platform/issues:
     get:
@@ -207,24 +210,24 @@ paths:
           name: status
           in: query
           schema:
-            type: string
             enum:
               - open
               - fixing
               - watching
               - completed
               - ignored
+            type: string
             title: Status
         - description: Filter by severity
           name: severity
           in: query
           schema:
-            type: integer
             enum:
               - 0
               - 1
               - 2
               - 3
+            type: integer
             title: Severity
         - description: Filter by exact severity (repeatable; OR semantics)
           name: severity_exact
@@ -278,7 +281,6 @@ paths:
           name: sort_by
           in: query
           schema:
-            type: string
             enum:
               - default
               - created_at
@@ -287,6 +289,7 @@ paths:
               - last_updated
               - trace_count
               - severity
+            type: string
             title: Sort By
         - description: Group results by issue lifecycle status before applying sort_by
           name: status_first
@@ -443,6 +446,17 @@ components:
           type: string
         traces:
           type: object
+        type:
+          description: >-
+            "actionable" (there is something to do; it may carry PRs or
+            LangSmith
+
+            assets) or "finding" (an observation only). Defaults to
+            "actionable".
+          type: string
+          enum:
+            - actionable
+            - finding
         updated_at:
           type: string
         validation_result:

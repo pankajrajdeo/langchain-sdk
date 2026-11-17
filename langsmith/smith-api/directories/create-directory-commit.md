@@ -172,8 +172,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/platform/hub/repos/{owner}/{repo}/directories/commits:
     post:
@@ -208,6 +211,17 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/directory.CommitResponse'
+        '201':
+          description: Commit created
+          headers:
+            Location:
+              description: URL of the directory at the created commit
+              schema:
+                type: string
           content:
             application/json:
               schema:

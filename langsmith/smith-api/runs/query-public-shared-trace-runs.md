@@ -1,6 +1,6 @@
 ---
 title: "Query public shared trace runs"
-description: "Returns all runs within the trace identified by the share token. The share token supplies the tenant, project, and trace scope."
+description: "GET with body payload — no resources created. Returns all runs within the trace identified by the share token. The share token supplies the tenant, project, and trace scope."
 source: "https://docs.langchain.com/langsmith/smith-api/runs/query-public-shared-trace-runs"
 category: "docs"
 tags: [docs, langsmith, smith-api, runs, query-public-shared-trace-runs]
@@ -8,7 +8,7 @@ tags: [docs, langsmith, smith-api, runs, query-public-shared-trace-runs]
 
 # Query public shared trace runs
 
-> Returns all runs within the trace identified by the share token. The share token supplies the tenant, project, and trace scope.
+> GET with body payload — no resources created. Returns all runs within the trace identified by the share token. The share token supplies the tenant, project, and trace scope.
 
 Self-hosted deployments require LangSmith `v0.16` or later.
 
@@ -174,8 +174,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v2/public/{share_token}/runs/query:
     post:
@@ -183,8 +186,9 @@ paths:
         - runs
       summary: Query public shared trace runs
       description: >-
-        Returns all runs within the trace identified by the share token. The
-        share token supplies the tenant, project, and trace scope.
+        GET with body payload — no resources created. Returns all runs within
+        the trace identified by the share token. The share token supplies the
+        tenant, project, and trace scope.
 
         Self-hosted deployments require LangSmith `v0.16` or later.
       parameters:

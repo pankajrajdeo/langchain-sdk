@@ -163,7 +163,7 @@ The `role_ids` array specifies which workspace roles the policy applies to. When
 
 Policies can be attached to [workspace roles](rbac.md#workspace-roles) (built-in or [custom](rbac.md#custom-roles)) when creating the policy, or attached later in the UI or with the API.
 
-Policies can also be attached to [teams](teams.md#access-policies). A team's policies apply to its members in the workspaces the team can access.
+Policies can also be attached to [user groups](user-groups.md#access-policies). A user group's policies apply to its members in the workspaces the user group can access.
 
 To provision users into roles automatically from your identity provider, see [SCIM](user-management.md#set-up-scim-for-your-organization).
 
@@ -186,7 +186,7 @@ To create an access policy:
    * **Resource tag**: Enter a **Tag Key**, operator, and **Tag Value**. [Create the resource tags](set-up-resource-tags.md) before using them in a policy.
    * **Root-run metadata**: First select **Project** for **Resource Type** and `runs:read` for **Permission**. Enter a **Metadata Key** and a **Metadata Value**. The operator is fixed to `equals`, and **Metadata Value** is prefilled with `${user.ls_user_id}`, which matches the current user. Replace it with a literal value to match a fixed value instead. For requirements and an example, refer to [Create a root run metadata policy in the UI](#create-a-root-run-metadata-policy-in-the-ui).
 7. Click **Save condition**, add any more conditions, and then click **Add rule** to return to the policy editor. All conditions within a rule must match, and multiple rules use OR logic.
-8. (Optional) Attach the policy to roles. A policy has no effect until you attach it to a role or [team](teams.md#access-policies). In the dialog under **Roles**, click **Add role**. Select the workspace roles the policy applies to, and click **Add roles**. You can inspect each role's permissions before adding it. You can also attach a policy to roles later.
+8. (Optional) Attach the policy to roles. A policy has no effect until you attach it to a role or [user group](user-groups.md#access-policies). In the dialog under **Roles**, click **Add role**. Select the workspace roles the policy applies to, and click **Add roles**. You can inspect each role's permissions before adding it. You can also attach a policy to roles later.
 9. To finish, click **Create policy**.
 
 > [!TIP]
@@ -199,14 +199,14 @@ On the **Policies** tab, use the icons in a policy's **Actions** column. To edit
 
 > [!WARNING]
 >
-> Deleting a policy removes its role and team attachments. Deleting a deny policy may grant access. Deleting an allow policy may remove access.
+> Deleting a policy removes its role and user group attachments. Deleting a deny policy may grant access. Deleting an allow policy may remove access.
 
-### Attach policies to teams
+### Attach policies to user groups
 
-[Teams](teams.md) do not create policies. They attach existing ones:
+[User Groups](user-groups.md) do not create policies. They attach existing ones:
 
-* Attaching a policy to a team requires `organization:teams:manage-policies`.
-* A Workspace Admin can attach an existing policy to a team as a [workspace-only policy](teams.md#add-workspace-only-members-and-policies) in their workspace, with `workspaces:teams:manage-policies`.
+* Attaching a policy to a user group requires `organization:user-groups:manage-policies`.
+* A Workspace Admin can attach an existing policy to a user group as a [workspace-only policy](user-groups.md#add-workspace-only-members-and-policies) in their workspace, with `workspaces:user-groups:manage-policies`.
 
 ## How ABAC works with RBAC
 
@@ -216,7 +216,7 @@ On the **Policies** tab, use the icons in a policy's **Actions** column. To edit
 * ABAC **allow** policies can grant access even without RBAC permissions.
 * If no ABAC policies match, the system falls back to RBAC.
 
-When a user belongs to [teams](teams.md), LangSmith evaluates the permissions and policies from the user's role and every team together. A matching deny policy from any source still blocks access.
+When a user belongs to [user groups](user-groups.md), LangSmith evaluates the permissions and policies from the user's role and every user group together. A matching deny policy from any source still blocks access.
 
 The access model depends on which features are enabled for the organization:
 

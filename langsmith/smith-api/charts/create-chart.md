@@ -172,8 +172,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/charts/create:
     post:
@@ -311,8 +314,8 @@ components:
             - type: 'null'
           title: Metadata
         markdown:
-          type: string
           title: Markdown
+          type: string
       additionalProperties: false
       type: object
       required:
@@ -384,8 +387,8 @@ components:
           const: text
           title: Chart Type
         markdown:
-          type: string
           title: Markdown
+          type: string
         index:
           type: integer
           title: Index

@@ -172,8 +172,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/datasets/upload-experiment:
     post:
@@ -303,10 +306,16 @@ components:
           type: string
           format: date-time
           title: Created At
+          description: >-
+            When the feedback was created, as an ISO 8601 timestamp. Defaults to
+            now.
         modified_at:
           type: string
           format: date-time
           title: Modified At
+          description: >-
+            When the feedback was last modified, as an ISO 8601 timestamp.
+            Defaults to now.
         key:
           type: string
           maxLength: 180
@@ -318,6 +327,9 @@ components:
             - type: boolean
             - type: 'null'
           title: Score
+          description: >-
+            The numeric or boolean score. Numbers must be between -99999.9999
+            and 99999.9999 with at most 4 decimal places.
         value:
           anyOf:
             - type: number
@@ -328,11 +340,17 @@ components:
               type: object
             - type: 'null'
           title: Value
+          description: >-
+            A non-numeric value, such as a category label or a JSON object.
+            Dropped if it exceeds the feedback size limit.
         comment:
           anyOf:
             - type: string
             - type: 'null'
           title: Comment
+          description: >-
+            A free-text comment explaining the feedback. Truncated at the
+            feedback size limit.
         correction:
           anyOf:
             - additionalProperties: true
@@ -340,18 +358,27 @@ components:
             - type: string
             - type: 'null'
           title: Correction
+          description: >-
+            The corrected output for the run, as a string or a JSON object.
+            Dropped if it exceeds the feedback size limit.
         feedback_group_id:
           anyOf:
             - type: string
               format: uuid
             - type: 'null'
           title: Feedback Group Id
+          description: >-
+            Groups feedback written together, such as one comparison in a
+            pairwise experiment.
         comparative_experiment_id:
           anyOf:
             - type: string
               format: uuid
             - type: 'null'
           title: Comparative Experiment Id
+          description: >-
+            The ID of the comparative (pairwise) experiment this feedback was
+            written for.
         id:
           type: string
           format: uuid
@@ -582,6 +609,17 @@ components:
           anyOf:
             - $ref: '#/components/schemas/TraceTier'
             - type: 'null'
+        longlived_ttl_days:
+          anyOf:
+            - type: integer
+            - type: 'null'
+          title: Longlived Ttl Days
+          description: >-
+            Retention in days for traces while trace_tier is longlived. One of
+            the deployment's allowed values (allowed_longlived_ttl_days in
+            /info), up to the maximum of the deployment. The value is kept while
+            trace_tier is shortlived. Null means the project uses the workspace
+            retention.
         id:
           type: string
           format: uuid
@@ -628,20 +666,17 @@ components:
           title: Completion Tokens
         total_cost:
           anyOf:
-            - type: string
-              pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+            - type: number
             - type: 'null'
           title: Total Cost
         prompt_cost:
           anyOf:
-            - type: string
-              pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+            - type: number
             - type: 'null'
           title: Prompt Cost
         completion_cost:
           anyOf:
-            - type: string
-              pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+            - type: number
             - type: 'null'
           title: Completion Cost
         tenant_id:

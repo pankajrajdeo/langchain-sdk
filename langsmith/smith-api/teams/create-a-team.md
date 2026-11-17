@@ -1,6 +1,6 @@
 ---
 title: "Create a team"
-description: "Creates an organization-wide team. Needs organization:teams:manage. Workspace scoped teams are not created here: granting an organization-wide team access to a workspace creates its workspace scoped..."
+description: "Deprecated: use the corresponding /user-groups endpoint. Creates an organization-wide team. Needs organization:teams:manage. Workspace scoped teams are not created here: granting an organization-wide..."
 source: "https://docs.langchain.com/langsmith/smith-api/teams/create-a-team"
 category: "docs"
 tags: [docs, langsmith, smith-api, teams, create-a-team]
@@ -8,7 +8,8 @@ tags: [docs, langsmith, smith-api, teams, create-a-team]
 
 # Create a team
 
-> Creates an organization-wide team. Needs organization:teams:manage. Workspace scoped
+> Deprecated: use the corresponding /user-groups endpoint.
+Creates an organization-wide team. Needs organization:teams:manage. Workspace scoped
 teams are not created here: granting an organization-wide team access to a
 workspace creates its workspace scoped team there, so workspace_id and
 parent_team_id return 400.
@@ -175,8 +176,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/platform/orgs/current/teams:
     post:
@@ -184,6 +188,8 @@ paths:
         - teams
       summary: Create a team
       description: >-
+        Deprecated: use the corresponding /user-groups endpoint.
+
         Creates an organization-wide team. Needs organization:teams:manage.
         Workspace scoped
 
@@ -199,7 +205,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/teams.CreateTeamPayload'
+              $ref: '#/components/schemas/user_groups.CreateTeamPayload'
       responses:
         '201':
           description: Created
@@ -211,7 +217,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/teams.Team'
+                $ref: '#/components/schemas/user_groups.Team'
         '400':
           description: invalid request, or workspace_id or parent_team_id is set
           content:
@@ -236,6 +242,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/shared.ProblemDetails'
+      deprecated: true
       security:
         - API Key: []
           Organization ID: []
@@ -243,7 +250,7 @@ paths:
           Organization ID: []
 components:
   schemas:
-    teams.CreateTeamPayload:
+    user_groups.CreateTeamPayload:
       type: object
       required:
         - name
@@ -259,14 +266,14 @@ components:
           format: uuid
         workspace_id:
           description: >-
-            Rejected with 400, so a request for a workspace team does not create
-            an
+            Rejected with 400, so a request for a workspace user group does not
+            create an
 
-            organization-wide team. Granting a team a workspace creates its
-            workspace team.
+            organization-wide user group. Granting a user group a workspace
+            creates its workspace user group.
           type: string
           format: uuid
-    teams.Team:
+    user_groups.Team:
       type: object
       required:
         - created_at
@@ -295,18 +302,20 @@ components:
           format: uuid
         parent_team_id:
           description: >-
-            ParentTeamID is the organization-wide team a workspace team belongs
-            to.
+            ParentUserGroupID is the organization-wide user group a workspace
+            user group belongs to.
 
-            It is omitted for organization-wide teams.
+            It is omitted for organization-wide user groups.
           type: string
           format: uuid
         updated_at:
           type: string
         workspace_id:
-          description: |-
-            WorkspaceID is the workspace the team belongs to. It is omitted for
-            organization-wide teams.
+          description: >-
+            WorkspaceID is the workspace the user group belongs to. It is
+            omitted for
+
+            organization-wide user groups.
           type: string
           format: uuid
     shared.ProblemDetails:

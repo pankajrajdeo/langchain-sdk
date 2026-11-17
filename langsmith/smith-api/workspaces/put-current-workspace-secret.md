@@ -10,9 +10,10 @@ tags: [docs, langsmith, smith-api, workspaces, put-current-workspace-secret]
 
 > Create or update a workspace secret and the hosts it may be sent to.
 
-Omit `value` to keep the current one; it is required to create a secret.
-`configs` replaces the secret's hosts; omitted or empty restores the
-built-in defaults for known provider keys. The value is never returned.
+Requires workspace admin. Omit value to keep the current one; it is
+required to create a secret. configs replaces the secret's hosts; omitted
+or empty restores the built-in defaults for known provider keys. The value
+is never returned.
 
 ## OpenAPI
 
@@ -176,20 +177,29 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/workspaces/current/secrets/{key}:
     put:
       tags:
         - workspaces
       summary: Put current workspace secret
-      description: |-
+      description: >-
         Create or update a workspace secret and the hosts it may be sent to.
 
-        Omit `value` to keep the current one; it is required to create a secret.
-        `configs` replaces the secret's hosts; omitted or empty restores the
-        built-in defaults for known provider keys. The value is never returned.
+        Requires workspace admin. Omit value to keep the current one; it is
+
+        required to create a secret. configs replaces the secret's hosts;
+        omitted
+
+        or empty restores the built-in defaults for known provider keys. The
+        value
+
+        is never returned.
       operationId: put_current_workspace_secret_api_v1_workspaces_current_secrets__key__put
       parameters:
         - name: key
@@ -229,11 +239,23 @@ paths:
                 $ref: '#/components/schemas/ProblemDetails'
           description: The value is missing for a new secret, or a host config is invalid.
         '422':
-          description: Validation Error
+          description: The request has an invalid path, query, header, or body parameter.
           content:
-            application/json:
+            application/problem+json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                allOf:
+                  - $ref: '#/components/schemas/ProblemDetails'
+                  - type: object
+                    required:
+                      - errors
+                    properties:
+                      errors:
+                        type: array
+                        items:
+                          type: string
+                        description: >-
+                          One message per invalid parameter, prefixed with its
+                          location.
       security:
         - API Key: []
         - Tenant ID: []
@@ -268,6 +290,7 @@ components:
         key:
           type: string
           title: Key
+          description: Secret name, e.g. OPENAI_API_KEY.
         configs:
           items:
             $ref: '#/components/schemas/SecretConfig'
@@ -305,15 +328,6 @@ components:
         - detail
       title: ProblemDetails
       description: Problem details describing an error response, as defined by RFC 7807.
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            type: string
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     SecretConfigInput:
       properties:
         host_pattern:
@@ -368,6 +382,7 @@ components:
           description: Omitted for a built-in default.
         source:
           $ref: '#/components/schemas/SecretConfigSource'
+          description: DEFAULT for a built-in provider host, CUSTOM for one an admin set.
         created_at:
           anyOf:
             - type: string

@@ -105,7 +105,7 @@ This reference is designed to align with the six pillars of the AWS Well-Archite
 * Automate deployments with IaC ([CloudFormation](https://aws.amazon.com/cloudformation/) / [Terraform](https://www.terraform.io/)).
 * Use [AWS Systems Manager Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html) for configuration.
 * Configure your LangSmith instance to [export telemetry data](export-backend.md) and continuously monitor via [CloudWatch Logs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html).
-* The preferred method to manage [Agent Servers](deployment.md) is to create a CI process that builds [Agent Server](agent-server.md) images and pushes them to [ECR](https://aws.amazon.com/ecr/). Create a test deployment for pull requests before deploying a new revision to staging or production upon PR merge.
+* The preferred method to manage [Agent Servers](agent-server.md) is to create a CI process that builds Agent Server images and pushes them to [ECR](https://aws.amazon.com/ecr/). Create a test deployment for pull requests before deploying a new revision to staging or production upon PR merge.
 
 ### Security
 

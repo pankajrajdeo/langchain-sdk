@@ -61,6 +61,7 @@ The following table shows tools that generate video, image, or audio assets:
 | [`OracleSummary`](tools/oracleai.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@oracle/langchain-oracledb?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@oracle/langchain-oracledb) |
 | [`ExaSearchResults`](tools/exa_search.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/exa?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/exa) |
 | [`Composio`](tools/composio.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@composio/langchain?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@composio/langchain) |
+| [`pilotfish`](https://pilotfish.gai.ventures/docs/open) | [  ![Downloads per month](https://img.shields.io/npm/dm/@gaiventures/pilotfish-mcp?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@gaiventures/pilotfish-mcp) |
 | [`Mcp toolbox for databases`](tools/mcp_toolbox.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@toolbox-sdk/core?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@toolbox-sdk/core) |
 | [`WatsonxToolkit`](tools/ibm.md) | [  ![Downloads per month](https://img.shields.io/npm/dm/@langchain/ibm?style=flat-square\&label=%20&)](https://www.npmjs.com/package/@langchain/ibm) |
 | [`Fizzl`](https://fizzl.eu/agents/langchain-js/) | [  ![Downloads per month](https://img.shields.io/npm/dm/fizzl-langchain?style=flat-square\&label=%20&)](https://www.npmjs.com/package/fizzl-langchain) |

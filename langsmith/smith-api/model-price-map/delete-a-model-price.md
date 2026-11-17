@@ -176,8 +176,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/model-price-map/{id}:
     delete:
@@ -208,6 +211,8 @@ paths:
           content:
             application/json:
               schema: {}
+        '204':
+          description: The entry was deleted or did not exist.
         '422':
           description: Validation Error
           content:

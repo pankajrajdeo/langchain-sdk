@@ -145,6 +145,10 @@ tags: [docs, langsmith, byoc-faq]
 >
 > Yes, on AWS. When you create a data plane, you can encrypt its S3 buckets, EBS volumes, EKS secrets, RDS databases, and ElastiCache with your own AWS KMS keys. See [Bring your own keys](byoc-byok-aws.md). By default, data is encrypted at rest with cloud provider-managed keys.
 
+> [accordion] How long does BYOC keep traces?
+>
+> BYOC is not subject to the extended retention maximum that applies to LangSmith Cloud. By default, base traces last 14 days and extended traces last 400 days. You can change both defaults in the data plane settings. Enterprise customers can also shorten the extended period per workspace. See [Data retention](usage-and-billing.md#retention-periods) and [Customize extended retention policy](data-purging-compliance.md#customize-extended-retention-policy).
+
 > [accordion] How do I revoke LangChain's access?
 >
 > You create and own the cross-account role in your own account, so you can revoke access without involving LangChain. Removing the role, or its trust relationship with the LangChain account, stops the control plane from assuming it, and stops reconciliation of data plane resources.

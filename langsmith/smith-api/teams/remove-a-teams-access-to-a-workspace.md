@@ -1,6 +1,6 @@
 ---
 title: "Remove a team's access to a workspace"
-description: "Removes an organization-wide team's grant in a workspace. This also detaches the team's access policies attached for that workspace and deletes the team's workspace scoped team there. Policies..."
+description: "Deprecated: use the corresponding /user-groups endpoint. Removes an organization-wide team's grant in a workspace. This also detaches the team's access policies attached for that workspace and..."
 source: "https://docs.langchain.com/langsmith/smith-api/teams/remove-a-teams-access-to-a-workspace"
 category: "docs"
 tags: [docs, langsmith, smith-api, teams, remove-a-teams-access-to-a-workspace]
@@ -8,7 +8,8 @@ tags: [docs, langsmith, smith-api, teams, remove-a-teams-access-to-a-workspace]
 
 # Remove a team's access to a workspace
 
-> Removes an organization-wide team's grant in a workspace. This also detaches the
+> Deprecated: use the corresponding /user-groups endpoint.
+Removes an organization-wide team's grant in a workspace. This also detaches the
 team's access policies attached for that workspace and deletes the team's workspace
 scoped team there. Policies attached for every workspace stay. Returns 204 also when
 the team had no access to the workspace.
@@ -176,8 +177,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/platform/orgs/current/teams/{team_id}/workspaces/{workspace_id}:
     delete:
@@ -185,6 +189,8 @@ paths:
         - teams
       summary: Remove a team's access to a workspace
       description: >-
+        Deprecated: use the corresponding /user-groups endpoint.
+
         Removes an organization-wide team's grant in a workspace. This also
         detaches the
 
@@ -245,6 +251,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/shared.ProblemDetails'
+      deprecated: true
       security:
         - API Key: []
           Organization ID: []

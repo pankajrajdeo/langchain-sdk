@@ -112,7 +112,7 @@ Export jobs automatically retry transient failures with the following behavior:
 
 | Failure type | Cause | Automatic retry? | Action required |
 | - | - | - | - |
-| **Infrastructure interruption** | [Deployments](deployment.md), server restarts, worker crashes | Yes, automatically requeued with remaining retries. | None, jobs resume automatically. |
+| **Infrastructure interruption** | [Deployments](deploy-overview.md), server restarts, worker crashes | Yes, automatically requeued with remaining retries. | None, jobs resume automatically. |
 | **Run timeout** | Single run exceeds 4-hour limit | Yes, retried up to 20 times (subject to change). | If persistent, narrow date range, add filters, or [limit the exported fields](data-export.md#limit-exported-fields). |
 | **Workflow timeout** | Entire export exceeds 72 hours | No | Reduce export scope (date range, filters) or break into smaller exports. |
 | **Storage/destination errors** | [Invalid credentials](data-export-destinations.md#credentials-configuration), [missing bucket](data-export-destinations.md#configuration-fields), [permission issues](data-export-destinations.md#permissions-required) | No | Fix destination configuration and create new export. |

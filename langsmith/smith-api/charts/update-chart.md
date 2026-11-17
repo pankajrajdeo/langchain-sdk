@@ -172,8 +172,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/charts/{chart_id}:
     patch:
@@ -231,77 +234,44 @@ components:
     CustomChartUpdate:
       properties:
         title:
-          anyOf:
-            - type: string
-            - $ref: '#/components/schemas/Missing'
+          type: string
           title: Title
-          default:
-            __missing__: __missing__
         description:
           anyOf:
             - type: string
-            - $ref: '#/components/schemas/Missing'
             - type: 'null'
           title: Description
-          default:
-            __missing__: __missing__
         index:
-          anyOf:
-            - type: integer
-            - $ref: '#/components/schemas/Missing'
           title: Index
-          default:
-            __missing__: __missing__
           minimum: 0
           maximum: 100
+          type: integer
         chart_type:
-          anyOf:
-            - $ref: '#/components/schemas/CustomChartType'
-            - $ref: '#/components/schemas/Missing'
+          $ref: '#/components/schemas/CustomChartType'
           title: Chart Type
-          default:
-            __missing__: __missing__
         series:
-          anyOf:
-            - items:
-                $ref: '#/components/schemas/CustomChartSeriesUpdate'
-              type: array
-            - $ref: '#/components/schemas/Missing'
           title: Series
-          default:
-            __missing__: __missing__
+          items:
+            $ref: '#/components/schemas/CustomChartSeriesUpdate'
+          type: array
         section_id:
-          anyOf:
-            - type: string
-              format: uuid
-            - $ref: '#/components/schemas/Missing'
+          type: string
+          format: uuid
           title: Section Id
-          default:
-            __missing__: __missing__
         metadata:
           anyOf:
             - additionalProperties: true
               type: object
-            - $ref: '#/components/schemas/Missing'
             - type: 'null'
           title: Metadata
-          default:
-            __missing__: __missing__
         common_filters:
           anyOf:
             - $ref: '#/components/schemas/CustomChartSeriesFilters'
-            - $ref: '#/components/schemas/Missing'
             - type: 'null'
           title: Common Filters
-          default:
-            __missing__: __missing__
         markdown:
-          anyOf:
-            - type: string
-            - $ref: '#/components/schemas/Missing'
           title: Markdown
-          default:
-            __missing__: __missing__
+          type: string
       type: object
       title: CustomChartUpdate
     CustomChartResponse:
@@ -368,8 +338,8 @@ components:
           const: text
           title: Chart Type
         markdown:
-          type: string
           title: Markdown
+          type: string
         index:
           type: integer
           title: Index
@@ -400,16 +370,6 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    Missing:
-      properties:
-        __missing__:
-          type: string
-          const: __missing__
-          title: Missing
-      type: object
-      required:
-        - __missing__
-      title: Missing
     CustomChartType:
       type: string
       enum:

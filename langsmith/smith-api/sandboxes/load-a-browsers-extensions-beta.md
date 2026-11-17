@@ -1,6 +1,6 @@
 ---
 title: "Load a browser's extensions (Beta)"
-description: "Beta: load the unpacked extensions placed in the browser's /var/lib/browserd/extensions (one per directory) that its Chrome does not have yet. Chrome loads them while running, so windows, tabs and..."
+description: "Beta: bring the browser's Chrome in line with the unpacked extensions in its /var/lib/browserd/extensions (one per directory). Of several with the same manifest name, only the highest manifest..."
 source: "https://docs.langchain.com/langsmith/smith-api/sandboxes/load-a-browsers-extensions-beta"
 category: "docs"
 tags: [docs, langsmith, smith-api, sandboxes, load-a-browsers-extensions-beta]
@@ -8,7 +8,7 @@ tags: [docs, langsmith, smith-api, sandboxes, load-a-browsers-extensions-beta]
 
 # Load a browser's extensions (Beta)
 
-> Beta: load the unpacked extensions placed in the browser's /var/lib/browserd/extensions (one per directory) that its Chrome does not have yet. Chrome loads them while running, so windows, tabs and connections are left as they are. Extensions already loaded stay loaded, even if removed from the directory, until Chrome next launches.
+> Beta: bring the browser's Chrome in line with the unpacked extensions in its /var/lib/browserd/extensions (one per directory). Of several with the same manifest name, only the highest manifest version is loaded, so a newer version installed beside an older one replaces it. Extensions placed there that Chrome does not have yet are loaded while it runs, so windows, tabs and connections are left as they are. When an extension Chrome has was removed or replaced, Chrome cannot unload it while running, so it is relaunched instead with the directory's extensions: logins stay, open tabs close and connections drop, and the call returns once every window is back.
 
 ## OpenAPI
 
@@ -172,8 +172,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v2/sandboxes/browsers/{name}/extensions/load:
     post:
@@ -181,11 +184,16 @@ paths:
         - sandboxes
       summary: Load a browser's extensions (Beta)
       description: >-
-        Beta: load the unpacked extensions placed in the browser's
-        /var/lib/browserd/extensions (one per directory) that its Chrome does
-        not have yet. Chrome loads them while running, so windows, tabs and
-        connections are left as they are. Extensions already loaded stay loaded,
-        even if removed from the directory, until Chrome next launches.
+        Beta: bring the browser's Chrome in line with the unpacked extensions in
+        its /var/lib/browserd/extensions (one per directory). Of several with
+        the same manifest name, only the highest manifest version is loaded, so
+        a newer version installed beside an older one replaces it. Extensions
+        placed there that Chrome does not have yet are loaded while it runs, so
+        windows, tabs and connections are left as they are. When an extension
+        Chrome has was removed or replaced, Chrome cannot unload it while
+        running, so it is relaunched instead with the directory's extensions:
+        logins stay, open tabs close and connections drop, and the call returns
+        once every window is back.
       parameters:
         - description: Browser name or ID
           name: name
@@ -219,7 +227,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/sandboxes.ErrorResponse'
         '501':
-          description: The browser beta is not enabled
+          description: Browsers are only available on SaaS deployments
           content:
             application/json:
               schema:
@@ -235,10 +243,13 @@ components:
       properties:
         loaded:
           description: >-
-            Loaded are the ids of the extensions this call loaded; empty when
-            Chrome
+            Loaded are the ids of the extensions this call loaded, by loading
+            them
 
-            already had every extension in the directory.
+            or by relaunching Chrome; empty when Chrome already had every
+            extension
+
+            in the directory.
           type: array
           items:
             type: string

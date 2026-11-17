@@ -170,8 +170,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/orgs/current/members/active:
     get:
@@ -262,6 +265,13 @@ paths:
             description: Field to sort by
             default: created_at
           description: Field to sort by
+        - name: needs_oidc_sso_sign_in
+          in: query
+          required: false
+          schema:
+            type: boolean
+            default: false
+            title: Needs Oidc Sso Sign In
       responses:
         '200':
           description: Successful Response

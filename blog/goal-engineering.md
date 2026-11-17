@@ -10,7 +10,7 @@ tags: [blog, goal-engineering]
 
 # Goal Engineering: How to Design Goals
 
-The scope of tasks that agents can take on has increased drastically over the past few years. They have gone from simple text generation to tool calling and decision making to executing full tasks. The future of agents is them taking on open ended goals and driving towards completion of those goals. Launches like that of [Hone](https://x.com/hone/status/2108218574926176490?s=20) give us a glimpse into that future.
+The scope of tasks that agents can take on has increased drastically over the past few years. They have gone from simple text generation to tool calling and decision making to executing full tasks. The future of agents is them [taking on open ended goals](https://www.langchain.com/blog/from-tasks-to-goals) and driving towards completion of those goals. Launches like that of [Hone](https://x.com/hone/status/2108218574926176490?s=20) give us a glimpse into that future.
 
 In this world, designing the scope of agents is crucial. Point them in the wrong direction, and you’ll get a lot of wasted tokens. A key part of the Hone agent set up is defining metrics for them to optimize.
 
@@ -24,7 +24,7 @@ When agents mess up, a big reason they mess up is lack of right context. In orde
 
 This is especially important as agents expand beyond doing verifiable tasks and start taking on subjective work alongside humans within an organization. For example, if you want an agent to help optimize a business metric (like improving your ads to optimize marketing performance), there are so many nuances beyond just factual context that you want to govern how the agent behaves. You probably have a certain taste around what sounds and looks good. You have opinions about how provocative or out-there your brand can be. An agent that can’t effectively get feedback to learn these things quickly becomes useless.
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6af66c061f44e08747451fa2_Outdated%20agent.png)
+![__wf_reserved_inherit](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6af66c061f44e08747451fa2_Outdated%20agent.png)
 
 If the scope of your agent makes it really easy to give lots of high quality feedback on the agent’s work, that will help you immensely in building an agent that can reliably pursue a long-horizon goal.
 
@@ -46,7 +46,7 @@ This aligns feedback (both scope of feedback, and ease of giving feedback) with 
 
 This isn’t to say that account context isn’t important - it obviously is! But that account context is often already written down and much more objective. So Actively has context-gathering agents that run in the background and assemble context on each account, but the actual work of progressing accounts down the funnel is now handled by motions that work across many accounts. They own the slice of a sales motion, learn much more quickly from feedback, and pull in each account’s context as needed.
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6af66c5601a2317509bbc886_Goal%20oriented%20agents.png)
+![__wf_reserved_inherit](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6af66c5601a2317509bbc886_Goal%20oriented%20agents.png)
 
 ## **In the future**
 

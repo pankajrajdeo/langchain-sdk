@@ -335,7 +335,7 @@ ISSUER_SUB_CLAIM_OVERRIDES='{"https://login.microsoftonline.com/": "oid", "https
 >
 > SSO Groups Sync on self-hosted requires LangSmith chart version **0.15.0-rc.3** (application version **0.15.2rc1**) or later.
 
-[SSO Groups Sync](user-management.md#sso-groups-sync-alternative) lets LangSmith assign org and workspace roles from a group membership claim on the OIDC token, as a simpler alternative to [SCIM](user-management.md#set-up-scim-for-your-organization). On self-hosted, you must configure the IdP to include groups in the OIDC ID token before LangSmith can read them. Groups in the token can also set membership in [synced teams](teams.md#sync-team-members-from-your-identity-provider).
+[SSO Groups Sync](user-management.md#sso-groups-sync-alternative) lets LangSmith assign org and workspace roles from a group membership claim on the OIDC token, as a simpler alternative to [SCIM](user-management.md#set-up-scim-for-your-organization). On self-hosted, you must configure the IdP to include groups in the OIDC ID token before LangSmith can read them. Groups in the token can also set membership in [synced user groups](user-groups.md#sync-user-group-members-from-your-identity-provider).
 
 **IdP-side configuration (varies by provider):**
 

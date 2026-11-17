@@ -20,6 +20,8 @@ Valid fields:
 - get_started_checklist_dismissed_at
 - agent_trace_viewed_at
 - agent_monitoring_viewed_at
+- agent_edited_at
+- monitoring_course_opened_at
 
 ## OpenAPI
 
@@ -183,8 +185,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/me/onboarding_state/{field}:
     put:
@@ -204,6 +209,8 @@ paths:
         - get_started_checklist_dismissed_at
         - agent_trace_viewed_at
         - agent_monitoring_viewed_at
+        - agent_edited_at
+        - monitoring_course_opened_at
       operationId: update_onboarding_state_field_api_v1_me_onboarding_state__field__put
       parameters:
         - name: field
@@ -293,6 +300,18 @@ components:
               format: date-time
             - type: 'null'
           title: Agent Monitoring Viewed At
+        agent_edited_at:
+          anyOf:
+            - type: string
+              format: date-time
+            - type: 'null'
+          title: Agent Edited At
+        monitoring_course_opened_at:
+          anyOf:
+            - type: string
+              format: date-time
+            - type: 'null'
+          title: Monitoring Course Opened At
         get_started_path:
           anyOf:
             - $ref: '#/components/schemas/GetStartedPath'

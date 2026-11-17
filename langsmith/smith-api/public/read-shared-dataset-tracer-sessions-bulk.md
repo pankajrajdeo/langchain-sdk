@@ -172,8 +172,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/public/datasets/sessions-bulk:
     get:
@@ -255,6 +258,17 @@ components:
           anyOf:
             - $ref: '#/components/schemas/TraceTier'
             - type: 'null'
+        longlived_ttl_days:
+          anyOf:
+            - type: integer
+            - type: 'null'
+          title: Longlived Ttl Days
+          description: >-
+            Retention in days for traces while trace_tier is longlived. One of
+            the deployment's allowed values (allowed_longlived_ttl_days in
+            /info), up to the maximum of the deployment. The value is kept while
+            trace_tier is shortlived. Null means the project uses the workspace
+            retention.
         id:
           type: string
           format: uuid
@@ -301,20 +315,17 @@ components:
           title: Completion Tokens
         total_cost:
           anyOf:
-            - type: string
-              pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+            - type: number
             - type: 'null'
           title: Total Cost
         prompt_cost:
           anyOf:
-            - type: string
-              pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+            - type: number
             - type: 'null'
           title: Prompt Cost
         completion_cost:
           anyOf:
-            - type: string
-              pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+            - type: number
             - type: 'null'
           title: Completion Cost
         tenant_id:

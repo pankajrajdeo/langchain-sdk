@@ -172,8 +172,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/platform/evaluators:
     delete:
@@ -216,10 +219,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/evaluators.ErrorResponse'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/evaluators.ErrorResponse'
         '401':
           description: Unauthorized
           content:
             application/json:
+              schema:
+                $ref: '#/components/schemas/evaluators.ErrorResponse'
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/evaluators.ErrorResponse'
         '403':
@@ -228,10 +237,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/evaluators.ErrorResponse'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/evaluators.ErrorResponse'
         '500':
           description: Internal Server Error
           content:
             application/json:
+              schema:
+                $ref: '#/components/schemas/evaluators.ErrorResponse'
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/evaluators.ErrorResponse'
       security:
@@ -254,8 +269,21 @@ components:
     evaluators.ErrorResponse:
       type: object
       properties:
+        detail:
+          type: string
         error:
-          description: Error message
+          description: Error repeats detail for clients of the pre-RFC 7807 error body.
+          type: string
+          deprecated: true
+        instance:
+          type: string
+        remedy:
+          type: string
+        status:
+          type: integer
+        title:
+          type: string
+        type:
           type: string
     evaluators.BulkDeleteEvaluatorFailedItem:
       type: object

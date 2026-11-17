@@ -172,8 +172,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/platform/orgs/current/scim/tokens/{scim_token_id}:
     patch:
@@ -210,7 +213,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/scim.ErrorResponse'
         '403':
-          description: Forbidden - requires OrganizationAuthenticationManage permission
+          description: Forbidden - requires OrganizationScimTokensManage permission
           content:
             application/json:
               schema:

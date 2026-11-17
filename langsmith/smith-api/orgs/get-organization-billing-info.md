@@ -170,8 +170,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/orgs/current/billing:
     get:
@@ -352,6 +355,11 @@ components:
           type: integer
           title: Max Free Langgraph Cloud Deployments
           default: 0
+        free_deployment_ttl_days:
+          anyOf:
+            - type: integer
+            - type: 'null'
+          title: Free Deployment Ttl Days
         sandbox_enabled:
           type: boolean
           title: Sandbox Enabled
@@ -649,6 +657,7 @@ components:
         - plus_01_2026
         - plus_07_2026
         - plus_10_2026
+        - plus_11_2026
         - enterprise
         - developer_legacy
         - plus_legacy

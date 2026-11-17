@@ -19,7 +19,7 @@ Managed Deep Agents (MDA) is the simplest way to build and deploy production age
 You write the agent's intelligence: its instructions, the tools it can call, the skills it follows, and you select the model that drives it. MDA provides everything underneath:
 
 * **The Deep Agents harness**: The agent loop that plans, calls tools, manages a filesystem, and delegates to subagents. See [Deep Agents](../../deepagents/overview.md).
-* **A managed runtime**: Every deployment runs on [LangSmith Agent Server](../agent-server-overview.md). You get the Agent Server API, threads, runs, streaming, and the [MCP endpoint](managed-deep-agents-mcp-endpoint.md) without operating the server yourself.
+* **A managed runtime**: Every deployment runs on [LangSmith Agent Server](../agent-server.md). You get the Agent Server API, threads, runs, streaming, and the [MCP endpoint](managed-deep-agents-mcp-endpoint.md) without operating the server yourself.
 
 ![Your agent definition runs inside the Deep Agents harness, surrounded by managed Agent Server, channels, memory, sandboxes, schedules, and connections.](https://mintcdn.com/langchain-5e9cc07a/WPyMZQ4QJL4KarWB/images/managed-deep-agents-overview-light.png?fit=max\&auto=format\&n=WPyMZQ4QJL4KarWB\&q=85\&s=823ce5f1f80a9653308d03cbf5c2e583)
 
@@ -164,14 +164,14 @@ For the full layout, see [Project structure](managed-deep-agents-project-structu
 
 Managed Deep Agents runs the open source [Deep Agents](../../deepagents/overview.md) harness rather than a second framework. The agent loop, filesystem tools, subagents, and skills are the same, so there is no second API to learn and an agent you already built keeps working.
 
-Managed Deep Agents adds the layer around the agent. The sandbox, durable memory, channels, and schedules above are declarations in a project file rather than services you build and operate. [Connections](managed-deep-agents-connections.md) run OAuth, so end users authorize their own accounts instead of you provisioning credentials for each one. LangSmith hosts the result on [Agent Server](../agent-server-overview.md). In the code, the difference is narrower: who compiles the agent.
+Managed Deep Agents adds the layer around the agent. The sandbox, durable memory, channels, and schedules above are declarations in a project file rather than services you build and operate. [Connections](managed-deep-agents-connections.md) run OAuth, so end users authorize their own accounts instead of you provisioning credentials for each one. LangSmith hosts the result on [Agent Server](../agent-server.md). In the code, the difference is narrower: who compiles the agent.
 
 * [create\_deep\_agent](https://reference.langchain.com/python/deepagents/graph/create_deep_agent) returns a compiled agent. You run it, and you own the backend, store, checkpointer, and server around it.
 * `define_deep_agent` returns a definition. The `mda` CLI hands it to the managed runtime, which supplies those pieces along with memory, skills, and the system prompt, then compiles the agent with [create\_deep\_agent](https://reference.langchain.com/python/deepagents/graph/create_deep_agent).
 
 So `define_deep_agent` takes the same parameters minus the managed ones, plus a required static `name`. Every `define_*` function works this way: declare what the agent needs, and leave the lifecycle to the runtime.
 
-Start with Managed Deep Agents to run production agents without having to manage infrastructure. Alternatively, for maximum flexibility while using the same Deep Agents harness, use the [Deep Agents SDK](../../deepagents/overview.md#self-host-with-the-sdk) and host agents yourself, or run a custom [Agent Server](../deployment.md). For a side-by-side comparison and steps to convert an agent you already built, see [Move from Deep Agents](managed-deep-agents-migrate.md).
+Start with Managed Deep Agents to run production agents without having to manage infrastructure. Alternatively, for maximum flexibility while using the same Deep Agents harness, use the [Deep Agents SDK](../../deepagents/overview.md#self-host-with-the-sdk) and host agents yourself, or run a custom [Agent Server](../agent-server.md). For a side-by-side comparison and steps to convert an agent you already built, see [Move from Deep Agents](managed-deep-agents-migrate.md).
 
 ## Next steps
 
@@ -191,7 +191,7 @@ Start with Managed Deep Agents to run production agents without having to manage
 >
 > Deploy LangChain's open-source paid media agent to Slack.
 
-> [card] [Agent Server](../agent-server-overview.md)
+> [card] [Agent Server](../agent-server.md)
 >
 > Explore the runtime that hosts Managed Deep Agents deployments.
 

@@ -220,7 +220,7 @@ Load levels in the examples are defined as:
 
 ### Low reads, low writes
 
-The default [LangSmith Agent Server](deployment.md) configuration will handle this load. No custom resource configuration is needed here.
+The default [LangSmith Agent Server](agent-server.md) configuration will handle this load. No custom resource configuration is needed here.
 
 ### Low reads, high writes
 

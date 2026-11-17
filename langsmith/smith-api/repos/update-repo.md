@@ -172,8 +172,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/repos/{owner}/{repo}:
     patch:
@@ -207,7 +210,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CreateRepoResponse'
+                $ref: '#/components/schemas/GetRepoResponse'
         '422':
           description: The request has an invalid path, query, header, or body parameter.
           content:
@@ -270,14 +273,14 @@ components:
       type: object
       title: UpdateRepoRequest
       description: Fields to update a repo
-    CreateRepoResponse:
+    GetRepoResponse:
       properties:
         repo:
           $ref: '#/components/schemas/RepoWithLookups'
       type: object
       required:
         - repo
-      title: CreateRepoResponse
+      title: GetRepoResponse
     ProblemDetails:
       properties:
         type:

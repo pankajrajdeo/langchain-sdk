@@ -262,7 +262,6 @@ The default instructions treat destructive actions as risky, even when the user 
 * [Google provider overview](../providers/google.md)
 * [ChatGoogleGenerativeAI](../chat/google_generative_ai.md)
 * [Prebuilt middleware](../../langchain/middleware/built-in.md)
-* [OpenAI Decisions integration](openai.md)
 * [LangChain Google GenAI API reference](https://reference.langchain.com/python/langchain-google-genai)
 
 ***

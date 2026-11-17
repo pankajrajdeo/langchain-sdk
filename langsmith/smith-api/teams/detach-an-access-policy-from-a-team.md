@@ -1,6 +1,6 @@
 ---
 title: "Detach an access policy from a team"
-description: "Detaches an access policy from a team. A workspace scoped team's policy is detached from its workspace. An organization-wide team's policy is detached from the workspace_id given, or from every..."
+description: "Deprecated: use the corresponding /user-groups endpoint. Detaches an access policy from a team. A workspace scoped team's policy is detached from its workspace. An organization-wide team's policy is..."
 source: "https://docs.langchain.com/langsmith/smith-api/teams/detach-an-access-policy-from-a-team"
 category: "docs"
 tags: [docs, langsmith, smith-api, teams, detach-an-access-policy-from-a-team]
@@ -8,7 +8,8 @@ tags: [docs, langsmith, smith-api, teams, detach-an-access-policy-from-a-team]
 
 # Detach an access policy from a team
 
-> Detaches an access policy from a team. A workspace scoped team's policy is detached
+> Deprecated: use the corresponding /user-groups endpoint.
+Detaches an access policy from a team. A workspace scoped team's policy is detached
 from its workspace. An organization-wide team's policy is detached from the
 workspace_id given, or from every workspace the team has access to when it is
 omitted. Returns 204 also when the policy was not attached. Needs the same
@@ -176,8 +177,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /api/v1/platform/orgs/current/teams/{team_id}/access-policies/{access_policy_id}:
     delete:
@@ -185,6 +189,8 @@ paths:
         - teams
       summary: Detach an access policy from a team
       description: >-
+        Deprecated: use the corresponding /user-groups endpoint.
+
         Detaches an access policy from a team. A workspace scoped team's policy
         is detached
 
@@ -258,6 +264,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/shared.ProblemDetails'
+      deprecated: true
       security:
         - API Key: []
           Organization ID: []

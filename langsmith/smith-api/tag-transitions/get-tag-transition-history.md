@@ -174,8 +174,11 @@ tags:
   - name: fleet users
   - name: productfeedback
     x-hidden: true
+  - name: rules
+  - name: sql
   - name: teams
   - name: usage
+  - name: user-groups
 paths:
   /repos/{owner}/{repo}/tags/{tag_name}/history:
     get:
