@@ -26,6 +26,9 @@ any base URL or API key passed to the model or set in the environment. This
 lets a caller load an untrusted serialized model without it redirecting the
 gateway key to another host or bypassing the gateway.
 
+Treat invocation arguments, including `extra_headers`, as trusted application
+input; gateway header precedence is not an authorization boundary.
+
 ## Signature
 
 ```python
@@ -33,6 +36,7 @@ langsmith_gateway(
     *,
     api_key: str | SecretStr,
     base_url: str = _LANGSMITH_GATEWAY_DEFAULT_BASE,
+    headers: Mapping[str, str] | None = None,
 ) -> Iterator[None]
 ```
 
@@ -42,7 +46,8 @@ langsmith_gateway(
 |------|------|----------|-------------|
 | `api_key` | `str \| SecretStr` | Yes | Key used to authenticate to the gateway. |
 | `base_url` | `str` | No | Gateway host. The provider's path is appended per model. (default: `_LANGSMITH_GATEWAY_DEFAULT_BASE`) |
+| `headers` | `Mapping[str, str] \| None` | No | Headers sent with every request to the gateway, such as a service key. They replace any header of the same name (case-insensitive) set on the model. They are kept in private model state and sent by the HTTP client, but are not serialized or traced. (default: `None`) |
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/ea17e48f0a4336c920394fd029de99f1568b4c38/libs/core/langchain_core/utils/_gateway.py#L56)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/5069b326c53069ec85a7e1d914c6873feb8d0cfa/libs/core/langchain_core/utils/_gateway.py#L57)

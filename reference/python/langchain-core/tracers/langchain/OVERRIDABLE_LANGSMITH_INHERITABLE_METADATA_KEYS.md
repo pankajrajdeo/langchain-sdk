@@ -32,4 +32,4 @@ OVERRIDABLE_LANGSMITH_INHERITABLE_METADATA_KEYS: frozenset[str] = frozenset({'ls
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/ea17e48f0a4336c920394fd029de99f1568b4c38/libs/core/langchain_core/tracers/langchain.py#L42)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/5069b326c53069ec85a7e1d914c6873feb8d0cfa/libs/core/langchain_core/tracers/langchain.py#L42)

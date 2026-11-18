@@ -43,4 +43,4 @@ The cached value is a list of `Generation` (or subclasses).
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/ea17e48f0a4336c920394fd029de99f1568b4c38/libs/core/langchain_core/caches.py#L100)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/5069b326c53069ec85a7e1d914c6873feb8d0cfa/libs/core/langchain_core/caches.py#L100)

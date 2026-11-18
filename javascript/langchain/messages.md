@@ -169,6 +169,50 @@ const humanMsg = new HumanMessage({
 >
 > The `name` field behavior varies by provider—some use it for user identification, others ignore it. To check, refer to the model provider's [reference](https://reference.langchain.com/python/integrations/).
 
+#### Notifications
+
+An agent harness sometimes adds a human message that the user did not type, such as a background task update or a conversation summary. Notification metadata marks these messages so that your frontend can show them differently from user input.
+
+> [!NOTE]
+>
+> Notification metadata requires `@langchain/core>=1.3.2`.
+
+`addNotificationMetadata` returns a copy of a `HumanMessage` with a `source` that names the feature that added it, and optional `data` with that feature's fields:
+
+```ts
+import { HumanMessage, addNotificationMetadata } from "@langchain/core/messages";
+
+const notification = addNotificationMetadata(
+  new HumanMessage("Background task t_42 finished."),
+  { source: "background_job", data: { task_id: "t_42", status: "success" } },
+);
+```
+
+`getNotificationMetadata` returns the `source` and `data` of a notification, or `undefined` for any other message:
+
+```ts
+import { getNotificationMetadata } from "@langchain/core/messages";
+
+for (const message of messages) {
+  const metadata = getNotificationMetadata(message);
+  if (metadata === undefined) {
+    console.log(message.text); // A regular message
+  } else {
+    console.log(`[${metadata.source}]`, metadata.data);
+  }
+}
+```
+
+The metadata does not change the message content: the model reads the content as written. LangChain's chat model integrations do not send the metadata to the model. Anyone who can send input to a thread can set it, so do not use it to decide whether to trust a message.
+
+Deep Agents notification sources include:
+
+| Source | Added when | Details |
+| - | - | - |
+| `async_subagent` | An async subagent task finishes, fails, or waits for input. `data` is the task event. | [Async subagents](../deepagents/async-subagents.md#understand-the-lifecycle) |
+| `summarization` | The agent summarizes the conversation history. | [Summarization](../deepagents/context-engineering.md#summarization) |
+| `pinned_skill` | The agent adds a pinned skill to the conversation. | [Pin skills](../deepagents/skills.md#pin-skills) |
+
 ***
 
 ### AI message

@@ -14,6 +14,10 @@ tags: [reference, langchain-core, output_parsers, base, baseoutputparser, aparse
 
 Async parse a single string model output into some structure.
 
+The default implementation runs `parse` in an executor. To use native
+async parsing through `ainvoke` or `abatch`, override `aparse_result`
+instead; those entry points do not call this method by default.
+
 ## Signature
 
 ```python
@@ -37,4 +41,4 @@ Structured output.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/ea17e48f0a4336c920394fd029de99f1568b4c38/libs/core/langchain_core/output_parsers/base.py#L303)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/5069b326c53069ec85a7e1d914c6873feb8d0cfa/libs/core/langchain_core/output_parsers/base.py#L309)

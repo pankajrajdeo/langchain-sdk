@@ -26,7 +26,7 @@ We’ve seen the impact crons can have. Proactivity is the new default for agent
 
 Crons, despite being a simple concept, unlock a few different behaviors that shape these proactive, always-on agents.
 
-**Memory:** A distinctive part of all these agents is that they remember facts about you over longer time horizons. Implementing this partially involves running a background job to condense previous conversations into a denser form of memory. This is colloquially called “dreaming”. Under the hood, this is just a cron that runs on some cadence (e.g. once a day) and updates long-term memory with any learnings from reflecting on the conversations.
+**Memory:** A distinctive part of all these agents is that they [remember facts about you over longer time horizons](https://www.langchain.com/blog/what-weve-learned-building-proactive-agents). Implementing this partially involves running a background job to condense previous conversations into a denser form of memory. This is colloquially called “dreaming”. Under the hood, this is just a cron that runs on some cadence (e.g. once a day) and updates long-term memory with any learnings from reflecting on the conversations.
 
 **Proactiveness**: Part of what makes these agents work is that they initiate communication about an idea that they think you may be interested in. Under the hood, the way that this works is there is some “idea” of what this agent should be accomplishing.
 

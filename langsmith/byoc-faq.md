@@ -245,15 +245,21 @@ tags: [docs, langsmith, byoc-faq]
 
 > [accordion] What about Kubernetes upgrades?
 >
-> LangChain owns and performs EKS upgrades proactively, ahead of AWS end-of-support dates, and coordinates the window with you.
+> On AWS, LangChain owns and performs EKS upgrades proactively, ahead of AWS end-of-support dates, in the data plane's [maintenance window](byoc-operations-aws.md#maintenance-window). Control plane upgrades are transparent. Node group upgrades roll nodes one by one with make-before-break semantics, so you might see brief connection resets as pods restart, but no data loss. See [Kubernetes cluster upgrades on AWS](byoc-operations-aws.md#kubernetes-cluster-upgrades).
 >
-> Control plane upgrades are transparent. Node group upgrades roll nodes one by one with make-before-break semantics, so you might see brief connection resets as pods restart, but no data loss. See [Kubernetes cluster upgrades](byoc-operations-aws.md#kubernetes-cluster-upgrades).
+> On Azure, AKS applies Kubernetes patch versions and node image updates automatically in the maintenance window. See [Kubernetes cluster upgrades on Azure](byoc-operations-azure.md#kubernetes-cluster-upgrades).
+>
+> On GCP, the GKE cluster runs on the `REGULAR` release channel, and nodes upgrade automatically. See [GKE and compute](byoc-architecture-gcp.md#gke-and-compute).
 
 > [accordion] Do upgrades cause downtime?
 >
-> No. Services run multiple replicas sized by a horizontal pod autoscaler, and pod disruption budgets cap how many replicas can be unavailable at once, so neither a rolling update nor a node drain takes a service below the capacity it needs.
+> No. Services run multiple replicas sized by a horizontal pod autoscaler, and pod disruption budgets cap how many replicas can be unavailable at once. Therefore, neither a rolling update nor a node drain takes a service below the capacity it needs.
 >
-> Maintenance that could cause downtime, such as a restart of RDS or ElastiCache, happens in a scheduled maintenance window that LangChain coordinates with you in advance.
+> Maintenance that could cause downtime, such as a database restart, happens in the data plane's weekly maintenance window:
+>
+> * **AWS**: Set the window in the LangSmith UI or the API. See [Maintenance window](byoc-operations-aws.md#maintenance-window).
+> * **Azure**: Set the window through the API. See [Maintenance window on Azure](byoc-operations-azure.md#maintenance-window).
+> * **GCP**: Set the window through the API. See [Change data plane settings](byoc-onboarding-gcp.md#change-data-plane-settings).
 
 > [accordion] Who monitors the data plane?
 >

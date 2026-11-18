@@ -25,4 +25,4 @@ Prompt template that contains few shot examples.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/ea17e48f0a4336c920394fd029de99f1568b4c38/libs/core/langchain_core/prompts/few_shot_with_templates.py)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/5069b326c53069ec85a7e1d914c6873feb8d0cfa/libs/core/langchain_core/prompts/few_shot_with_templates.py)

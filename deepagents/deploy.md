@@ -20,6 +20,7 @@ You write the agent's intelligence: its instructions, the tools it can call, the
 
 * **The Deep Agents harness**: The agent loop that plans, calls tools, manages a filesystem, and delegates to subagents. See [Deep Agents](overview.md).
 * **A managed runtime**: Every deployment runs on [LangSmith Agent Server](../langsmith/agent-server.md). You get the Agent Server API, threads, runs, streaming, and the [MCP endpoint](../langsmith/python/managed-deep-agents-mcp-endpoint.md) without operating the server yourself.
+* **Proactive runs**: [Memory](../langsmith/python/managed-deep-agents-memory.md), [channels](../langsmith/python/managed-deep-agents-channels.md), and [schedules](../langsmith/python/managed-deep-agents-schedules.md) keep an agent useful between conversations. Schedules run digests, reminders, and check-ins without a user message.
 
 ![Your agent definition runs inside the Deep Agents harness, surrounded by managed Agent Server, channels, memory, sandboxes, schedules, and connections.](https://mintcdn.com/langchain-5e9cc07a/WPyMZQ4QJL4KarWB/images/managed-deep-agents-overview-light.png?fit=max\&auto=format\&n=WPyMZQ4QJL4KarWB\&q=85\&s=823ce5f1f80a9653308d03cbf5c2e583)
 

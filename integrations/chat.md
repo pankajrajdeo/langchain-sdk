@@ -169,6 +169,7 @@ Certain model providers offer endpoints that are compatible with OpenAI's [Chat 
 | [`ChatKeln`](https://github.com/kris-holy/langchain-keln#readme) | ✅ | ✅ | ✅ | | N/A |
 | [`ChatLlamay`](https://github.com/kosa8ai/langchain-llamay#readme) | ✅ | ✅ | ✅ | ❌ | N/A |
 | [`ChatOptiQ`](https://github.com/optiq-bot/langchain-optiq) | ✅ | ✅ | ✅ | ❌ | N/A |
+| [`ChatSovereignEG`](https://sovereigneg.com/docs/langchain) | ✅ | ✅ | ✅ | | N/A |
 | [`Cheaper Inference`](https://cheaperinference.com/docs) | ✅ | ✅ | ✅ | ✅ | N/A |
 | [`DaoXE`](https://daoxe.com) | ✅ | ✅ | ✅ | ✅ | N/A |
 | [`GPTZZZ`](https://gptzzz.ai/docs/) | ✅ | ✅ | ✅ | ✅ | N/A |

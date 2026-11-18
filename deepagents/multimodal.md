@@ -32,6 +32,8 @@ result = agent.invoke({
 
 For block types, provider-specific requirements, and additional examples (PDF, audio, video), see [Multimodal messages](../langchain/messages.md#multimodal).
 
+<a id="built-in-read_file-tool"></a>
+
 ## Built-in `read_file` tool
 
 The harness `read_file` tool returns [standard content blocks](../langchain/messages.md#standard-content-blocks) for supported multimodal files instead of plain text. The agent can inspect images, documents, and media stored in its [filesystem](overview.md#virtual-filesystem-access) when the selected model supports the corresponding modality. Check the provider's documentation for your model's supported MIME types.
@@ -44,6 +46,8 @@ The harness `read_file` tool returns [standard content blocks](../langchain/mess
 > | [Video](../langchain/messages.md#multimodal) | `.mp4`, `.mpeg`, `.mov`, `.avi`, `.flv`, `.mpg`, `.webm`, `.wmv`, `.3gpp` |
 > | [Audio](../langchain/messages.md#multimodal) | `.wav`, `.mp3`, `.aiff`, `.aac`, `.ogg`, `.flac` |
 > | [File](../langchain/messages.md#multimodal) | `.pdf`, `.ppt`, `.pptx` |
+
+With the optional `[video]` extra (`uv add 'deepagents[video]'`), `read_file` samples frames from a video instead of returning the raw file. It returns a `ToolMessage` that describes the sample, then a follow-on `HumanMessage` that carries the frames. That message has [notification metadata](../langchain/messages.md#notifications) whose source is `"read_file_media"` and whose `data` includes `path` and `tool_call_id`. A frontend can read it to show the frames differently from user messages. For videos, `offset` and `limit` are seconds of source to sample.
 
 ## Custom tool outputs
 

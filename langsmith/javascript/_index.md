@@ -38,7 +38,7 @@ tags: [index, langsmith, javascript]
 - [Managed Deep Agents quickstart](managed-deep-agents-quickstart.md) - Create and deploy your first Managed Deep Agent with the mda CLI.
 - [Managed Deep Agents runtime](managed-deep-agents-runtime.md) - Read run context, the verified caller, the thread, and the sandbox from the native runtime types that agent factories, tools, and middleware receive.
 - [Add a sandbox to Managed Deep Agents](managed-deep-agents-sandboxes.md) - Configure an isolated filesystem and shell for a managed deep agent.
-- [Add schedules to Managed Deep Agents](managed-deep-agents-schedules.md) - Declare managed cron schedules for Managed Deep Agents deployments, or create them at runtime.
+- [Add schedules to Managed Deep Agents](managed-deep-agents-schedules.md) - Run Managed Deep Agents on a schedule so agents act without a user message, with static declarations or runtime tools.
 - [Web search](managed-deep-agents-search.md) - Add web search powered by Parallel to Managed Deep Agents without a separate account or API key.
 - [Add skills to Managed Deep Agents](managed-deep-agents-skills.md) - Add reusable task-specific instructions to a managed deep agent.
 - [Subagents](managed-deep-agents-subagents.md) - Delegate work to subagents that run inline or in the background for a managed deep agent.

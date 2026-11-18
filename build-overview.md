@@ -23,7 +23,7 @@ Managed Deep Agents, Deep Agents, LangChain, and LangGraph share the same open s
 > > [card] [Managed Deep Agents](langsmith/python/managed-deep-agents-overview.md)
 > >
 > > Build deep agents with managed deployment infrastructure for complex, long-running tasks. A complete agent harness with
-> > planning, subagents, a virtual filesystem, and long-term memory built in.
+> > schedules, subagents, a virtual filesystem, and long-term memory built in.
 > > The fastest way to write your agent; LangSmith runs the harness and runtime.
 >
 > > [card] [Deep Agents](deepagents/overview.md)
@@ -47,7 +47,7 @@ Managed Deep Agents, Deep Agents, LangChain, and LangGraph share the same open s
 > > [card] [Managed Deep Agents](langsmith/javascript/managed-deep-agents-overview.md)
 > >
 > > Build deep agents with managed deployment infrastructure for complex, long-running tasks. A complete agent harness with
-> > planning, subagents, a virtual filesystem, and long-term memory built in.
+> > schedules, subagents, a virtual filesystem, and long-term memory built in.
 > > The fastest way to write your agent; LangSmith runs the harness and runtime.
 >
 > > [card] [Deep Agents](javascript/deepagents/overview.md)

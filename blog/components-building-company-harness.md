@@ -26,7 +26,7 @@ tags: [blog, components-building-company-harness]
 
 To ground this discussion, a brief overview of the three main agents we have at LangChain:
 
-**GTM Agent**: a proactive, always-on agent that assists with GTM activities. Monitors and responds to emails, to new qualified leads, sends daily briefs, can answer questions about accounts, can run outbound motions
+**GTM Agent**: [a proactive, always-on agent](https://www.langchain.com/blog/what-weve-learned-building-proactive-agents) that assists with GTM activities. Monitors and responds to emails, to new qualified leads, sends daily briefs, can answer questions about accounts, can run outbound motions
 
 **OpenSWE**: our engineering agent, can work on and draft PRs, but also runs code review over all PRs
 
@@ -34,7 +34,7 @@ To ground this discussion, a brief overview of the three main agents we have at 
 
 All of these agents are built in the same way. We think this is a general recipe for building company harnesses.
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6add442530f2704b9d5e03af_HVZbWoXb0AAOzqm.png)
+![__wf_reserved_inherit](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6add442530f2704b9d5e03af_HVZbWoXb0AAOzqm.png)
 
 ## Problem: User Experience
 
@@ -42,11 +42,11 @@ All our agents live where people already work, which for us is Slack. They each 
 
 One nice thing we added was the concept of “breaking” out a conversation in Slack. Oftentimes, a great conversation would be happening and you’d want to add in your agent to get their opinion or get them to do something. But if they ran in that thread it would pollute the human conversation and distract. So we added an easy way for agents to “breakout” into their own thread in the channel.
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6add451310058c5037cabbb0_Harness%20user%20experience.jpeg)
+![__wf_reserved_inherit](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6add451310058c5037cabbb0_Harness%20user%20experience.jpeg)
 
 There are some user experiences that are best NOT done in Slack. For example, when reviewing emails GTM Agent wants me to send, it's fine to do that in a one-off way in Slack, but if there is a big backlog it's not a fun experience at all to track those from Slack messages. For experiences like that, we did end up building a custom UI.
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6add4532f950f25096ed5a7d_GTM%20agent%20user%20experience.jpeg)
+![__wf_reserved_inherit](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6add4532f950f25096ed5a7d_GTM%20agent%20user%20experience.jpeg)
 
 ## Problem: Identity
 
@@ -74,7 +74,7 @@ This is how we handled it for each agent (docs: [Add identity to Managed Deep Ag
 - It has some tools (eg Notion) where it acts on behalf of the user invoking the agent
 - It has some tools (eg Twitter) where it uses a fixed set of credentials, in this case for our company Twitter account. Only a whitelisted set of users can invoke certain operations here though. Eg not everyone can post to Twitter (they may only be able to read/draft)
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6add459a10058c5037cac545_Content%20Studio%20agent.png)
+![__wf_reserved_inherit](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6add459a10058c5037cac545_Content%20Studio%20agent.png)
 
 ## Problem: Memory
 
@@ -91,7 +91,7 @@ This is probably the least explored area so far - we have a lot of work we want 
 
 All three of our agents can write and execute code, and often need to in order to accomplish tasks. They all follow the pattern of running outside the sandbox, but connecting to it and executing code in there. They all have slightly different base images with different dependencies. OpenSWE (the most coding related agent) is intelligent about which base image it spins up (differs based on channel/user). They all take advantage of the [secret proxy](../langsmith/sandbox-auth-proxy.md) on [LangSmith Sandboxes](../langsmith/sandboxes.md) (see also [Add a sandbox to Managed Deep Agents](../langsmith/python/managed-deep-agents-sandboxes.md)) to let the agent connect to services in a safe and secure way from inside the sandbox itself.
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ade4515f950f250960af9f0_LangSmith%20sandbox.jpeg)
+![__wf_reserved_inherit](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ade4515f950f250960af9f0_LangSmith%20sandbox.jpeg)
 
 ## Problem: Scheduled Runs
 
@@ -101,7 +101,7 @@ Some of these are set up by the developer of the agent. For example: OpenSWE lis
 
 Others of these are set up by the user asking the agent to do so. For example: I asked GTM agent to send me a daily brief, and it created its own [cron](../langsmith/python/managed-deep-agents-schedules.md) to do so.
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6add46108744271fad7d41f3_Agent%20runs.png)
+![__wf_reserved_inherit](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6add46108744271fad7d41f3_Agent%20runs.png)
 
 ## All built on Managed Deep Agents
 

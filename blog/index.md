@@ -30,7 +30,15 @@ Thank you! Your submission has been received!Oops! Something went wrong while su
 
 ### Recent stories
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6afb4de42e8c607285a6a62d_From%20tasks%20to%20agent%20goals.png)Harrison's In the Loop
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6afc8c729c62441dd562ba85_Control%20Agent%20Traces%20Blog.png)Company Announcements
+
+## Protect sensitive data in your traces: new controls in LangSmith
+
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a8dd57932ec9d5fe5ad91d3_1727879885099.jpeg)Trammell SaltzgaberNovember 17, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)5min![What We’ve Learned Building Proactive Agents](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6afbe03740032458b5454817_6afbdfbd4417930ee7bc26c7_what-weve-learned-building-proactive-agents-cover.png)Agent Architecture
+
+## What We’ve Learned Building Proactive Agents
+
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69dcee60745f0e15b18ad4d5_sydney-runkle.png)Sydney RunkleNovember 17, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)7min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6afb4de42e8c607285a6a62d_From%20tasks%20to%20agent%20goals.png)Harrison's In the Loop
 
 ## From tasks to goals
 
@@ -86,15 +94,7 @@ Thank you! Your submission has been received!Oops! Something went wrong while su
 
 ## Browser Use in Managed Deep Agents
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69dcee60745f0e15b18ad4d5_sydney-runkle.png)Sydney RunkleOctober 29, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)7min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ae0e3564fd9f8b3ca94389e_Building%20Evidence-Grounded%20Agent%20Memory%20with%20OpenWiki%20and%20Graphs.png)Open Source
-
-## Building Evidence-Grounded Agent Memory with OpenWiki and Graphs
-
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ae0e5bff0ac6d52df9ced30_Eugene%20Liu.jpg)Eugene LiuOctober 28, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)8min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ae21ba6cf4a24aceb1adef8_proactive-agents-cover-1200x675.png)Agent Architecture
-
-## Why aren’t you building proactive agents yet?
-
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab416d4dafca27a7246c1d0_Nathan%20Drezner.jpg)Nathan DreznerOctober 28, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)6min1...1 / 35
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69dcee60745f0e15b18ad4d5_sydney-runkle.png)Sydney RunkleOctober 29, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)7min1...1 / 36
 
 #### We couldn't find anything matching that.
 

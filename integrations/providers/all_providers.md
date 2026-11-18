@@ -540,6 +540,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 >
 > A chat model that sends each request to one of several LangChain chat models, chosen by a routing strategy defined in application code.
 
+> [card] [ChatSovereignEG](https://sovereigneg.com/docs/langchain)
+>
+> Egyptian sovereign AI platform with an OpenAI-compatible API for local and international models, billed in EGP.
+
 > [card] [ChopperCompressor](https://github.com/wiiiktor/chopper_demo/tree/main/integrations/chopper-rag)
 >
 > Local document compressor and reranker: cuts the exact sentences answering a query out of retrieved documents and ranks the documents, in one pass (fine-tuned mmBERT).
@@ -943,6 +947,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 > [card] [FrameScanTool](https://github.com/Sandeep85Das/langchain-frame)
 >
 > Tools that run the Frame static analysis security scanner on a path and check whether a later change fixed each finding.
+
+> [card] [FreeImageToVideoGenerator](https://github.com/hanshs474/langchain-freeimagetovideo)
+>
+> Text-to-video and image-to-video with sound tool for the Free Image to Video API (MiniMax H3).
 
 > [card] [Future AGI](https://docs.futureagi.com/docs/integrations/traceai/langchain/)
 >
@@ -1540,6 +1548,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 >
 > Long-term memory for AI conversations.
 
+> [card] [MovoaVideoGenerator](https://movoa.readthedocs.io/en/latest/integrations/langchain/)
+>
+> Text-to-video and photo-to-video with sound tool for the Movoa video API (MiniMax H3, Veo 3.1 Fast, Seedance 2.5).
+
 > [card] [MrScraper](https://docs.mrscraper.com)
 >
 > Web scraping APIs for rendered HTML, AI extraction, scraper reruns, and result management.
@@ -1783,6 +1795,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 > [card] [PaySafe](https://paysafe-agent.com)
 >
 > x402 payment firewall with provenance tagging for prompt-injection detection.
+
+> [card] [PaySafely](https://github.com/screwtapeai/pay-safely)
+>
+> LangChain tools that check whether a seller is safe to pay before an agent pays, and return a signed receipt.
 
 > [card] [PDFluentLoader](https://github.com/pdfluent/pdfluent-sdk/tree/main/integrations/langchain-pdfluent#readme)
 >

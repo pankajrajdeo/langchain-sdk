@@ -7,11 +7,11 @@ tags: [index, reference, python, langchain-core, utils]
 
 # reference/python/langchain-core/utils
 
-17 pages here, 137 pages including subdirectories.
+17 pages here, 138 pages including subdirectories.
 
 ## Directories
 
-- [_gateway/](_gateway/_index.md) - 9 pages
+- [_gateway/](_gateway/_index.md) - 10 pages
 - [_merge/](_merge/_index.md) - 3 pages
 - [aiter/](aiter/_index.md) - 11 pages
 - [env/](env/_index.md) - 3 pages

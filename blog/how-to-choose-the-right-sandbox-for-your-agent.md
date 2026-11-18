@@ -3,7 +3,7 @@ title: "How to Choose the Right Sandbox for Your Agent"
 description: "Learn how to choose a secure sandbox for AI agents, with guidance on filesystem isolation, network access, resource limits, and microVMs."
 source: "https://www.langchain.com/blog/how-to-choose-the-right-sandbox-for-your-agent"
 category: "blog"
-published: "2026-06-12T15:00:00.000Z"
+published: "2026-10-01T13:00:00.000Z"
 author: "LangChain Accounts"
 tags: [blog, how-to-choose-the-right-sandbox-for-your-agent]
 ---
@@ -14,7 +14,11 @@ AI agents are most useful when they can take action, and letting them write and 
 
 Sandboxes give teams that control. They isolate AI-generated code, limit its permissions, and create a safer boundary for letting agents do real work. They’re computers your agent can safely use. This guide covers the security risks of running AI-generated code and how to choose a sandboxing approach that protects your data and systems without limiting agent usefulness.
 
-## The Agent Lethal Trifecta
+## What is an AI agent sandbox?
+
+An AI agent sandbox is an isolated environment where an agent can run the code it writes, install packages, and work with files without touching your host machine or the rest of your infrastructure. If an attacker attempts to hijack the agent through prompt injection, the sandbox limits what the agent do to your data and systems.
+
+## The Agent lethal trifecta: why agents need a sandbox
 
 LLMs excel at software engineering, making code generation and execution one of the best ways for agents to create value. The code itself can be the output, or the agent can create programs to help it accomplish non-software engineering tasks. A common example of the latter is writing one-off scripts to help with custom data analysis. The risk, however, is that an attacker can use prompt injection to induce your agent to write code that compromises your data and systems.
 
@@ -24,15 +28,23 @@ Currently, [there is no surefire way to prevent prompt injection](https://genai.
 2. Exposure to untrusted content
 3. The ability to communicate externally
 
-Inspired by Willison’s work, Meta [proposed](https://ai.meta.com/blog/practical-ai-agent-security/) applying the “Rule of Two”, meaning an agent should never run fully autonomously if all three conditions of the trifecta apply.
+Inspired by Willison’s “lethal trifecta” and Chromium’s security Rule of Two, Meta [proposed](https://ai.meta.com/blog/practical-ai-agent-security/) the “Agents Rule of Two.” Under this framework, an agent should not operate fully autonomously if all three of the following properties apply within a session.
 
-The rule of two is simple to understand, but following it is difficult. Providing an agent with the tools it needs usually means giving it both access to sensitive data and the ability to communicate externally. Advances in foundation models and harness engineering allow AI agents to leverage more and more context, but that increases the odds an attacker can send a prompt injection attack.
+- An agent can process untrustworthy inputs
+- An agent can have access to sensitive systems or private data
+- An agent can change state or communicate externally
+
+If a task requires all three, Meta recommends human approval or another reliable means of validation.
+
+Providing an agent with the tools it needs usually means giving it both access to sensitive data and the ability to communicate externally. Advances in foundation models and harness engineering allow AI agents to leverage more and more context, but that increases the odds an attacker can send a prompt injection attack.
+
+An email assistant, for example, reads messages from unknown senders, accesses a private inbox, and sends replies. A malicious instruction in an incoming message could exploit that combination to make the agent disclose private information or send an unauthorized message.
 
 Odds are, the lethal trifecta applies to your agent, which means it needs safeguards limiting what actions it can take with what data. Successfully implementing those controls is a lot easier if you first narrow all three risk factors. That’s where sandboxes help.
 
-## Using sandboxes to put clear boundaries around what your agent can do
+## What to look for in an AI agent sandbox
 
-A secure sandbox solution provides the following features to narrow an agent’s exposure to the lethal trifecta, and limit the harm it can do in the event of a successful prompt injection attack:
+When evaluating [coding agent sandboxes](https://www.langchain.com/resources/coding-agent-sandboxes), look for the following features to limit access to sensitive data and reduce the harm a successful prompt injection attack can cause.
 
 - Isolated filesystem
 - Limited network access
@@ -40,7 +52,7 @@ A secure sandbox solution provides the following features to narrow an agent’s
 - Controlled reusability
 - Kernel-level isolation from the host machine
 
-There are products on the market calling themselves "sandboxes" that don't provide this functionality out of the box, so evaluate potential solutions critically before choosing one for your agent. For example, the open-source Kubernetes Agent Sandbox is only secure if deployed to a cluster that has kernel-level isolation between containers, which most Kubernetes clusters do not enforce.
+There are products on the market calling themselves "[sandboxes](https://www.langchain.com/resources/what-is-an-ai-sandbox)" that don't provide this functionality out of the box, so evaluate potential solutions critically before choosing one for your agent. For example, the open-source Kubernetes Agent Sandbox is only secure if deployed to a cluster that has kernel-level isolation between containers, which most Kubernetes clusters do not enforce.
 
 ### Isolated Filesystem
 
@@ -63,6 +75,17 @@ Reusing sandboxes can be a convenient way to persist agent state across executio
 The controls above only work if the agent can’t override the systems enforcing them. Unfortunately, the kernels that power operating systems often contain bugs a compromised agent can exploit to take control of your machine and bypass any controls protecting the data on it. The solution here is virtualization, meaning your sandbox runs using its own kernel separate from the one powering the machine running it. You can use a microVM-powered solution to efficiently create kernel-isolated sandboxes without incurring the costs of spinning up a full virtual machine per sandbox.
 
 A sandbox solution that has all of the above doesn’t mean you don’t need to think seriously about the risks a compromised agent poses to your data and systems. Sandboxes alone do not fully eliminate any aspect of the lethal trifecta. Instead, they shrink access to sensitive data and limit external communication to the point where managing prompt injection risk becomes a small enough problem for your team to solve confidently.
+
+## Should your agent run inside the sandbox or call it as a tool?
+
+An agent can connect to a sandbox in one of two ways, which our CEO and co-founder [Harrison Chase](https://x.com/hwchase17) describes in [*The two patterns by which agents connect sandboxes*](https://www.langchain.com/blog/the-two-patterns-by-which-agents-connect-sandboxes):
+
+- **Agent in the sandbox.** You build an image with your agent preinstalled and run it inside the sandbox. This mirrors local development, but every agent update means rebuilding and redeploying the image.
+- **Sandbox as a tool.** The agent runs on your own server and calls the sandbox through an API whenever it needs to execute code.
+
+The case for calling the sandbox as a tool rests on three advantages: you can update agent logic without rebuilding an image, API keys stay outside the sandbox, and agent state stays separate from execution.
+
+The main trade-off is network latency, since every execution call crosses the network. Deep Agents supports both patterns.
 
 ## LangSmith Sandboxes: secure code execution, integrated with our end-to-end agent engineering platform
 

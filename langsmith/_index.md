@@ -79,7 +79,7 @@ tags: [index, langsmith]
 - [BYOC onboarding](byoc-onboarding-aws.md) - Set up a LangSmith BYOC data plane, from enabling BYOC on your organization to creating workspaces and connecting privately.
 - [BYOC onboarding on Azure](byoc-onboarding-azure.md) - Set up a LangSmith BYOC data plane in your Azure subscription, from granting LangSmith access to a resource group to creating, changing, and deleting the data plane.
 - [BYOC onboarding on GCP](byoc-onboarding-gcp.md) - Set up a LangSmith BYOC data plane in your GCP project, from the provisioner service account to creating, changing, and deleting the data plane with the API.
-- [BYOC operations](byoc-operations-aws.md) - How LangChain upgrades, patches, and maintains a LangSmith BYOC data plane, and when maintenance requires a scheduled window.
+- [BYOC operations](byoc-operations-aws.md) - How LangChain operates a LangSmith BYOC data plane, which operations you manage in your own AWS account, and how break-glass access works.
 - [BYOC operations on Azure](byoc-operations-azure.md) - How LangChain scales, upgrades, and maintains a LangSmith BYOC data plane on Azure, including instance sizes, maintenance windows, and auditing.
 - [BYOC shared responsibility model](byoc-shared-responsibility.md) - How LangChain and your organization divide responsibility for a LangSmith BYOC deployment across operations, security, support, and compliance.
 - [BYOC usage](byoc-usage.md) - Route tracing and API traffic to a LangSmith BYOC data plane, including tracing to multiple endpoints and the path prefixes for each service.

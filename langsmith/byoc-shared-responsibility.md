@@ -12,7 +12,9 @@ tags: [docs, langsmith, byoc-shared-responsibility]
 
 The BYOC shared responsibility model defines what LangChain manages and what your organization manages in a LangSmith BYOC deployment. Under this model, sensitive data does not transit LangChain infrastructure during normal operation. The sections below cover this division across platform and infrastructure, data and security, and operations and support.
 
-For the multi-tenant SaaS equivalent, see the [LangSmith shared responsibility model](shared-responsibility-model.md). For the technical structure of the control plane and data plane, see [BYOC architecture](byoc-architecture-aws.md).
+> [!TIP]
+>
+> For the multi-tenant SaaS equivalent, see the [LangSmith shared responsibility model](shared-responsibility-model.md). For the technical structure of the control plane and data plane, see [BYOC architecture](byoc-architecture-aws.md).
 
 ## Access model
 
@@ -20,9 +22,7 @@ For the multi-tenant SaaS equivalent, see the [LangSmith shared responsibility m
 * **Access is least privilege, with break-glass as the exception**: The routine access LangChain holds is scoped to provisioning and operations. Data access is not required for normal operations. Incident troubleshooting may require customer-approved break-glass access, granted through the shared support channel.
 * **You remain accountable for your cloud account**: You control your cloud account or subscription governance, network connectivity, and internal access policies.
 
-For GCP project access and networking requirements, see [GCP onboarding](byoc-onboarding-gcp.md).
-
-For Azure resource group access, Key Vault setup, and networking requirements, see [Azure onboarding](byoc-onboarding-azure.md). For Azure resources and permissions, see [Azure architecture](byoc-architecture-azure.md).
+For the exact access LangChain holds on each cloud, see [Cross-account IAM permissions on AWS](byoc-architecture-aws.md#cross-account-iam-permissions), [Access and permissions on GCP](byoc-architecture-gcp.md#access-and-permissions), and [Access and permissions on Azure](byoc-architecture-azure.md#access-and-permissions).
 
 ## Platform and infrastructure
 
@@ -45,7 +45,7 @@ For details on how upgrades, autoscaling, and maintenance windows work, see [BYO
 >
 > * VPC
 > * Subnets
-> * Routes,
+> * Routes
 > * Gateways
 > * Customer-side VPC endpoints
 > * Flow logs
@@ -65,7 +65,7 @@ For details on how upgrades, autoscaling, and maintenance windows work, see [BYO
 | **Security incident notification** | <ul><li>Notify you of a confirmed security incident in LangChain-owned infrastructure that affects your deployment, covering the control plane, corporate systems, and the BYOC build and release pipeline</li><li>Share the incident scope, impact assessment, and remediation steps</li><li>Cooperate on joint forensics</li><li>Do not run security monitoring inside your cloud account</li></ul> | <ul><li>Deploy and operate security monitoring for the BYOC components in your account, such as EDR, IDS, container security, cloud security posture management, and log aggregation</li><li>Keep that monitoring from affecting the operation of BYOC-managed resources</li><li>Designate a security contact and define internal incident response procedures</li><li>Notify LangChain promptly of any suspected compromise of customer-side credentials or access</li></ul> |
 | **Compliance and audits** | <ul><li>Provide documentation on the BYOC architecture and operational model</li><li>Supply audit evidence for LangChain-operated controls, including access logs, change history, security policies, and penetration test summaries</li><li>Support SOC 2, ISO 27001, and equivalent audit programs</li></ul> | <ul><li>Own the compliance posture of your cloud environment and all customer-managed controls</li><li>Run or coordinate audits and evidence collection for that environment</li></ul> |
 
-The IAM permissions that scope LangChain access are described in [Cross-account IAM permissions](byoc-architecture-aws.md#cross-account-iam-permissions). For how break-glass access works in practice, see [Troubleshooting](byoc-operations-aws.md#troubleshooting). For where the audit logs live and how to access them, see [Auditing](byoc-operations-aws.md#auditing).
+The IAM permissions that scope LangChain access are described in [Cross-account IAM permissions](byoc-architecture-aws.md#cross-account-iam-permissions). For how break-glass access works in practice, see [Break-glass access](byoc-operations-aws.md#break-glass-access). For where the audit logs live and how to access them, see [Auditing](byoc-operations-aws.md#auditing).
 
 ## Operations and support
 

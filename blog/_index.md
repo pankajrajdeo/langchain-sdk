@@ -1,13 +1,13 @@
 ---
 title: "blog"
-description: "Index of 561 pages and 0 subdirectories under blog."
+description: "Index of 563 pages and 0 subdirectories under blog."
 category: "index"
 tags: [index, blog]
 ---
 
 # blog
 
-561 pages here.
+563 pages here.
 
 ## Files
 
@@ -465,6 +465,7 @@ tags: [index, blog]
 - [You don’t know what your agent will do until it’s in production](production-monitoring.md) - Production monitoring for LLM agents requires new observability tools. Learn how to trace, evaluate, and improve AI agents at scale.
 - [Prompt Selectors](prompt-selectors.md) - LangChain&#39;s Prompt Selectors automatically choose the right prompt template for any AI model, from ChatGPT to GPT-3, ensuring seamless chains.
 - [Promptim: an experimental library for prompt optimization](promptim.md) - Automate prompt engineering with Promptim&#39;s optimization library. Save time, improve AI performance, and switch models faster.
+- [Protect sensitive data in your traces: new controls in LangSmith](protect-sensitive-data-in-your-traces-new-controls-in-langsmith.md) - New controls are now in LangSmith to help teams manage access to sensitive trace data. Learn more.
 - [Proving the ROI of agentic AI in financial services](proving-the-roi-of-agentic-ai-in-financial-services.md) - How to prove agentic AI ROI in financial services: business KPIs, cost tracking and governance for RFP and AML use cases, using LangSmith and Pay-i together.
 - [Sharing LangSmith Benchmarks](public-langsmith-benchmarks.md) - Share and compare LLM evaluation results with public LangSmith benchmarks. Test RAG systems, agents, and architectures on community datasets.
 - [Introducing Pytest and Vitest integrations for LangSmith Evaluations](pytest-and-vitest-for-langsmith-evals.md) - Introducing a new way to run evals using LangSmith’s Pytest and Vitest/Jest integrations.
@@ -557,6 +558,7 @@ tags: [index, blog]
 - [What is a &quot;cognitive architecture&quot;?](what-is-a-cognitive-architecture.md) - The second installment in our &quot;In the Loop&quot; series, focusing on what cognitive architecture means.
 - [What is an AI agent?](what-is-an-agent.md) - Learn what AI agents are, how they work in an LLM loop, and where workflows fit so you can build reliable, production-ready autonomous systems.
 - [What Is Eval-Driven Development? How to Improve AI Agents](what-is-eval-driven-development.md) - Eval-driven development helps you build AI agents against a consistent set of metrics. Define good behavior, write the eval first, then compare experiments.
+- [What We’ve Learned Building Proactive Agents](what-weve-learned-building-proactive-agents.md) - Proactive agents work toward goals in the background and check in when they need you. What we&#39;ve learned about memory and UX from building GTM Agent and Robin.
 - [Why agent infrastructure matters](why-agent-infrastructure.md) - Learn why agent infrastructure is essential to handling stateful, long-running tasks — and how LangGraph Platform provides the runtime support needed to build and scale reliable agents.
 - [Why Fleet Has Both General Purpose Chat and Specialized Agents](why-fleet-has-both-general-purpose-chat-and-specialized-agents.md) - Fleet supports both quick, ad hoc tasks and recurring responsibilities. See how General Purpose Chat and Specialized Agents help teams delegate work.
 - [Why do I need LangGraph Platform for agent deployment?](why-langgraph-platform.md) - This blog dives into technical details for why agent deployment is difficult, and how we built a platform to solve those challenges (LangGraph Platform).

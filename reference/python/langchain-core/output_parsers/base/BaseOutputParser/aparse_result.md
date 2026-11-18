@@ -17,6 +17,12 @@ Parse a list of candidate model `Generation` objects into a specific format.
 The return value is parsed from only the first `Generation` in the result, which
 is assumed to be the highest-likelihood `Generation`.
 
+This method is used by `ainvoke` and `abatch`. The default implementation
+runs `parse_result` in an executor; it does not call `aparse`. Override this
+method to provide native async parsing, for example when using async I/O or
+clients bound to the caller's event loop. Synchronous parsers can use the
+default implementation.
+
 ## Signature
 
 ```python
@@ -43,4 +49,4 @@ Structured output.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/ea17e48f0a4336c920394fd029de99f1568b4c38/libs/core/langchain_core/output_parsers/base.py#L281)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/5069b326c53069ec85a7e1d914c6873feb8d0cfa/libs/core/langchain_core/output_parsers/base.py#L281)

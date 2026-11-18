@@ -648,6 +648,10 @@ Connect LangGraph agents to front ends and observability platforms.
 >
 > Retrieve from Amazon Bedrock Knowledge Bases.
 
+> [card] [ClawDBRetriever (Axonio)](https://github.com/hackcat29/axonio-sdk/tree/main/adapters/langchain#readme)
+>
+> Axonio provides a LangChain.js retriever for persistent agent memory, with hosted and self-hosted backends.
+
 > [card] [Exa](../retrievers/exa.md)
 >
 > AI-powered web search and retrieval.

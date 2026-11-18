@@ -1696,6 +1696,7 @@ tags: [reference, langchain-core, documents]
 - [`GATEWAY_METADATA_HEADER`](https://reference.langchain.com/python/langchain-core/utils/_gateway/GATEWAY_METADATA_HEADER)
 - [`base_url`](https://reference.langchain.com/python/langchain-core/utils/_gateway/_GatewayOverride/base_url)
 - [`api_key`](https://reference.langchain.com/python/langchain-core/utils/_gateway/_GatewayOverride/api_key)
+- [`headers`](https://reference.langchain.com/python/langchain-core/utils/_gateway/_GatewayOverride/headers)
 - [`base_url`](https://reference.langchain.com/python/langchain-core/utils/_gateway/GatewayConfig/base_url)
 - [`api_key`](https://reference.langchain.com/python/langchain-core/utils/_gateway/GatewayConfig/api_key)
 - [`base_url_from_gateway`](https://reference.langchain.com/python/langchain-core/utils/_gateway/GatewayConfig/base_url_from_gateway)

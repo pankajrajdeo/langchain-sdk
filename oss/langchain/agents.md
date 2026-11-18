@@ -1831,6 +1831,8 @@ agent = create_agent(
 
 See [`ModelRetryMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/model_retry/ModelRetryMiddleware), [`ToolRetryMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/tool_retry/ToolRetryMiddleware), [Prebuilt middleware](../../langchain/middleware/built-in.md).
 
+Without another limit, an agent that keeps calling tools stops only at its recursion limit. `create_agent` sets that limit to 9,999 steps. For production agents, pass a lower `recursion_limit` in the invoke config, or cap model calls with [`ModelCallLimitMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/model_call_limit/ModelCallLimitMiddleware).
+
 ### Guardrails
 
 Some policies can't live in a prompt—they need to be enforced deterministically regardless of what the model does. Guardrails intercept data as it flows through the agent loop, applying compliance rules or content policies before tool results reach the model's context.

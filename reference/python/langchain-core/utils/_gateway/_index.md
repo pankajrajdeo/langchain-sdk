@@ -7,12 +7,12 @@ tags: [index, reference, python, langchain-core, utils, gateway]
 
 # reference/python/langchain-core/utils/_gateway
 
-4 pages here, 9 pages including subdirectories.
+4 pages here, 10 pages including subdirectories.
 
 ## Directories
 
 - [GatewayConfig/](GatewayConfig/_index.md) - 3 pages
-- [_GatewayOverride/](_GatewayOverride/_index.md) - 2 pages
+- [_GatewayOverride/](_GatewayOverride/_index.md) - 3 pages
 
 ## Files
 
