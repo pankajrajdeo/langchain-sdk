@@ -15,6 +15,6 @@ tags: [index, reference, python, langchain-core, api, beta_decorator]
 - [T](T.md) - View source on GitHub
 - [beta](beta.md) - Decorator to mark a function, a class, or a property as beta.
 - [is_caller_internal](is_caller_internal.md) - Return whether the caller at depth of this function is internal.
-- [suppress_langchain_beta_warning](suppress_langchain_beta_warning.md) - Context manager to suppress LangChainDeprecationWarning.
+- [suppress_langchain_beta_warning](suppress_langchain_beta_warning.md) - Suppress LangChain beta warnings within the current context.
 - [surface_langchain_beta_warnings](surface_langchain_beta_warnings.md) - Unmute LangChain beta warnings.
 - [warn_beta](warn_beta.md) - Display a standardized beta annotation.

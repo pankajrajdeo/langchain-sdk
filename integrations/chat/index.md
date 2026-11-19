@@ -102,7 +102,6 @@ Certain model providers offer endpoints that are compatible with OpenAI's [Chat 
 | [`ChatTogether`](together.md) | ✅ | ✅ | ✅ | ✅ | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-together/month)](https://pypi.org/project/langchain-together/) |
 | [`ChatOCIGenerativeAI`](oci_generative_ai.md) | ✅ | ✅ | ✅ | ✅ | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-oci/month)](https://pypi.org/project/langchain-oci/) |
 | [`ChatOCIModelDeployment`](oci_data_science.md) | ✅ | | | | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-oci/month)](https://pypi.org/project/langchain-oci/) |
-| [`ChatParallel`](parallel.md) | ✅ | ❌ | ✅ | ❌ | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-parallel/month)](https://pypi.org/project/langchain-parallel/) |
 | [`ChatQwen`](qwen.md) | ✅ | ✅ | ✅ | ✅ | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-qwq/month)](https://pypi.org/project/langchain-qwq/) |
 | [`ChatQwQ`](qwq.md) | ✅ | ✅ | ✅ | ✅ | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-qwq/month)](https://pypi.org/project/langchain-qwq/) |
 | [`ChatUpstage`](upstage.md) | | | | | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-upstage/month)](https://pypi.org/project/langchain-upstage/) |

@@ -22,4 +22,4 @@ futures: weakref.WeakSet[Future[None]] = weakref.WeakSet[Future[None]]()
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/5069b326c53069ec85a7e1d914c6873feb8d0cfa/libs/core/langchain_core/tracers/evaluation.py#L111)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/2b7ff14fb2021e6f4ee22f796a9b888eaacb5af9/libs/core/langchain_core/tracers/evaluation.py#L111)

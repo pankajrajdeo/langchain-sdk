@@ -102,6 +102,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      security: []
 components:
   schemas:
     ErrorResponse:

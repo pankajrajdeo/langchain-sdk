@@ -7,11 +7,11 @@ tags: [index, langsmith]
 
 # langsmith
 
-541 pages here, 1335 pages including subdirectories.
+541 pages here, 1336 pages including subdirectories.
 
 ## Directories
 
-- [agent-server-api/](agent-server-api/_index.md) - 73 pages
+- [agent-server-api/](agent-server-api/_index.md) - 74 pages
 - [fleet/](fleet/_index.md) - 24 pages
 - [javascript/](javascript/_index.md) - 33 pages
 - [python/](python/_index.md) - 34 pages
@@ -371,7 +371,7 @@ tags: [index, langsmith]
 - [Runs](runs.md) - An overview of runs in Agent Server, including how to kick off background runs, stateless runs, and cancel runs.
 - [How to run multiple assistants on the same thread](same-thread.md) - In LangSmith Agent Server, a thread is not explicitly associated with a particular assistant. This means that you can run multiple assistants on the same thread, which allows a different assistant to...
 - [Set a sampling rate for traces](sample-traces.md) - When working with high-volume applications, you may not want to log every trace to LangSmith. Sampling rates allow you to control what percentage of traces are logged, helping you balance...
-- [Sandbox auth proxy](sandbox-auth-proxy.md) - Inject credentials into outbound requests and control which destinations a sandbox can reach.
+- [Sandbox auth proxy](sandbox-auth-proxy.md) - Inject credentials or public attribution headers into outbound requests and control which destinations a sandbox can reach.
 - [Sandbox CLI](sandbox-cli.md) - Create, inspect, connect to, and tunnel into LangSmith sandboxes from the command line.
 - [Sandbox download links](sandbox-download-links.md) - Share a single file from a sandbox as a link that needs no LangSmith credential.
 - [Sandbox mounts](sandbox-mounts.md) - Mount S3 buckets, GCS buckets, public Git repositories, and Context Hub repos into LangSmith sandboxes.

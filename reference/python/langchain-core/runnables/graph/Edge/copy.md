@@ -40,4 +40,4 @@ A copy of the edge with the new source and target nodes.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/5069b326c53069ec85a7e1d914c6873feb8d0cfa/libs/core/langchain_core/runnables/graph.py#L80)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/2b7ff14fb2021e6f4ee22f796a9b888eaacb5af9/libs/core/langchain_core/runnables/graph.py#L80)

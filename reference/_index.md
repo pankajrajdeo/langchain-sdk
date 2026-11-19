@@ -7,11 +7,11 @@ tags: [index, reference]
 
 # reference
 
-1 page here, 6237 pages including subdirectories.
+1 page here, 6251 pages including subdirectories.
 
 ## Directories
 
-- [python/](python/_index.md) - 6236 pages
+- [python/](python/_index.md) - 6250 pages
 
 ## Files
 

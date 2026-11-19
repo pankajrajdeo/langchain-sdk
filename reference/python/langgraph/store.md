@@ -882,6 +882,7 @@ tags: [reference, langgraph, store]
 - [`CACHE_NS_WRITES`](https://reference.langchain.com/python/langgraph/_internal/_constants/CACHE_NS_WRITES)
 - [`CONFIG_KEY_SEND`](https://reference.langchain.com/python/langgraph/_internal/_constants/CONFIG_KEY_SEND)
 - [`CONFIG_KEY_READ`](https://reference.langchain.com/python/langgraph/_internal/_constants/CONFIG_KEY_READ)
+- [`CONFIG_KEY_READ_STATE`](https://reference.langchain.com/python/langgraph/_internal/_constants/CONFIG_KEY_READ_STATE)
 - [`CONFIG_KEY_CALL`](https://reference.langchain.com/python/langgraph/_internal/_constants/CONFIG_KEY_CALL)
 - [`CONFIG_KEY_CHECKPOINTER`](https://reference.langchain.com/python/langgraph/_internal/_constants/CONFIG_KEY_CHECKPOINTER)
 - [`CONFIG_KEY_STREAM`](https://reference.langchain.com/python/langgraph/_internal/_constants/CONFIG_KEY_STREAM)

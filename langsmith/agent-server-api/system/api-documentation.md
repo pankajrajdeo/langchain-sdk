@@ -71,5 +71,6 @@ paths:
           description: Success
           content:
             text/html: {}
+      security: []
 
 ````

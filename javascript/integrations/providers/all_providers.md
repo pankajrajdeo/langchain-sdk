@@ -542,7 +542,7 @@ Connect LangGraph agents to front ends and observability platforms.
 >
 > Web search results from the Perplexity Search API.
 
-> [card] [Pexafy](https://docs.pexafy.com/langchain)
+> [card] [Pexafy Stock Photos](https://docs.pexafy.com/langchain)
 >
 > Semantic search over free stock photos from Unsplash, Pexels, Pixabay, and more, returning each photo with license and credit.
 
@@ -550,9 +550,9 @@ Connect LangGraph agents to front ends and observability platforms.
 >
 > People search and contact enrichment (work emails, phone numbers, profiles, and firmographics) across multiple data providers
 
-> [card] [pilotfish](https://pilotfish.gai.ventures/docs/open)
+> [card] [pilotfish](https://pilotfish.gai.ventures/docs/langchain)
 >
-> Open-source MCP server that drives Chrome on your machine and returns only the parts of the page that changed after each action.
+> Browser MCP servers for agents: drive local Chrome step by step, or run whole tasks in a cloud browser with saved logins.
 
 > [card] [Precleared](https://precleared.dev/docs/langchain)
 >

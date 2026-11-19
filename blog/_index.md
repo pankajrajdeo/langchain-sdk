@@ -1,13 +1,13 @@
 ---
 title: "blog"
-description: "Index of 563 pages and 0 subdirectories under blog."
+description: "Index of 564 pages and 0 subdirectories under blog."
 category: "index"
 tags: [index, blog]
 ---
 
 # blog
 
-563 pages here.
+564 pages here.
 
 ## Files
 
@@ -386,6 +386,7 @@ tags: [index, blog]
 - [LangSmith BYOC is now available on AWS, Azure, and Google Cloud](langsmith-byoc-aws-gc-azure.md) - LangSmith BYOC now runs on AWS (GA), Azure and Google Cloud (Beta). Your traces, evals, and agent deployments stay in your cloud account while LangChain runs it.
 - [LangSmith BYOC is now generally available on AWS](langsmith-byoc-is-now-generally-available-on-aws.md) - LangSmith Bring Your Own Cloud is now generally available on AWS, giving Enterprise teams managed observability, evaluation, and deployment inside their own VPC.
 - [LangSmith CLI &amp; Skills](langsmith-cli-skills.md) - LangSmith CLI and skills give AI coding agents expertise in tracing, debugging, datasets, and evaluation. Boost Claude Code from 17% to 92%.
+- [LangSmith for Coding Agents: Now track spend by outcome](langsmith-coding-agents-roi.md) - LangSmith now offers reporting built for coding agents, along with new capabilities that tie their spend to the pull requests they produce.
 - [Introducing LangSmith Custom Apps: Build custom interfaces around your agent data](langsmith-custom-apps.md) - LangSmith Custom Apps lets you build the interface you want with your LangSmith data, publish it into your workspace, and skip the hosting, auth, and permissions work. Learn more.
 - [New in LangSmith: Engine v2, Managed Deep Agents, Fine-Tuning, and More](langsmith-engine-agents-fine-tuning-trajectories.md) - LangChain announced new updates to LangSmith. Updates include Engine v2 with red teaming and automatic testing, a new version of Managed Deep Agents, trajectories and more.
 - [LangSmith Engine v2: Red teaming and automated testing](langsmith-engine-v2-redteam.md) - LangSmith Engine now includes Red Teaming to proactively detect agent issues and automated agent testing. Learn more about the Engine v2 release.

@@ -7,7 +7,7 @@ tags: [index, langsmith, agent-server-api]
 
 # langsmith/agent-server-api
 
-9 pages here, 73 pages including subdirectories.
+9 pages here, 74 pages including subdirectories.
 
 ## Directories
 
@@ -18,7 +18,7 @@ tags: [index, langsmith, agent-server-api]
 - [stateless-runs/](stateless-runs/_index.md) - 4 pages
 - [store/](store/_index.md) - 5 pages
 - [streaming/](streaming/_index.md) - 2 pages
-- [system/](system/_index.md) - 4 pages
+- [system/](system/_index.md) - 5 pages
 - [thread-runs/](thread-runs/_index.md) - 10 pages
 - [threads/](threads/_index.md) - 16 pages
 
@@ -30,6 +30,6 @@ tags: [index, langsmith, agent-server-api]
 - [MCP Get](mcp.md) - Implemented according to the Streamable HTTP Transport specification.
 - [Create Run, Stream Output](stateless-runs.md) - Create a run and stream the output.
 - [Retrieve a single item.](store.md) - /langsmith/agent-server-openapi.json get /store/items
-- [Server Information](system.md) - Get server version information, feature flags, and metadata.
+- [Root Health Check](system.md) - Check the health status of the server. Alias of /ok for load balancers. Optionally check database connectivity.
 - [List Runs](thread-runs.md) - List runs for a thread.
 - [Create Thread](threads.md) - Create a thread.

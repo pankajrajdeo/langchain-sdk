@@ -24,4 +24,4 @@ tags: [index, reference, python, langchain-core, prompts, base]
 - [dumpd](dumpd.md) - Return a dict representation of an object.
 - [ensure_config](ensure_config.md) - Ensure that a config is a dict with all keys present.
 - [format_document](format_document.md) - Format a document into a string based on a prompt template.
-- [suppress_langchain_deprecation_warning](suppress_langchain_deprecation_warning.md) - Context manager to suppress LangChainDeprecationWarning.
+- [suppress_langchain_deprecation_warning](suppress_langchain_deprecation_warning.md) - Suppress LangChain deprecation warnings within the current context.

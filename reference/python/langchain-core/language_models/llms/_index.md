@@ -29,5 +29,5 @@ tags: [index, reference, python, langchain-core, language_models, llms]
 - [get_prompts](get_prompts.md) - Get prompts that are already cached.
 - [logger](logger.md) - View source on GitHub
 - [run_in_executor](run_in_executor.md) - Run a function in an executor.
-- [suppress_langchain_deprecation_warning](suppress_langchain_deprecation_warning.md) - Context manager to suppress LangChainDeprecationWarning.
+- [suppress_langchain_deprecation_warning](suppress_langchain_deprecation_warning.md) - Suppress LangChain deprecation warnings within the current context.
 - [update_cache](update_cache.md) - Update the cache and get the LLM output.

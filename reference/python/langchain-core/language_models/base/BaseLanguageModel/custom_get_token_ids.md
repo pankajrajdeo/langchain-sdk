@@ -22,4 +22,4 @@ custom_get_token_ids: Callable[[str], list[int]] | None = Field(default=None, ex
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/5069b326c53069ec85a7e1d914c6873feb8d0cfa/libs/core/langchain_core/language_models/base.py#L213)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/2b7ff14fb2021e6f4ee22f796a9b888eaacb5af9/libs/core/langchain_core/language_models/base.py#L213)

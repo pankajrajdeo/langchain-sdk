@@ -20,12 +20,10 @@ change.
 Re-exports:
 - `deprecated`: decorator for callables, classes, and properties.
 - `warn_deprecated`: helper for parameter/value-level deprecations where the
-    callable itself isn't being deprecated. Wraps the upstream helper to
-    accept a `stacklevel` argument (the upstream version hardcodes
-    `stacklevel=4`, which mis-attributes warnings emitted directly from a
-    deprecated method body).
+    callable itself isn't being deprecated. Forwards to the upstream helper
+    with caller-controlled stack attribution.
 - `suppress_langchain_deprecation_warning`: context manager that silences
-    emissions from this module's helpers (use sparingly — it is type-wide).
+    emissions from this module's helpers (use sparingly).
 - `LangChainDeprecationWarning`: warning class emitted by the helpers above
     (subclass of `DeprecationWarning`).
 
@@ -36,4 +34,4 @@ Re-exports:
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/53e090968118f72f6dd3847d097607461a0fb5a8/libs/deepagents/deepagents/_api/deprecation.py)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/9b754bc914cc75c3f6d8c6e99353e81041b73bce/libs/deepagents/deepagents/_api/deprecation.py)

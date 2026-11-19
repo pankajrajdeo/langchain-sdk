@@ -20,4 +20,4 @@ channels: dict[str, BaseChannel | ManagedValueSpec] = channels or {}
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/08a2016953789a4f579b4d36bd1967941ec62012/libs/langgraph/langgraph/pregel/main.py#L809)
+[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/7830b91a24e657a8167e2dbf40c3fa5a77ef5d93/libs/langgraph/langgraph/pregel/main.py#L809)

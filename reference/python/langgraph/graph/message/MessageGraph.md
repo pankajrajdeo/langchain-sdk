@@ -45,4 +45,4 @@ MessageGraph is deprecated in langgraph 1.0.0, to be removed in 2.0.0. Please us
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/08a2016953789a4f579b4d36bd1967941ec62012/libs/langgraph/langgraph/graph/message.py#L259)
+[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/7830b91a24e657a8167e2dbf40c3fa5a77ef5d93/libs/langgraph/langgraph/graph/message.py#L259)

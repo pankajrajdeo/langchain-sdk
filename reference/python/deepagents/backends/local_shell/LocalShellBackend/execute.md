@@ -17,7 +17,7 @@ Execute a shell command directly on the host system.
 !!! danger "Unrestricted Execution"
 
     Commands are executed directly on your host system
-    using `subprocess.run()` with `shell=True`. There is **no sandboxing,
+    using `subprocess.Popen()` with `shell=True`. There is **no sandboxing,
     isolation, or security restrictions**. The command runs with
     your user's full permissions and can:
 
@@ -33,6 +33,22 @@ Execute a shell command directly on the host system.
 The command is executed using the system shell (`/bin/sh` or equivalent)
 with the working directory set to the backend's `root_dir`.
 Stdout and stderr are combined into a single output stream.
+
+On POSIX systems, each command starts in a new session without sharing
+the parent's controlling terminal. A timeout, an interruption such as
+`KeyboardInterrupt`, and async cancellation all terminate the command's
+process group with `SIGKILL`, then wait briefly for the shell process to
+exit. A descendant that makes its own session or process group, for
+example with `setsid`, leaves that group and is not killed. `nohup` alone
+does not change the process group or protect against `SIGKILL`.
+
+Async cancellation cleanup applies only when `execute` is not overridden.
+
+On Windows, commands do not start in a new process group. Cleanup
+terminates only the direct shell process, so descendants may continue
+running after a timeout, an interruption, or async cancellation. A
+descendant that inherits the output handles also keeps the pipes open, so
+the command waits for the full timeout even after the shell itself exits.
 
 ## Signature
 
@@ -63,4 +79,4 @@ execute(
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/53e090968118f72f6dd3847d097607461a0fb5a8/libs/deepagents/deepagents/backends/local_shell.py#L216)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/9b754bc914cc75c3f6d8c6e99353e81041b73bce/libs/deepagents/deepagents/backends/local_shell.py#L529)

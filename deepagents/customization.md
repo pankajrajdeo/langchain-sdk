@@ -1206,6 +1206,10 @@ From first to last:
 
 14. **Excluded-tool filtering**: When the harness profile lists excluded tools, middleware removes those tools from the agent.
 
+> [!NOTE]
+>
+> Built-in Deep Agents middleware set `trace_policy` to `TracePolicy(process_inputs=omit_payload)`, so LangSmith records an empty input for lifecycle-hook spans instead of the full agent state. Hook outputs, model calls, and tool calls are still traced. Middleware from `langchain` that does not set its own policy, such as human-in-the-loop, is not affected. Requires `deepagents>=0.7.9`.
+
 <a id="general-purpose-subagent-prompt"></a>
 
 ### Synchronous subagent stack

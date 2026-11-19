@@ -28,4 +28,4 @@ The schema that should be used for tool calls from language models.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/5069b326c53069ec85a7e1d914c6873feb8d0cfa/libs/core/langchain_core/tools/base.py#L678)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/2b7ff14fb2021e6f4ee22f796a9b888eaacb5af9/libs/core/langchain_core/tools/base.py#L678)

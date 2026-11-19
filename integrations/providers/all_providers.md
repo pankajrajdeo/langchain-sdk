@@ -36,6 +36,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 >
 > Chat Completions model integration using Ace Data Cloud application credentials and endpoint defaults.
 
+> [card] [AdapterSpotLabelReader](https://adapterspot.com/en/api/langchain/)
+>
+> Reads power adapter rating labels from photos (voltage, current, wattage, connector, polarity) and finds the power supply that fits.
+
 > [card] [Adeu](https://adeu.ai)
 >
 > Local, offline-capable Microsoft Word (.docx) redlining and parsing tools for LLM agents.
@@ -48,9 +52,17 @@ Browse the complete collection of integrations available for Python. LangChain P
 >
 > Portable, high-performance vector database for embedded, edge, and cloud AI applications.
 
+> [card] [AdsCrawlReadTool](https://github.com/AdsCrawl/langchain-adscrawl)
+>
+> LangChain tool for fetching rendered public webpages via AdsCrawl’s /html API in HTML, Markdown, or article-JSON mode.
+
 > [card] [Aidress](https://aidress.ai)
 >
 > Discovery and trust registry tools for verifying counterpart AI agents before they transact.
+
+> [card] [AigifmakerGifGenerator](https://aigifmaker.readthedocs.io/en/latest/integrations/langchain/)
+>
+> Text-to-GIF tool for the AI GIF Maker API; generates animated GIFs directly from text prompts using an API key.
 
 > [card] [AI Stupid Level](https://github.com/StudioPlatforms/aistupidlevel-sdk/blob/main/langchain-python/README.md)
 >
@@ -307,6 +319,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 > [card] [AsinAmazonSearch](https://github.com/asindotdev/langchain-asin#readme)
 >
 > Amazon product search, price history and live seller offers as tools, through the Asin API.
+
+> [card] [AskJapanToolkit](https://github.com/ihouse-corp/langchain-askjapan#readme)
+>
+> Japanese company and postcode data queries and MARU Japan Hands service tools over MCP, maintained by iHouse Co., Ltd.
 
 > [card] [assistant-ui](https://www.assistant-ui.com/docs/runtimes/langgraph)
 >
@@ -603,6 +619,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 > [card] [CommentScraperLoader](https://comment-scraper.com/langchain)
 >
 > Loads local JSON exports of Reddit and Hacker News threads made with the Comment Scraper browser extension, one Document per comment.
+
+> [card] [CommitLayer](https://commitlayer.ai/docs/integrations/python/langgraph)
+>
+> Records an agent’s tool calls as verifiable actions before they run and gates the graph on the verdict, read from the systems of record.
 
 > [card] [comply54](https://comply54.io/langchain)
 >
@@ -1660,6 +1680,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 >
 > Code interpreter sandboxes for running agent-generated code.
 
+> [card] [ObscateMiddleware](https://obscate.com/docs/langchain)
+>
+> ObscateMiddleware provides reversible PII redaction for LangChain text and JSON through the hosted Obscate API.
+
 > [card] [OceanBase](https://pypi.org/project/langchain-oceanbase/)
 >
 > Distributed relational database system.
@@ -1692,7 +1716,7 @@ Browse the complete collection of integrations available for Python. LangChain P
 >
 > Belief-tracking BaseStore for LangGraph with superseding writes and provenance.
 
-> [card] [OnlineCompilerToolkit](https://github.com/onlinecompiler-io/langchain-onlinecompiler/tree/main/python#readme)
+> [card] [OnlineCompilerToolkit](https://onlinecompiler.io/docs/langchain)
 >
 > Runs code in 46 languages and judges it against test cases. Each run gets a fresh gVisor sandbox with no network access.
 
@@ -1788,6 +1812,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 >
 > Web search, page reading, and scraping tools for agents and RAG, built on the Oxylabs Web API and Web Scraper API.
 
+> [card] [PandaStackSandbox](https://docs.pandastack.ai/docs/agents/deep-agents)
+>
+> Sandbox backend for Deep Agents that runs commands and file operations in PandaStack Firecracker microVMs.
+
 > [card] [Parallel](parallel.md)
 >
 > AI-powered web search and content extraction for LLMs.
@@ -1820,7 +1848,7 @@ Browse the complete collection of integrations available for Python. LangChain P
 >
 > AI-powered search and reasoning engine.
 
-> [card] [Pexafy](https://docs.pexafy.com/langchain)
+> [card] [Pexafy Stock Photos](https://docs.pexafy.com/langchain)
 >
 > Semantic search over free stock photos from Unsplash, Pexels, Pixabay, and more, returning each photo with license and credit.
 
@@ -2238,7 +2266,7 @@ Browse the complete collection of integrations available for Python. LangChain P
 
 > [card] [SignafaideMiddleware](https://signafaide.co.uk/docs/frameworks/langchain)
 >
-> Agent middleware that writes a signed, tamper-evident record of every tool call, verifiable offline by an auditor.
+> Agent middleware that checks each risky tool call against your rules before it runs and signs a record of every call, verifiable offline.
 
 > [card] [Signatrust](https://signatrust.net/docs/api)
 >
@@ -2296,6 +2324,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 >
 > Static documentation generator with retrieval-ready artefacts for LLM applications.
 
+> [card] [SovereignEGEmbeddings](https://sovereigneg.com/docs/langchain)
+>
+> Text embedding models from SovereignEG, an Egyptian sovereign AI platform with an OpenAI-compatible API.
+
 > [card] [Spanlens](https://www.spanlens.io/docs/sdk)
 >
 > Open-source LLM observability with a LangChain and LangGraph callback handler.
@@ -2303,6 +2335,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 > [card] [SpecStream](https://specstream.ai/docs/langchain)
 >
 > Web search tool for the live web. Returns ranked results with page content and the source URL for each result.
+
+> [card] [SpendBudgetMiddleware](https://github.com/Mattbusel/langchain-agent-budget/blob/main/docs/index.md)
+>
+> Agent middleware that reserves each model call's worst-case USD cost before the call, so runs and parallel subagents sharing a budget cannot overspend it.
 
 > [card] [SpiceDB](https://github.com/authzed/langchain-spicedb)
 >
@@ -2543,6 +2579,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 > [card] [TranscriptFetch](https://transcriptfetch.com/docs/langchain)
 >
 > TranscriptFetch loads YouTube, TikTok, and Instagram transcripts from videos, channels, playlists, and searches with timestamped chunks for RAG.
+
+> [card] [Trimwise](https://trimwise.readthedocs.io/en/latest/integrations/langchain/)
+>
+> Post-retrieval Runnable that trims documents to a shared evidence budget and preserves source spans.
 
 > [card] [TrueFoundry](truefoundry.md)
 >

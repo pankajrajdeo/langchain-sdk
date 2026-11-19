@@ -89,9 +89,9 @@ components:
           type: array
           title: Items
           description: >-
-            Namespaces the data-plane administrator has allowed for the caller's
-            workspace, sorted by name. Empty on SaaS, outside BYOC data planes,
-            or when none are allowed.
+            Namespaces the administrator has allowed for the caller's workspace,
+            sorted by name. Empty on SaaS, on listener-backed installs, or when
+            none are allowed.
       type: object
       required:
         - items

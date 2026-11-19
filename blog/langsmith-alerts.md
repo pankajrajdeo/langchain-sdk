@@ -30,7 +30,7 @@ Agentic apps inherently rely on numerous dependencies — you might use one (or 
 
 User experience isn't just about speed; it's also about the *quality* of the LLM's output. LLMs don't always behave predictably— small changes in prompts, models, or inputs can unexpectedly impact results.
 
-Prompts that perform well in controlled evaluations can also sometimes regress in real-world scenarios due to differences in user interactions. Alerts based on feedback scores (from [user input](https://docs.smith.langchain.com/evaluation/how_to_guides/attach_user_feedback?ref=blog.langchain.com) or [online evaluations](https://docs.smith.langchain.com/observability/how_to_guides/online_evaluations?ref=blog.langchain.com#configure-llm-as-judge-evaluators)) provide an early warning system for these quality dips.
+Prompts that perform well in controlled evaluations can also sometimes regress in real-world scenarios due to differences in user interactions. [Alerts based on feedback scores](https://www.youtube.com/watch?v=keMWUys2BMs) (from [user input](https://docs.smith.langchain.com/evaluation/how_to_guides/attach_user_feedback?ref=blog.langchain.com) or [online evaluations](https://docs.smith.langchain.com/observability/how_to_guides/online_evaluations?ref=blog.langchain.com#configure-llm-as-judge-evaluators)) provide an early warning system for these quality dips.
 
 ## LangSmith Alerts Overview
 

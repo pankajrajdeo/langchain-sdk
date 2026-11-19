@@ -96,5 +96,6 @@ paths:
                   - flags
                   - metadata
                 title: ServerInfo
+      security: []
 
 ````

@@ -14,14 +14,6 @@ tags: [reference, deepagents, middleware, filesystem, warn_deprecated]
 
 Emit a deprecation warning with caller-controlled stack attribution.
 
-`langchain_core.warn_deprecated` formats a standard message but hardcodes
-`stacklevel=4` in its internal `warnings.warn` call. That value targets a
-decorator-wrapped frame layout; when called directly from a deprecated
-method's body the warning is attributed one frame too high (above the
-user's call site). This wrapper captures the formatted upstream warning
-and re-emits it with an explicit `stacklevel`, so the warning points at
-the user's call site.
-
 ## Signature
 
 ```python
@@ -59,4 +51,4 @@ warn_deprecated(
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/53e090968118f72f6dd3847d097607461a0fb5a8/libs/deepagents/deepagents/_api/deprecation.py#L39)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/9b754bc914cc75c3f6d8c6e99353e81041b73bce/libs/deepagents/deepagents/_api/deprecation.py#L35)

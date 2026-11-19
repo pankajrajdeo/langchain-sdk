@@ -1,18 +1,18 @@
 ---
-title: "Server Information"
-description: "Get server version information, feature flags, and metadata."
+title: "Root Health Check"
+description: "Check the health status of the server. Alias of /ok for load balancers. Optionally check database connectivity."
 source: "https://docs.langchain.com/langsmith/agent-server-api/system"
 category: "docs"
 tags: [docs, langsmith, agent-server-api, system]
 ---
 
-# Server Information
+# Root Health Check
 
-> Get server version information, feature flags, and metadata.
+> Check the health status of the server. Alias of `/ok` for load balancers. Optionally check database connectivity.
 
 ## OpenAPI
 
-**/langsmith/agent-server-openapi.json get /info**
+**/langsmith/agent-server-openapi.json get /**
 
 ````yaml
 openapi: 3.1.0
@@ -59,13 +59,27 @@ tags:
       `/threads/{thread_id}/stream/events` (not documented here — OpenAPI 3.1
       does not describe WebSocket).
 paths:
-  /info:
+  /:
     get:
       tags:
         - System
-      summary: Server Information
-      description: Get server version information, feature flags, and metadata.
-      operationId: server_info_info_get
+      summary: Root Health Check
+      description: >-
+        Check the health status of the server. Alias of `/ok` for load
+        balancers. Optionally check database connectivity.
+      operationId: health_check_root_get
+      parameters:
+        - name: check_db
+          in: query
+          required: false
+          schema:
+            type: integer
+            enum:
+              - 0
+              - 1
+            default: 0
+            title: Check Database
+            description: Whether to check database connectivity (0=false, 1=true)
       responses:
         '200':
           description: Success
@@ -74,27 +88,32 @@ paths:
               schema:
                 type: object
                 properties:
-                  version:
-                    type: string
-                    title: Version
-                    description: LangGraph API version
-                  langgraph_py_version:
-                    type: string
-                    title: LangGraph Python Version
-                    description: LangGraph Python library version
-                  flags:
-                    type: object
-                    title: Feature Flags
-                    description: Enabled features and capabilities
-                  metadata:
-                    type: object
-                    title: Metadata
-                    description: Server deployment metadata
+                  ok:
+                    type: boolean
+                    const: true
+                    title: OK
+                    description: Indicates the server is healthy
                 required:
-                  - version
-                  - langgraph_py_version
-                  - flags
-                  - metadata
-                title: ServerInfo
+                  - ok
+                title: HealthResponse
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security: []
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      required:
+        - detail
+      properties:
+        detail:
+          type: string
+          description: Human-readable error message
+      title: ErrorResponse
+      description: Error response returned from the server
 
 ````

@@ -147,7 +147,7 @@ If you have enabled [blob storage](self-host-blob-storage.md) (recommended for p
 
 > [!WARNING]
 >
-> **Keep TTL lifecycle rules in your DR bucket.** If you copy data to a DR bucket, replicate the lifecycle rules for `ttl_s/`, `ttl_l/`, and any custom `ttl_XXd/` prefixes too. Missing rules in the DR bucket will cause data to be retained indefinitely after failover. See [TTL configuration](self-host-blob-storage.md#ttl-configuration).
+> **Keep TTL lifecycle rules in your DR bucket.** If you copy data to a DR bucket, replicate the lifecycle rules for `ttl_s/`, `ttl_l/`, and any custom `ttl_XXd/` prefixes too. If you use automation rules, also replicate the 30-day rule for `run_rules/outcomes/`. Missing rules in the DR bucket cause data to be retained indefinitely after failover. See [TTL configuration](self-host-blob-storage.md#ttl-configuration) and [automation outcome retention](self-host-blob-storage.md#automation-outcome-retention).
 
 ## Redis
 

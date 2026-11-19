@@ -51,6 +51,7 @@ Arrows show a typical retrieval flow. The highlighted component is the one this 
 | [`Kosa8Sandbox`](https://github.com/kosa8ai/langchain-kosa8#readme) | N/A |
 | [`LangSmith sandbox`](sandboxes/langsmith.md) | N/A |
 | [`NoMacSandbox`](https://github.com/NoMac-app/langchain-nomac#readme) | N/A |
+| [`PandaStackSandbox`](https://docs.pandastack.ai/docs/agents/deep-agents) | N/A |
 
 If you'd like to contribute a sandbox, see [Implement a sandbox integration](../contributing/implement-langchain.md).
 

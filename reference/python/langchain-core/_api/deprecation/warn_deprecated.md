@@ -29,6 +29,7 @@ warn_deprecated(
     addendum: str = '',
     removal: str = '',
     package: str = '',
+    stacklevel: int = 4,
 ) -> None
 ```
 
@@ -46,7 +47,8 @@ warn_deprecated(
 | `addendum` | `str` | No | Additional text appended directly to the final message. (default: `''`) |
 | `removal` | `str` | No | The expected removal version.  With the default (an empty string), no removal version is shown in the warning message.  Cannot be used together with pending. (default: `''`) |
 | `package` | `str` | No | The package of the deprecated object. (default: `''`) |
+| `stacklevel` | `int` | No | Warning attribution depth passed to `warnings.warn`; `1` points inside this helper and `2` points to its caller. (default: `4`) |
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/5069b326c53069ec85a7e1d914c6873feb8d0cfa/libs/core/langchain_core/_api/deprecation.py#L479)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/2b7ff14fb2021e6f4ee22f796a9b888eaacb5af9/libs/core/langchain_core/_api/deprecation.py#L491)

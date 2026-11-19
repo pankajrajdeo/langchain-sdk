@@ -27,4 +27,4 @@ CriterionEval = Annotated[CriterionPass | CriterionFail, Discriminator('passed')
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/53e090968118f72f6dd3847d097607461a0fb5a8/libs/deepagents/deepagents/middleware/rubric.py#L209)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/9b754bc914cc75c3f6d8c6e99353e81041b73bce/libs/deepagents/deepagents/middleware/rubric.py#L209)

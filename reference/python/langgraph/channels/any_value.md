@@ -19,4 +19,4 @@ tags: [reference, langgraph, channels, any_value]
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/08a2016953789a4f579b4d36bd1967941ec62012/libs/langgraph/langgraph/channels/any_value.py)
+[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/7830b91a24e657a8167e2dbf40c3fa5a77ef5d93/libs/langgraph/langgraph/channels/any_value.py)

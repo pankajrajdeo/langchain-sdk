@@ -30,7 +30,11 @@ Thank you! Your submission has been received!Oops! Something went wrong while su
 
 ### Recent stories
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6afc8c729c62441dd562ba85_Control%20Agent%20Traces%20Blog.png)Company Announcements
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6afd2e9dfe8e56017d39e855_langsmith-coding-agents-cover.png)Company AnnouncementsObservability & Evals
+
+## LangSmith for Coding Agents: Now track spend by outcome
+
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6afd2f0bbca7125b3b37de18_Jacob%20Lee.jpg)Jacob LeeNovember 18, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)8min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6afc8c729c62441dd562ba85_Control%20Agent%20Traces%20Blog.png)Company Announcements
 
 ## Protect sensitive data in your traces: new controls in LangSmith
 
@@ -90,11 +94,7 @@ Thank you! Your submission has been received!Oops! Something went wrong while su
 
 ## Managed Deep Agents v0.10: Browser use and asynchronous subagents
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab416d4dafca27a7246c1d0_Nathan%20Drezner.jpg)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69dcee60745f0e15b18ad4d5_sydney-runkle.png)Nathan DreznerSydney RunkleOctober 29, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)7min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ae8c5c17db7aee10f486fef_webflow-cover-1200x675.png)Deep AgentsAgent ArchitectureDeployment
-
-## Browser Use in Managed Deep Agents
-
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69dcee60745f0e15b18ad4d5_sydney-runkle.png)Sydney RunkleOctober 29, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)7min1...1 / 36
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab416d4dafca27a7246c1d0_Nathan%20Drezner.jpg)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69dcee60745f0e15b18ad4d5_sydney-runkle.png)Nathan DreznerSydney RunkleOctober 29, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)7min1...1 / 36
 
 #### We couldn't find anything matching that.
 

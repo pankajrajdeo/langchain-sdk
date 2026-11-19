@@ -39,4 +39,4 @@ tags: [index, reference, python, langchain-core, language_models, chat_models]
 - [message_chunk_to_message](message_chunk_to_message.md) - Convert a message chunk to a Message.
 - [message_to_events](message_to_events.md) - Replay a finalized message as a synthetic event lifecycle.
 - [run_in_executor](run_in_executor.md) - Run a function in an executor.
-- [suppress_langchain_deprecation_warning](suppress_langchain_deprecation_warning.md) - Context manager to suppress LangChainDeprecationWarning.
+- [suppress_langchain_deprecation_warning](suppress_langchain_deprecation_warning.md) - Suppress LangChain deprecation warnings within the current context.

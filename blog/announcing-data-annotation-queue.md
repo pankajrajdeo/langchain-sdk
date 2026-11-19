@@ -26,7 +26,7 @@ Beyond that, it's helpful to have a dataset of test cases you can run your chain
 
 Notice that all these techniques require having datapoints specific to your application. Which most people often don't have to start! One of the main benefits of LLMs is that they make it incredibly easy to get started building an application compared to traditional machine learning - you don't need to have a dataset to train a model, you can just start using an API. This is great for getting started, but presents some challenges when you start diving deep and you want to improve your chain.
 
-To help solve some of those problems, we're releasing a new feature of LangSmith: Data Annotation Queues. This is designed to make it easy to review logs, give feedback on those logs, and create datasets from those logs. In parallel, we're excited to highlight [langfree](https://langfree.parlance-labs.com/?ref=blog.langchain.com), an OSS package from [Hamel Husain](https://hamel.dev/?ref=blog.langchain.com) aimed at doing some of this functionality locally.
+To help solve some of those problems, we're releasing a new feature of LangSmith: Data Annotation Queues. This is designed to make it easy to [review logs, give feedback on those logs](https://www.youtube.com/watch?v=LfdGwdUhGW4), and create datasets from those logs. In parallel, we're excited to highlight [langfree](https://langfree.parlance-labs.com/?ref=blog.langchain.com), an OSS package from [Hamel Husain](https://hamel.dev/?ref=blog.langchain.com) aimed at doing some of this functionality locally.
 
 ## Data Annotation Queue
 

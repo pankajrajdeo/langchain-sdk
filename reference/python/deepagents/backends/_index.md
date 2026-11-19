@@ -1,21 +1,23 @@
 ---
 title: "reference/python/deepagents/backends"
-description: "Index of 10 pages and 10 subdirectories under reference/python/deepagents/backends."
+description: "Index of 10 pages and 12 subdirectories under reference/python/deepagents/backends."
 category: "index"
 tags: [index, reference, python, deepagents, backends]
 ---
 
 # reference/python/deepagents/backends
 
-10 pages here, 302 pages including subdirectories.
+10 pages here, 315 pages including subdirectories.
 
 ## Directories
 
+- [_posix_process/](_posix_process/_index.md) - 4 pages
+- [_windows_process/](_windows_process/_index.md) - 4 pages
 - [composite/](composite/_index.md) - 27 pages
 - [context_hub/](context_hub/_index.md) - 32 pages
 - [filesystem/](filesystem/_index.md) - 19 pages
 - [langsmith/](langsmith/_index.md) - 12 pages
-- [local_shell/](local_shell/_index.md) - 4 pages
+- [local_shell/](local_shell/_index.md) - 9 pages
 - [protocol/](protocol/_index.md) - 104 pages
 - [sandbox/](sandbox/_index.md) - 28 pages
 - [state/](state/_index.md) - 16 pages

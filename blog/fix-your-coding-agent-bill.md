@@ -34,16 +34,16 @@ Once we started digging into this with teams, a pattern emerged: solving it isn'
 
 1. **See your spend:** Instead of five dashboards in five formats, you’ll want one consistent view across every coding agent your team actually uses. LangSmith now traces sessions from Claude Code, Codex, Cursor, GitHub Copilot Chat, Pi, and OpenCode into the same trace model. It’s the same metadata, same query syntax, regardless of which tool ran the session. You can finally ask "which sessions were expensive" and get one answer instead of five partial ones.
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a4eb14dde5f126ebf80d2c3_Group%202147239402.png)
+![__wf_reserved_inherit](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a4eb14dde5f126ebf80d2c3_Group%202147239402.png)
 
 1. **Standardize cost across tools:** Once you can see sessions side by side, you can compare them honestly. Token usage, cost per session, tool calls, and subagent activity normalized across tools means you can finally tell how much Cursor or Claude Code is doing for the money on a given workflow.
 2. **Optimize your usage:** Seeing the data is what makes optimization possible, but most teams don't act on it because nobody has the bandwidth to manually review every session for waste. This is where Engine comes in: it analyzes agent sessions and surfaces concrete skill improvements, the kind of refinements a senior engineer would suggest if they had time to review every PR an agent produced. For example, if an agent is making redundant tool calls to retrieve the same context multiple times in a session, Engine flags it and recommends consolidating them. Instead of a dashboard telling you spend is high, you get a specific recommendation for what to change.
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a4eb15aa9ece6bd4fda830e_Group%202147239403.png)
+![__wf_reserved_inherit](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a4eb15aa9ece6bd4fda830e_Group%202147239403.png)
 
 1. **Govern your spending:** Our LLM Gateway cost caps and governs at the user, team, and org level, and will soon be able to route to open source models where they're a fit. Open source models have gotten good and cheap enough that they belong as an option in every agent harness — not as a replacement for frontier models everywhere, but as a default for most work that doesn't require frontier intelligence. The same goes for subagents: cheap models handling scoped subtasks can keep a smart model from burning frontier-level cost on grunt work.
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a469ea7309e67eb671b5a94_Group%202147239404.png)
+![__wf_reserved_inherit](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a469ea7309e67eb671b5a94_Group%202147239404.png)
 
 Each of these stages makes the next one possible. Visibility tells you where to optimize. Optimization tells you where governance needs to be tightest. Governance protects the gains so the next round of visibility shows real progress instead of new waste.
 
@@ -67,7 +67,7 @@ Traces are normalized to a common model (root session, turns, tool calls, metada
 
 Setup is different for each tool: find the steps for [Claude Code](../langsmith/trace-claude-code.md), [Codex](../langsmith/trace-with-codex.md), [OpenCode](../langsmith/trace-with-opencode.md), [Cursor](https://github.com/langchain-ai/Cursor-LangSmith-Integration), [GitHub Copilot](../langsmith/trace-with-vscode-copilot.md), [Pi](../langsmith/trace-with-pi.md), or [dcode](../deepagents/code/overview.md).
 
-We built this because we lived through this problem ourselves: the bill kept climbing, and and we didn't have a clear sense of what work was actually worth the spend. Your engineering team will never standardize on one agent (and they shouldn’t have to!) since they’ll keep picking whatever fits the task best. The observability later has to meet them where they are: different agents, different event formats, one place to make sense of all of it.
+We built this because we lived through this problem ourselves: the bill kept climbing, and we didn't have a clear sense of [what work was actually worth the spend](https://www.langchain.com/blog/langsmith-coding-agents-roi). Your engineering team will never standardize on one agent (and they shouldn’t have to!) since they’ll keep picking whatever fits the task best. The observability later has to meet them where they are: different agents, different event formats, one place to make sense of all of it.
 
 LangSmith gives teams one place to debug and measure sessions across all your coding agents. [Find your tool and get started.](../langsmith/integrations.md#developer-tools)
 

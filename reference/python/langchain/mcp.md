@@ -31,4 +31,4 @@ those from `langchain.mcp.elicitation`.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/c2f4036e4c6ca45a8da8a42d8e07a25d2ea48b8f/libs/langchain_v1/langchain/mcp/__init__.py)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/ced9bdb1a8899516b6c541fc0e19ab5f349aa0ea/libs/langchain_v1/langchain/mcp/__init__.py)

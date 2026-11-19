@@ -96,5 +96,6 @@ paths:
                 description: >-
                   Metrics in JSON format including queue stats, worker stats,
                   and HTTP metrics
+      security: []
 
 ````

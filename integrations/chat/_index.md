@@ -39,7 +39,7 @@ tags: [index, integrations, chat]
 - [ChatOllama integration](ollama.md) - Integrate with the ChatOllama chat model using LangChain Python.
 - [ChatOpenAI integration](openai.md) - Integrate with the ChatOpenAI chat model using LangChain Python.
 - [ChatOpenRouter integration](openrouter.md) - Integrate with the ChatOpenRouter chat model using LangChain Python.
-- [ChatParallel integration](parallel.md) - Integrate with the ChatParallel chat model using LangChain Python.
+- [Parallel Responses API](parallel.md) - Migrate from Parallel Chat to the Parallel Responses API for web research.
 - [ChatPerplexity integration](perplexity.md) - Integrate with the ChatPerplexity chat model using LangChain Python.
 - [ChatQwen integration](qwen.md) - Integrate with the ChatQwen chat model using LangChain Python.
 - [ChatQwQ integration](qwq.md) - Integrate with the ChatQwQ chat model using LangChain Python.

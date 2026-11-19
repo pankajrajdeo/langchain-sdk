@@ -10,7 +10,7 @@ tags: [docs, integrations, providers, parallel]
 
 > Integrate with Parallel using LangChain Python.
 
-This page covers all LangChain integrations with [Parallel](https://platform.parallel.ai/).
+This page covers LangChain integrations with [Parallel](https://platform.parallel.ai/), plus a migration note for Parallel's Responses API.
 
 ## Installation and setup
 
@@ -30,11 +30,11 @@ uv add langchain-parallel
 
 Set the `PARALLEL_API_KEY` environment variable to your Parallel API key. Sign up at [platform.parallel.ai](https://platform.parallel.ai) to obtain one.
 
-## Chat models
+## Web research
 
-> [card] [ChatParallel](../chat/parallel.md)
+> [card] [Parallel Responses API](../chat/parallel.md)
 >
-> OpenAI-compatible chat model with optional web research and per-field citations on the research tiers.
+> Call Parallel's OpenAI-compatible Responses API with the OpenAI SDK. Not a `langchain-parallel` chat model.
 
 ## Tools
 

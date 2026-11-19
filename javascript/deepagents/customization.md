@@ -1275,6 +1275,10 @@ From first to last:
 
 14. [`UnsupportedContentMiddleware`](https://reference.langchain.com/javascript/deepagents/middleware/createUnsupportedContentMiddleware): Rewrites unsupported multimodal content in requests with a text placeholder.
 
+> [!NOTE]
+>
+> Built-in Deep Agents middleware set `tracePolicy` to `{ processInputs: omitPayload }`, so LangSmith records an empty input for lifecycle-hook spans instead of the full agent state. Hook outputs, model calls, and tool calls are still traced. Middleware from `langchain`, such as prompt caching and human-in-the-loop, and [`UnsupportedContentMiddleware`](https://reference.langchain.com/javascript/deepagents/middleware/createUnsupportedContentMiddleware) are not affected. Requires `deepagents>=1.16.3`.
+
 ### Synchronous subagent stack
 
 The built-in **general-purpose** subagent and each declarative synchronous `SubAgent` graph use a stack that `createDeepAgent` builds in code. It matches the main agent in broad shape (filesystem, summarization, Patch, profile extras, skills, Anthropic and Bedrock caching, optional permissions), except that there is **no** [`SubAgentMiddleware`](https://reference.langchain.com/javascript/deepagents/middleware/createSubAgentMiddleware) inside a subagent graph (only the parent agent exposes the `task` tool).

@@ -23,9 +23,9 @@ inheritance hierarchy, `C` *must* define an `__init__` method (if `C` instead
 inherited its `__init__` from its own base class, then `@deprecated` would mess up
 `__init__` inheritance when installing its own (deprecation-emitting) `C.__init__`).
 
-Parameters are the same as for `warn_deprecated`, except that *obj_type* defaults to
-'class' if decorating a class, 'attribute' if decorating a property, and 'function'
-otherwise.
+Parameters are the same as for `warn_deprecated`, except for `stacklevel`;
+*obj_type* defaults to 'class' if decorating a class, 'attribute' if decorating a
+property, and 'function' otherwise.
 
 ## Signature
 
@@ -78,4 +78,4 @@ A decorator to mark a function or class as deprecated.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/5069b326c53069ec85a7e1d914c6873feb8d0cfa/libs/core/langchain_core/_api/deprecation.py#L119)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/2b7ff14fb2021e6f4ee22f796a9b888eaacb5af9/libs/core/langchain_core/_api/deprecation.py#L119)

@@ -388,10 +388,10 @@ components:
             - type: 'null'
           title: K8S Namespace
           description: >-
-            Kubernetes namespace for a BYOC deployment, provisioned and allowed
-            by the data-plane administrator for this workspace. Omit to use the
-            installation namespace. Cannot be changed after creation. Not
-            supported for SaaS or listener-backed deployments.
+            Kubernetes namespace for a self-hosted or BYOC deployment,
+            provisioned and allowed by the administrator for this workspace.
+            Omit to use the installation namespace. Cannot be changed after
+            creation. Not supported for SaaS or listener-backed deployments.
         integration_id:
           anyOf:
             - type: string
