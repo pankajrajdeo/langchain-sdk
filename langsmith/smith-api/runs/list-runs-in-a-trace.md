@@ -175,10 +175,11 @@ tags:
   - name: productfeedback
     x-hidden: true
   - name: rules
+  - name: runsanalytics
   - name: sql
-  - name: teams
   - name: usage
   - name: user-groups
+  - name: users
 paths:
   /api/v2/traces/{trace_id}/runs:
     get:
@@ -224,8 +225,8 @@ paths:
           name: max_start_time
           in: query
           schema:
-            format: date-time
             type: string
+            format: date-time
             title: Max Start Time
         - description: >-
             `min_start_time` is the optional inclusive lower bound for run
@@ -234,8 +235,8 @@ paths:
           name: min_start_time
           in: query
           schema:
-            format: date-time
             type: string
+            format: date-time
             title: Min Start Time
         - description: '`project_id` is the UUID of the tracing project that owns the trace.'
           name: project_id

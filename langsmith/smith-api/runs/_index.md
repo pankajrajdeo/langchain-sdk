@@ -20,7 +20,7 @@ tags: [index, langsmith, smith-api, runs]
 - [List runs in a trace](list-runs-in-a-trace.md) - Returns runs for a trace ID within min/max start time. Optional filter; repeatable selects to select fields to return.
 - [Query public shared trace runs](query-public-shared-trace-runs.md) - GET with body payload — no resources created. Returns all runs within the trace identified by the share token. The share token supplies the tenant, project, and trace scope.
 - [Query runs](query-runs.md) - Returns a paginated list of runs for the given projects within min/max start_time. Supports filters, cursor pagination, and selects to select fields to return.
-- [Query traces](query-traces.md) - Returns a paginated list of traces (root runs) for a single tracing project. Each item carries the trace's root run plus optional trace-wide aggregates (total_tokens, total_cost, first_token_time)...
+- [Query traces](query-traces.md) - GET with body payload — no resources created. Returns the traces matching the query passed as the request payload.
 - [Share a run](share-a-run.md) - Creates or returns a share token for a run. Child runs share their trace root.
 - [Translate an ai search into query filters](translate-an-ai-search-into-query-filters.md) - Translates a natural-language search into the scope, filters, semantic criterion and time bounds for the runs, traces or threads query API, without running the search. No resources are created. Send...
 - [Unshare a run](unshare-a-run.md) - Deletes the share token for the trace identified by trace_id and session_id. Idempotent: returns 204 whether or not a share token existed.

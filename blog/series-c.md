@@ -28,7 +28,7 @@ LangSmith provides the foundation for companies to control their agent systems a
 
 **Agent Improvement **helps teams test, monitor, and improve agent performance. LangSmith Observability and Evaluation give teams visibility into how agents behave and measure quality. LangSmith Engine, our in-platform agent, automates improvement by finding errors, writing code and prompt fixes, and monitoring production traffic for regressions. LangSmith Fine-Tuning helps teams turn agent traces into training data to fine-tune and evaluate specialized models.
 
-**Agent Governance **gives teams centralized control over how agents use models, tools, and data. Our LLM and Tool Gateways help teams manage model budgets and fallbacks, protect sensitive data, and govern tool access and authentication across teams and agents.
+**Agent Governance **gives teams centralized control over how agents use models, tools, and data. Our LLM and Tool Gateways help teams manage model budgets and fallbacks, protect sensitive data, and [govern tool access and authentication across teams and agents](https://www.langchain.com/blog/langsmith-tool-gateway).
 
 Next Friday, November 20th, we’ll share several new LangSmith capabilities that build on this foundation. [Join us](https://events.langchain.com/webinar/future-of-agents/) for a special release event to see what’s coming next.
 

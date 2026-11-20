@@ -173,10 +173,11 @@ tags:
   - name: productfeedback
     x-hidden: true
   - name: rules
+  - name: runsanalytics
   - name: sql
-  - name: teams
   - name: usage
   - name: user-groups
+  - name: users
 paths:
   /api/v1/sessions/{session_id}/dashboard:
     post:
@@ -706,6 +707,10 @@ components:
         - error_responses_per_second
         - p95_latency
         - run_queue_wait_time
+        - startable_runs_wait_max_by_priority
+        - startable_runs_by_priority
+        - running_runs_by_priority
+        - out_of_memory_restarts
       title: HostProjectChartMetric
       description: LGP Metrics you can chart.
     CustomChartFeedbackCountMetric:

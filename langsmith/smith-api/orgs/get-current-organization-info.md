@@ -171,10 +171,11 @@ tags:
   - name: productfeedback
     x-hidden: true
   - name: rules
+  - name: runsanalytics
   - name: sql
-  - name: teams
   - name: usage
   - name: user-groups
+  - name: users
 paths:
   /api/v1/orgs/current/info:
     get:
@@ -475,7 +476,6 @@ components:
         can_use_teams:
           type: boolean
           title: Can Use Teams
-          default: false
         can_add_seats:
           type: boolean
           title: Can Add Seats

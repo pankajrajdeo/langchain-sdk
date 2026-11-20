@@ -18,7 +18,7 @@ tags: [docs, langsmith, engine-self-hosted]
 
 In self-hosted LangSmith, [LangSmith Engine](engine.md)'s analysis and fix workflow runs in your environment. Engine sends the trace content and code it needs to its models, which run either on LangSmith Intelligence (LSI) or on your own model providers. It reports usage metadata to LSI for billing, unless your installation is [air-gapped](#air-gapped-installations).
 
-This page covers how to [choose how Engine runs its models](#choose-how-engine-runs-its-models), where Engine processes data, and how to [install Engine](#install-engine). To configure your own model providers, see [Configure model providers for Engine on self-hosted](engine-self-hosted-model-providers.md). To give Engine access to source code, also [configure a GitHub App](engine-self-hosted-github.md). GitHub is optional for trace analysis.
+This page covers how to [choose how Engine runs its models](#choose-how-engine-runs-its-models), where Engine processes data, and how to [install Engine](#install-engine). To configure your own model providers, see [Configure model providers for Engine on self-hosted](engine-self-hosted-model-providers.md). To give Engine access to source code, also [configure a GitHub App](engine-self-hosted-github.md) or [connect GitLab](engine-repositories.md#connect-gitlab). A code connection is optional for trace analysis.
 
 Engine also runs on [BYOC](byoc.md) data planes, where LangChain installs and operates it for you. See [Engine on BYOC](#engine-on-byoc) for what differs.
 
@@ -34,6 +34,7 @@ Engine on BYOC differs from self-hosted LangSmith in the following ways:
 
 * **Model providers**: Engine runs only on [your own model providers](engine-self-hosted-model-providers.md). LangSmith Intelligence is not available. Amazon Bedrock can use your data plane's cloud identity instead of saved credentials. Enable access to the required models in the AWS account that hosts the data plane.
 * **GitHub**: An Organization Admin registers a GitHub App and saves its credentials from an Engine project in the LangSmith UI. See [Connect Engine to GitHub on BYOC](engine-self-hosted-github.md#configure-the-app-on-byoc).
+* **GitLab**: A workspace admin connects GitLab in workspace settings, the same way as on LangSmith Cloud. See [Connect GitLab](engine-repositories.md#connect-gitlab).
 * **Slack**: An Organization Admin configures a Slack app for the organization under **Settings** > **General Settings** > **Slack**. See [Create your Slack app on BYOC](self-host-slack.md#create-your-slack-app-on-byoc).
 
 To set up Engine after LangChain enables it on your data plane:
@@ -41,7 +42,7 @@ To set up Engine after LangChain enables it on your data plane:
 1. An Organization Admin goes to **Settings** > **Engine**, selects the data plane, and turns on Engine. This setting applies to all workspaces on the data plane. Other data planes and LangSmith Cloud are unaffected.
 2. An Organization Admin [chooses model providers](engine-self-hosted-model-providers.md#choose-model-providers) under **Settings** > **Engine** > **Model providers**. Saving credentials requires the `organization:manage-model-secrets` permission.
 3. A user whose [role](rbac.md) can update tracing projects turns on Engine for a tracing project. See [Set up Engine](engine-setup.md#turn-on-engine-for-a-tracing-project).
-4. (Optional) An Organization Admin [configures the GitHub App](engine-self-hosted-github.md#configure-the-app-on-byoc), and workspace users connect repositories.
+4. (Optional) Connect source code. For GitHub, an Organization Admin [configures the GitHub App](engine-self-hosted-github.md#configure-the-app-on-byoc), and workspace users connect repositories. For GitLab, a workspace admin [connects GitLab](engine-repositories.md#connect-gitlab), and workspace users add projects.
 5. (Optional) An Organization Admin [configures the Slack app](self-host-slack.md#create-your-slack-app-on-byoc) and adds [notification destinations](engine-notifications.md).
 
 To move Engine issues from LangSmith Cloud or self-hosted LangSmith to a data plane, see [Migrate to BYOC](byoc-migration.md#complete-the-engine-manual-steps).
@@ -175,7 +176,7 @@ Serve that hostname through your ingress with TLS, as described in [Set up an in
 
 When Engine generates a code fix, it installs dependencies from `pypi.org`, `files.pythonhosted.org`, and `registry.npmjs.org`. The registry hosts are not configurable, so Engine cannot use an internal PyPI or npm mirror, and dependency installs fail if your network blocks the public registries. Sandboxes cannot reach Go module proxies such as `proxy.golang.org`, so Engine uses your connected code repository's `vendor/` directory when it is present.
 
-For GitHub connections, also allow the [outbound requests and inbound webhooks](engine-self-hosted-github.md#allow-network-access) required by your GitHub environment. Browser access to LangSmith alone does not establish webhook connectivity from GitHub.
+For GitHub connections, also allow the [outbound requests and inbound webhooks](engine-self-hosted-github.md#allow-network-access) required by your GitHub environment. For GitLab, see [Self-hosted network access](engine-repositories.md#self-hosted-network-access). Browser access to LangSmith alone does not establish webhook connectivity from GitHub.
 
 **5. Generate Engine's keys**
 
@@ -313,7 +314,7 @@ Enabling Engine in Helm makes the feature available, but it does not start any s
 2. An Organization Admin [chooses how Engine runs its models](engine-self-hosted-model-providers.md#choose-model-providers) under **Settings > Engine > Model providers**. Engine does not start any runs until this is saved.
 3. A user whose [role](rbac.md) can update tracing projects turns on Engine for a tracing project from its **Engine** tab. For more information, see [Set up Engine](engine-setup.md#turn-on-engine-for-a-tracing-project).
 
-To read source code and open pull requests, Engine also needs a GitHub connection. An operator [configures the GitHub App](engine-self-hosted-github.md), then workspace users [connect repositories](engine-repositories.md#connect-repositories).
+To read source code and open pull requests, Engine also needs a GitHub or GitLab connection. For GitHub, an operator [configures the GitHub App](engine-self-hosted-github.md), then workspace users [connect repositories](engine-repositories.md#connect-repositories). For GitLab, a workspace admin [connects GitLab](engine-repositories.md#connect-gitlab).
 
 ### Disable Engine
 

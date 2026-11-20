@@ -173,10 +173,11 @@ tags:
   - name: productfeedback
     x-hidden: true
   - name: rules
+  - name: runsanalytics
   - name: sql
-  - name: teams
   - name: usage
   - name: user-groups
+  - name: users
 paths:
   /api/v2/runs/rules:
     get:
@@ -222,10 +223,10 @@ paths:
           name: type
           in: query
           schema:
+            type: string
             enum:
               - PROJECT
               - DATASET
-            type: string
             title: Type
         - description: Case-insensitive display-name pattern
           name: name_contains

@@ -22,4 +22,4 @@ gated: dict[str, BaseTool] = field(default_factory=dict)
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/9b754bc914cc75c3f6d8c6e99353e81041b73bce/libs/deepagents/deepagents/middleware/_skill_tools.py#L159)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/5568767515b7edc6b106e92d3de4cc65886c1eca/libs/deepagents/deepagents/middleware/_skill_tools.py#L159)

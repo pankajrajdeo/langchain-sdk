@@ -173,10 +173,11 @@ tags:
   - name: productfeedback
     x-hidden: true
   - name: rules
+  - name: runsanalytics
   - name: sql
-  - name: teams
   - name: usage
   - name: user-groups
+  - name: users
 paths:
   /api/v1/charts/section:
     post:
@@ -185,6 +186,13 @@ paths:
       summary: Create section
       description: Create a new section.
       operationId: create_section_api_v1_charts_section_post
+      parameters:
+        - name: access_scope
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/AccessScope'
+            default: workspace
       requestBody:
         required: true
         content:
@@ -207,9 +215,16 @@ paths:
       security:
         - API Key: []
         - Tenant ID: []
+        - Organization ID: []
         - Bearer Auth: []
 components:
   schemas:
+    AccessScope:
+      type: string
+      enum:
+        - organization
+        - workspace
+      title: AccessScope
     CustomChartsSectionCreate:
       properties:
         title:
@@ -244,6 +259,15 @@ components:
             - type: integer
             - type: 'null'
           title: Index
+        access_scope:
+          $ref: '#/components/schemas/AccessScope'
+          default: workspace
+        tenant_id:
+          anyOf:
+            - type: string
+              format: uuid
+            - type: 'null'
+          title: Tenant Id
         id:
           type: string
           format: uuid
@@ -288,6 +312,10 @@ components:
       type: apiKey
       in: header
       name: X-Tenant-Id
+    Organization ID:
+      type: apiKey
+      in: header
+      name: X-Organization-Id
     Bearer Auth:
       type: http
       description: >-

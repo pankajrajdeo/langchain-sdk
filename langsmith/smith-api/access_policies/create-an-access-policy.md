@@ -173,10 +173,11 @@ tags:
   - name: productfeedback
     x-hidden: true
   - name: rules
+  - name: runsanalytics
   - name: sql
-  - name: teams
   - name: usage
   - name: user-groups
+  - name: users
 paths:
   /api/v1/platform/orgs/current/access-policies:
     post:
@@ -409,6 +410,8 @@ components:
         - organization:authentication:manage
         - organization:billing:manage
         - organization:billing:read
+        - organization:charts:manage
+        - organization:charts:read
         - organization:engine:manage
         - organization:engine:read
         - organization:gateway:manage
@@ -571,6 +574,8 @@ components:
         - OrganizationAuthenticationManage
         - OrganizationBillingManage
         - OrganizationBillingRead
+        - OrganizationChartsManage
+        - OrganizationChartsRead
         - OrganizationEngineManage
         - OrganizationEngineRead
         - OrganizationGatewayManage

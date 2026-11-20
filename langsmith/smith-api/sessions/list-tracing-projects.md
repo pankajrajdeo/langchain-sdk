@@ -173,10 +173,11 @@ tags:
   - name: productfeedback
     x-hidden: true
   - name: rules
+  - name: runsanalytics
   - name: sql
-  - name: teams
   - name: usage
   - name: user-groups
+  - name: users
 paths:
   /api/v2/sessions:
     get:
@@ -262,6 +263,8 @@ paths:
           name: sort_by
           in: query
           schema:
+            type: string
+            default: START_TIME
             enum:
               - NAME
               - START_TIME
@@ -270,18 +273,16 @@ paths:
               - LATENCY_P50
               - LATENCY_P99
               - FEEDBACK
-            type: string
-            default: START_TIME
             title: Sort By
         - description: Sort direction
           name: sort_order
           in: query
           schema:
+            type: string
+            default: desc
             enum:
               - asc
               - desc
-            type: string
-            default: desc
             title: Sort Order
         - description: Feedback key to sort by; required when sort_by is FEEDBACK
           name: sort_by_feedback_key
@@ -295,10 +296,10 @@ paths:
           name: sort_by_feedback_source
           in: query
           schema:
+            type: string
             enum:
               - RUN
               - SESSION
-            type: string
             title: Sort By Feedback Source
         - description: >-
             Only return experiments run against this dataset version (RFC 3339
@@ -306,8 +307,8 @@ paths:
           name: dataset_version
           in: query
           schema:
-            format: date-time
             type: string
+            format: date-time
             title: Dataset Version
         - description: Include run statistics
           name: include_stats
@@ -338,8 +339,8 @@ paths:
           name: stats_start_time
           in: query
           schema:
-            format: date-time
             type: string
+            format: date-time
             title: Stats Start Time
         - description: Statistics to include when include_stats is true; defaults to all
           name: stats_select

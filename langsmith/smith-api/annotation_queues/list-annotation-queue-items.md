@@ -173,10 +173,11 @@ tags:
   - name: productfeedback
     x-hidden: true
   - name: rules
+  - name: runsanalytics
   - name: sql
-  - name: teams
   - name: usage
   - name: user-groups
+  - name: users
 paths:
   /api/v1/platform/annotation-queues/{queue_id}/items:
     get:
@@ -206,11 +207,11 @@ paths:
           in: query
           required: true
           schema:
+            type: string
             enum:
               - needs_my_review
               - needs_others_review
               - archived
-            type: string
             title: Status
         - description: Page size (max 100)
           name: page_size
@@ -229,10 +230,10 @@ paths:
           name: item_type
           in: query
           schema:
+            type: string
             enum:
               - RUN
               - THREAD
-            type: string
             title: Item Type
         - description: >-
             Only items whose trace start time is at or after this timestamp.
@@ -240,8 +241,8 @@ paths:
           name: min_start_time
           in: query
           schema:
-            format: date-time
             type: string
+            format: date-time
             title: Min Start Time
         - description: >-
             Only items whose trace start time is at or before this timestamp.
@@ -249,19 +250,40 @@ paths:
           name: max_start_time
           in: query
           schema:
-            format: date-time
             type: string
+            format: date-time
             title: Max Start Time
         - description: Pagination direction. backward requires cursor
           name: direction
           in: query
           schema:
+            type: string
+            default: forward
             enum:
               - forward
               - backward
-            type: string
-            default: forward
             title: Direction
+        - description: >-
+            Only completed items whose reviewers disagreed on at least one
+            rubric key. Returns 501 unless multi-reviewer queues are on for the
+            workspace. Requires status=archived
+          name: agreement
+          in: query
+          schema:
+            type: string
+            enum:
+              - disagreed
+            title: Agreement
+        - description: >-
+            Only completed items that do (true) or do not (false) still have a
+            disagreed rubric key with no final answer. Items with no agreement
+            result match neither value. Returns 501 unless multi-reviewer queues
+            are on for the workspace. Requires status=archived
+          name: has_unresolved_keys
+          in: query
+          schema:
+            type: boolean
+            title: Has Unresolved Keys
       responses:
         '200':
           description: OK
@@ -284,6 +306,12 @@ paths:
                 $ref: '#/components/schemas/shared.ProblemDetails'
         '404':
           description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/shared.ProblemDetails'
+        '501':
+          description: Multi-reviewer queues are not on for the workspace
           content:
             application/json:
               schema:
@@ -341,16 +369,32 @@ components:
       properties:
         added_at:
           type: string
+        agreement_state:
+          description: Whether the item's reviewers agreed across its rubric keys.
+          allOf:
+            - $ref: '#/components/schemas/agreement.State'
+        assigned_to:
+          items:
+            type: string
+          type: array
         completed_by:
           items:
             type: string
           type: array
         effective_added_at:
           type: string
+        has_unresolved_keys:
+          description: True while a key the reviewers disagreed on has no final answer.
+          type: boolean
         id:
           type: string
         item_type:
           $ref: '#/components/schemas/annotationqueues.AnnotationQueueItemType'
+        key_agreements:
+          description: The reviewers' result for each rubric key.
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/annotationqueues.ItemKeyAgreement'
         last_reviewed_time:
           description: >-
             LastReviewedTime is always present on the wire (null until
@@ -385,6 +429,16 @@ components:
           type: string
         run_id:
           type: string
+    agreement.State:
+      type: string
+      enum:
+        - agreed
+        - disagreed
+        - none
+      x-enum-varnames:
+        - StateAgreed
+        - StateDisagreed
+        - StateNone
     annotationqueues.AnnotationQueueItemType:
       type: string
       enum:
@@ -393,6 +447,30 @@ components:
       x-enum-varnames:
         - AnnotationQueueItemTypeRun
         - AnnotationQueueItemTypeThread
+    annotationqueues.ItemKeyAgreement:
+      type: object
+      properties:
+        answer:
+          $ref: '#/components/schemas/agreement.Answer'
+        has_final:
+          type: boolean
+        state:
+          $ref: '#/components/schemas/agreement.State'
+    agreement.Answer:
+      type: object
+      properties:
+        score:
+          type: number
+        scores:
+          type: array
+          items:
+            type: number
+        value:
+          type: string
+        values:
+          items:
+            type: string
+          type: array
   securitySchemes:
     API Key:
       type: apiKey

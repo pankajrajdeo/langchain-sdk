@@ -177,10 +177,11 @@ tags:
   - name: productfeedback
     x-hidden: true
   - name: rules
+  - name: runsanalytics
   - name: sql
-  - name: teams
   - name: usage
   - name: user-groups
+  - name: users
 paths:
   /api/v1/platform/orgs/current/user-groups/{user_group_id}/workspace-members:
     get:

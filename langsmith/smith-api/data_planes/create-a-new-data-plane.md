@@ -174,10 +174,11 @@ tags:
   - name: productfeedback
     x-hidden: true
   - name: rules
+  - name: runsanalytics
   - name: sql
-  - name: teams
   - name: usage
   - name: user-groups
+  - name: users
 paths:
   /orgs/current/data-planes:
     post:
@@ -453,6 +454,13 @@ components:
         gcp_project_id:
           description: ProjectID is the customer project that hosts the data plane.
           type: string
+        mtu_bytes:
+          description: >-
+            MTUBytes is the VPC network's MTU, 1300 to 8896, for example 1440 to
+            match
+
+            a peered network or interconnect. Defaults to GCP's 1460.
+          type: integer
         name:
           type: string
         provisioner_service_account:

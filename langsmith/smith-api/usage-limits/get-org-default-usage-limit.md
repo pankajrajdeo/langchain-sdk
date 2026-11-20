@@ -1,6 +1,6 @@
 ---
 title: "Get org default usage limit"
-description: "Get the organization's default monthly trace limit for workspaces."
+description: "Get the organization's default monthly trace limit and alert thresholds for workspaces."
 source: "https://docs.langchain.com/langsmith/smith-api/usage-limits/get-org-default-usage-limit"
 category: "docs"
 tags: [docs, langsmith, smith-api, usage-limits, get-org-default-usage-limit]
@@ -8,7 +8,7 @@ tags: [docs, langsmith, smith-api, usage-limits, get-org-default-usage-limit]
 
 # Get org default usage limit
 
-> Get the organization's default monthly trace limit for workspaces.
+> Get the organization's default monthly trace limit and alert thresholds for workspaces.
 
 ## OpenAPI
 
@@ -173,17 +173,20 @@ tags:
   - name: productfeedback
     x-hidden: true
   - name: rules
+  - name: runsanalytics
   - name: sql
-  - name: teams
   - name: usage
   - name: user-groups
+  - name: users
 paths:
   /api/v1/usage-limits/org/default:
     get:
       tags:
         - usage-limits
       summary: Get org default usage limit
-      description: Get the organization's default monthly trace limit for workspaces.
+      description: >-
+        Get the organization's default monthly trace limit and alert thresholds
+        for workspaces.
       operationId: get_org_default_usage_limit_api_v1_usage_limits_org_default_get
       responses:
         '200':
@@ -205,8 +208,38 @@ components:
             - type: integer
             - type: 'null'
           title: Limit Value
+        alert_thresholds:
+          items:
+            $ref: '#/components/schemas/AlertThreshold'
+          type: array
+          title: Alert Thresholds
+          description: Alert thresholds copied into workspaces that inherit the default.
       type: object
       title: OrgDefaultMonthlyTraceLimit
+    AlertThreshold:
+      properties:
+        kind:
+          $ref: '#/components/schemas/AlertThresholdKind'
+          description: '`PERCENT` of the limit, or an absolute `COUNT` in the limit''s unit.'
+        value:
+          type: integer
+          maximum: 9007199254740991
+          minimum: 1
+          title: Value
+          description: 1-100 for `PERCENT`; a positive number for `COUNT`.
+      type: object
+      required:
+        - kind
+        - value
+      title: AlertThreshold
+      description: A usage level that sends an alert when reached.
+    AlertThresholdKind:
+      type: string
+      enum:
+        - PERCENT
+        - COUNT
+      title: AlertThresholdKind
+      description: How an alert threshold value is measured.
   securitySchemes:
     API Key:
       type: apiKey

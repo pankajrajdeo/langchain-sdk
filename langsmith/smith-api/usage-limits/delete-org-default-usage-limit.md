@@ -1,6 +1,6 @@
 ---
 title: "Delete org default usage limit"
-description: "Clear the organization's default monthly trace limit. Existing workspace limits are unchanged."
+description: "Clear the organization's default monthly trace limit and alert thresholds. Existing workspace limits are unchanged."
 source: "https://docs.langchain.com/langsmith/smith-api/usage-limits/delete-org-default-usage-limit"
 category: "docs"
 tags: [docs, langsmith, smith-api, usage-limits, delete-org-default-usage-limit]
@@ -8,7 +8,7 @@ tags: [docs, langsmith, smith-api, usage-limits, delete-org-default-usage-limit]
 
 # Delete org default usage limit
 
-> Clear the organization's default monthly trace limit. Existing workspace limits are unchanged.
+> Clear the organization's default monthly trace limit and alert thresholds. Existing workspace limits are unchanged.
 
 ## OpenAPI
 
@@ -173,10 +173,11 @@ tags:
   - name: productfeedback
     x-hidden: true
   - name: rules
+  - name: runsanalytics
   - name: sql
-  - name: teams
   - name: usage
   - name: user-groups
+  - name: users
 paths:
   /api/v1/usage-limits/org/default:
     delete:
@@ -184,8 +185,8 @@ paths:
         - usage-limits
       summary: Delete org default usage limit
       description: >-
-        Clear the organization's default monthly trace limit. Existing workspace
-        limits are unchanged.
+        Clear the organization's default monthly trace limit and alert
+        thresholds. Existing workspace limits are unchanged.
       operationId: delete_org_default_usage_limit_api_v1_usage_limits_org_default_delete
       responses:
         '204':

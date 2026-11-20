@@ -173,10 +173,11 @@ tags:
   - name: productfeedback
     x-hidden: true
   - name: rules
+  - name: runsanalytics
   - name: sql
-  - name: teams
   - name: usage
   - name: user-groups
+  - name: users
 paths:
   /api/v1/charts/{chart_id}:
     delete:
@@ -193,6 +194,12 @@ paths:
             type: string
             format: uuid
             title: Chart Id
+        - name: access_scope
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/AccessScope'
+            default: workspace
       responses:
         '200':
           description: Successful Response
@@ -208,9 +215,16 @@ paths:
       security:
         - API Key: []
         - Tenant ID: []
+        - Organization ID: []
         - Bearer Auth: []
 components:
   schemas:
+    AccessScope:
+      type: string
+      enum:
+        - organization
+        - workspace
+      title: AccessScope
     HTTPValidationError:
       properties:
         detail:
@@ -229,6 +243,10 @@ components:
       type: apiKey
       in: header
       name: X-Tenant-Id
+    Organization ID:
+      type: apiKey
+      in: header
+      name: X-Organization-Id
     Bearer Auth:
       type: http
       description: >-

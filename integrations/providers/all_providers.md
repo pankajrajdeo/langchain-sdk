@@ -1612,10 +1612,6 @@ Browse the complete collection of integrations available for Python. LangChain P
 >
 > CatchAll web search for real-world business events as LangChain tools.
 
-> [card] [NetNest Design Fundamentals](https://api.netnestdesign.com/docs)
->
-> Fundamentals and filing events for companies that file with the SEC, as MCP tools, each value linked to its filing.
-
 > [card] [Nextmail](https://nextmail.sh/docs/python/langchain)
 >
 > Email on your own domains, with agent tools to read and search mail, wait for verification codes, use disposable inboxes, save drafts, reply and send.
@@ -2044,6 +2040,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 >
 > Search posts, subreddit feeds, and comment-tree retrievers for Reddit.
 
+> [card] [ReDefiNERPIIMiddleware](https://github.com/Jungroo-AI/langchain-redefiner#readme)
+>
+> Agent middleware that redacts personal data, as defined by a plain-English rulebook, with a local 0.8B model before messages reach the LLM.
+
 > [card] [Redis](redis.md)
 >
 > In-memory data structure store and cache.
@@ -2083,6 +2083,10 @@ Browse the complete collection of integrations available for Python. LangChain P
 > [card] [Revana](https://github.com/Aribk7/langchain-revana#readme)
 >
 > Revana serves Claude, Gemini, DeepSeek and other chat models from several labs behind one OpenAI-compatible API key, routed to the cheapest working provider.
+
+> [card] [RiskShield](https://github.com/kynto2001-ctrl/apexrunner-tools#riskshield-block-dangerous-trades-before-they-execute)
+>
+> RiskShield provides pre-trade crypto risk, timing, and slippage checks for agents and blocks orders scored DANGER.
 
 > [card] [Robocorp](https://github.com/robocorp/robocorp)
 >

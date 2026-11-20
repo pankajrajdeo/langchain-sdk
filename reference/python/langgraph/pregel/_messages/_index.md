@@ -1,13 +1,13 @@
 ---
 title: "reference/python/langgraph/pregel/_messages"
-description: "Index of 6 pages and 2 subdirectories under reference/python/langgraph/pregel/_messages."
+description: "Index of 7 pages and 2 subdirectories under reference/python/langgraph/pregel/_messages."
 category: "index"
 tags: [index, reference, python, langgraph, pregel, messages]
 ---
 
 # reference/python/langgraph/pregel/_messages
 
-6 pages here, 25 pages including subdirectories.
+7 pages here, 26 pages including subdirectories.
 
 ## Directories
 
@@ -17,6 +17,7 @@ tags: [index, reference, python, langgraph, pregel, messages]
 ## Files
 
 - [Meta](Meta.md) - View source on GitHub
+- [REMOVE_ALL_MESSAGES](REMOVE_ALL_MESSAGES.md) - View source on GitHub
 - [StreamMessagesHandler](StreamMessagesHandler.md) - A callback handler that implements stream_mode=messages.
 - [StreamMessagesHandlerV2](StreamMessagesHandlerV2.md) - v2 variant of StreamMessagesHandler.
 - [T](T.md) - View source on GitHub

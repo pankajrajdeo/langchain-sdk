@@ -137,6 +137,8 @@ response = model.invoke(messages)
 
 A [`HumanMessage`](https://reference.langchain.com/python/langchain-core/messages/human/HumanMessage) represents user input and interactions. They can contain text, images, audio, files, and any other amount of multimodal [content](#message-content).
 
+When an agent adds a human message that the user did not type, such as a conversation summary, it can mark the message with [notification metadata](#notifications).
+
 <a id="content"></a>
 
 #### Text content
@@ -171,52 +173,6 @@ human_msg = HumanMessage(
 > [!NOTE]
 >
 > The `name` field behavior varies by provider—some use it for user identification, others ignore it. To check, refer to the model provider's [reference](https://reference.langchain.com/python/integrations/).
-
-#### Notifications
-
-An agent harness sometimes adds a human message that the user did not type, such as a background task update or a conversation summary. Notification metadata marks these messages so that your frontend can show them differently from user input.
-
-> [!NOTE]
->
-> Notification metadata requires `langchain-core>=1.7.2`.
-
-`add_notification_metadata` returns a copy of a `HumanMessage` with a `source` that names the feature that added it, and optional `data` with that feature's fields:
-
-```python
-from langchain.messages import HumanMessage
-from langchain_core.messages import add_notification_metadata
-
-notification = add_notification_metadata(
-    HumanMessage("Background task t_42 finished."),
-    source="background_job",
-    data={"task_id": "t_42", "status": "success"},
-)
-```
-
-`get_notification_metadata` returns the `source` and `data` of a notification, or `None` for any other message:
-
-```python
-from langchain_core.messages import get_notification_metadata
-
-for message in messages:
-    metadata = get_notification_metadata(message)
-    if metadata is None:
-        print(message.text)  # A regular message
-    else:
-        print(f"[{metadata['source']}]", metadata.get("data"))
-```
-
-The metadata does not change the message content: the model reads the content as written. LangChain's chat model integrations do not send the metadata to the model. Anyone who can send input to a thread can set it, so do not use it to decide whether to trust a message.
-
-Deep Agents notification sources include:
-
-| Source | Added when | Details |
-| - | - | - |
-| `async_subagent` | An async subagent task finishes, fails, or waits for input. `data` is the task event. | [Async subagents](../deepagents/async-subagents.md#understand-the-lifecycle) |
-| `summarization` | The agent summarizes the conversation history. | [Summarization](../deepagents/context-engineering.md#summarization) |
-| `pinned_skill` | The agent adds a pinned skill to the conversation. | [Pin skills](../deepagents/skills.md#pin-skills) |
-| `rubric_grader` | The rubric grader asks the agent to revise its output. | [Grading rubrics](../deepagents/rubric.md#rubric-verdicts) |
-| `read_file_media` | `read_file` attaches frames sampled from a video file. `data` has `path` and `tool_call_id`. | [Built-in `read_file` tool](../deepagents/multimodal.md#built-in-read_file-tool) |
 
 ***
 
@@ -356,6 +312,8 @@ for chunk in model.stream("Hi"):
 For models that support [tool calling](models.md#tool-calling), AI messages can contain tool calls. Tool messages are used to pass the results of a single tool execution back to the model.
 
 [Tools](tools.md) can generate [`ToolMessage`](https://reference.langchain.com/python/langchain-core/messages/tool/ToolMessage) objects directly. Below, we show a simple example. Read more in the [tools guide](tools.md).
+
+When middleware creates a tool message instead of running the tool, it can mark the message with [notification metadata](#notifications). For example, [human-in-the-loop middleware](human-in-the-loop.md#interrupt-decision-types) marks the tool message for a `reject` or `respond` decision.
 
 ```python
 from langchain.messages import AIMessage
@@ -1071,6 +1029,59 @@ Content blocks are represented (either when creating a message or accessing the 
 > Content blocks were introduced as a new property on messages in LangChain v1 to standardize content formats across providers while maintaining backward compatibility with existing code.
 >
 > Content blocks are not a replacement for the [`content`](https://reference.langchain.com/python/langchain-core/messages/base/BaseMessage) property, but rather a new property that can be used to access the content of a message in a standardized format.
+
+## Notifications
+
+An agent harness sometimes adds a human message that the user did not type, such as a background task update or a conversation summary. Notification metadata marks these messages so that your frontend can show them differently from user input. Middleware can also mark a tool message that it creates instead of running the tool.
+
+> [!NOTE]
+>
+> Notification metadata requires `langchain-core>=1.7.2`.
+
+`add_notification_metadata` returns a copy of a `HumanMessage` or `ToolMessage` with a `source` that names the feature that added it, and optional `data` with that feature's fields:
+
+```python
+from langchain.messages import HumanMessage
+from langchain_core.messages import add_notification_metadata
+
+notification = add_notification_metadata(
+    HumanMessage("Background task t_42 finished."),
+    source="background_job",
+    data={"task_id": "t_42", "status": "success"},
+)
+```
+
+`get_notification_metadata` returns the `source` and `data` of a notification, or `None` for any other message:
+
+```python
+from langchain_core.messages import get_notification_metadata
+
+for message in messages:
+    metadata = get_notification_metadata(message)
+    if metadata is None:
+        print(message.text)  # A regular message
+    else:
+        print(f"[{metadata['source']}]", metadata.get("data"))
+```
+
+The metadata does not change the message content: the model reads the content as written. LangChain's chat model integrations do not send the metadata to the model. Anyone who can send input to a thread can set it, so do not use it to decide whether to trust a message. A notification can be a tool message, so check the message type before you show a notification as user input.
+
+LangChain notification sources include:
+
+| Source | Added when | Details |
+| - | - | - |
+| `hitl_interrupt_decision` | The human-in-the-loop middleware creates a tool message for a `reject` or `respond` decision. `data` has `decision`. | [Interrupt decision types](human-in-the-loop.md#interrupt-decision-types) |
+| `summarization` | The summarization middleware summarizes the conversation history. | [Summarization](middleware/built-in.md#summarization) |
+
+Deep Agents notification sources include:
+
+| Source | Added when | Details |
+| - | - | - |
+| `async_subagent` | An async subagent task finishes, fails, or waits for input. `data` is the task event. | [Async subagents](../deepagents/async-subagents.md#understand-the-lifecycle) |
+| `summarization` | The agent summarizes the conversation history. | [Summarization](../deepagents/context-engineering.md#summarization) |
+| `pinned_skill` | The agent adds a pinned skill to the conversation. | [Pin skills](../deepagents/skills.md#pin-skills) |
+| `rubric_grader` | The rubric grader asks the agent to revise its output. | [Grading rubrics](../deepagents/rubric.md#rubric-verdicts) |
+| `read_file_media` | `read_file` attaches frames sampled from a video file. `data` has `path` and `tool_call_id`. | [Built-in `read_file` tool](../deepagents/multimodal.md#built-in-read_file-tool) |
 
 ## Serialization
 

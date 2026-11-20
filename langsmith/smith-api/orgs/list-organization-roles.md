@@ -171,10 +171,11 @@ tags:
   - name: productfeedback
     x-hidden: true
   - name: rules
+  - name: runsanalytics
   - name: sql
-  - name: teams
   - name: usage
   - name: user-groups
+  - name: users
 paths:
   /api/v1/orgs/current/roles:
     get:
@@ -182,16 +183,69 @@ paths:
         - orgs
       summary: List organization roles
       operationId: list_organization_roles_api_v1_orgs_current_roles_get
+      parameters:
+        - name: sort_by
+          in: query
+          required: false
+          schema:
+            anyOf:
+              - type: array
+                items:
+                  enum:
+                    - display_name
+                    - created_at
+                  type: string
+              - type: 'null'
+            description: >-
+              Fields to sort by, applied in the order supplied within existing
+              scope and built-in role priorities. Repeat this parameter for
+              multiple fields. Omit to preserve the default ordering.
+            title: Sort By
+          description: >-
+            Fields to sort by, applied in the order supplied within existing
+            scope and built-in role priorities. Repeat this parameter for
+            multiple fields. Omit to preserve the default ordering.
+        - name: sort_order
+          in: query
+          required: false
+          schema:
+            anyOf:
+              - type: array
+                items:
+                  enum:
+                    - asc
+                    - desc
+                  type: string
+              - type: 'null'
+            description: >-
+              Sort directions corresponding positionally to sort_by fields.
+              Supply one direction for all fields, or repeat this parameter once
+              per field. Omit to sort all requested fields ascending. Ignored
+              when sort_by is omitted. Scope and built-in role priorities are
+              unchanged.
+            title: Sort Order
+          description: >-
+            Sort directions corresponding positionally to sort_by fields. Supply
+            one direction for all fields, or repeat this parameter once per
+            field. Omit to sort all requested fields ascending. Ignored when
+            sort_by is omitted. Scope and built-in role priorities are
+            unchanged.
       responses:
         '200':
           description: Successful Response
           content:
             application/json:
               schema:
+                type: array
                 items:
                   $ref: '#/components/schemas/Role'
-                type: array
                 title: Response List Organization Roles Api V1 Orgs Current Roles Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
       security:
         - API Key: []
         - Organization ID: []
@@ -240,6 +294,15 @@ components:
         - description
         - permissions
       title: Role
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            type: string
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     AccessScope:
       type: string
       enum:

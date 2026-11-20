@@ -173,10 +173,11 @@ tags:
   - name: productfeedback
     x-hidden: true
   - name: rules
+  - name: runsanalytics
   - name: sql
-  - name: teams
   - name: usage
   - name: user-groups
+  - name: users
 paths:
   /api/v1/platform/orgs/current/info:
     get:
@@ -391,10 +392,10 @@ components:
           description: Indicates whether this org can provision BYOC data planes.
           type: boolean
         byoc_external_id:
+          readOnly: true
           description: >-
             ByocExternalID is the organization's assigned AWS external ID,
             stored only in org config.
-          readOnly: true
           anyOf:
             - type: string
             - type: 'null'

@@ -173,10 +173,11 @@ tags:
   - name: productfeedback
     x-hidden: true
   - name: rules
+  - name: runsanalytics
   - name: sql
-  - name: teams
   - name: usage
   - name: user-groups
+  - name: users
 paths:
   /api/v1/charts/section/clone:
     post:
@@ -185,12 +186,19 @@ paths:
       summary: Clone section
       description: Clone a dashboard.
       operationId: clone_section_api_v1_charts_section_clone_post
+      parameters:
+        - name: access_scope
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/AccessScope'
+            default: workspace
       requestBody:
+        required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CustomChartsSectionsCloneRequest'
-        required: true
       responses:
         '200':
           description: Successful Response
@@ -206,10 +214,17 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
       security:
         - API Key: []
-        - Tenant ID: []
         - Bearer Auth: []
+        - Tenant ID: []
+        - Organization ID: []
 components:
   schemas:
+    AccessScope:
+      type: string
+      enum:
+        - organization
+        - workspace
+      title: AccessScope
     CustomChartsSectionsCloneRequest:
       properties:
         section_id:
@@ -241,6 +256,15 @@ components:
             - type: integer
             - type: 'null'
           title: Index
+        access_scope:
+          $ref: '#/components/schemas/AccessScope'
+          default: workspace
+        tenant_id:
+          anyOf:
+            - type: string
+              format: uuid
+            - type: 'null'
+          title: Tenant Id
         id:
           type: string
           format: uuid
@@ -281,15 +305,19 @@ components:
       type: apiKey
       in: header
       name: X-API-Key
-    Tenant ID:
-      type: apiKey
-      in: header
-      name: X-Tenant-Id
     Bearer Auth:
       type: http
       description: >-
         Bearer tokens are used to authenticate from the UI. Must also specify
         x-tenant-id or x-organization-id (for org scoped apis).
       scheme: bearer
+    Tenant ID:
+      type: apiKey
+      in: header
+      name: X-Tenant-Id
+    Organization ID:
+      type: apiKey
+      in: header
+      name: X-Organization-Id
 
 ````

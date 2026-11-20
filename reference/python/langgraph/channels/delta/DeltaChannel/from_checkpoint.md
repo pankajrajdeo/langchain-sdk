@@ -27,11 +27,11 @@ from_checkpoint(
 
 **Blob types:**
 
-* `MISSING`: start empty; caller replays writes.
+* `MISSING` or `None`: start empty; caller replays writes.
 * `_DeltaSnapshot(value)`: restore value directly from snapshot.
 * plain value (migration from old `BinaryOperatorAggregate` blobs):
   use directly.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/7830b91a24e657a8167e2dbf40c3fa5a77ef5d93/libs/langgraph/langgraph/channels/delta.py#L118)
+[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/58a6e1cc5b7dfc3619fc6e7e7573b040d554649b/libs/langgraph/langgraph/channels/delta.py#L118)

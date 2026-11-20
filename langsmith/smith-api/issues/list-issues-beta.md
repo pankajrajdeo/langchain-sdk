@@ -176,10 +176,11 @@ tags:
   - name: productfeedback
     x-hidden: true
   - name: rules
+  - name: runsanalytics
   - name: sql
-  - name: teams
   - name: usage
   - name: user-groups
+  - name: users
 paths:
   /api/v1/platform/issues:
     get:
@@ -210,24 +211,24 @@ paths:
           name: status
           in: query
           schema:
+            type: string
             enum:
               - open
               - fixing
               - watching
               - completed
               - ignored
-            type: string
             title: Status
         - description: Filter by severity
           name: severity
           in: query
           schema:
+            type: integer
             enum:
               - 0
               - 1
               - 2
               - 3
-            type: integer
             title: Severity
         - description: Filter by exact severity (repeatable; OR semantics)
           name: severity_exact
@@ -281,6 +282,7 @@ paths:
           name: sort_by
           in: query
           schema:
+            type: string
             enum:
               - default
               - created_at
@@ -289,7 +291,6 @@ paths:
               - last_updated
               - trace_count
               - severity
-            type: string
             title: Sort By
         - description: Group results by issue lifecycle status before applying sort_by
           name: status_first

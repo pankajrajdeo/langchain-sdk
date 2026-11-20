@@ -173,10 +173,11 @@ tags:
   - name: productfeedback
     x-hidden: true
   - name: rules
+  - name: runsanalytics
   - name: sql
-  - name: teams
   - name: usage
   - name: user-groups
+  - name: users
 paths:
   /api/v1/platform/annotation-queues/{queue_id}/items/count:
     get:
@@ -221,16 +222,38 @@ paths:
           name: min_start_time
           in: query
           schema:
-            format: date-time
             type: string
+            format: date-time
             title: Min Start Time
         - description: Trace started at or before this time
           name: max_start_time
           in: query
           schema:
-            format: date-time
             type: string
+            format: date-time
             title: Max Start Time
+        - description: >-
+            Count only completed items whose reviewers disagreed on at least one
+            rubric key. Returns 501 unless multi-reviewer queues are on for the
+            workspace. Requires status=archived
+          name: agreement
+          in: query
+          schema:
+            type: string
+            enum:
+              - disagreed
+            title: Agreement
+        - description: >-
+            Count only completed items that do (true) or do not (false) still
+            have a disagreed rubric key with no final answer. Items with no
+            agreement result match neither value. Returns 501 unless
+            multi-reviewer queues are on for the workspace. Requires
+            status=archived
+          name: has_unresolved_keys
+          in: query
+          schema:
+            type: boolean
+            title: Has Unresolved Keys
       responses:
         '200':
           description: OK
@@ -273,6 +296,14 @@ paths:
                   type: string
         '500':
           description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '501':
+          description: Multi-reviewer queues are not on for the workspace
           content:
             application/json:
               schema:

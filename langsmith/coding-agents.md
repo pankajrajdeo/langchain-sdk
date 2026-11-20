@@ -53,6 +53,8 @@ Pull request tracking uses the same GitHub and GitLab connections as [LangSmith 
 
 For details, see [Connect repositories to Engine](engine-repositories.md).
 
+On BYOC and self-hosted LangSmith, GitHub connections use the Engine GitHub App that your administrator registers for the installation, not a LangSmith-owned App. Set up that App before connecting GitHub to a coding agent. See [Configure GitHub for Engine on self-hosted and BYOC](engine-self-hosted-github.md).
+
 On the agent Overview, click **Track pull requests** and connect a GitHub or GitLab account. You can reuse an installation that is already connected to another agent in the workspace.
 
 LangSmith links a pull request when GitHub or GitLab reports activity on it, such as opening, updating, or merging it. It links the threads whose traces record the pull request's repository and source branch in their Git metadata. Pull requests merged before you connect do not appear. Time to merge, cost per merged pull request, and the pull request cards fill in as developers open and merge pull requests.

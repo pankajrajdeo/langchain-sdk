@@ -17,6 +17,8 @@ tags: [docs, langsmith, engine-self-hosted-github]
 
 This configuration is separate from GitHub setup for Agent Server builds and previews.
 
+The same App also powers [pull request tracking for coding agents](coding-agents.md#connect-github-or-gitlab). On BYOC and self-hosted LangSmith, coding agents link GitHub through this App's installations, so complete this setup before connecting GitHub to a coding agent, even if you do not use Engine.
+
 ## Configure the App on BYOC
 
 On a [BYOC](byoc.md) data plane, you register your own GitHub App and save its credentials from an Engine project in the LangSmith UI. You do not set environment variables or Helm values. Complete this setup once per data plane: every workspace on the data plane shares the App.
@@ -310,6 +312,26 @@ hostBackend:
 
 Remove these variables from component-specific `extraEnv` lists, including `hostBackend.deployment.extraEnv`, to avoid duplicate definitions. The shared configuration supplies the same values to API and background workloads.
 
+Keep the private key and webhook secret in `commonEnv` rather than only on `hostBackend`. The platform backend (`platformBackend`) also reads `ENGINE_GITHUB_APP_ID`, `ENGINE_GITHUB_APP_PRIVATE_KEY`, and `ENGINE_GITHUB_APP_WEBHOOK_SECRET` to link coding agents to GitHub and to verify the pull request webhooks that host-backend forwards to it. If you scope these settings to individual components instead, also add the private key and webhook secret to `platformBackend.deployment.extraEnv`:
+
+```yaml
+platformBackend:
+  deployment:
+    extraEnv:
+      - name: ENGINE_GITHUB_APP_PRIVATE_KEY
+        valueFrom:
+          secretKeyRef:
+            name: langsmith-engine-github
+            key: private_key
+      - name: ENGINE_GITHUB_APP_WEBHOOK_SECRET
+        valueFrom:
+          secretKeyRef:
+            name: langsmith-engine-github
+            key: webhook_secret
+```
+
+Without them, Engine's GitHub connection works, but connecting GitHub to a coding agent fails with **GitHub App is not configured** and pull requests are not linked to coding agent threads.
+
 The chart's `config.hostname`, `config.frontendHostname` if used, and `config.basePath` must also describe the URL users open in their browser.
 
 #### Private GHES deployments
@@ -364,6 +386,7 @@ A successful webhook response alone does not prove the event matched an Engine i
 | Installation does not return to LangSmith | Enable **Request user authorization (OAuth) during installation**. Check the exact authorization callback URL and confirm the Client ID and Client secret belong to this App. Then restart **Connect GitHub** in LangSmith. |
 | Repositories appear, but cloning or pushing fails | Check sandbox-host DNS, routing, private-IP settings, certificate trust, and GitHub IP/push policies. |
 | PR creation fails after a successful push | Check **Pull requests: Read and write**, draft PR availability, and the selected base branch. |
+| Connecting GitHub to a coding agent fails with **GitHub App is not configured** | Confirm that `platformBackend` receives `ENGINE_GITHUB_APP_ID`, `ENGINE_GITHUB_APP_PRIVATE_KEY`, and `ENGINE_GITHUB_APP_WEBHOOK_SECRET`, through `commonEnv` or `platformBackend.deployment.extraEnv`. See [Set Helm values](#set-helm-values). Engine can work while these are missing from the platform backend. |
 | A merge does not complete an issue | Check **Pull request** event subscription, webhook reachability, the matching webhook secret, and **Recent deliveries**. Redeliver failed events after correcting the cause. |
 
 If GitHub cannot deliver webhooks, repository reads, fixes, and PR creation can still work. Webhook-driven PR linking and automatic issue completion after merges do not work. Restore delivery and redeliver missed events from GitHub's App settings.
@@ -373,6 +396,8 @@ For PRs created with an external coding assistant, preserve the issue reference 
 For missing organizations or repositories, see [Troubleshoot repository selection](engine-repositories.md#troubleshoot-repository-selection).
 
 When asking for help, include your LangSmith and Helm chart versions, GitHub environment and GHES version if applicable, App ownership type, and the step that fails. Do not include private keys, client secrets, webhook secrets, or access tokens.
+
+<a id="ghes-on-a-private-network"></a>
 
 ### Change or rotate configuration
 

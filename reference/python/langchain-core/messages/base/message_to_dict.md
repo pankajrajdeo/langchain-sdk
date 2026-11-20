@@ -36,4 +36,4 @@ Message as a dict. The dict will have a `type` key with the message type
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/2b7ff14fb2021e6f4ee22f796a9b888eaacb5af9/libs/core/langchain_core/messages/base.py#L476)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/d4dafe5839c4a6b07d71cc78697df0de9e627e21/libs/core/langchain_core/messages/base.py#L476)

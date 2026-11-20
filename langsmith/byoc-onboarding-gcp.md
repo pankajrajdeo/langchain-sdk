@@ -62,7 +62,7 @@ provider "google" {
 }
 
 module "langsmith_byoc_service_account" {
-  source = "github.com/langchain-ai/terraform//modules/byoc/gcp/langsmith-byoc-service-account?ref=v0.17.80"
+  source = "github.com/langchain-ai/terraform//modules/byoc/gcp/langsmith-byoc-service-account?ref=v0.17.103"
 
   project_id                 = "<project-id>"
   crossplane_service_account = "byoc-crossplane@langchain-prod.iam.gserviceaccount.com"
@@ -74,7 +74,7 @@ output "provisioner_service_account" {
 }
 ```
 
-LangSmith requires release v0.17.80 or later of the module. If you applied an earlier release, re-apply the module at v0.17.80 or later.
+LangSmith requires release v0.17.90 or later of the module, which lets the provisioner create the [Private Google Access](byoc-networking-gcp.md#private-google-access) routes. With an earlier release, the data plane still becomes ready, but without Private Google Access: Google API traffic resolves to public addresses and follows your VPC's routes. If you applied an earlier release, re-apply the module at v0.17.90 or later.
 
 To create the data plane service accounts and their project roles yourself, set `byo_iam = true` before you create data planes in the project. The provisioner then cannot create service accounts or change the project IAM policy. Set it if the project holds resources that are not LangSmith's. Create the data plane with `byoiam_enabled` set to `true`. For more information, see [Bring your own IAM](byoc-architecture-gcp.md#bring-your-own-iam).
 
@@ -107,10 +107,11 @@ The request takes the following fields:
 | `region` | The GCP region of the data plane. BYOC on GCP can run in any GCP region. If the region you need is not enabled yet, contact the LangChain team to add it. |
 | `gcp_project_id` | The project from [Step 2](#step-2-run-the-terraform-module). |
 | `provisioner_service_account` | The `provisioner_service_account` Terraform output. It must be in the project. |
-| `vpc_cidr` | The range of the VPC that LangSmith creates. A private RFC 1918 range from `/16` to `/18`. It must not overlap `192.168.0.0/17`, which GKE pods and services use. |
+| `vpc_cidr` | The range of the VPC that LangSmith creates. A private RFC 1918 range from `/16` to `/18`. A `/16` or `/17` holds every range, GKE pods included. A `/18` must not overlap `192.168.0.0/18`, where its GKE pods go. See [Network](byoc-networking-gcp.md#address-ranges). |
 | `public_load_balancer` | `true` for a public endpoint. `false` (default) for an internal endpoint. See [Choose a public or internal endpoint](#choose-a-public-or-internal-endpoint). |
 | `byoiam_enabled` | Optional. `true` if you applied the module with `byo_iam = true`. |
 | `sandboxes_enabled` | Optional. `true` to deploy [LangSmith sandboxes](sandboxes.md) in the data plane. Defaults to `false`. |
+| `mtu_bytes` | Optional. The VPC MTU, from 1300 to 8896. Set it to match a peered hub or interconnect with a smaller MTU, such as 1440. Defaults to the GCP default, 1460. See [MTU](byoc-networking-gcp.md#mtu). |
 
 The API returns `202` with the data plane's `id`, `api_url`, and `status`. Before it accepts the request, LangSmith checks that it can impersonate the provisioner, and that the provisioner is in the project and carries your external ID. If a check fails, the response names the problem. See [Troubleshoot create errors](#troubleshoot-create-errors).
 
@@ -137,9 +138,9 @@ To point applications and API clients at the data plane, see [BYOC usage](byoc-u
 You pick the endpoint type when you create the data plane:
 
 * **Public**: Users reach the data plane from the internet.
-* **Internal** (default): The ingress is on an internal load balancer, and the hostname resolves only inside the data plane VPC. Connect your network to that VPC, for example with VPC peering or Cloud VPN, and make the hostname resolve from your network.
+* **Internal** (default): The ingress is on an internal load balancer, and the hostname resolves only inside the data plane VPC. Connect your network to that VPC, for example with VPC peering or Cloud VPN, and make the hostname resolve from your network. See [Connect your network](byoc-networking-gcp.md#connect-your-network).
 
-Outbound traffic from the data plane leaves through Cloud NAT with a static IP address, so you can allowlist the data plane.
+Outbound traffic from the data plane leaves through Cloud NAT with a static IP address, so you can allowlist the data plane. For the destinations the data plane needs, see [Outbound traffic](byoc-networking-gcp.md#outbound-traffic).
 
 ### Change data plane settings
 
@@ -177,7 +178,7 @@ The create request returns these error codes:
 | `organization_external_id_missing` | 409 | BYOC is not set up for your organization. | Contact the LangChain team. |
 | `data_plane_name_taken` | 409 | Your organization already has a data plane with this name. | Choose another `name`. |
 
-A request that fails field validation, such as a region that is not enabled or a `vpc_cidr` that overlaps the GKE ranges, returns `400` with the field and the reason.
+A request that fails field validation, such as a region that is not enabled, a `/18` `vpc_cidr` that overlaps the GKE pod range, or an `mtu_bytes` out of range, returns `400` with the field and the reason.
 
 ## Delete a data plane
 
@@ -213,6 +214,7 @@ When something does not work, [contact LangChain support](https://support.langch
 ## See also
 
 * [BYOC architecture on GCP](byoc-architecture-gcp.md)
+* [BYOC networking on GCP](byoc-networking-gcp.md)
 * [BYOC overview](byoc.md)
 * [BYOC usage](byoc-usage.md)
 

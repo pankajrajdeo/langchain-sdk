@@ -171,10 +171,11 @@ tags:
   - name: productfeedback
     x-hidden: true
   - name: rules
+  - name: runsanalytics
   - name: sql
-  - name: teams
   - name: usage
   - name: user-groups
+  - name: users
 paths:
   /api/v1/orgs/current/roles:
     post:
@@ -183,11 +184,11 @@ paths:
       summary: Create organization roles
       operationId: create_organization_roles_api_v1_orgs_current_roles_post
       requestBody:
+        required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateRoleRequest'
-        required: true
       responses:
         '200':
           description: Successful Response

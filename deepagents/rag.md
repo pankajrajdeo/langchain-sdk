@@ -416,7 +416,7 @@ print(f"Split documentation into {len(all_splits)} chunks.")
 Split documentation into 782 chunks.
 ```
 
-If you want to learn more about text splitters, check out the [`TextSplitter` interface](https://reference.langchain.com/python/langchain-text-splitters/base/TextSplitter) and [text splitter integrations](../integrations/splitters.md).
+If you want to learn more about text splitters, check out the [`TextSplitter` interface](https://reference.langchain.com/python/langchain-text-splitters/base/TextSplitter) and [text splitter integrations](../integrations/splitters.md). For guidance on choosing chunk size and a splitting strategy, see [Chunk documents for retrieval](../langchain/chunking.md).
 
 ### Select an embeddings model
 
@@ -674,6 +674,10 @@ You can choose from many different [embedding integrations](../integrations/embe
 >
 > embeddings = IsaacusEmbeddings(model="kanon-2-embedder")
 ```
+
+> [!WARNING]
+>
+> Use the same embedding model, with a compatible vector dimension, when indexing documents and querying them. If you change embedding models, re-embed and re-index your documents.
 
 ### Store chunks and embeddings in VectorStore
 
@@ -1502,6 +1506,7 @@ You implemented one RAG pattern with [`create_deep_agent`](https://reference.lan
 
 * Add [Skills](skills.md) to package retrieval workflows and domain-specific search guidance
 * [Evaluate a RAG application](../langsmith/evaluate-rag-tutorial.md) with LangSmith datasets and evaluators
+* [Chunk documents for retrieval](../langchain/chunking.md) to improve retrieval quality
 * Read [Context engineering](context-engineering.md) for offloading and subagent isolation strategies
 * Deploy with [Managed Deep Agents](../langsmith/python/managed-deep-agents-overview.md) to run production agents without having to manage infrastructure. Alternatively, for maximum flexibility while using the same Deep Agents harness, host agents yourself or use a custom [Agent Server](../langsmith/agent-server.md)
 * Use [Grading rubrics](rubric.md) to verify answers are grounded in retrieved source material

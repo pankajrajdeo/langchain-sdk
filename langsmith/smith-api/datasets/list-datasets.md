@@ -174,10 +174,11 @@ tags:
   - name: productfeedback
     x-hidden: true
   - name: rules
+  - name: runsanalytics
   - name: sql
-  - name: teams
   - name: usage
   - name: user-groups
+  - name: users
 paths:
   /api/v2/datasets:
     get:
@@ -281,11 +282,11 @@ paths:
           name: sort_order
           in: query
           schema:
+            type: string
+            default: desc
             enum:
               - asc
               - desc
-            type: string
-            default: desc
             title: Sort Order
         - description: Maximum number of datasets to return.
           name: page_size

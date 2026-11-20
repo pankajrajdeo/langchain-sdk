@@ -171,10 +171,11 @@ tags:
   - name: productfeedback
     x-hidden: true
   - name: rules
+  - name: runsanalytics
   - name: sql
-  - name: teams
   - name: usage
   - name: user-groups
+  - name: users
 paths:
   /api/v1/workspaces/current/tag-keys/{tag_key_id}/tag-values/{tag_value_id}:
     get:

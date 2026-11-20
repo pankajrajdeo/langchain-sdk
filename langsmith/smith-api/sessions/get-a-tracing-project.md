@@ -173,10 +173,11 @@ tags:
   - name: productfeedback
     x-hidden: true
   - name: rules
+  - name: runsanalytics
   - name: sql
-  - name: teams
   - name: usage
   - name: user-groups
+  - name: users
 paths:
   /api/v2/sessions/{session_id}:
     get:
@@ -208,8 +209,8 @@ paths:
           name: stats_start_time
           in: query
           schema:
-            format: date-time
             type: string
+            format: date-time
             title: Stats Start Time
       responses:
         '200':

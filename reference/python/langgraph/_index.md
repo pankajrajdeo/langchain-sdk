@@ -18,9 +18,9 @@ tags: [index, reference, python, langgraph]
 - [constants/](constants/_index.md) - 4 pages
 - [errors/](errors/_index.md) - 35 pages
 - [func/](func/_index.md) - 18 pages
-- [graph/](graph/_index.md) - 90 pages
+- [graph/](graph/_index.md) - 89 pages
 - [managed/](managed/_index.md) - 15 pages
-- [pregel/](pregel/_index.md) - 540 pages
+- [pregel/](pregel/_index.md) - 541 pages
 - [runtime/](runtime/_index.md) - 41 pages
 - [stream/](stream/_index.md) - 152 pages
 - [types/](types/_index.md) - 162 pages

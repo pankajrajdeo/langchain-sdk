@@ -1,13 +1,13 @@
 ---
 title: "langsmith/smith-api"
-description: "Index of 0 pages and 64 subdirectories under langsmith/smith-api."
+description: "Index of 0 pages and 65 subdirectories under langsmith/smith-api."
 category: "index"
 tags: [index, langsmith, smith-api]
 ---
 
 # langsmith/smith-api
 
-0 pages here, 630 pages including subdirectories.
+0 pages here, 618 pages including subdirectories.
 
 ## Directories
 
@@ -59,6 +59,7 @@ tags: [index, langsmith, smith-api]
 - [rules/](rules/_index.md) - 1 page
 - [run/](run/_index.md) - 24 pages
 - [runs/](runs/_index.md) - 14 pages
+- [runsanalytics/](runsanalytics/_index.md) - 1 page
 - [sandboxes/](sandboxes/_index.md) - 52 pages
 - [scim-tokens/](scim-tokens/_index.md) - 5 pages
 - [service-accounts/](service-accounts/_index.md) - 3 pages
@@ -66,7 +67,6 @@ tags: [index, langsmith, smith-api]
 - [settings/](settings/_index.md) - 2 pages
 - [tag-transitions/](tag-transitions/_index.md) - 1 page
 - [tags/](tags/_index.md) - 5 pages
-- [teams/](teams/_index.md) - 17 pages
 - [tenant/](tenant/_index.md) - 2 pages
 - [threads/](threads/_index.md) - 13 pages
 - [tools/](tools/_index.md) - 8 pages
@@ -74,4 +74,5 @@ tags: [index, langsmith, smith-api]
 - [ttl-settings/](ttl-settings/_index.md) - 4 pages
 - [usage-limits/](usage-limits/_index.md) - 7 pages
 - [user-groups/](user-groups/_index.md) - 17 pages
+- [users/](users/_index.md) - 4 pages
 - [workspaces/](workspaces/_index.md) - 42 pages

@@ -1,0 +1,26 @@
+---
+title: "langsmith/tool-gateway-api/connecting-tools"
+description: "Index of 13 pages and 0 subdirectories under langsmith/tool-gateway-api/connecting-tools."
+category: "index"
+tags: [index, langsmith, tool-gateway-api, connecting-tools]
+---
+
+# langsmith/tool-gateway-api/connecting-tools
+
+13 pages here.
+
+## Files
+
+- [Connect a server](connect-a-server.md) - Connects you to a secret MCP server by storing or replacing your header credentials. Requires mcp-servers:invoke. Call as yourself. Values are never returned. With credential_owner_type, stores that...
+- [Create a profile](create-a-profile.md) - Creates a profile: a named set of tool credentials an admin connects for an agent or other non-user caller. Requires workspaces:credentials:manage. Call as yourself.
+- [Delete a profile credential](delete-a-profile-credential.md) - Disconnects a profile from an MCP server and revokes managed OAuth tokens with their provider. Requires workspaces:credentials:manage and mcp-servers:invoke for the server. Call as yourself. The...
+- [Delete a profile](delete-a-profile.md) - Deletes a profile and its credentials, and revokes managed OAuth tokens with their provider. Requires workspaces:credentials:manage. Call as yourself. Returns 204 if the profile is already gone. If...
+- [Disconnect a server](disconnect-a-server.md) - Disconnects you from an MCP server by deleting your credential; the server and other users' credentials are kept. A shared OAuth credential is removed from every integration that uses its connection...
+- [Get a profile](get-a-profile.md) - Returns a profile. Requires workspaces:credentials:read-metadata. Call as yourself.
+- [List profiles](list-profiles.md) - Lists the workspace's profiles in creation order. Requires workspaces:credentials:read-metadata. Call as yourself.
+- [List the caller's connections for a tool kit](list-the-callers-connections-for-a-tool-kit.md) - Lists the MCP servers a tool kit uses that you can call, with whether you're connected and which kit tools use each server. For the me kit, lists every server you can use. Requires...
+- [Rename a profile](rename-a-profile.md) - Renames a profile and returns it. Requires workspaces:credentials:manage. Call as yourself.
+- [Start connecting a server for a profile](start-connecting-a-server-for-a-profile.md) - Returns a link where you, as an admin, connect a profile to an MCP server through OAuth or secret values. Requires workspaces:credentials:manage and mcp-servers:invoke for the server. Call as...
+- [Start connecting a server in a tool kit](start-connecting-a-server-in-a-tool-kit.md) - Connects you to one MCP server a tool kit uses and returns the link where you finish. For the me kit, any server you can use. Requires mcp-servers:invoke. Returns 204 if you're already connected or...
+- [Start entering the caller's credential for a secret MCP server](start-entering-the-callers-credential-for-a-secret-mcp-server.md) - Returns a link where you enter the values a workspace or built-in secret MCP server needs, to connect without calling the server first. Requires mcp-servers:invoke for the server. Choose who you call...
+- [Store a profile credential](store-a-profile-credential.md) - Stores or replaces a profile's header credentials for a secret MCP server. Requires workspaces:credentials:manage and mcp-servers:invoke for the server. Call as yourself. Values are never returned.

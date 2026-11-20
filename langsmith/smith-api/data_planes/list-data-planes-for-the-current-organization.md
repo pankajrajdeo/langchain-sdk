@@ -174,10 +174,11 @@ tags:
   - name: productfeedback
     x-hidden: true
   - name: rules
+  - name: runsanalytics
   - name: sql
-  - name: teams
   - name: usage
   - name: user-groups
+  - name: users
 paths:
   /orgs/current/data-planes:
     get:
@@ -199,11 +200,11 @@ paths:
           name: view
           in: query
           schema:
+            type: string
+            default: FULL
             enum:
               - FULL
               - SUMMARY
-            type: string
-            default: FULL
             title: View
       responses:
         '200':

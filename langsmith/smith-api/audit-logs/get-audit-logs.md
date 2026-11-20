@@ -180,10 +180,11 @@ tags:
   - name: productfeedback
     x-hidden: true
   - name: rules
+  - name: runsanalytics
   - name: sql
-  - name: teams
   - name: usage
   - name: user-groups
+  - name: users
 paths:
   /api/v1/audit-logs:
     get:
@@ -413,8 +414,11 @@ components:
         - update_agent
         - delete_agent
         - create_agent_runtime_binding
+        - update_agent_runtime
         - create_agent_environment_api_key
         - delete_agent_environment_api_key
+        - disable_agent_environment
+        - enable_agent_environment
         - create_tracer_session
         - update_tracer_session
         - delete_tracer_session

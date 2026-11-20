@@ -1,13 +1,13 @@
 ---
 title: "blog"
-description: "Index of 564 pages and 0 subdirectories under blog."
+description: "Index of 566 pages and 0 subdirectories under blog."
 category: "index"
 tags: [index, blog]
 ---
 
 # blog
 
-564 pages here.
+566 pages here.
 
 ## Files
 
@@ -20,6 +20,7 @@ tags: [index, blog]
 - [Agent Engineering: A New Discipline](agent-engineering-a-new-discipline.md) - Learn how agent engineering combines product thinking, engineering, and data science to build reliable LLM systems. Ship faster with iterative testing.
 - [Agent Evaluation Readiness Checklist](agent-evaluation-readiness-checklist.md) - A practical checklist for agent evaluation: error analysis, dataset construction, grader design, offline &amp; online evals, and production readiness.
 - [Agent Frameworks, Runtimes, and Harnesses- oh my!](agent-frameworks-runtimes-and-harnesses-oh-my.md) - Explore agent frameworks, runtimes, and harnesses. When to use LangChain, LangGraph, and DeepAgents for building AI agents.
+- [Why agent governance starts with observability](agent-governance-observability.md) - A strong AI agent governance strategy
 - [Building an Agent Harness for Life Sciences: Introducing Deep Life Sci](agent-harness-life-sciences.md) - Deep Life Sci is LangChain&#39;s open source agentic assistant for clinical and lab scientists. It pulls from 600K+ ClinicalTrials.gov studies, 29M PubMed abstracts, and 12M PubMed Central full-text...
 - [Agent Middleware](agent-middleware.md) - LangChain 1.0 introduces Middleware—giving developers full control over context engineering, model calls, and tool execution for production-ready agents.
 - [Agent observability needs feedback to power learning](agent-observability-needs-feedback-to-power-learning.md) - Traces show what an agent did; feedback shows what it meant. How explicit, implicit, LLM-as-judge and rule-based feedback turn observability into learning.
@@ -401,6 +402,7 @@ tags: [index, blog]
 - [LangSmith Preview Builds: Test agent changes before production](langsmith-preview-builds-test-agent-changes-before-production.md) - Preview Builds let teams test pull request branches in temporary, production-like LangSmith deployments before merging agent changes.
 - [LangSmith: Production Monitoring &amp; Automations](langsmith-production-logging-automations.md) - Key Links:
 - [LangSmith Sandboxes are Generally Available](langsmith-sandboxes-generally-available.md) - Run AI agents safely with LangSmith Sandboxes (GA): kernel-isolated microVMs with snapshots, parallel forks, service URLs, and auth proxies. Built for coding agents, CI agents, and data pipelines
+- [LangSmith Tool Gateway: Secure, governed tool use for agents](langsmith-tool-gateway.md) - LangSmith Tool Gateway, now in Public Beta, handles credentials, identity, and access for every agent tool call, with policies, approvals, and traces.
 - [Trajectories now in LangSmith: A readable view of every agent session](langsmith-trajectories-tracing.md) - Trajectories in LangSmith provide a conversational view of an agent session. Trajectories make trace data easy to navigate and speed up debugging for long-running agents.
 - [Launching LangGraph Templates](launching-langgraph-templates.md) - Build agentic AI apps with LangGraph Templates. Get production-ready templates for RAG chatbots, ReAct agents, and more with full code control.
 - [Launching Long-Term Memory Support in LangGraph](launching-long-term-memory-support-in-langgraph.md) - Build AI agents that remember. LangGraph&#39;s long-term memory stores and recalls information across conversations in Python and JavaScript.

@@ -1,6 +1,6 @@
 ---
 title: "Query traces"
-description: "Returns a paginated list of traces (root runs) for a single tracing project. Each item carries the trace's root run plus optional trace-wide aggregates (total_tokens, total_cost, first_token_time)..."
+description: "GET with body payload — no resources created. Returns the traces matching the query passed as the request payload."
 source: "https://docs.langchain.com/langsmith/smith-api/runs/query-traces"
 category: "docs"
 tags: [docs, langsmith, smith-api, runs, query-traces]
@@ -8,7 +8,9 @@ tags: [docs, langsmith, smith-api, runs, query-traces]
 
 # Query traces
 
-> Returns a paginated list of traces (root runs) for a single tracing project. Each item carries the trace's root run plus optional trace-wide aggregates (`total_tokens`, `total_cost`, `first_token_time`) under `trace_aggregates`, so clients never have to merge by `trace_id`.
+> GET with body payload — no resources created. Returns the traces matching the query passed as the request payload.
+
+Returns a paginated list of traces (root runs) for a single tracing project. Each item carries the trace's root run plus optional trace-wide aggregates (`total_tokens`, `total_cost`, `first_token_time`) under `trace_aggregates`, so clients never have to merge by `trace_id`.
 
 Traces are scanned within a `start_time` window: `min_start_time` defaults to 24 hours before the request, `max_start_time` defaults to the request time. Set either explicitly to widen or narrow the window.
 
@@ -182,10 +184,11 @@ tags:
   - name: productfeedback
     x-hidden: true
   - name: rules
+  - name: runsanalytics
   - name: sql
-  - name: teams
   - name: usage
   - name: user-groups
+  - name: users
 paths:
   /api/v2/traces/query:
     post:
@@ -193,6 +196,9 @@ paths:
         - runs
       summary: Query traces
       description: >-
+        GET with body payload — no resources created. Returns the traces
+        matching the query passed as the request payload.
+
         Returns a paginated list of traces (root runs) for a single tracing
         project. Each item carries the trace's root run plus optional trace-wide
         aggregates (`total_tokens`, `total_cost`, `first_token_time`) under

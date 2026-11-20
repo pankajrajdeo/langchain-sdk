@@ -173,10 +173,11 @@ tags:
   - name: productfeedback
     x-hidden: true
   - name: rules
+  - name: runsanalytics
   - name: sql
-  - name: teams
   - name: usage
   - name: user-groups
+  - name: users
 paths:
   /api/v2/sandboxes/usage/costs:
     get:
@@ -213,10 +214,10 @@ paths:
           name: resource_type
           in: query
           schema:
+            type: string
             enum:
               - SANDBOX
               - SNAPSHOT
-            type: string
             title: Resource Type
         - description: Resource UUID filter; repeat this parameter up to 100 times
           name: resource_ids
@@ -243,11 +244,11 @@ paths:
           name: granularity
           in: query
           schema:
+            type: string
+            default: HOUR
             enum:
               - HOUR
               - RESOURCE
-            type: string
-            default: HOUR
             title: Granularity
         - description: Opaque pagination cursor
           name: cursor

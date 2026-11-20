@@ -20,4 +20,4 @@ EMPTY_OLD_STRING_ERROR = 'Error: old_string cannot be empty. Provide the exact t
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/9b754bc914cc75c3f6d8c6e99353e81041b73bce/libs/deepagents/deepagents/backends/utils.py#L25)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/5568767515b7edc6b106e92d3de4cc65886c1eca/libs/deepagents/deepagents/backends/utils.py#L25)

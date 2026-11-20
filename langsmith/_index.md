@@ -1,13 +1,13 @@
 ---
 title: "langsmith"
-description: "Index of 541 pages and 5 subdirectories under langsmith."
+description: "Index of 555 pages and 6 subdirectories under langsmith."
 category: "index"
 tags: [index, langsmith]
 ---
 
 # langsmith
 
-541 pages here, 1336 pages including subdirectories.
+555 pages here, 1368 pages including subdirectories.
 
 ## Directories
 
@@ -15,7 +15,8 @@ tags: [index, langsmith]
 - [fleet/](fleet/_index.md) - 24 pages
 - [javascript/](javascript/_index.md) - 33 pages
 - [python/](python/_index.md) - 34 pages
-- [smith-api/](smith-api/_index.md) - 630 pages
+- [smith-api/](smith-api/_index.md) - 618 pages
+- [tool-gateway-api/](tool-gateway-api/_index.md) - 30 pages
 
 ## Files
 
@@ -74,8 +75,10 @@ tags: [index, langsmith]
 - [Bring your own VPC on AWS](byoc-byovpc-aws.md) - Create a customer-managed VPC for LangSmith BYOC, configure a reduced-permission IAM role, and supply your VPC and subnet IDs.
 - [AWS data plane cost estimate](byoc-data-plane-cost-aws.md) - Rough AWS cost of a LangSmith BYOC data plane running SmithDB, with a legacy estimate for data planes created with ClickHouse.
 - [Azure data plane cost estimate](byoc-data-plane-cost-azure.md) - Rough Azure infrastructure cost of a LangSmith BYOC data plane running SmithDB, with example node counts, sandboxes excluded, and additional charges.
+- [GCP data plane cost estimate](byoc-data-plane-cost-gcp.md) - Rough Google Cloud cost of a LangSmith BYOC data plane running SmithDB, with the default resource sizes and a separate estimate for sandboxes.
 - [BYOC FAQ](byoc-faq.md) - Answers to common questions about LangSmith BYOC, covering data residency, access, setup, the data plane model, and ongoing operations.
 - [Migrate to BYOC](byoc-migration.md) - Copy users, datasets, prompts, experiments, Fleet resources, and other data from an existing LangSmith instance into a BYOC data plane.
+- [BYOC networking on GCP](byoc-networking-gcp.md) - The network that LangSmith BYOC creates in your GCP project, how to connect your network to it, and the traffic that leaves the data plane.
 - [BYOC onboarding](byoc-onboarding-aws.md) - Set up a LangSmith BYOC data plane, from enabling BYOC on your organization to creating workspaces and connecting privately.
 - [BYOC onboarding on Azure](byoc-onboarding-azure.md) - Set up a LangSmith BYOC data plane in your Azure subscription, from granting LangSmith access to a resource group to creating, changing, and deleting the data plane.
 - [BYOC onboarding on GCP](byoc-onboarding-gcp.md) - Set up a LangSmith BYOC data plane in your GCP project, from the provisioner service account to creating, changing, and deleting the data plane with the API.
@@ -491,6 +494,18 @@ tags: [index, langsmith]
 - [Test from the Playground](test-from-playground.md) - Test prompts and model configurations over datasets in the LangSmith Playground without writing code.
 - [Test a ReAct agent with Pytest/Vitest and LangSmith](test-react-agent-pytest.md) - This tutorial will show you how to use LangSmith's integrations with popular testing tools (Pytest, Vitest, and Jest) to evaluate your LLM application. We will create a ReAct agent that answers...
 - [Configure threads](threads.md) - Many LLM applications have a chatbot-like interface in which the user and the LLM application engage in a multi-turn conversation. In order to track these conversations, you can use threads in...
+- [Tool Gateway API reference](tool-gateway-api-ref.md) - Browse the Tool Gateway API for MCP servers, credentials, tool kits, profiles, and MCP calls.
+- [Call tools through Tool Gateway](tool-gateway-call-tools.md) - Send MCP requests to Tool Gateway tool kits and servers over HTTP, handle connection and approval prompts, and fix common errors.
+- [Connect an MCP client to a tool kit](tool-gateway-clients.md) - Connect Claude Code, Cursor, Managed Deep Agents, or another MCP client to a Tool Gateway tool kit, and turn on search mode for large kits.
+- [Connect accounts to Tool Gateway](tool-gateway-connect-accounts.md) - Store the credentials Tool Gateway uses to call MCP servers, for yourself, for an agent, for a profile, or for the whole workspace.
+- [How Tool Gateway works](tool-gateway-how-it-works.md) - Learn how Tool Gateway authenticates callers, chooses the credential for each call, divides work between tool kits and policies, and the limits that apply.
+- [Act as users and agents](tool-gateway-identity.md) - Choose whose credentials each Tool Gateway call uses, so agents can call tools as each end user, as themselves, or with shared profile credentials.
+- [Set Tool Gateway policies](tool-gateway-policies.md) - Block Tool Gateway tool calls or require approval before they run, and see what callers get when a policy applies.
+- [Tool Gateway quickstart](tool-gateway-quickstart.md) - Add two MCP servers to Tool Gateway, connect your accounts, create a tool kit, and call its tools from an MCP client.
+- [Add MCP servers to Tool Gateway](tool-gateway-servers.md) - Register remote MCP servers with Tool Gateway for your workspace or for yourself, choose the credentials each server needs, and use built-in servers.
+- [Create tool kits](tool-gateway-tool-kits.md) - Create, update, and delete Tool Gateway tool kits, which serve a chosen set of tools from any number of MCP servers at one MCP URL.
+- [Tool Gateway traces and audit log](tool-gateway-traces.md) - Record a trace for each Tool Gateway tool call, and review tool calls and policy changes in your organization's audit log.
+- [Tool Gateway](tool-gateway.md) - Give agents and MCP clients one managed layer for tool calls, with credentials stored in LangSmith, policies applied to every call, and optional traces for each call.
 - [Trace with Anthropic](trace-anthropic.md) - Send Anthropic traces to LangSmith from the Claude Platform, from the Claude SDKs over OpenTelemetry, or with the LangSmith SDK wrapper.
 - [Trace with Amazon Bedrock](trace-bedrock.md) - This guide shows you how to trace Amazon Bedrock model calls with LangSmith using the native AWS SDKs. LangSmith also works seamlessly with LangChain's Bedrock integrations. Either approach provides...
 - [Trace with the Claude Agent SDK](trace-claude-agent-sdk.md) - The Claude Agent SDK is an SDK for building agents with Claude. LangSmith provides native integration with the Claude Agent SDK to automatically trace your agent executions, tool calls, and...

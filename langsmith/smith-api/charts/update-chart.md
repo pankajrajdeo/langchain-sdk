@@ -173,10 +173,11 @@ tags:
   - name: productfeedback
     x-hidden: true
   - name: rules
+  - name: runsanalytics
   - name: sql
-  - name: teams
   - name: usage
   - name: user-groups
+  - name: users
 paths:
   /api/v1/charts/{chart_id}:
     patch:
@@ -193,6 +194,12 @@ paths:
             type: string
             format: uuid
             title: Chart Id
+        - name: access_scope
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/AccessScope'
+            default: workspace
       requestBody:
         required: true
         content:
@@ -228,9 +235,16 @@ paths:
       security:
         - API Key: []
         - Tenant ID: []
+        - Organization ID: []
         - Bearer Auth: []
 components:
   schemas:
+    AccessScope:
+      type: string
+      enum:
+        - organization
+        - workspace
+      title: AccessScope
     CustomChartUpdate:
       properties:
         title:
@@ -604,6 +618,10 @@ components:
         - error_responses_per_second
         - p95_latency
         - run_queue_wait_time
+        - startable_runs_wait_max_by_priority
+        - startable_runs_by_priority
+        - running_runs_by_priority
+        - out_of_memory_restarts
       title: HostProjectChartMetric
       description: LGP Metrics you can chart.
     CustomChartFeedbackCountMetric:
@@ -1020,6 +1038,10 @@ components:
       type: apiKey
       in: header
       name: X-Tenant-Id
+    Organization ID:
+      type: apiKey
+      in: header
+      name: X-Organization-Id
     Bearer Auth:
       type: http
       description: >-

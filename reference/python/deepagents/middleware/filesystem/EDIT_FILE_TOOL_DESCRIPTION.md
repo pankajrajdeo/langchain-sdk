@@ -15,9 +15,9 @@ tags: [reference, deepagents, middleware, filesystem, edit_file_tool_description
 ## Signature
 
 ```python
-EDIT_FILE_TOOL_DESCRIPTION = 'Performs exact string replacements in files.\n\nUsage:\n- You must read the file before editing; this tool errors otherwise.\n- Preserve the exact source indentation from the read output, and never include the read status header in old_string or new_string.\n- Prefer editing an existing file over creating a new one.\n- Only use emojis if the user explicitly requests it.'
+EDIT_FILE_TOOL_DESCRIPTION = 'Performs exact string replacements in files.\n\nUsage:\n- You must read the file before editing.\n- Preserve the exact source indentation from the read output, and never include the read status header in old_string or new_string.\n- Prefer editing an existing file over creating a new one.\n- Only use emojis if the user explicitly requests it.'
 ```
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/9b754bc914cc75c3f6d8c6e99353e81041b73bce/libs/deepagents/deepagents/middleware/filesystem.py#L1608)
+[View source on GitHub](https://github.com/langchain-ai/deepagents/blob/5568767515b7edc6b106e92d3de4cc65886c1eca/libs/deepagents/deepagents/middleware/filesystem.py#L1608)

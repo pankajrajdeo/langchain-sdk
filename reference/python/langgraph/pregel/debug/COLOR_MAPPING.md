@@ -20,4 +20,4 @@ COLOR_MAPPING = {'black': '0;30', 'red': '0;31', 'green': '0;32', 'yellow': '0;3
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/7830b91a24e657a8167e2dbf40c3fa5a77ef5d93/libs/langgraph/langgraph/pregel/debug.py#L267)
+[View source on GitHub](https://github.com/langchain-ai/langgraph/blob/58a6e1cc5b7dfc3619fc6e7e7573b040d554649b/libs/langgraph/langgraph/pregel/debug.py#L267)

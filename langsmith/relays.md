@@ -12,7 +12,7 @@ tags: [docs, langsmith, relays]
 
 > [!NOTE]
 >
-> Relays are in [alpha](release-stages.md). To request access for your organization, [contact our sales team](https://www.langchain.com/contact-sales).
+> Relays are in [beta](release-stages.md). To request access for your organization, [contact our sales team](https://www.langchain.com/contact-sales).
 
 A relay sends some of a [sandbox's](sandboxes.md) outbound connections through your own network. You run the LangSmith connector inside your network and add a relay rule to the sandbox's proxy configuration. When the sandbox connects to a host that the rule matches, the connection leaves from the connector instead of from LangSmith. Use a relay to reach a service that is only reachable inside your network, such as an internal database or API, or to make requests from your network's IP address.
 

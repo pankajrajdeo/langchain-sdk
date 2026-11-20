@@ -1,6 +1,6 @@
 ---
 title: "List rules"
-description: "List all run rules."
+description: "List run rules. Supplied filters are combined; a rule must match all of them."
 source: "https://docs.langchain.com/langsmith/smith-api/run/list-rules"
 category: "docs"
 tags: [docs, langsmith, smith-api, run, list-rules]
@@ -8,7 +8,7 @@ tags: [docs, langsmith, smith-api, run, list-rules]
 
 # List rules
 
-> List all run rules.
+> List run rules. Supplied filters are combined; a rule must match all of them.
 
 Deprecated: use GET /api/v2/runs/rules, which returns cursor-paginated results.
 
@@ -175,10 +175,11 @@ tags:
   - name: productfeedback
     x-hidden: true
   - name: rules
+  - name: runsanalytics
   - name: sql
-  - name: teams
   - name: usage
   - name: user-groups
+  - name: users
 paths:
   /api/v1/runs/rules:
     get:
@@ -186,7 +187,8 @@ paths:
         - run
       summary: List rules
       description: >-
-        List all run rules.
+        List run rules. Supplied filters are combined; a rule must match all of
+        them.
 
         Deprecated: use GET /api/v2/runs/rules, which returns cursor-paginated
         results.

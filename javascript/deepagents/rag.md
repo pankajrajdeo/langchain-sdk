@@ -434,6 +434,8 @@ console.log(`Split documentation into ${allSplits.length} chunks.`);
 Split documentation into 722 chunks.
 ```
 
+If you want to learn more about text splitters, see the [text splitter integrations](../integrations/splitters.md). For guidance on choosing chunk size and a splitting strategy, see [Chunk documents for retrieval](../langchain/chunking.md).
+
 ### Select an embeddings model
 
 An [embedding](../integrations/embeddings.md) is a numeric vector that captures the meaning of each documentation chunk. An [Embeddings](https://reference.langchain.com/javascript/langchain-core/embeddings/Embeddings) model converts those chunks into vectors so that similar meanings land close together in vector space, enabling you to retrieve relevant sections when a user asks a question.
@@ -629,6 +631,10 @@ You can choose from many different [embedding integrations](../integrations/embe
 >   model: "embed-english-v3.0"
 > });
 ```
+
+> [!WARNING]
+>
+> Use the same embedding model, with a compatible vector dimension, when indexing documents and querying them. If you change embedding models, re-embed and re-index your documents.
 
 ### Store chunks and embeddings in VectorStore
 
@@ -2522,6 +2528,7 @@ You implemented one RAG pattern with [`createDeepAgent`](https://reference.langc
 
 * Add [Skills](skills.md) to package retrieval workflows and domain-specific search guidance
 * [Evaluate a RAG application](../../langsmith/evaluate-rag-tutorial.md) with LangSmith datasets and evaluators
+* [Chunk documents for retrieval](../langchain/chunking.md) to improve retrieval quality
 * Read [Context engineering](context-engineering.md) for offloading and subagent isolation strategies
 * Deploy with [Managed Deep Agents](../../langsmith/javascript/managed-deep-agents-overview.md) to run production agents without having to manage infrastructure. Alternatively, for maximum flexibility while using the same Deep Agents harness, host agents yourself or use a custom [Agent Server](../../langsmith/agent-server.md)
 

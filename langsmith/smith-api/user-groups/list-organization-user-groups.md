@@ -181,10 +181,11 @@ tags:
   - name: productfeedback
     x-hidden: true
   - name: rules
+  - name: runsanalytics
   - name: sql
-  - name: teams
   - name: usage
   - name: user-groups
+  - name: users
 paths:
   /api/v1/platform/orgs/current/user-groups:
     get:
@@ -233,8 +234,8 @@ paths:
           name: parent_user_group_id
           in: query
           schema:
-            format: uuid
             type: string
+            format: uuid
             title: Parent User Group Id
         - description: >-
             Only return user groups this organization identity is a direct

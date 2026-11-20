@@ -1,13 +1,13 @@
 ---
 title: "resources"
-description: "Index of 38 pages and 0 subdirectories under resources."
+description: "Index of 39 pages and 0 subdirectories under resources."
 category: "index"
 tags: [index, resources]
 ---
 
 # resources
 
-38 pages here.
+39 pages here.
 
 ## Files
 
@@ -45,6 +45,7 @@ tags: [index, resources]
 - [You don’t know what your agent will do until it’s in production](production-monitoring.md) - Create agentsShare
 - [Scaling Agents in Europe &amp; The Middle East: Lessons from Schneider Electric, Vodafone, and monday.com](scaling-agents-in-europe-the-middle-east-lessons-from-schneider-electric-vodafone-and-monday-com.md) - New Guide on Scaling Agents in Europe &amp; the Middle East to see how Schneider Electric, Vodafone, and monday.com are approaching production AI at scale, from establishing shared agent platforms...
 - [Scaling Agents in Healthcare &amp; Life Sciences](scaling-agents-in-healthcare-life-sciences.md) - Agent programs in healthcare and life sciences are being built under a different set of constraints than those in most industries. There’s plenty of upside if the constraints can be resolved. Success...
+- [State of Agent Engineering](state-of-agent-engineering.md) - As we enter 2026, organizations are no longer asking whether to build agents, but rather how to deploy them reliably, efficiently, and at scale. We surveyed 1,300+ professionals to understand how...
 - [The Definitive Guide to Testing LLM Applications](the-definitive-guide-to-testing-llm-applications.md) - January 26, 2025
 - [The agent improvement loop starts with a trace](traces-start-agent-improvement-loop.md) - March 31, 2026
 - [What is an AI sandbox?](what-is-an-ai-sandbox.md) - - An AI sandbox gives an agent an isolated workspace for running code and completing tasks while keeping host systems outside the execution boundary. - An agent needs a sandbox when it runs generated...

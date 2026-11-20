@@ -1,6 +1,6 @@
 ---
 title: "Put org default usage limit"
-description: "Set the organization's default monthly trace limit for new workspaces; with apply_to, also update existing workspaces without their own limit."
+description: "Set the organization's default monthly trace limit and alert thresholds for new workspaces; with apply_to, also update existing workspaces without their own limit."
 source: "https://docs.langchain.com/langsmith/smith-api/usage-limits/put-org-default-usage-limit"
 category: "docs"
 tags: [docs, langsmith, smith-api, usage-limits, put-org-default-usage-limit]
@@ -8,7 +8,9 @@ tags: [docs, langsmith, smith-api, usage-limits, put-org-default-usage-limit]
 
 # Put org default usage limit
 
-> Set the organization's default monthly trace limit for new workspaces; with `apply_to`, also update existing workspaces without their own limit.
+> Set the organization's default monthly trace limit and alert thresholds for new workspaces; with `apply_to`, also update existing workspaces without their own limit.
+
+`alert_thresholds` replaces the stored list; omitting it clears the thresholds. To give workspaces alerts without enforcing a limit, set `limit_value` to -1 and send `COUNT` thresholds; `PERCENT` thresholds need a limit.
 
 ## OpenAPI
 
@@ -173,10 +175,11 @@ tags:
   - name: productfeedback
     x-hidden: true
   - name: rules
+  - name: runsanalytics
   - name: sql
-  - name: teams
   - name: usage
   - name: user-groups
+  - name: users
 paths:
   /api/v1/usage-limits/org/default:
     put:
@@ -184,9 +187,14 @@ paths:
         - usage-limits
       summary: Put org default usage limit
       description: >-
-        Set the organization's default monthly trace limit for new workspaces;
-        with `apply_to`, also update existing workspaces without their own
-        limit.
+        Set the organization's default monthly trace limit and alert thresholds
+        for new workspaces; with `apply_to`, also update existing workspaces
+        without their own limit.
+
+        `alert_thresholds` replaces the stored list; omitting it clears the
+        thresholds. To give workspaces alerts without enforcing a limit, set
+        `limit_value` to -1 and send `COUNT` thresholds; `PERCENT` thresholds
+        need a limit.
       operationId: put_org_default_usage_limit_api_v1_usage_limits_org_default_put
       requestBody:
         content:
@@ -224,6 +232,15 @@ components:
           anyOf:
             - $ref: '#/components/schemas/OrgDefaultApplyTo'
             - type: 'null'
+        alert_thresholds:
+          items:
+            $ref: '#/components/schemas/AlertThreshold'
+          type: array
+          title: Alert Thresholds
+          description: >-
+            Usage levels that send an alert, at most one per `kind`. Omitting
+            this field or sending an empty list removes all alert thresholds
+            from the default.
       additionalProperties: false
       type: object
       required:
@@ -236,6 +253,12 @@ components:
             - type: integer
             - type: 'null'
           title: Limit Value
+        alert_thresholds:
+          items:
+            $ref: '#/components/schemas/AlertThreshold'
+          type: array
+          title: Alert Thresholds
+          description: Alert thresholds copied into workspaces that inherit the default.
       type: object
       title: OrgDefaultMonthlyTraceLimit
     HTTPValidationError:
@@ -252,6 +275,30 @@ components:
       enum:
         - INHERITED_OR_UNSET
       title: OrgDefaultApplyTo
+    AlertThreshold:
+      properties:
+        kind:
+          $ref: '#/components/schemas/AlertThresholdKind'
+          description: '`PERCENT` of the limit, or an absolute `COUNT` in the limit''s unit.'
+        value:
+          type: integer
+          maximum: 9007199254740991
+          minimum: 1
+          title: Value
+          description: 1-100 for `PERCENT`; a positive number for `COUNT`.
+      type: object
+      required:
+        - kind
+        - value
+      title: AlertThreshold
+      description: A usage level that sends an alert when reached.
+    AlertThresholdKind:
+      type: string
+      enum:
+        - PERCENT
+        - COUNT
+      title: AlertThresholdKind
+      description: How an alert threshold value is measured.
   securitySchemes:
     API Key:
       type: apiKey

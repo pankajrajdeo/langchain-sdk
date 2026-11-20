@@ -7,13 +7,13 @@ tags: [index, reference, python, langgraph, graph]
 
 # reference/python/langgraph/graph
 
-4 pages here, 90 pages including subdirectories.
+4 pages here, 89 pages including subdirectories.
 
 ## Directories
 
 - [_branch/](_branch/_index.md) - 6 pages
 - [_node/](_node/_index.md) - 13 pages
-- [message/](message/_index.md) - 7 pages
+- [message/](message/_index.md) - 6 pages
 - [state/](state/_index.md) - 45 pages
 - [ui/](ui/_index.md) - 15 pages
 

@@ -27,7 +27,7 @@ The guide also includes a minimal RAG implementation on top of the search engine
 This tutorial focuses on text retrieval and covers the following concepts:
 
 * [`Document`](https://reference.langchain.com/python/langchain-core/documents/base/Document)
-* [Text splitters](../integrations/splitters.md)
+* [Text splitters](../integrations/splitters.md) and [chunking strategy](chunking.md)
 * [Embeddings](../integrations/embeddings.md)
 * [Vector stores](../integrations/vectorstores.md) and [retrievers](../integrations/retrievers.md)
 
@@ -608,7 +608,7 @@ print(len(docs))
 107
 ```
 
-A page is often too coarse for retrieval. Split pages further so relevant passages are not diluted by surrounding text. [`RecursiveCharacterTextSplitter`](https://reference.langchain.com/python/langchain-text-splitters/character/RecursiveCharacterTextSplitter) recursively splits on common separators (such as newlines) until each chunk is the target size. This is the recommended text splitter for generic text use cases.
+A page is often too coarse for retrieval. Split pages further so relevant passages are not diluted by surrounding text. [`RecursiveCharacterTextSplitter`](https://reference.langchain.com/python/langchain-text-splitters/character/RecursiveCharacterTextSplitter) recursively splits on common separators (such as newlines) until each chunk is the target size. This is the recommended text splitter for generic text use cases. For guidance on choosing chunk size, overlap, and other strategies, see [Chunk documents for retrieval](chunking.md).
 
 Set `add_start_index=True` so each split keeps a `start_index` metadata field for its character offset in the original document.
 
@@ -822,6 +822,8 @@ For more on RAG:
 
 * [Retrieval overview](../deepagents/retrieval.md)
 * [RAG with Deep Agents](../deepagents/rag.md)
+* [Chunk documents for retrieval](chunking.md)
+* [Improve retrieval quality](retrieval-optimization.md)
 * [Evaluate a RAG application](../langsmith/evaluate-rag-tutorial.md)
 
 ***

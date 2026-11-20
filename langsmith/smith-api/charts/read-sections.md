@@ -173,10 +173,11 @@ tags:
   - name: productfeedback
     x-hidden: true
   - name: rules
+  - name: runsanalytics
   - name: sql
-  - name: teams
   - name: usage
   - name: user-groups
+  - name: users
 paths:
   /api/v1/charts/section:
     get:
@@ -186,6 +187,12 @@ paths:
       description: Get all sections for the tenant.
       operationId: read_sections_api_v1_charts_section_get
       parameters:
+        - name: access_scope
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/AccessScope'
+            default: workspace
         - name: limit
           in: query
           required: false
@@ -270,9 +277,16 @@ paths:
       security:
         - API Key: []
         - Tenant ID: []
+        - Organization ID: []
         - Bearer Auth: []
 components:
   schemas:
+    AccessScope:
+      type: string
+      enum:
+        - organization
+        - workspace
+      title: AccessScope
     CustomChartsSectionResponse:
       properties:
         title:
@@ -288,6 +302,15 @@ components:
             - type: integer
             - type: 'null'
           title: Index
+        access_scope:
+          $ref: '#/components/schemas/AccessScope'
+          default: workspace
+        tenant_id:
+          anyOf:
+            - type: string
+              format: uuid
+            - type: 'null'
+          title: Tenant Id
         id:
           type: string
           format: uuid
@@ -332,6 +355,10 @@ components:
       type: apiKey
       in: header
       name: X-Tenant-Id
+    Organization ID:
+      type: apiKey
+      in: header
+      name: X-Organization-Id
     Bearer Auth:
       type: http
       description: >-

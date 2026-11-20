@@ -20,4 +20,4 @@ MessageLikeRepresentation = MessageLike | tuple[str | type, str | Sequence[dict[
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/2b7ff14fb2021e6f4ee22f796a9b888eaacb5af9/libs/core/langchain_core/prompts/chat.py#L787)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/d4dafe5839c4a6b07d71cc78697df0de9e627e21/libs/core/langchain_core/prompts/chat.py#L787)

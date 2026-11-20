@@ -38,6 +38,10 @@ LangChain provides open source, model-agnostic harnesses for building agents. La
 >
 > Route, control, and observe LLM traffic across providers.
 
+> [card] [Tool Gateway](langsmith/tool-gateway.md)
+>
+> Govern agent tool calls with managed credentials, policies, and traces.
+
 > [card] [No-code agents](langsmith/fleet.md)
 >
 > Build and run agents without code using LangSmith Fleet.

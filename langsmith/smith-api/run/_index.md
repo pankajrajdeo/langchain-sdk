@@ -21,7 +21,7 @@ tags: [index, langsmith, smith-api, run]
 - [Group runs](group-runs.md) - Deprecated; sunset January 31, 2027. Use POST /api/v2/threads/query to query threads instead.
 - [List rule logs (v2)](list-rule-logs-v2.md) - List logs for a particular rule with cursor-based pagination.
 - [List rule logs](list-rule-logs.md) - List logs for a particular rule
-- [List rules](list-rules.md) - List all run rules.
+- [List rules](list-rules.md) - List run rules. Supplied filters are combined; a rule must match all of them.
 - [Query runs](query-runs.md) - /langsmith/langsmith-platform-openapi.json post /api/v1/runs/query
 - [Read run share state](read-run-share-state.md) - Get the state of sharing of a run.
 - [Read run](read-run.md) - Get a specific run.

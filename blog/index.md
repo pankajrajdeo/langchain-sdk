@@ -30,7 +30,15 @@ Thank you! Your submission has been received!Oops! Something went wrong while su
 
 ### Recent stories
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6afd2e9dfe8e56017d39e855_langsmith-coding-agents-cover.png)Company AnnouncementsObservability & Evals
+![LangSmith Tool Gateway: Secure, governed tool use for agents](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6afe62e5d73b650c2ced87f0_6afe621d80523ccef7ddb249_tool-gateway-white-cards-1200x675.png)LangSmith
+
+## LangSmith Tool Gateway: Secure, governed tool use for agents
+
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab43e723b026a19d87bf6d2_Karthic%20S.jpg)Karthic SubramanianNovember 19, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)10min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aff37bcf26186b3d445793a_agent%20governance%20observability.png)LangSmith
+
+## Why agent governance starts with observability
+
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6aff9820466b8dbd8694adda_Christine%20Manegan.jpg)Christine ManeganNovember 19, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)10min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6afd2e9dfe8e56017d39e855_langsmith-coding-agents-cover.png)Company AnnouncementsObservability & Evals
 
 ## LangSmith for Coding Agents: Now track spend by outcome
 
@@ -86,15 +94,7 @@ Thank you! Your submission has been received!Oops! Something went wrong while su
 
 ## How We Optimized Browser Use for Deep Agents
 
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69dcee60745f0e15b18ad4d5_sydney-runkle.png)Sydney RunkleNovember 3, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)10min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ae8c3176dbb11c11eaf324b_context-engineering-challenges-blog.png)Harrison's In the Loop
-
-## New context engineering challenges in late 2026
-
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6a056ea05f3880a1361b47cf_Harrison.avif)Harrison ChaseNovember 2, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)5min![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ae37bc699a519b4b3d501e9_mda-v0.10-blog-cover-4k.png)Agent Architecture
-
-## Managed Deep Agents v0.10: Browser use and asynchronous subagents
-
-![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6ab416d4dafca27a7246c1d0_Nathan%20Drezner.jpg)![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69dcee60745f0e15b18ad4d5_sydney-runkle.png)Nathan DreznerSydney RunkleOctober 29, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)7min1...1 / 36
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69dcee60745f0e15b18ad4d5_sydney-runkle.png)Sydney RunkleNovember 3, 2026![](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69cd1fd0002272ce39bf1241_Icon-6.svg)10min1...1 / 36
 
 #### We couldn't find anything matching that.
 
