@@ -22,7 +22,7 @@ That’s why we’ve built LangSmith, [the framework-agnostic platform to run, i
 
 LangSmith provides the foundation for companies to control their agent systems across three pillars – Agent Runtime, Agent Improvement, and Agent Governance:
 
-![__wf_reserved_inherit](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6af52a53dfc23de1ad3a2804_langchain-product-stackvF.png)
+![](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/6af52a53dfc23de1ad3a2804_langchain-product-stackvF.png)
 
 **Agent Runtime **gives teams the architecture and infrastructure to run agents reliably. Deep Agents, LangGraph, and LangChain give developers flexibility across models and control over how context is managed. LangSmith Agent Server and Sandboxes allow teams to deploy and run agents securely at scale, whether in the cloud or in their environment. LangSmith Managed Agents and Fleet provide fully managed services to build, deploy, and run mission-critical agents in production.
 
@@ -30,7 +30,7 @@ LangSmith provides the foundation for companies to control their agent systems a
 
 **Agent Governance **gives teams centralized control over how agents use models, tools, and data. Our LLM and Tool Gateways help teams manage model budgets and fallbacks, protect sensitive data, and [govern tool access and authentication across teams and agents](https://www.langchain.com/blog/langsmith-tool-gateway).
 
-Next Friday, November 20th, we’ll share several new LangSmith capabilities that build on this foundation. [Join us](https://events.langchain.com/webinar/future-of-agents/) for a special release event to see what’s coming next.
+On Friday, November 20th, we shared several new LangSmith capabilities that build on this foundation. [Watch the recording](https://events.langchain.com/on-demand/78972867-6505-4fb9-9eb9-ae776dfbe7ab) of our special release event to see what’s coming next.
 
 LangSmith has been shaped by our fantastic community – from our developer evangelists to the customers we’re lucky enough to partner with. Thank you all for your feedback, insights, and trust.
 

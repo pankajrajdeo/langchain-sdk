@@ -1,6 +1,6 @@
 ---
 title: "wrap_tool_call"
-description: "Intercept tool execution and convert handled exceptions to error messages."
+description: "Intercept tool execution and retry on failure."
 source: "https://reference.langchain.com/python/langchain/agents/middleware/wrap_tool_call"
 category: "reference"
 tags: [reference, langchain, agents, middleware, wrap_tool_call]
@@ -10,9 +10,9 @@ tags: [reference, langchain, agents, middleware, wrap_tool_call]
 
 > **Method** in `langchain`
 
-📖 [View in docs](https://reference.langchain.com/python/langchain/agents/middleware/tool_error/ToolErrorMiddleware/wrap_tool_call)
+📖 [View in docs](https://reference.langchain.com/python/langchain/agents/middleware/tool_retry/ToolRetryMiddleware/wrap_tool_call)
 
-Intercept tool execution and convert handled exceptions to error messages.
+Intercept tool execution and retry on failure.
 
 ## Signature
 
@@ -29,7 +29,7 @@ wrap_tool_call(
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `request` | `ToolCallRequest` | Yes | Tool call request with call dict, `BaseTool`, state, and runtime. |
-| `handler` | `Callable[[ToolCallRequest], ToolMessage \| Command[Any]]` | Yes | Callable to execute the tool. |
+| `handler` | `Callable[[ToolCallRequest], ToolMessage \| Command[Any]]` | Yes | Callable to execute the tool (can be called multiple times). |
 
 ## Returns
 
@@ -39,4 +39,4 @@ wrap_tool_call(
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/ced9bdb1a8899516b6c541fc0e19ab5f349aa0ea/libs/langchain_v1/langchain/agents/middleware/tool_error.py#L133)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/ced9bdb1a8899516b6c541fc0e19ab5f349aa0ea/libs/langchain_v1/langchain/agents/middleware/tool_retry.py#L295)

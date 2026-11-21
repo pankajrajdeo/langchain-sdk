@@ -1,6 +1,6 @@
 ---
 title: "before_agent"
-description: "Classify the latest task and store the complete routing answer."
+description: "Logic to run before the agent execution starts."
 source: "https://reference.langchain.com/python/langchain/agents/middleware/before_agent"
 category: "reference"
 tags: [reference, langchain, agents, middleware, before_agent]
@@ -10,20 +10,33 @@ tags: [reference, langchain, agents, middleware, before_agent]
 
 > **Method** in `langchain`
 
-📖 [View in docs](https://reference.langchain.com/python/langchain/agents/middleware/model_router/ModelRouterMiddleware/before_agent)
+📖 [View in docs](https://reference.langchain.com/python/langchain/agents/middleware/types/AgentMiddleware/before_agent)
 
-Classify the latest task and store the complete routing answer.
+Logic to run before the agent execution starts.
 
 ## Signature
 
 ```python
 before_agent(
     self,
-    state: _ModelRouterState,
+    state: StateT,
     runtime: Runtime[ContextT],
-) -> dict[str, ChoiceAnswer]
+) -> dict[str, Any] | None
 ```
+
+## Parameters
+
+| Name | Type | Required | Description |
+|------|------|----------|-------------|
+| `state` | `StateT` | Yes | The current agent state. |
+| `runtime` | `Runtime[ContextT]` | Yes | The runtime context. |
+
+## Returns
+
+`dict[str, Any] | None`
+
+Agent state updates to apply before agent execution.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/ced9bdb1a8899516b6c541fc0e19ab5f349aa0ea/libs/langchain_v1/langchain/agents/middleware/model_router.py#L151)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/ced9bdb1a8899516b6c541fc0e19ab5f349aa0ea/libs/langchain_v1/langchain/agents/middleware/types.py#L433)

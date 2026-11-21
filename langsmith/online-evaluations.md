@@ -88,6 +88,8 @@ For details, refer to [Track and limit evaluator spend](evaluator-spend.md).
 
 View [LLM-as-a-judge evaluators](llm-as-judge.md#evaluator-templates) for more information.
 
+To lower the cost of an online evaluator that uses an OpenAI model, you can run it on OpenAI's slower [flex service tier](llm-as-judge.md#use-the-openai-flex-service-tier).
+
 When you save a custom LLM-as-a-judge evaluator in the UI, LangSmith automatically saves its prompt to the prompt hub. You do not need to save the prompt separately. To find it, open **Prompts** and select **Used in Evaluators** from the filter dropdown. The **All Prompts** filter excludes evaluator-linked prompts.
 
 New evaluator prompts use the name `eval_<evaluator_name>_<8-character suffix>`. LangSmith lowercases the evaluator name and replaces characters other than letters, numbers, and underscores with underscores. The suffix contains eight random lowercase letters or digits.

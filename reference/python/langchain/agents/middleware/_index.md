@@ -39,10 +39,10 @@ tags: [index, reference, python, langchain, agents, middleware]
 
 ## Files
 
-- [after_agent](after_agent.md) - Run shutdown commands and release resources when an agent completes.
-- [after_model](after_model.md) - Increment model call counts after a model call.
+- [after_agent](after_agent.md) - Logic to run after the agent execution completes.
+- [after_model](after_model.md) - Check AI messages for PII after model invocation.
 - [auto_mode](auto_mode.md) - Tool-risk middleware driven by a decision model.
-- [before_agent](before_agent.md) - Classify the latest task and store the complete routing answer.
+- [before_agent](before_agent.md) - Logic to run before the agent execution starts.
 - [before_model](before_model.md) - Process messages before model invocation, potentially triggering summarization.
 - [configure_trace_policy](configure_trace_policy.md) - Set the process-wide default TracePolicy for agent middleware hook spans.
 - [context_editing](context_editing.md) - Context editing middleware.
@@ -67,5 +67,5 @@ tags: [index, reference, python, langchain, agents, middleware]
 - [tool_retry](tool_retry.md) - Tool retry middleware for agents.
 - [tool_selection](tool_selection.md) - LLM-based tool selector middleware.
 - [types](types.md) - Types for middleware and agents.
-- [wrap_model_call](wrap_model_call.md) - Filter tools based on LLM selection before invoking the model via handler.
-- [wrap_tool_call](wrap_tool_call.md) - Intercept tool execution and convert handled exceptions to error messages.
+- [wrap_model_call](wrap_model_call.md) - Defer tools before invoking the model.
+- [wrap_tool_call](wrap_tool_call.md) - Intercept tool execution and retry on failure.

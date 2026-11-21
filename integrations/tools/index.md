@@ -117,6 +117,7 @@ The following table shows tools that can be used to automate tasks in web browse
 | [Hyperbrowser Web Scraping Tools](https://docs.hyperbrowser.ai/) | Free trial, with flat rate plans and pre-paid credits after | ❌ |
 | [Manifest](https://omfang.io/manifest-docs) | Free tier available | ❌ |
 | [MrScraper](https://docs.mrscraper.com) | Paid | ❌ |
+| [Oya Browser](https://oyabrowser.com/docs/sdk) | Free desktop app & 1 cloud browser hour; paid cloud & self-hosted | ✅ |
 | [W2A](https://w2a-protocol.org/docs) | Free (public endpoints) | ❌ |
 | [Nimble Extract](https://docs.nimbleway.com/integrations/connectors/langchain) | Free trial available | ❌ |
 | [Nimble Extract Templates](https://docs.nimbleway.com/integrations/connectors/langchain#extract-templates) | Free trial available | ❌ |
@@ -584,10 +585,12 @@ The following table shows tools that generate video, image, or audio assets:
 | [`EtfiqToolkit`](https://github.com/etfiq/etfiq-connectors/tree/main/langchain-etfiq) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-etfiq/month)](https://pypi.org/project/langchain-etfiq/) |
 | [`Channel3Toolkit`](https://channel3.ai/docs/langchain) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-channel3/month)](https://pypi.org/project/langchain-channel3/) |
 | [`StoreRouterToolkit`](https://github.com/octogen-ai/octogen-dev/tree/main/integrations/langchain#readme) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-storerouter/month)](https://pypi.org/project/langchain-storerouter/) |
+| [`TrezaToolkit`](https://www.trezalabs.com/integrations/langchain) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-treza/month)](https://pypi.org/project/langchain-treza/) |
 | [`TensorustToolkit`](https://github.com/Mattbusel/langchain-tensorust/blob/main/docs/index.md) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-tensorust/month)](https://pypi.org/project/langchain-tensorust/) |
 | [`ArcnmToolkit`](https://github.com/arcnm/langchain-arcnm#readme) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-arcnm/month)](https://pypi.org/project/langchain-arcnm/) |
 | [`OutcrawlSearchTool`](https://github.com/outcrawlai/langchain-outcrawl#readme) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-outcrawl/month)](https://pypi.org/project/langchain-outcrawl/) |
 | [`BrowsaToolkit`](https://github.com/browsa-io/browsa/tree/main/integrations/langchain-browsa#readme) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-browsa/month)](https://pypi.org/project/langchain-browsa/) |
+| [`DatacircleToolkit`](https://github.com/waynehamadi/langchain-datacircle) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-datacircle/month)](https://pypi.org/project/langchain-datacircle/) |
 | [`Solvecha`](https://github.com/Solvecha/solvecha-skills/tree/main/python) | [  ![Downloads per month](https://static.pepy.tech/badge/solvecha/month)](https://pypi.org/project/solvecha/) |
 | [`StophyToolkit`](https://github.com/stophydotdev/stophy/tree/main/sdk/packages/langchain) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-stophy/month)](https://pypi.org/project/langchain-stophy/) |
 | [`BoscoToolkit`](https://github.com/Bosco-Labs/bosco-labs-data/tree/main/langchain-bosco) | [  ![Downloads per month](https://static.pepy.tech/badge/langchain-bosco/month)](https://pypi.org/project/langchain-bosco/) |

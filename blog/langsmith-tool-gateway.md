@@ -12,7 +12,9 @@ tags: [blog, langsmith-tool-gateway]
 
 Agents are moving beyond the chat window to take on more proactive and ambient work. Instead of waiting for a prompt, they run on a schedule or are triggered by events, and they’re handling longer tasks without someone checking every step. That makes them much more useful, but it also means teams need to control which tools each agent can call and whose identity it acts with, and keep a record of every action it takes.
 
-Today, we’re launching [LangSmith Tool Gateway](../langsmith/tool-gateway.md) in Public Beta, on the [LangSmith Agent Platform](https://www.langchain.com/blog/we-rebuilt-langsmith-around-the-agent). Tool Gateway is a managed tool layer that handles credentials, identity, and access for every agent tool call, making it simple to govern the actions your agents take. Tool Gateway makes it easier and faster for engineering teams to grant agents access to new tools in a controlled manner and without hand-rolling auth each time. Security and compliance teams can use LangSmith to trace and audit tool calls as part of agent monitoring.
+Today, we’re launching [LangSmith Tool Gateway](../langsmith/tool-gateway.md) in Public Beta, on the [LangSmith Agent Platform](https://www.langchain.com/blog/we-rebuilt-langsmith-around-the-agent). Tool Gateway is a managed tool layer that handles credentials, identity, and access for every agent tool call, making it simple to govern the actions your agents take. Tool Gateway makes it easier and faster for engineering teams to grant agents access to new tools in a controlled manner and without hand-rolling auth each time. Security and compliance teams can use LangSmith to [trace and audit tool calls](https://www.langchain.com/blog/agent-governance-observability) as part of agent monitoring.
+
+The two-minute video below shows how Tool Gateway controls which tools each agent can call and whose identity it acts with.
 
 ## Tool governance is core to agent governance
 

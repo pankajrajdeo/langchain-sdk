@@ -160,6 +160,7 @@ components:
             $ref: '#/components/schemas/Secret'
           type: array
           title: Secrets
+          description: Each secret name may appear only once.
         secret_references:
           anyOf:
             - items:
@@ -631,10 +632,14 @@ components:
         Secrets are accessible as environment variables in the deployment's
         container. In addition to user-defined secrets, Agent Server supports
         [pre-defined environment
-        variables](https://langchain-ai.github.io/langgraph/cloud/reference/env_var/)
-        that can be configured to augment the functionality of a deployment.
-        When updating a deployment (`PATCH`), setting this field to a non-null
-        value will trigger creation of a new revision.
+        variables](https://docs.langchain.com/langsmith/env-var) that can be
+        configured to augment the functionality of a deployment. When updating a
+        deployment (`PATCH`), setting this field to a non-null value will
+        trigger creation of a new revision. On `PATCH
+        /v2/deployments/{deployment_id}` and `POST
+        /v2/deployments/{deployment_id}/revisions`, an empty list is treated as
+        not provided: the deployment keeps its current values, though a new
+        revision is still created.
     SecretReference:
       properties:
         name:

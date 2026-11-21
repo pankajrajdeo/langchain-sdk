@@ -1,6 +1,6 @@
 ---
 title: "after_model"
-description: "Increment model call counts after a model call."
+description: "Check AI messages for PII after model invocation."
 source: "https://reference.langchain.com/python/langchain/agents/middleware/after_model"
 category: "reference"
 tags: [reference, langchain, agents, middleware, after_model]
@@ -10,16 +10,16 @@ tags: [reference, langchain, agents, middleware, after_model]
 
 > **Method** in `langchain`
 
-📖 [View in docs](https://reference.langchain.com/python/langchain/agents/middleware/model_call_limit/ModelCallLimitMiddleware/after_model)
+📖 [View in docs](https://reference.langchain.com/python/langchain/agents/middleware/pii/PIIMiddleware/after_model)
 
-Increment model call counts after a model call.
+Check AI messages for PII after model invocation.
 
 ## Signature
 
 ```python
 after_model(
     self,
-    state: ModelCallLimitState[ResponseT],
+    state: AgentState[Any],
     runtime: Runtime[ContextT],
 ) -> dict[str, Any] | None
 ```
@@ -28,15 +28,16 @@ after_model(
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| `state` | `ModelCallLimitState[ResponseT]` | Yes | The current agent state. |
+| `state` | `AgentState[Any]` | Yes | The current agent state. |
 | `runtime` | `Runtime[ContextT]` | Yes | The langgraph runtime. |
 
 ## Returns
 
 `dict[str, Any] | None`
 
-State updates with incremented call counts.
+Updated state with PII handled according to strategy, or None if no PII
+detected.
 
 ---
 
-[View source on GitHub](https://github.com/langchain-ai/langchain/blob/ced9bdb1a8899516b6c541fc0e19ab5f349aa0ea/libs/langchain_v1/langchain/agents/middleware/model_call_limit.py#L235)
+[View source on GitHub](https://github.com/langchain-ai/langchain/blob/ced9bdb1a8899516b6c541fc0e19ab5f349aa0ea/libs/langchain_v1/langchain/agents/middleware/pii.py#L821)

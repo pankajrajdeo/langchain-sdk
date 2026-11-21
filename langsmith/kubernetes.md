@@ -20,7 +20,7 @@ After completing this guide, you'll have:
 
 * **LangSmith UI and APIs**: Observability, tracing, evaluation, Insights, and Chat.
 * **Backend services**: Queue, playground, and ACE.
-* **Datastores**: PostgreSQL, Redis, ClickHouse, and optional blob storage.
+* **Datastores**: PostgreSQL, Redis, ClickHouse, and blob storage.
 
 LangSmith runs on any conformant Kubernetes cluster. It has been tested on the following distributions:
 
@@ -110,13 +110,14 @@ You need a working Kubernetes cluster that you can access with `kubectl`. Your c
 
 ### Datastores
 
-LangSmith uses a PostgreSQL database, a Redis cache, and a ClickHouse database to store traces. By default, these services are installed inside your Kubernetes cluster. For production, use external datastores instead. For PostgreSQL and Redis, the best option is your cloud provider's managed services.
+LangSmith uses a PostgreSQL database, a Redis cache, a ClickHouse database, and blob storage to store traces. By default, these services are installed inside your Kubernetes cluster, with RustFS for blob storage. For production, use external datastores instead. For PostgreSQL and Redis, the best option is your cloud provider's managed services.
 
 For more information, refer to the following setup guides for external services:
 
 * [PostgreSQL](self-host-external-postgres.md)
 * [Redis](self-host-external-redis.md)
 * [ClickHouse](self-host-external-clickhouse.md)
+* [Blob storage](self-host-blob-storage.md)
 
 For the minimum supported version of each datastore, refer to [Minimum versions for self-hosting dependencies](self-host-dependency-versions.md). [SmithDB](self-host-smithdb.md) is an optional datastore that you can enable after the base installation. This guide does not require it.
 
